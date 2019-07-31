@@ -37,7 +37,7 @@ export default class MyDocument extends Document {
           {this.props.styleTags}
           <script />
         </Head>
-        <body>
+        <body style={{margin: '0px', padding: '0px'}}>
           <Main />
           <NextScript />
           <div id="__CUSTOM_CUBE_LOADER__">

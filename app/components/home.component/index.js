@@ -10,6 +10,7 @@ const Wrapper = styled.div`
   font-family: 'Karla', sans-serif;
   background: #fff;
   width: 100%;
+  margin-top: 100px;
 `;
 const Cont = styled.div`
   width: 70%;
