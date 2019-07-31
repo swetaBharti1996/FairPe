@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { Container } from "next/app";
 import Search from "./search";
 import Stores from "./stores";
+import Categories from "./categories";
+import Description from "./description";
 
 const Wrapper = styled.div`
   font-family: 'Karla', sans-serif;
@@ -51,7 +53,7 @@ const Down = styled.button`
   padding: 0px;
   border: 1px solid #E2E2E2;
   border-radius: 50%;
-  margin-bottom: 80px;
+  margin-bottom: 160px;
 `;
 class Home extends Component {
   state = {};
@@ -73,6 +75,8 @@ class Home extends Component {
               keyboard_arrow_down
             </i>
           </Down>
+          <Categories/>
+          <Description/>
         </Cont>
       </Wrapper>
     );

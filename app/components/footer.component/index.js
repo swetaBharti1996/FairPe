@@ -7,70 +7,75 @@ const Wrapper = styled.div`
   background: #f8f8f8;
   opacity: 100%;
   border-top: 1px solid #ff632a;
-  position: relative;
 `;
-// background: #f8f8f8;
-
 const Box = styled.div`
   width: 964px;
   height: 400px;
-
   margin: 0 auto;
   margin-top: -250px;
   background: #fff;
   z-index: 50;
   display: flex;
-  box-shadow: 0px 0px 25px #ededed;
+  border: 1px solid #EDEDED;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  border-radius: 10px;
+  flex-direction: row;
+`;
+const Container = styled.div`
+  margin: auto;
+  /* display: flex; */
+  width: 964px;
+  margin-bottom: 100px;
 `;
 const MailBox = styled.div`
   width: 670px;
   height: 62px;
-  margin: auto;
-  margin-left: 18%;
-  margin-top: 360px;
-  position: absolute;
-  z-index: 10;
   display: flex;
+  margin-top: -32px;
+  margin-left: 250px;
 `;
 const MailInput = styled.input`
   width: 399px;
-  height: 58px;
   border-radius: 31px 0px 0px 31px;
   border: 1px solid #707070;
   font-size: 18px;
-  text-align: center;
+  padding: 20px 36px;
   line-height: 60px;
   vertical-align: middle;
 `;
-
 const MailButton = styled.div`
   width: 271px;
-  height: 62px;
   background: #220a3e;
   font-size: 18px;
   text-align: center;
   color: white;
-  font-family: Helevetica Neue;
+  font-family: Helvetica, sans-serif;
   border-radius: 0px 31px 31px 0px;
   font-style: bold;
-  line-height: 60px;
-  vertical-align: middle;
+  padding: 20px 36px;
 `;
 
 const ImageBox = styled.div`
-  width: 450px;
+  display: flex;
+  width: 35%;
+  align-items: flex-start;
+  justify-content: center;
+  >img{
+    margin-top: 50px;
+    width: 70%;
+  }
 `;
 const LabelBox = styled.div`
-  width: 456px;
-  margin-top: 100px;
+  width: 65%;
+  margin-top: 150px;
   height: 74px;
 `;
 const BoxTextHead = styled.div`
   width: 456px;
   height: 74px;
   font-size: 30px;
-  font-family: karla;
-  font-style: bold;
+  font-family: 'Karla', sans-serif;
+  font-weight: bolder;
   text-align: left;
   line-height: 36px;
   vertical-align: middle;
@@ -79,60 +84,70 @@ const BoxText = styled.div`
   width: 411px;
   margin-top: 20px;
   height: 84px;
+  font-family: 'Karla', sans-serif;
   font-size: 18px;
   text-align: left;
   color: #333333;
 `;
-const Logo = styled.div``;
-const PolicyBox = styled.div`
-  width: 155px;
-  height: 17px;
-  position: absolute;
+const Foot = styled.div`
+  width: 90%;
   display: flex;
-  bottom: 50px;
-  right: 30px;
-  color: #707070;
+  flex-direction: row;
+  margin: 0px auto;
+  justify-content: space-between;
+`;
+const Logo = styled.img`
+  display: flex;
+  width: 72px;
+  height: 16.25px;
+`;
+const PolicyBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 10%;
+  justify-content: space-between;
+  >p{
+    color: #707070;
+    font-size: 14px;
+    font-family: 'Karla', sans-serif;
+  }
 `;
 
-const Policy = styled.div`
-  text-align: left;
-`;
-const Terms = styled.div`
-  position: absolute;
-  right: 0px;
-`;
 
 class Footer extends Component {
   state = {};
   render() {
     return (
       <Wrapper>
-        <Box>
-          <ImageBox />
-          <LabelBox>
-            <BoxTextHead>
-              "Will you deliver the products <br />
-              from a local shop to my place?"
-            </BoxTextHead>
-            <BoxText>
-              We are listening, we know your pain.
-              <br /> We are working hard to make your life simpler.
-              <br /> Watch this space, something great is on its way!
-            </BoxText>
-          </LabelBox>
-
+        <Container>
+          <Box>
+            <ImageBox>
+              <img src="../../static/images/deliver.svg" />
+            </ImageBox>
+            <LabelBox>
+              <BoxTextHead>
+                "Will you deliver the products
+                from a local shop to my place?"
+              </BoxTextHead>
+              <BoxText>
+                We are listening, we know your pain.<br />
+                We are working hard to make your life simpler.<br />
+                Watch this space, something great is on its way!
+              </BoxText>
+            </LabelBox>
+          </Box>
           <MailBox>
             <MailInput placeholder="Your email address/ Mobile number" />
             <MailButton>Notify me about this</MailButton>
           </MailBox>
-        </Box>
-        <PolicyBox>
-          <Policy>Policy</Policy>
-          <Terms>Terms</Terms>
-        </PolicyBox>
-        <Logo>
-          <img src="../../img/logo.png" style={{ width: 72, height: "auto" }} />
-        </Logo>
+        </Container>
+        <Foot>
+          <Logo src="../../static/images/logo.png"/>
+          <PolicyBox>
+            <p>Policy</p>
+            <p>Terms</p>
+          </PolicyBox>
+        </Foot>
       </Wrapper>
     );
   }
