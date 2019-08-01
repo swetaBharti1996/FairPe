@@ -1,6 +1,7 @@
 import Document, { Head, Main, NextScript } from "next/document";
 import { extractCritical } from "emotion-server";
 import { ServerStyleSheet } from "styled-components";
+import { AddToCart } from "../UI";
 
 export default class MyDocument extends Document {
   static getInitialProps({ renderPage }) {
@@ -24,13 +25,14 @@ export default class MyDocument extends Document {
           />
 
           <link
-            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900"
+            href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap"
             rel="stylesheet"
           />
-          <link href="https://fonts.googleapis.com/css?family=Karla&display=swap" rel="stylesheet" />
-          <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-            rel="stylesheet" />
-
+          <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet"
+          />
+          <link rel="stylesheet" href="/static/css/style.css" />
           <style
             dangerouslySetInnerHTML={{ __html: this.props.selectStyles.css }}
           />
