@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-    margin-bottom: 400px;
 `;
 const MiniTitle = styled.p`
     font-size: 18px;

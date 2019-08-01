@@ -4,18 +4,19 @@ import styled from "styled-components";
 const Wrapper = styled.div`
     display: flex;
     flex-direction: row;
-    width: 1063px;
+    width: 80%;
+    height: 100%;
     /* padding: 38px 48px; */
     background: #fff;
     border-radius: 49px;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 2px 4px 0 #ddd;
     margin-bottom: 55px;
 `;
 const SearchBar = styled.input`
-    font-size: 20px;
-    margin: 38px 0px;
+    font-size: 16px;
+    margin: 3% 0px;
     margin-left: 48px;
-    width: 931px;
+    width: 85%;
     border: none;
     ::placeholder {
        color: #999999;
@@ -23,9 +24,12 @@ const SearchBar = styled.input`
 `;
 const SearchButton = styled.button`
     background-image: linear-gradient(127deg, #FF632A, #E20000);   
-    width: 132px;
+    width: 15%;
     border: none;
     border-radius: 0px 49px 49px 0px;
+    >img{
+        width: 40%;
+    }
 `;
 class Search extends Component{
     render(){

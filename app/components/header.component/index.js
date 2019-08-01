@@ -5,8 +5,9 @@ const Wrapper = styled.div`
   height: 100px;
   background: #fff;
   display: flex;
-  box-shadow: 0 2px 4px 0px #eee;
+  box-shadow: 0 2px 4px 0px #ddd;
   font-family: 'Karla', sans-serif;
+  z-index: 10;
 `;
 const Container = styled.div`
   display: flex;

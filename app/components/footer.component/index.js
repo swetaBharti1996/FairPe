@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
+  margin-top: 400px;
   width: 100%;
   height: 328px;
   background: #f8f8f8;

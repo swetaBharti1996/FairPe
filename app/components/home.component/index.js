@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { Container } from "next/app";
-import Search from "./search";
+import Search from "../reusable/search";
 import Stores from "./stores";
 import Categories from "./categories";
 import Description from "./description";
