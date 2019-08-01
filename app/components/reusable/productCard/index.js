@@ -1,10 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import { AddToCart } from "../../UI";
+import { AddToCart } from "../../../UI";
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  width: 30%;
+  margin-bottom: 100px;
+`;
 const Container = styled.div`
   width: 205px;
+  font-family: 'Karla', sans-serif;
 `;
 const ImageContainer = styled.div`
   width: 107px;

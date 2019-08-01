@@ -27,6 +27,9 @@ const SearchButton = styled.button`
     width: 15%;
     border: none;
     border-radius: 0px 49px 49px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     >img{
         width: 40%;
     }

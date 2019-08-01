@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import SearchBar from '../reusable/search';
+import ProductCard from '../reusable/productCard';
 
 const Wrapper = styled.div`
     width: 75%;
@@ -39,6 +40,7 @@ const ProductListing = styled.div`
     flex-flow: row wrap;
     justify-content: space-between;
     align-items: flex-start;
+    padding: 110px 0;
 `;
 class ListingSection extends Component {
     render() {
@@ -55,7 +57,14 @@ class ListingSection extends Component {
                             <span>32 Results</span> from 7344 results for "Physics"
                         </ResultDetails>
                         <ProductListing>
-                            {}
+                            <ProductCard/>
+                            <ProductCard/>
+                            <ProductCard/>
+                            <ProductCard/>
+                            <ProductCard/>
+                            <ProductCard/>
+                            <ProductCard/>
+                            <ProductCard/>
                         </ProductListing>
                     </Container>
                 </DataContainer>
