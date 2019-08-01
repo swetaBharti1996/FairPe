@@ -11,6 +11,7 @@ const Wrapper = styled.div`
   background: #fff;
   width: 100%;
   margin-top: 100px;
+  margin-bottom: 400px;
 `;
 const Cont = styled.div`
   width: 70%;
