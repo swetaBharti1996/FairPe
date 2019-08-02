@@ -17,8 +17,8 @@ const Box = styled.div`
   background: #fff;
   z-index: 50;
   display: flex;
-  border: 1px solid #EDEDED;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  border: 1px solid #ededed;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   flex-direction: row;
 `;
@@ -61,11 +61,12 @@ const ImageBox = styled.div`
   width: 35%;
   align-items: flex-start;
   justify-content: center;
-  >img{
+  > img {
     margin-top: 50px;
     width: 70%;
   }
 `;
+
 const LabelBox = styled.div`
   width: 65%;
   margin-top: 150px;
@@ -75,7 +76,7 @@ const BoxTextHead = styled.div`
   width: 456px;
   height: 74px;
   font-size: 30px;
-  font-family: 'Karla', sans-serif;
+  font-family: "Karla", sans-serif;
   font-weight: bolder;
   text-align: left;
   line-height: 36px;
@@ -85,7 +86,7 @@ const BoxText = styled.div`
   width: 411px;
   margin-top: 20px;
   height: 84px;
-  font-family: 'Karla', sans-serif;
+  font-family: "Karla", sans-serif;
   font-size: 18px;
   text-align: left;
   color: #333333;
@@ -107,13 +108,12 @@ const PolicyBox = styled.div`
   flex-direction: row;
   width: 10%;
   justify-content: space-between;
-  >p{
+  > p {
     color: #707070;
     font-size: 14px;
-    font-family: 'Karla', sans-serif;
+    font-family: "Karla", sans-serif;
   }
 `;
-
 
 class Footer extends Component {
   state = {};
@@ -127,12 +127,13 @@ class Footer extends Component {
             </ImageBox>
             <LabelBox>
               <BoxTextHead>
-                "Will you deliver the products
-                from a local shop to my place?"
+                "Will you deliver the products from a local shop to my place?"
               </BoxTextHead>
               <BoxText>
-                We are listening, we know your pain.<br />
-                We are working hard to make your life simpler.<br />
+                We are listening, we know your pain.
+                <br />
+                We are working hard to make your life simpler.
+                <br />
                 Watch this space, something great is on its way!
               </BoxText>
             </LabelBox>
@@ -143,7 +144,7 @@ class Footer extends Component {
           </MailBox>
         </Container>
         <Foot>
-          <Logo src="../../static/images/logo.png"/>
+          <Logo src="../../static/images/logo.png" />
           <PolicyBox>
             <p>Policy</p>
             <p>Terms</p>
