@@ -8,6 +8,7 @@ const Container = styled.div`
 `;
 const Wrapper = styled.div`
   width: 100%;
+  margin-bottom: 300px;
 `;
 class Product extends Component {
   state = {};

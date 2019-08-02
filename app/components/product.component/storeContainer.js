@@ -12,10 +12,9 @@ const Container = styled.div`
 const Wrapper = styled.div`
   width: 70%;
   height: 100%;
-  flex: 2.5;
+  flex: 3.5;
   background: #eee;
   margin-top: 20px;
-  /* box-shadow: -5px 0px 05px 0px #ddd; */
 `;
 const BoldText = styled.b`
   color: #000;
@@ -24,7 +23,7 @@ const BoldText = styled.b`
 
 const Location = styled.div`
   display: flex;
-  margin-left: 2%;
+  /* margin-left: 2%; */
 `;
 const Address = styled.div`
   margin-left: 10px;
@@ -44,7 +43,7 @@ const AddText = styled.div`
 const Store = styled.div`
   width: 100%;
   margin-top: 40px;
-  margin-left: 2%;
+  /* margin-left: 2%; */
 `;
 const TitleContainer = styled.div`
   display: flex;
@@ -76,6 +75,7 @@ const H_Name = styled.div`
   font-size: 16px;
   line-height: 19px;
   color: #666666;
+  padding: 0px 25px;
 `;
 const H_Price = styled.div`
   flex: 1;
@@ -113,12 +113,11 @@ const Desc = styled.div`
   flex-direction: column;
 `;
 const D_Store = styled.div`
-  width: 80px;
-  height: 24px;
   flex: 1;
-
+  align-items: center;
+  justify-content: center;
   > img {
-    width: 80%;
+    /* width: 80%; */
     height: 100%;
   }
 `;
@@ -140,9 +139,11 @@ const D_Name = styled.div`
   font-size: 16px;
   line-height: 24px;
   font-weight: bold;
+  padding: 0 25px;
 `;
 const H_D_Name = styled.div`
   flex: 2;
+  padding: 0 25px;
   color: #ff632a;
   font-size: 16px;
   line-height: 24px;
@@ -212,6 +213,7 @@ const Allresult = styled.div`
 `;
 const CardContainer = styled.div`
   margin-top: 15%;
+  padding-right: 50px;
 `;
 const CardSection = styled.div`
   display: flex;
@@ -353,6 +355,7 @@ class StoreContainer extends Component {
           <CardContainer>
             <CardContHead>Related Products</CardContHead>
             <CardSection>
+              <ProductCard />
               <ProductCard />
               <ProductCard />
               <ProductCard />
