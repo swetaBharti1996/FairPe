@@ -96,7 +96,7 @@ app
 
     server.use(handle);
 
-    server.listen(PORT, prettyHost, err => {
+    server.listen(PORT, err => {
       if (err) throw err;
       console.log("> Server started on port:", PORT);
     });
