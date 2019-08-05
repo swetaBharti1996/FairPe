@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "nodemon server/index.js ",
     "build": "next build app/",
-    "start": "NODE_ENV=production HOST=localhost PORT=3050 node server/index.js"
+    "start": "NODE_ENV=production HOST=localhost PORT=3060 node server/index.js"
   },
   "author": "",
   "license": "ISC",
