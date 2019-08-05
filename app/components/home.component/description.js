@@ -50,6 +50,7 @@ const Button = styled.button`
     width: 200px;
     padding: 13px 30px;
     border-radius: 24px;
+    text-align: center;
     font-size: 18px;
     color: #fff;
     background-image: linear-gradient(105deg, #FF632A, #E20000); 

@@ -50,8 +50,10 @@ const Link = styled.a`
 `;
 const Button = styled.a`
   padding: 15px 30px;
-  font-family: 'Helvetica Neue', sans-serif;
-  /* font-weight: bolder; */
+  /* font-family: 'Helvetica', sans-serif; */
+  font-weight: bolder;
+  /* width: 110px; */
+  text-align: center;
   font-size: 16px;
   border-radius: 24px;
   background: ${props=>props.active? 'linear-gradient(111deg, #FF632A, #E20000)': '#fff' };
