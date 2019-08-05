@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { AddToCart } from "../../../UI";
 
 const Wrapper = styled.div`
-  width: 30%;
+  /* width: 100%; */
   margin-bottom: 100px;
 `;
 const Container = styled.div`
@@ -97,7 +97,7 @@ const ProductCard = () => {
           </PriceContainer>
           <Wishlist>Wishlist</Wishlist>
         </Box>
-        <AddToCart />
+        {/* <AddToCart /> */}
       </Container>
     </Wrapper>
   );

@@ -6,6 +6,7 @@ import ProductCard from '../reusable/productCard';
 const Wrapper = styled.div`
     width: 75%;
     background: #F7F7F7;
+    margin-bottom: 400px;
 `;
 const Container = styled.div`
     width: 95%;
@@ -36,11 +37,27 @@ const ResultDetails = styled.div`
     }
 `;
 const ProductListing = styled.div`
-    display: flex;
-    flex-flow: row wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 300px);
     justify-content: space-between;
-    align-items: flex-start;
     padding: 110px 0;
+    /* margin-bottom: 50px; */
+`;
+const LoadMore = styled.div`
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    >a{
+        color: #FF632A;
+        font-weight: bolder;
+        font-size: 22px;
+    }
+    >i{
+        color: #E20000;
+        font-size: 32px;
+    }
 `;
 class ListingSection extends Component {
     render() {
@@ -57,15 +74,19 @@ class ListingSection extends Component {
                             <span>32 Results</span> from 7344 results for "Physics"
                         </ResultDetails>
                         <ProductListing>
-                            <ProductCard/>
-                            <ProductCard/>
-                            <ProductCard/>
-                            <ProductCard/>
-                            <ProductCard/>
-                            <ProductCard/>
-                            <ProductCard/>
-                            <ProductCard/>
+                            <ProductCard />
+                            <ProductCard />
+                            <ProductCard />
+                            <ProductCard />
+                            <ProductCard />
+                            <ProductCard />
+                            <ProductCard />
+                            <ProductCard />
                         </ProductListing>
+                        <LoadMore>
+                            <a>Load More</a>
+                            <i class="material-icons">keyboard_arrow_down</i>
+                        </LoadMore>
                     </Container>
                 </DataContainer>
             </Wrapper>
