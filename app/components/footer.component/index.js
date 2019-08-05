@@ -20,11 +20,16 @@ const Box = styled.div`
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   flex-direction: row;
+  @media only screen and (max-width: 1440px){
+    width: 740px;
+    height: 300px;
+    margin-top: -200px
+  }
 `;
 const Container = styled.div`
   margin: auto;
   /* display: flex; */
-  width: 964px;
+  width: 100%;
   margin-bottom: 100px;
 `;
 const MailBox = styled.div`
@@ -32,27 +37,38 @@ const MailBox = styled.div`
   height: 62px;
   display: flex;
   margin-top: -32px;
-  margin-left: 250px;
+  margin-left: 750px;
+  @media only screen and (max-width: 1440px){
+    width: 480px;
+    height: 54px;
+    margin-left: 550px;
+  }
 `;
 const MailInput = styled.input`
-  width: 399px;
+  width: 60%;
   border-radius: 31px 0px 0px 31px;
   border: 1px solid #707070;
-  font-size: 18px;
+  font-size: 16px;
   padding: 20px 36px;
   line-height: 60px;
   vertical-align: middle;
+  @media only screen and (max-width: 1440px){
+    font-size: 12px;
+  }
 `;
 const MailButton = styled.div`
-  width: 271px;
+  width: 40%;
   background: #220a3e;
-  font-size: 18px;
+  font-size: 16px;
   text-align: center;
   color: white;
   font-family: Helvetica, sans-serif;
   border-radius: 0px 31px 31px 0px;
   font-style: bold;
   padding: 20px 36px;
+  @media only screen and (max-width: 1440px){
+    font-size: 12px;
+  }
 `;
 
 const ImageBox = styled.div`
@@ -69,26 +85,36 @@ const ImageBox = styled.div`
 const LabelBox = styled.div`
   width: 65%;
   margin-top: 150px;
-  height: 74px;
+  /* height: 74px; */
+  @media only screen and (max-width: 1440px){
+    margin-top: 100px;
+  }
 `;
 const BoxTextHead = styled.div`
-  width: 456px;
-  height: 74px;
+  width: 80%;
+  /* height: 74px; */
   font-size: 30px;
   font-family: "Karla", sans-serif;
   font-weight: bolder;
   text-align: left;
   line-height: 36px;
   vertical-align: middle;
+  @media only screen and (max-width: 1440px){
+    font-size: 24px;
+    line-height: 28px;
+  }
 `;
 const BoxText = styled.div`
-  width: 411px;
+  width: 80%;
   margin-top: 20px;
   height: 84px;
   font-family: "Karla", sans-serif;
   font-size: 18px;
   text-align: left;
   color: #333333;
+  @media only screen and (max-width: 1440px){
+    font-size: 14px;
+  }
 `;
 const Foot = styled.div`
   width: 90%;

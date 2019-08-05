@@ -41,10 +41,15 @@ const CategoryTag = styled.div`
 `;
 const MainCaption = styled.h1`
   font-family: "Karla", sans-serif;
-  width: 70%;
+  width: 53%;
   line-height: 60px;
   font-size: 48px;
   margin-bottom: 20px;
+  @media only screen and (max-width: 1440px){
+    width: 50%;
+    font-size: 36px;
+    line-height: 40px;
+  }
 `;
 const Tagline = styled.p`
   font-family: "Karla", sans-serif;
@@ -54,6 +59,7 @@ const Tagline = styled.p`
   font-weight: bolder;
   @media only screen and (max-width: 1440px){
     margin-bottom: 50px;
+    font-size: 22px;
   }
 `;
 const Down = styled.button`

@@ -9,7 +9,7 @@ const Wrapper = styled.div`
     /* padding: 38px 48px; */
     background: #fff;
     border-radius: 49px;
-    box-shadow: 0 2px 4px 0 #ddd;
+    box-shadow: 0 2px 4px 2px #ddd;
     margin-bottom: 55px;
 `;
 const SearchBar = styled.input`
