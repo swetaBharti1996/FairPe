@@ -117,6 +117,8 @@ const D_Store = styled.div`
   align-items: center;
   justify-content: center;
   > img {
+    display: block;
+    margin: auto;
     /* width: 80%; */
     height: 100%;
   }

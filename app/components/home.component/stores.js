@@ -7,6 +7,9 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     margin-bottom: 120px;
+    @media only screen and (max-width: 1440px){
+        width: 35%;
+    }
     >p{
         font-size: 14px;
         color: #666666;

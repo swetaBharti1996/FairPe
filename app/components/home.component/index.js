@@ -12,10 +12,16 @@ const Wrapper = styled.div`
   width: 100%;
   margin-top: 100px;
   margin-bottom: 400px;
+  @media only screen and (max-width: 1440px){
+    margin-top: 50px;
+  }
 `;
 const Cont = styled.div`
   width: 70%;
   margin: auto;
+  @media only screen and (max-width: 1440px){
+    width: 80%;
+  } 
 `;
 const CategoryTag = styled.div`
   font-family: "Karla", sans-serif;
@@ -28,6 +34,10 @@ const CategoryTag = styled.div`
   font-weight: lighter;
   border-radius: 0px 35px 35px 0px;
   margin-bottom: 50px;
+  @media only screen and (max-width: 1440px){
+    font-size: 28px;
+    width: 250px;
+  }
 `;
 const MainCaption = styled.h1`
   font-family: "Karla", sans-serif;
@@ -42,6 +52,9 @@ const Tagline = styled.p`
   color: #666666;
   margin-bottom: 70px;
   font-weight: bolder;
+  @media only screen and (max-width: 1440px){
+    margin-bottom: 50px;
+  }
 `;
 const Down = styled.button`
   background: #fff;

@@ -8,6 +8,9 @@ const Wrapper = styled.div`
   box-shadow: 0 2px 4px 0px #ddd;
   font-family: 'Karla', sans-serif;
   z-index: 10;
+  @media only screen and (max-width: 1440px){
+    height: 80px;
+  }
 `;
 const Container = styled.div`
   display: flex;
@@ -21,6 +24,12 @@ const Logo = styled.div`
   >img{
     width: 120px;
   }
+  @media only screen and (max-width: 1440px){
+    width: 35%;
+    >img{
+      width: 100px;
+    }
+  }
 `;
 const LinkContainer = styled.div`
   display: flex;
@@ -28,10 +37,16 @@ const LinkContainer = styled.div`
   align-items: center;
   width: 55%;
   justify-content: space-between;
+  @media only screen and (max-width: 1440px){
+    width: 65%;
+  }
 `;
 const Link = styled.a`
   font-size: 18px;
   color: #666666;
+  @media only screen and (max-width: 1440px){
+    font-size: 16px;
+  }
 `;
 const Button = styled.a`
   padding: 15px 30px;
@@ -42,6 +57,10 @@ const Button = styled.a`
   background: ${props=>props.active? 'linear-gradient(111deg, #FF632A, #E20000)': '#fff' };
   color: ${props => props.active? '#fff': "#000"};
   border: 1px solid #FF632A;
+  @media only screen and (max-width: 1440px){
+    padding: 10px 25px;
+    font-size: 14px;
+  }
 `;
 class Header extends Component {
   state = {};

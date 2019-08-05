@@ -147,9 +147,9 @@ class ProductContainer extends Component {
               <LabelText>Price Starts at</LabelText>
               <CartContainer>
                 <Price>Rs. 10372</Price>
-                <Cart>
+                {/* <Cart>
                   <AddToCart />
-                </Cart>
+                </Cart> */}
               </CartContainer>
             </LowerContainer>
           </ProductBox>
