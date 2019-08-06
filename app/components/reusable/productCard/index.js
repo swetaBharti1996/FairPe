@@ -15,7 +15,7 @@ const ImageContainer = styled.div`
   height: 160px;
   > img {
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
   }
 `;
 
@@ -25,6 +25,9 @@ const Title = styled.h2`
   width: 100%;
   margin-top: 17px;
   color: #000;
+  @media only screen and (max-width: 1440px){
+    font-size: 16px;
+  }
 `;
 
 const Author = styled.p`
@@ -36,6 +39,9 @@ const Author = styled.p`
   > b {
     color: #333;
   }
+  @media only screen and (max-width: 1440px){
+    font-size: 14px;
+  }
 `;
 
 const Binding = styled.p`
@@ -43,6 +49,9 @@ const Binding = styled.p`
   font-size: 14px;
   margin-top: 16px;
   color: #666;
+  @media only screen and (max-width: 1440px){
+    font-size: 12px;
+  }
 `;
 
 const Box = styled.div`
@@ -55,6 +64,9 @@ const Box = styled.div`
   border-bottom: 1px solid #cecece;
   border-top: 1px solid #cecece;
   margin-top: 11px;
+  @media only screen and (max-width: 1440px){
+    padding: 14px 0;
+  }
 `;
 
 const PriceContainer = styled.div`
@@ -63,11 +75,19 @@ const PriceContainer = styled.div`
     font-size: 16px;
     color: #666;
   }
-  b {
+  >b {
     line-height: 28px;
     font-size: 24px;
     color: #000;
     margin-top: 6px;
+  }
+  @media only screen and (max-width: 1440px){
+    >p{
+      font-size: 14px;
+    }
+    >b{
+      font-size: 22px;
+    }
   }
 `;
 
