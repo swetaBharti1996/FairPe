@@ -10,11 +10,14 @@ const Container = styled.div`
   padding-left: 4%;
 `;
 const Wrapper = styled.div`
-  width: 70%;
+  /* width: 70%; */
   height: 100%;
   flex: 3.5;
   background: #eee;
   margin-top: 20px;
+  @media only screen and (max-width: 1440px){
+    flex: 2.5;
+  }
 `;
 const BoldText = styled.b`
   color: #000;
@@ -114,24 +117,24 @@ const Desc = styled.div`
 `;
 const D_Store = styled.div`
   flex: 1;
-  align-items: center;
-  justify-content: center;
+  height: 25px;
+  width: 80px;
   > img {
     display: block;
-    margin: auto;
-    /* width: 80%; */
-    height: 100%;
+    width: 50%;
   }
 `;
 
 const Offline_D_Store = styled.div`
-  width: 59px;
-  height: 59px;
   flex: 1;
-
+  height: 25px;
+  width: 80px;
+  /* align-items: center;
+  justify-content: center; */
   > img {
-    width: 80%;
-    height: 100%;
+    display: block;
+    width: 50%;
+    /* height: 100%; */
   }
   display: flex;
   flex-direction: column;
@@ -360,7 +363,7 @@ class StoreContainer extends Component {
               <ProductCard />
               <ProductCard />
               <ProductCard />
-              <ProductCard />
+              {/* <ProductCard /> */}
             </CardSection>
           </CardContainer>
         </Container>

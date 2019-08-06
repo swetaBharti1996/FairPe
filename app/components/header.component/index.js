@@ -48,6 +48,13 @@ const Link = styled.a`
     font-size: 16px;
   }
 `;
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 35%;
+  justify-content: space-between;
+
+`;
 const Button = styled.a`
   padding: 15px 30px;
   /* font-family: 'Helvetica', sans-serif; */
@@ -77,8 +84,10 @@ class Header extends Component {
             <Link>Why FairPe</Link>
             <Link>Offline partners</Link>
             <Link>Contact us</Link>
-            <Button>Refer and earn</Button>
-            <Button active>Sign up</Button>
+            <ButtonContainer>
+              <Button>Refer and earn</Button>
+              <Button active>Sign up</Button>
+            </ButtonContainer>
           </LinkContainer>
         </Container>
       </Wrapper>

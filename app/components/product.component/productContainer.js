@@ -6,7 +6,7 @@ const Container = styled.div`
   flex-direction: column;
 `;
 const Wrapper = styled.div`
-  width: 20%;
+  /* width: 20%; */
   flex: 1;
   z-index: 15;
 

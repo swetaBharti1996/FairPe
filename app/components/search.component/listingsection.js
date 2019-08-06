@@ -16,7 +16,7 @@ const Container = styled.div`
 `;
 const SearchContainer = styled.div`
     width: 80%;
-    height: 70px;
+    height: 60px;
     padding: 16px 0px;
 `;
 const DataContainer = styled.div`

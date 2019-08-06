@@ -29,7 +29,7 @@ const CategoryTag = styled.div`
   color: #ff632a;
   padding: 15px 15px;
   width: 310px;
-  background: #f5f5f5;
+  background: rgba(245,245,245, 0.57);
   font-size: 36px;
   font-weight: lighter;
   border-radius: 0px 35px 35px 0px;
