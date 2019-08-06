@@ -108,7 +108,7 @@ const Description = styled.div`
 const Offline_Description = styled.div`
   display: flex;
   padding-top: 30px;
-  padding-bottom: 80px;
+  padding-bottom: 40px;
   border-top: 1px solid #eee;
 `;
 const Desc = styled.div`
@@ -117,7 +117,7 @@ const Desc = styled.div`
 `;
 const D_Store = styled.div`
   flex: 1;
-  height: 25px;
+  width: 80px;
   > img {
     display: block;
     width: 50%;
