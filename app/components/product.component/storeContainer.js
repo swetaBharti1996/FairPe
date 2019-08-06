@@ -225,7 +225,7 @@ const CardContainer = styled.div`
 `;
 const CardSection = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, 300px);
+  grid-template-columns: repeat(auto-fit, 280px);
   justify-content: space-between;
   margin-top: 4%;
 `;
