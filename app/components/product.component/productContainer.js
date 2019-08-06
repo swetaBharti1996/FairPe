@@ -29,13 +29,13 @@ const ImageContainer = styled.div`
   width: 150px;
   height: 223px;
   > img {
-    width: 100%;
+    /* width: 100%; */
     height: 100%;
   }
 `;
 
 const Heart = styled.i`
-  padding: 20px;
+  /* padding: 20px; */
 `;
 const LowerContainer = styled.div`
   display: flex;
@@ -134,7 +134,9 @@ class ProductContainer extends Component {
               <ImageContainer>
                 <img src="../../static/images/imagebook.png" />
               </ImageContainer>
-              <Heart>WishList</Heart>
+              <Heart>
+                <img src="../../static/images/wishlist_fill.png"/>
+              </Heart>
             </UpperContainer>
             <LowerContainer>
               <Details>

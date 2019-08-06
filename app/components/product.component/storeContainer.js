@@ -27,6 +27,12 @@ const BoldText = styled.b`
 const Location = styled.div`
   display: flex;
   /* margin-left: 2%; */
+  >img{
+    margin-top: -5px;
+    width: auto;
+    height: 25px;
+    width: auto;
+  }
 `;
 const Address = styled.div`
   margin-left: 10px;
@@ -258,7 +264,7 @@ class StoreContainer extends Component {
       <Wrapper>
         <Container>
           <Location>
-            <i>Location</i>
+            <img src="../../static/images/location_1.png"/>
 
             <Address>9th Main, HSR Layout, Bangalore</Address>
             <AddText>Change your location</AddText>

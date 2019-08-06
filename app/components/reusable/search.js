@@ -18,9 +18,12 @@ const SearchBar = styled.input`
     margin-left: 48px;
     width: 85%;
     border: none;
+    :focus{
+        border: none;
+    }
     ::placeholder {
        color: #999999;
-   }
+    };
 `;
 const SearchButton = styled.button`
     background-image: linear-gradient(127deg, #FF632A, #E20000);   

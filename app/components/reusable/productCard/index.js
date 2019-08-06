@@ -91,7 +91,12 @@ const PriceContainer = styled.div`
   }
 `;
 
-const Wishlist = styled.i``;
+const Wishlist = styled.div`
+  >img{
+    margin-top: 10px;
+    width: 80%;
+  }
+`;
 
 const ProductCard = () => {
   return (
@@ -115,7 +120,9 @@ const ProductCard = () => {
             <p>Price starts at</p>
             <b>Rs. 10372</b>
           </PriceContainer>
-          <Wishlist>Wishlist</Wishlist>
+          <Wishlist>
+            <img src="../../../static/images/wishlist_empty.png"/>
+          </Wishlist>
         </Box>
         {/* <AddToCart /> */}
       </Container>

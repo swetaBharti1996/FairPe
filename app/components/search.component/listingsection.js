@@ -16,7 +16,10 @@ const Container = styled.div`
 `;
 const SearchContainer = styled.div`
     width: 80%;
-    height: 60px;
+    height: 70px;
+    @media only screen and (max-width: 1440px){
+        height: 60px;
+    }
     padding: 16px 0px;
 `;
 const DataContainer = styled.div`
