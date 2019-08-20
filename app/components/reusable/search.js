@@ -10,7 +10,7 @@ const Wrapper = styled.div`
     background: #fff;
     border-radius: 49px;
     box-shadow: 0 2px 4px 2px #ddd;
-    margin-bottom: 55px;
+    /* margin-bottom: 55px; */
 `;
 const SearchBar = styled.input`
     font-size: 16px;

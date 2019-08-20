@@ -195,13 +195,6 @@ const Off_distance = styled.div`
   padding: 10px 0 0 0;
   align-content: left;
   line-height: 19px;
-  /* > distance {
-    font-size: 16px;
-    align-content: left;
-    line-height: 19px;
-    font-weight: bold;
-    color: #333333;
-  } */
 `;
 const Off_dir = styled.div`
   font-size: 16px;

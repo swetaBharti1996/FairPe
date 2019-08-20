@@ -62,6 +62,9 @@ const Tagline = styled.p`
     font-size: 22px;
   }
 `;
+const SearchContainer = styled.div`
+  margin-bottom: 55px;
+`;
 const Down = styled.button`
   background: #fff;
   margin: 0 auto;
@@ -88,10 +91,12 @@ class Home extends Component {
             The best prices Online/Offline to shop locally
           </MainCaption>
           <Tagline>Search and buy at the cheapest price</Tagline>
-          <Search />
+          <SearchContainer>
+            <Search />
+          </SearchContainer>
           <Stores />
           <Down>
-            <i class="material-icons">keyboard_arrow_down</i>
+            <i className="material-icons">keyboard_arrow_down</i>
           </Down>
           <Categories />
           <Description />
