@@ -66,15 +66,15 @@ app
     //   })
     // );
 
-    // server.use(
-    //   "/_search",
-    //   httpProxy({
-    //     changeOrigin: true,
-    //     target: AppConstants.searchURL,
-    //     logLevel: "debug",
-    //     onError: onError
-    //   })
-    // );
+    server.use(
+      "/_search",
+      httpProxy({
+        changeOrigin: true,
+        target: AppConstants.searchURL,
+        logLevel: "debug",
+        onError: onError
+      })
+    );
 
     // server.use(
     //   "/suggest",

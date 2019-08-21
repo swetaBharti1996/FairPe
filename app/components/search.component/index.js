@@ -12,12 +12,12 @@ const FilterSection = styled.div`
     width: 25%;
     height: 100%;
 `;
-class Search extends Component{
-    render(){
-        return(
+class Search extends Component {
+    render() {
+        return (
             <Wrapper>
-                <FilterSection/>
-                <ListingSection/>
+                <FilterSection />
+                <ListingSection products={this.props.products} />
             </Wrapper>
         )
     }

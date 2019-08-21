@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { Container } from "next/app";
-import Search from "../reusable/search";
+import Search from "../../containers/searchbar.container";
 import Stores from "./stores";
 import Categories from "./categories";
 import Description from "./description";
@@ -63,7 +63,11 @@ const Tagline = styled.p`
   }
 `;
 const SearchContainer = styled.div`
+  height: 90px;
   margin-bottom: 55px;
+  @media only screen and (max-width: 1440px){
+    height: 70px;
+  }
 `;
 const Down = styled.button`
   background: #fff;

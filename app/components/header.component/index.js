@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import Router from "next/router";
 
 const Wrapper = styled.div`
   height: 100px;
@@ -20,6 +21,7 @@ const Container = styled.div`
   align-items: center;
 `;
 const Logo = styled.div`
+  cursor: pointer;
   width:45%;
   >img{
     width: 120px;
@@ -77,7 +79,7 @@ class Header extends Component {
     return (
       <Wrapper>
         <Container>
-          <Logo>
+          <Logo onClick={()=> Router.push(`/`)}>
             <img src="../../static/images/logo.png"/>
           </Logo>
           <LinkContainer>

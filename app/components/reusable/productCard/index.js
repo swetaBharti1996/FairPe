@@ -98,27 +98,28 @@ const Wishlist = styled.div`
   }
 `;
 
-const ProductCard = () => {
+const ProductCard = ({product}) => {
+  let specs = JSON.parse(product.specifications);
   return (
     <Wrapper>
       <Container>
         <ImageContainer>
           <img
-            src="https://images-eu.ssl-images-amazon.com/images/I/51DwqenW78L._SL300_.jpg"
-            alt="Solved Papers Karnataka CET Engineering Entrance"
+            src={product.image}
+            alt={product.title}
           />
         </ImageContainer>
-        <Title>Solved Papers Karnataka CET Engineering Entrance</Title>
+        <Title>{product.title}</Title>
 
         <Author>
-          By <b>Robert Vein</b>
+          By <b>{specs.author}</b>
         </Author>
-        <Binding>Paperback,Hardcover</Binding>
+        <Binding>{specs.binding}</Binding>
 
         <Box>
           <PriceContainer>
             <p>Price starts at</p>
-            <b>Rs. 10372</b>
+            <b>Rs. {product.mprice}</b>
           </PriceContainer>
           <Wishlist>
             <img src="../../../static/images/wishlist_empty.png"/>

@@ -11,7 +11,9 @@ class SearchContainer extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    products: state.products
+  };
 };
 
 const mapDispatchToProps = dispatch => {

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import SearchBar from '../reusable/search';
+import SearchBar from '../../containers/searchbar.container';
 import ProductCard from '../reusable/productCard';
+import _ from "lodash";
 
 const Wrapper = styled.div`
     width: 75%;
@@ -64,6 +65,7 @@ const LoadMore = styled.div`
 `;
 class ListingSection extends Component {
     render() {
+        const {products} = this.props;
         return (
             <Wrapper>
                 <Container>
@@ -77,18 +79,24 @@ class ListingSection extends Component {
                             <span>32 Results</span> from 7344 results for "Physics"
                         </ResultDetails>
                         <ProductListing>
+                            {_.map(products, (product, id) => (
+                                <ProductCard 
+                                    key={id}
+                                    product={product}
+                                />   
+                            ))}
+                            {/* <ProductCard />
                             <ProductCard />
                             <ProductCard />
                             <ProductCard />
                             <ProductCard />
                             <ProductCard />
                             <ProductCard />
-                            <ProductCard />
-                            <ProductCard />
+                            <ProductCard /> */}
                         </ProductListing>
                         <LoadMore>
                             <a>Load More</a>
-                            <i class="material-icons">keyboard_arrow_down</i>
+                            <i className="material-icons">keyboard_arrow_down</i>
                         </LoadMore>
                     </Container>
                 </DataContainer>
