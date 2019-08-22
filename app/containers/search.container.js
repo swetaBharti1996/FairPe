@@ -1,26 +1,138 @@
-import { connect } from "react-redux";
+import _ from "lodash";
 import { withRouter } from "next/router";
-import Search from "../components/search.component";
-import {} from "../actions/asyncAction";
-import {} from "../actions/syncAction";
+import { connect } from "react-redux";
+import queryString from "query-string";
+import Router from "next/router";
+import { filterResults } from "../actions/asyncAction";
+import SearchPage from "../components/search.component";
 
+const stringFacet = [
+  // "brand",
+  // "site",
+  "publisher",
+  "author"
+  // "category",
+  // "subcategory"
+];
+const numberFacet = ["lower", "upper"];
+
+const determineFacet = query => {
+  let facetCount = 0;
+  let stringExists = 0;
+  let numberExists = 0;
+  stringFacet.forEach(f => {
+    if (query[f]) stringExists = 1;
+  });
+  numberFacet.forEach(f => {
+    if (query[f]) numberExists = 2;
+  });
+  facetCount = stringExists + numberExists;
+  return facetCount;
+};
 class SearchContainer extends React.Component {
+  componentDidMount() {
+    // console.log(this.props.filters.query);
+  }
+
+  applyPriceFilter = (lower, upper) => {
+    const currentQuery = this.props.filters.query;
+
+    let newQuery = _.assign({}, currentQuery, { lower, upper });
+    newQuery = _.omit(newQuery, ["facets"]);
+    const count = determineFacet(newQuery);
+    if (count) {
+      newQuery.facets = count;
+    }
+    const query = queryString.stringify(newQuery);
+    Router.push(`/search?${query}`);
+    this.props.dispatch(filterResults(query));
+  };
+  applyFilter = (type, value) => {
+    const currentQuery = this.props.filters.query;
+    let newQuery = null;
+    if (value) {
+      newQuery = _.assign({}, currentQuery, {
+        [type]: value
+      });
+    } else {
+      newQuery = _.omit(currentQuery, [type]);
+    }
+    newQuery = _.omit(newQuery, ["facets"]);
+    const count = determineFacet(newQuery);
+    if (count) {
+      newQuery.facets = count;
+    }
+    const query = queryString.stringify(newQuery);
+    Router.push(`/search?${query}`);
+    this.props.dispatch(filterResults(query));
+  };
+
+  applyCategoryFilter = (category, subcategory, level) => {
+    const currentQuery = this.props.filters.query;
+    let newQuery = null;
+    if (category && subcategory && level) {
+      newQuery = _.assign({}, currentQuery, {
+        subcategory,
+        category,
+        level,
+        page: 1
+      });
+    } else {
+      newQuery = _.omit(currentQuery, category, subcategory, level);
+    }
+    newQuery = _.omit(newQuery, ["facets"]);
+    const count = determineFacet(newQuery);
+    if (count) {
+      newQuery.facets = count;
+    }
+    const query = queryString.stringify(newQuery);
+    Router.push(`/search?${query}`);
+    this.props.dispatch(filterResults(query));
+  };
+  clearFilter = () => {
+    const currentQuery = this.props.filters.query;
+    const newQuery = {
+      term: currentQuery.term,
+      page: 1
+    };
+    const query = queryString.stringify(newQuery);
+    Router.push(`/search?${query}`);
+    this.props.dispatch(filterResults(query));
+  };
+  clearAll = () => {
+    const currentQuery = this.props.filters.query;
+    const newQuery = {
+      term: currentQuery.term,
+      page: 1,
+      category: currentQuery.category,
+      level: currentQuery.level,
+      subcategory: currentQuery.subcategory
+    };
+    const query = queryString.stringify(newQuery);
+    Router.push(`/search?${query}`);
+    this.props.dispatch(filterResults(query));
+  };
   render() {
-    return <Search {...this.props} />;
+    const {
+      products,
+      filters,
+      router: { query }
+    } = this.props;
+    return (
+      <SearchPage
+        clearFilter={this.clearFilter}
+        clearAll={this.clearAll}
+        applyPriceFilter={this.applyPriceFilter}
+        applyFilter={this.applyFilter}
+        applyCategoryFilter={this.applyCategoryFilter}
+        filters={filters}
+        query={query}
+        products={products}
+      />
+    );
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    products: state.products
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {};
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRouter(SearchContainer));
+export default connect(s => ({ filters: s.filters, products: s.products }))(
+  withRouter(SearchContainer)
+);

@@ -63,8 +63,9 @@ const Tagline = styled.p`
   }
 `;
 const SearchContainer = styled.div`
-  height: 90px;
+  /* height: 90px; */
   margin-bottom: 55px;
+  height: 90px;
   @media only screen and (max-width: 1440px){
     height: 70px;
   }

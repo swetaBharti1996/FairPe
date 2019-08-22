@@ -76,23 +76,24 @@ app
       })
     );
 
-    // server.use(
-    //   "/suggest",
-    //   httpProxy({
-    //     changeOrigin: true,
-    //     target: AppConstants.suggestionURL,
-    //     logLevel: "debug"
-    //   })
-    // );
+    server.use(
+      "/suggest",
+      httpProxy({
+        changeOrigin: true,
+        target: AppConstants.suggestionURL || "http://192.168.0.20:6777",
+        logLevel: "debug",
+        // onError: onError
+      })
+    );
 
-    // server.use(
-    //   "/api",
-    //   httpProxy({
-    //     changeOrigin: true,
-    //     target: AppConstants.baseURL,
-    //     logLevel: "debug"
-    //   })
-    // );
+    server.use(
+      "/api",
+      httpProxy({
+        changeOrigin: true,
+        target: AppConstants.baseURL,
+        logLevel: "debug"
+      })
+    );
 
     server.use(handle);
 

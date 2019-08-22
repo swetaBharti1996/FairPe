@@ -16,12 +16,12 @@ const Container = styled.div`
     flex-direction: column;
 `;
 const SearchContainer = styled.div`
-    width: 80%;
+    width: 90%;
     height: 70px;
     @media only screen and (max-width: 1440px){
         height: 60px;
     }
-    padding: 16px 0px;
+    padding: 20px 0px;
 `;
 const DataContainer = styled.div`
     background: #fff;

@@ -7,7 +7,6 @@ import initialState from "../store/initialState";
 export default (state = initialState.filters, action) => {
     switch (action.type) {
         case ActionTypes.FETCHED_PRODUCTS:
-            console.log(action);
             const { query } = action;
             const filters = _.get(action, "payload.aggregations", {});
             const parsed = parseAggregtions(filters, query);

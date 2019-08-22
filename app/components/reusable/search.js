@@ -4,22 +4,26 @@ import _ from 'lodash';
 
 const Wrapper = styled.div`
     display: flex;
-    flex-direction: row;
-    width: 80%;
-    height: 100%;
-    /* padding: 38px 48px; */
+    flex-direction: column;
+    /* margin-bottom: 55px; */
     background: #fff;
     border-radius: 49px;
     box-shadow: 0 2px 4px 2px #ddd;
-    /* margin-bottom: 55px; */
+    width: 80%;
+    /* height: 100%; */
+`;
+const Container = styled.div`
+    display: flex;
+    flex-direction: row;
+    /* padding: 38px 48px; */
 `;
 const SearchBar = styled.input`
     font-size: 16px;
-    margin: 3% 0px;
-    margin-left: 40px !important;
+    margin: 20px 0px;
+    margin-left: 5% !important;
     width: 85%;
     height: 100%;
-    /* padding: 25px 30px; */
+    padding: 25px 0px;
     border: none !important;
     :focus{
         border: none;
@@ -40,6 +44,35 @@ const SearchButton = styled.button`
         width: 40%;
     }
 `;
+const SearchDropdown = styled.ul`
+    display: flex;
+    flex-direction: column;
+  /* padding: 20px; */
+    z-index: 99;
+    width: 100%;
+    padding-bottom: 40px;
+    /* padding: 10px; */
+    background-color: #fff;
+    color: #777;
+    cursor: default;
+    border-radius: 49px;
+
+  @media screen and (max-width: ${props => props.theme.bpxs}) {
+    top: 43px;
+  }
+`;
+const SuggestionList = styled.div`
+    width: 90%;
+    padding: 10px 5%;
+    font-size: 16px;
+    font-weight: bolder;
+    text-transform: capitalize;
+    color: #666666;
+    background: ${props=>props.hover?"#eee": "#fff"};
+    :hover{
+        background: #eee;
+    }
+`;
 class Search extends Component {
     state = {
         searchTerm: "",
@@ -54,12 +87,10 @@ class Search extends Component {
         hovered: ""
     };
     handleInputChange = e => {
-        console.log(e.target.value);
         this.setState({ searchTerm: e.target.value });
     };
 
     onChange = ({ value }) => {
-        console.log('hello');
         if (value) {
             this.state.searchTerm = value;
             this.props.onSearch(value);
@@ -100,11 +131,6 @@ class Search extends Component {
             const result = options.map(x => (
                 <SuggestionList
                     onMouseDown={() => {
-                        analytics(
-                            Events.SEARCH_EVENT,
-                            {},
-                            { event: "suggestion-click", searchTerm: x }
-                        );
                         this.onChange({ value: x });
                     }}
                     data={x}
@@ -121,14 +147,6 @@ class Search extends Component {
         this.debouncedFetch(input, callback);
     };
 
-    onEnterPress = term => e => {
-        if (e.key == "Enter") {
-            console.log('enter');
-            e.preventDefault();
-            this.onChange({ value: term || this.state.searchTerm });
-        }
-    };
-
     onHover = e => {
         this.setState({
             hovered: e.target.innerHTML
@@ -139,6 +157,11 @@ class Search extends Component {
         const { searchTerm, hovered, list } = this.state;
         let options = this.props.search[searchTerm] || list;
         let index = options.indexOf(hovered);
+        if (e.keyCode == 13) {
+            e.preventDefault();
+            this.onChange({ value: this.state.hovered || this.state.searchTerm });
+            this.setState({list: [], showSuggestion: false});
+        }
         if (e.keyCode === 40 && options.length) {
             let i = ++index;
             if (i > options.length - 1) {
@@ -157,25 +180,48 @@ class Search extends Component {
         const { searchTerm, showSuggestion, list, hovered } = this.state;
         return (
             <Wrapper>
-                <SearchBar
-                    type="text"
-                    placeholder="Search for any category / product"
-                    value={searchTerm}
-                    onChange={this.handleInputChange}
-                    onFocus={()=>this.setSuggestion()}
-                    onKeyPress={() => this.onEnterPress(hovered)}
-                    onBlur={() =>
-                        this.setState({ showSuggestion: false, hovered: null })
-                    }
-                    // onKeyDown={this.onUpDown}
-                />
-                <SearchButton
-                    onClick={() => 
-                        this.onChange({ value: searchTerm })
-                    }
-                >
-                    <img src="../../static/images/search_big.png" />
-                </SearchButton>
+                <Container>
+                    <SearchBar
+                        type="text"
+                        placeholder="Search for any category / product"
+                        value={searchTerm}
+                        onChange={this.handleInputChange}
+                        onFocus={() => this.setSuggestion()}
+                        onBlur={() =>
+                            this.setState({ showSuggestion: false, hovered: null })
+                        }
+                        onKeyDown={this.onUpDown}
+                    />
+                    <SearchButton
+                        onClick={() =>
+                            this.onChange({ value: searchTerm })
+                        }
+                    >
+                        <img src="../../static/images/search_big.png" />
+                    </SearchButton>
+                </Container>
+                {showSuggestion && (
+                    <SearchDropdown onClick={this.onChange}>
+                        {this.getOptions(searchTerm, data => {
+                            return data;
+                        })}
+                        {!searchTerm &&
+                            list.map((data, index) => {
+                                return (
+                                    <React.Fragment key={index}>
+                                        <SuggestionList
+                                            onMouseDown={() => {this.onChange({ value: data }); this.setState({list: [], value: ''})}}
+                                            onMouseOver={this.onHover}
+                                            data={data}
+                                            hover={hovered === data}
+                                        >
+                                            {data}
+                                        </SuggestionList>
+                                    </React.Fragment>
+                                );
+                            })}
+                    </SearchDropdown>
+                )}
             </Wrapper>
         )
     }
