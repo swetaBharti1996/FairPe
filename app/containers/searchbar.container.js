@@ -22,7 +22,7 @@ const mapDispatchToProps = dispatch => {
             const newQuery = { term, page: 1 };
             const query = queryString.stringify(newQuery);
             Router.push(`/search?${query}`);
-            return dispatch(filterResults(query));
+            return dispatch(filterResults(query, 1));
         },
         searchSuggestion: term => dispatch(searchSuggestion(term)),
         loading: () => dispatch(loading())

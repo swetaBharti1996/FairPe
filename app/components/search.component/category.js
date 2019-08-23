@@ -6,7 +6,6 @@ const MainContainer = styled.div`
   flex-flow: column;
   margin-top: 120px;
   margin-bottom: 20px;
-  margin-left: 40px;
 `;
 const CategoryContainer = styled.div`
   align-items: flex-start;

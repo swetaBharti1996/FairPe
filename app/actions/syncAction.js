@@ -8,10 +8,11 @@ export const gotSearchResults = (data, term) => {
         term
     })
 };
-export const gotProducts = (data, query) => ({
+export const gotProducts = (data, query, page) => ({
     type: ActionTypes.FETCHED_PRODUCTS,
     payload: data,
-    query
+    query,
+    page
 });
 export const loading = () => ({
     type: ActionTypes.LOADING

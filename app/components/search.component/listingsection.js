@@ -53,6 +53,7 @@ const LoadMore = styled.div`
     width: 100%;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
     >a{
         color: #FF632A;
         font-weight: bolder;
@@ -64,8 +65,16 @@ const LoadMore = styled.div`
     }
 `;
 class ListingSection extends Component {
+    loadMore = () => {
+        let page = Number(this.props.query.page) + 1;
+        this.props.applyFilter('page', page);
+        this.setState({ page: page });
+    }
     render() {
-        const {products} = this.props;
+        const { products, count, total, query } = this.props;
+        let length;
+        if (products)
+            length = Object.keys(products).length;
         return (
             <Wrapper>
                 <Container>
@@ -76,28 +85,22 @@ class ListingSection extends Component {
                 <DataContainer>
                     <Container>
                         <ResultDetails>
-                            <span>32 Results</span> from 7344 results for "Physics"
+                            <span>{count} Results</span> from {total} results for "{query.term}"
                         </ResultDetails>
                         <ProductListing>
                             {_.map(products, (product, id) => (
-                                <ProductCard 
+                                <ProductCard
                                     key={id}
                                     product={product}
-                                />   
+                                />
                             ))}
-                            {/* <ProductCard />
-                            <ProductCard />
-                            <ProductCard />
-                            <ProductCard />
-                            <ProductCard />
-                            <ProductCard />
-                            <ProductCard />
-                            <ProductCard /> */}
                         </ProductListing>
-                        <LoadMore>
-                            <a>Load More</a>
-                            <i className="material-icons">keyboard_arrow_down</i>
-                        </LoadMore>
+                        {products && (length < total) &&
+                            <LoadMore onClick={() => this.loadMore()}>
+                                <a>Load More</a>
+                                <i className="material-icons">keyboard_arrow_down</i>
+                            </LoadMore>
+                        }
                     </Container>
                 </DataContainer>
             </Wrapper>

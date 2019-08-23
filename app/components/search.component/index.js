@@ -14,37 +14,50 @@ const FilterSection = styled.div`
     width: 25%;
     height: 100%;
 `;
+const Container = styled.div`
+    margin-left: 40px;
+    margin-right: 40px;
+`;
 class Search extends Component {
     render() {
         const {
             filters,
             query,
+            total,
+            count,
             applyFilter,
             applyPriceFilter,
             applyCategoryFilter,
             clearAll
         } = this.props;
-        const { categoryBuckets, priceBuckets, sortedlist } = filters;
-        console.log(filters);
         return (
             <Wrapper>
                 <FilterSection>
                     {/* <Filters> */}
                     {filters.length &&
-                        <>
-                            <Category bucket={categoryBuckets} updateCategory={applyCategoryFilter} />
-                            <Filters
-                                clearAll={clearAll}
-                                query={query}
-                                allbuckets={sortedlist}
-                                applyFilter={applyFilter}
-                                applyPriceFilter={applyPriceFilter}
-                            />
-                        </>
+                        filters.map((filter,index)=>(
+                            <>
+                                {Object.keys(filter).map((key, i)=>(
+                                    <Container>
+                                        {key == "categoryBuckets" &&
+                                            <Category bucket={filter[key]} updateCategory={applyCategoryFilter}/>
+                                        }
+                                        {key != "price" && key != "categoryBuckets" &&
+                                            <Filters bucket={filter[key]} updateFilter={applyFilter} title={key}/>
+                                        }
+                                    </Container>
+                                ))}
+                            </>
+                        ))
                     }
-                    {/* </Filters> */}
                 </FilterSection>
-                <ListingSection products={this.props.products} />
+                <ListingSection 
+                    products={this.props.products} 
+                    applyFilter = {applyFilter}
+                    count = {count}
+                    total = {total}
+                    query = {query}    
+                />
             </Wrapper>
         )
     }

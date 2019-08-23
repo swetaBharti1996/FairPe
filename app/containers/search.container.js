@@ -64,7 +64,11 @@ class SearchContainer extends React.Component {
     }
     const query = queryString.stringify(newQuery);
     Router.push(`/search?${query}`);
-    this.props.dispatch(filterResults(query));
+    let page = 1;
+    if(type=='page'){
+      page = value;
+    }
+    this.props.dispatch(filterResults(query, page));
   };
 
   applyCategoryFilter = (category, subcategory, level) => {
@@ -116,6 +120,8 @@ class SearchContainer extends React.Component {
     const {
       products,
       filters,
+      count,
+      total,
       router: { query }
     } = this.props;
     return (
@@ -126,6 +132,8 @@ class SearchContainer extends React.Component {
         applyFilter={this.applyFilter}
         applyCategoryFilter={this.applyCategoryFilter}
         filters={filters}
+        count = {count}
+        total = {total}
         query={query}
         products={products}
       />
@@ -133,6 +141,9 @@ class SearchContainer extends React.Component {
   }
 }
 
-export default connect(s => ({ filters: s.filters, products: s.products }))(
-  withRouter(SearchContainer)
-);
+export default connect(s => ({ 
+  filters: s.filters, 
+  products: s.products.products, 
+  count: s.products.count,
+  total: s.products.total 
+}))(withRouter(SearchContainer));
