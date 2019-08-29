@@ -13,12 +13,15 @@ const Wrapper = styled.div`
 class Product extends Component {
   state = {};
   render() {
+    console.log(this.props.products)
     return (
       <Wrapper>
         <Container>
-          <ProductContainer />
+            <>
+              <ProductContainer product={this.props.products} />
 
-          <StoreContainer />
+              <StoreContainer product={this.props.products} />
+            </>
         </Container>
       </Wrapper>
     );

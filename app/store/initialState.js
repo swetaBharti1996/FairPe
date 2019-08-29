@@ -2,5 +2,6 @@ export default {
   home: {},
   products: {},
   filters: {},
-  search: {}
+  search: {},
+  productDetail: {}
 };

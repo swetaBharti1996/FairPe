@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { AddToCart } from "../../../UI";
 
-const Wrapper = styled.div`
-  /* width: 100%; */
+const Wrapper = styled.a`
   margin-bottom: 100px;
+  text-decoration: none;
 `;
 const Container = styled.div`
   width: 205px;
@@ -15,7 +15,6 @@ const ImageContainer = styled.div`
   height: 160px;
   > img {
     width: 100%;
-    /* height: 100%; */
   }
 `;
 
@@ -101,7 +100,7 @@ const Wishlist = styled.div`
 const ProductCard = ({product}) => {
   let specs = JSON.parse(product.specifications);
   return (
-    <Wrapper>
+    <Wrapper href={'/product/'+product.pid} target="_blank">
       <Container>
         <ImageContainer>
           <img

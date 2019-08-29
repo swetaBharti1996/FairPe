@@ -11,7 +11,9 @@ class ProductContainer extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    products: state.productDetail
+  };
 };
 
 const mapDispatchToProps = dispatch => {

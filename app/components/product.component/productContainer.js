@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { AddToCart } from "../../UI";
+
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -20,7 +21,7 @@ const ProductBox = styled.div`
 
 const UpperContainer = styled.div`
   display: flex;
-  margin: 0 40px;
+  margin: 0 50px;
   margin-top: 40px;
   justify-content: space-between;
 `;
@@ -28,6 +29,7 @@ const UpperContainer = styled.div`
 const ImageContainer = styled.div`
   width: 150px;
   height: 223px;
+  margin-bottom: 10px;
   > img {
     /* width: 100%; */
     height: 100%;
@@ -105,6 +107,7 @@ const Title = styled.div`
   align-items: center;
   color: #666666;
   line-height: 17px;
+  text-transform: capitalize;
 `;
 const Desc = styled.div`
   font-size: 14px;
@@ -126,21 +129,22 @@ const DescContent = styled.div`
 class ProductContainer extends Component {
   state = {};
   render() {
+    const { product } = this.props;
     return (
       <Wrapper>
         <Container>
           <ProductBox>
             <UpperContainer>
               <ImageContainer>
-                <img src="../../static/images/imagebook.png" />
+                <img src={product.image} />
               </ImageContainer>
               <Heart>
-                <img src="../../static/images/wishlist_fill.png"/>
+                <img src="../../static/images/wishlist_fill.png" />
               </Heart>
             </UpperContainer>
             <LowerContainer>
               <Details>
-                Determinants And Their Applications In Mathematical Physics{" "}
+                {product.title}
               </Details>
               <RatingContainer>
                 <Rating>Rating</Rating>
@@ -156,32 +160,14 @@ class ProductContainer extends Component {
             </LowerContainer>
           </ProductBox>
           <DetailBox>
-            <Detail>
-              <Title>Author</Title>
-              <Desc>
-                <DescContent>Robert Vein</DescContent>
-                <DescContent>PaulDate</DescContent>
-              </Desc>
-            </Detail>
-            <Detail>
-              <Title>Publisher</Title>
-              <Desc>
-                <DescContent>Springer</DescContent>
-              </Desc>
-            </Detail>
-            <Detail>
-              <Title>Pages</Title>
-              <Desc>
-                <DescContent>376</DescContent>
-              </Desc>
-            </Detail>
-            <Detail>
-              <Title>Cover</Title>
-              <Desc>
-                <DescContent>Robert Vein</DescContent>
-                <DescContent>Hardcover</DescContent>
-              </Desc>
-            </Detail>
+            {Object.keys(product.specifications).map(item => (
+              <Detail>
+                <Title>{item}</Title>
+                <Desc>
+                  <DescContent>{product.specifications[item]}</DescContent>
+                </Desc>
+              </Detail>
+            ))}
           </DetailBox>
         </Container>
       </Wrapper>

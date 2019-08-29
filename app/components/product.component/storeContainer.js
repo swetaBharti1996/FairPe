@@ -105,7 +105,8 @@ const H_Pickup = styled.div`
   color: #666666;
 `;
 
-const Description = styled.div`
+const Description = styled.a`
+  text-decoration: none;
   display: flex;
   padding-top: 20px;
   padding-bottom: 20px;
@@ -149,6 +150,10 @@ const D_Name = styled.div`
   line-height: 24px;
   font-weight: bold;
   padding: 0 25px;
+  :hover{
+    color: #ff632a;
+    cursor: pointer;
+  }
 `;
 const H_D_Name = styled.div`
   flex: 2;
@@ -160,10 +165,12 @@ const H_D_Name = styled.div`
 `;
 const D_Price = styled.div`
   flex: 1;
-  font-size: 18px;
+  font-size: 14px;
   align-content: left;
   line-height: 24px;
   font-weight: bold;
+  color: #666;
+  text-decoration: line-through;
 `;
 const D_Discount = styled.div`
   flex: 1;
@@ -253,11 +260,13 @@ const Refresh = styled.div`
 class StoreContainer extends Component {
   state = {};
   render() {
+    const { product } = this.props;
+    const { OnlineSites, OfflineSites } = product;
     return (
       <Wrapper>
         <Container>
           <Location>
-            <img src="../../static/images/location_1.png"/>
+            <img src="../../static/images/location_1.png" />
 
             <Address>9th Main, HSR Layout, Bangalore</Address>
             <AddText>Change your location</AddText>
@@ -274,87 +283,53 @@ class StoreContainer extends Component {
             <TableHeader>
               <H_Store>Store</H_Store>
               <H_Name>Iten name/code</H_Name>
-              <H_Price>Price</H_Price>
-              <H_Discount>Discount</H_Discount>
+              <H_Price>MRP</H_Price>
+              <H_Discount>Price</H_Discount>
               <H_Pickup>Pick-up</H_Pickup>
             </TableHeader>
             <Desc>
-              <Description>
-                <D_Store>
-                  <img src="../../static/images/amazon.png" />
-                </D_Store>
-                <H_D_Name>
-                  Determinants And Their Applications In Mathematical Physics
-                </H_D_Name>
-                <D_Price>Rs. 10,790</D_Price>
-                <D_Discount>Rs. 10,790</D_Discount>
-                <D_Pickup>Online</D_Pickup>
-              </Description>
-
-              <Description>
-                <D_Store>
-                  <img src="../../static/images/snapdeal.png" />
-                </D_Store>
-                <D_Name>
-                  Determinants And Their Applications In Mathematical Physics
-                </D_Name>
-                <D_Price>Rs. 10,790</D_Price>
-                <D_Discount>Rs. 10,790</D_Discount>
-                <D_Pickup>Online</D_Pickup>
-              </Description>
-
-              <Description>
-                <D_Store>
-                  <img src="../../static/images/flipkart.png" />
-                </D_Store>
-                <D_Name>
-                  Determinants And Their Applications In Mathematical Physics
-                </D_Name>
-                <D_Price>Rs. 10,790</D_Price>
-                <D_Discount>Rs. 10,790</D_Discount>
-                <D_Pickup>Online</D_Pickup>
-              </Description>
-
-              <Offline_Description>
-                <Offline_D_Store>
-                  <img src="../../static/images/imageoffline.png" />
-                  <Off_distance>
-                    <BoldText>4.2 km</BoldText>
-                    away
+              {
+                Object.keys(OnlineSites).map((key,index) => (
+                  <Description key={index} href={OnlineSites[key].productUrl} target="_blank">
+                    <D_Store>
+                      <img src="../../static/images/amazon.png" />
+                    </D_Store>
+                    <D_Name>
+                      {this.props.product.title}
+                    </D_Name>
+                    <D_Price>Rs. {OnlineSites[key].mrp}</D_Price>
+                    <D_Discount>Rs. {OnlineSites[key].price}</D_Discount>
+                    <D_Pickup>Online</D_Pickup>
+                  </Description>
+                ))
+              }
+              {
+                Object.keys(OfflineSites).map(key => (
+                  <Offline_Description>
+                    <Offline_D_Store>
+                      <img src="../../static/images/crossword.png" />
+                      <Off_distance>
+                        <BoldText>5.2 km</BoldText>
+                        away
                   </Off_distance>
-                  <Off_dir>Show direction</Off_dir>
-                </Offline_D_Store>
-                <D_Name>
-                  Determinants And Their Applications In Mathematical Physics
-                </D_Name>
-                <D_Price>Rs. 10,790</D_Price>
-                <D_Discount>Rs. 10,790</D_Discount>
-                <Off_Pickup>Offline</Off_Pickup>
-              </Offline_Description>
-
-              <Offline_Description>
-                <Offline_D_Store>
-                  <img src="../../static/images/crossword.png" />
-                  <Off_distance>
-                    <BoldText>5.2 km</BoldText>
-                    away
-                  </Off_distance>
-                  <Off_dir>Show direction</Off_dir>
-                </Offline_D_Store>
-                <D_Name>
-                  Determinants And Their Applications In Mathematical Physics
-                </D_Name>
-                <D_Price>Rs. 10,790</D_Price>
-                <D_Discount>Rs. 10,790</D_Discount>
-                <Off_Pickup>Offline</Off_Pickup>
-              </Offline_Description>
+                      <Off_dir>Show direction</Off_dir>
+                    </Offline_D_Store>
+                    <D_Name>
+                      {this.props.product.title}
+                    </D_Name>
+                    <D_Price>Rs. {OfflineSites[key].mrp}</D_Price>
+                    <D_Discount>Rs. {OfflineSites[key].price}</D_Discount>
+                    <Off_Pickup>Offline</Off_Pickup>
+                  </Offline_Description>
+                )
+                )}
             </Desc>
           </Store>
 
           <Allresult>
             <BoldText>All </BoldText> results listed
           </Allresult>
-          <CardContainer>
+          {/* <CardContainer>
             <CardContHead>Related Products</CardContHead>
             <CardSection>
               <ProductCard />
@@ -362,7 +337,7 @@ class StoreContainer extends Component {
               <ProductCard />
               <ProductCard />
             </CardSection>
-          </CardContainer>
+          </CardContainer> */}
         </Container>
       </Wrapper>
     );
