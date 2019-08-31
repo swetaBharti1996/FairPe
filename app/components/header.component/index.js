@@ -88,7 +88,7 @@ class Header extends Component {
             <Link>Contact us</Link>
             <ButtonContainer>
               <Button>Refer and earn</Button>
-              <Button active>Sign up</Button>
+              <Button active onClick={()=> this.props.openModal()}>Sign up</Button>
             </ButtonContainer>
           </LinkContainer>
         </Container>
