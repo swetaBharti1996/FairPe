@@ -1,4 +1,5 @@
 import Account from "../containers/account.container";
+import { fetchWishlist } from '../actions/asyncAction';
 
 class Index extends React.Component {
   static async getInitialProps(props) {

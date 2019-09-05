@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { withRouter } from "next/router";
 import Account from "../components/account.component";
-import {} from "../actions/asyncAction";
+import { fetchWishlist } from "../actions/asyncAction";
 import {} from "../actions/syncAction";
 
 class AccountContainer extends React.Component {
@@ -11,11 +11,16 @@ class AccountContainer extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    user: state.auth,
+    wishlist: state.wishlist
+  };
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    fetchWishlist: () => dispatch(fetchWishlist())
+  };
 };
 
 export default connect(

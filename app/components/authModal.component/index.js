@@ -86,7 +86,17 @@ const MODE = {
 }
 class AuthModal extends Component {
     state = {
-        mode: MODE.LOGIN
+        mode: MODE.LOGIN,
+        loginEmail: '',
+        loginPassword: '',
+        registerName: '',
+        registerEmail: '',
+        registerPhone: '',
+        registerPassword1: '',
+        registerPassword2: ''
+    }
+    changeHandler = (e) =>{
+        this.setState({ [e.target.name] : e.target.value });
     }
     changeMode = () => {
         if(this.state.mode == MODE.LOGIN)
@@ -94,21 +104,38 @@ class AuthModal extends Component {
         else
             this.setState({mode: MODE.LOGIN})
     }
+    buttonHandler = () => {
+        if(this.state.mode == MODE.LOGIN){
+            let data = {};
+            data.email=this.state.loginEmail;
+            data.password=this.state.loginPassword;
+            this.props.login(data);
+        }
+        else{
+            let data = {};
+            data.name = this.state.registerName;
+            data.email = this.state.registerEmail;
+            data.mobile = this.state.registerPhone;
+            data.password = this.state.registerPassword1;
+            data.password2 = this.state.registerPassword2;
+            this.props.signup(data);
+        }
+    }
     render() {
         return (
             <Wrapper>
                 <Container>
-                    <Cross><span onClick={()=>this.props.closeModal()}>&times;</span></Cross>
+                    <Cross><span onClick={()=>this.props.closeModal(false)}>&times;</span></Cross>
                     <Logo>
                         <img src="../../static/images/logo.png" />
                     </Logo>
                     {this.state.mode == MODE.LOGIN ?
-                        <Login />
+                        <Login data={this.state} changeHandler={this.changeHandler}/>
                         :
-                        <Register />
+                        <Register data={this.state} changeHandler={this.changeHandler}/>
                     }
                     <Footer>
-                        <Button>
+                        <Button onClick={() => this.buttonHandler()}>
                             {this.state.mode == MODE.LOGIN ? 'Login' : 'Sign up'}
                         </Button>
                         {this.state.mode == MODE.LOGIN ?

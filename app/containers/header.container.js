@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { withRouter } from "next/router";
 import Header from "../components/header.component";
-import {} from "../actions/asyncAction";
+import { logout } from "../actions/asyncAction";
 import {} from "../actions/syncAction";
 
 class HeaderContainer extends React.Component {
@@ -11,11 +11,15 @@ class HeaderContainer extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    user: state.auth.name
+  };
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    logout: () => dispatch(logout()) 
+  };
 };
 
 export default connect(

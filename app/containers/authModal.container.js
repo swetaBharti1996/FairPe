@@ -1,12 +1,12 @@
 import { connect } from "react-redux";
 import { withRouter } from "next/router";
 import AuthModal from "../components/authModal.component";
-import {} from "../actions/asyncAction";
+import { login, signup } from "../actions/asyncAction";
 import {} from "../actions/syncAction";
 
-class AccountContainer extends React.Component {
+class AuthModalContainer extends React.Component {
   render() {
-    return <Account {...this.props} />;
+    return <AuthModal {...this.props} />;
   }
 }
 
@@ -15,10 +15,13 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    login : (data) => dispatch(login(data)),
+    signup : (data) => dispatch(signup(data))
+  };
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withRouter(AuthModal));
+)(withRouter(AuthModalContainer));

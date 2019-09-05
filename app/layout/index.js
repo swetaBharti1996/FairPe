@@ -5,8 +5,7 @@ import AuthModal from "../containers/authModal.container";
 import { withRouter } from "next/router";
 import { connect } from "react-redux";
 import styled, { ThemeProvider } from "styled-components";
-// import {} from "../UI";
-import {} from "../actions/asyncAction";
+import { authModal } from "../actions/syncAction";
 
 const MainWrapper = styled.div``;
 const MainContainer = styled.div``;
@@ -27,10 +26,10 @@ class Layout extends React.Component {
       <ThemeProvider theme={theme}>
         <MainWrapper>
           <MainContainer>
-            <Header newRouter={router} openModal={this.openModal}/>
+            <Header newRouter={router} openModal={this.props.authModal}/>
             {this.props.children}
-            {this.state.showModal && 
-              <AuthModal closeModal={this.closeModal}/>
+            {this.props.modal.auth && !this.props.user && 
+              <AuthModal closeModal={this.props.authModal}/>
             }
             <Footer />
           </MainContainer>
@@ -41,11 +40,16 @@ class Layout extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    user: state.auth.name,
+    modal: state.modal
+  };
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    authModal : (flag) => dispatch(authModal(flag)) 
+  };
 };
 export default connect(
   mapStateToProps,

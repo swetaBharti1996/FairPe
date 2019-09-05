@@ -93,6 +93,7 @@ class Search extends Component {
     onChange = ({ value }) => {
         if (value) {
             this.state.searchTerm = value;
+            this.props.fetchWishlist();
             this.props.onSearch(value);
         }
     };

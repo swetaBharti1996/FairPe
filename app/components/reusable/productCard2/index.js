@@ -1,11 +1,12 @@
-import Reac from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
+const Wrapper = styled.a`
   /* width: 100%; */
   margin-bottom: 50px;
   display: flex;
   flex-direction: row;
+  text-decoration: none;
 `;
 const Container = styled.div`
   width: 100%;
@@ -98,35 +99,40 @@ const Wishlist = styled.div`
   }
 `;
 
-const ProductCard = () => {
+class ProductCard extends Component {
+  render() {
+    const { data } = this.props;
+    console.log(data.author);
     return (
-        <Wrapper>
-            <ImageContainer>
-                <img
-                    src="https://images-eu.ssl-images-amazon.com/images/I/51DwqenW78L._SL300_.jpg"
-                    alt="Solved Papers Karnataka CET Engineering Entrance"
-                />
-            </ImageContainer>
-            <Container>
-                <Title>Solved Papers Karnataka CET Engineering Entrance</Title>
+      <Wrapper href={'/product/' + data.pid} target="_blank">
+        <ImageContainer>
+          <img
+            src={data.image}
+            alt={data.title}
+          />
+        </ImageContainer>
+        <Container>
+          <Title>{data.title}</Title>
+          {data.author && 
+          <Author>
+            By <b>{data.author}</b>
+          </Author>
+          }
+          <Binding>{data.publisher}</Binding>
 
-                <Author>
-                    By <b>Robert Vein</b>
-                </Author>
-                <Binding>Paperback,Hardcover</Binding>
-
-                <Box>
-                    <PriceContainer>
-                        <p>Price starts at</p>
-                        <b>Rs. 10372</b>
-                    </PriceContainer>
-                </Box>
-            </Container>
-            <Wishlist>
-                <img src="../../../static/images/wishlist_fill.png" />
-            </Wishlist>
-        </Wrapper>
+          <Box>
+            <PriceContainer>
+              <p>Price starts at</p>
+              <b>Rs. {data.price}</b>
+            </PriceContainer>
+          </Box>
+        </Container>
+        <Wishlist>
+          <img src="../../../static/images/wishlist_fill.png" />
+        </Wishlist>
+      </Wrapper>
     );
+  }
 };
 
 export default ProductCard;

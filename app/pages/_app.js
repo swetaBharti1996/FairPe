@@ -1,12 +1,30 @@
 import App, { Container } from "next/app";
 import withRedux from "next-redux-wrapper";
 import { Provider } from "react-redux";
+import AppConstant from "../constants/appConstant";
 import createStore from "../store";
 import Layout from "../layout";
-import {} from "../actions/syncAction";
+import cookies from "next-cookies";
+import { makeRequest } from "../constants/request";
+import { gotUserDetails, fetchWishlist } from "../actions/syncAction";
 
+
+const getWishlist = async (c) => {
+  const resp = await makeRequest("get", `${AppConstant.default.baseURL}/api/wishlist`, null, {
+    Authorization: c.authtoken.replace("authtoken=", "")
+  });
+  return resp;
+}
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
+    const c = cookies(ctx);
+    const isServer = !!ctx.req;
+    if (!!c.authtoken && isServer) {
+      ctx.store.dispatch(gotUserDetails(c.authtoken));
+      getWishlist(c)
+        .then(resp => ctx.store.dispatch(fetchWishlist(resp.data)))
+        .catch(err => console.log(err));
+    }
     const pageProps = Component.getInitialProps
       ? await Component.getInitialProps(ctx)
       : {};

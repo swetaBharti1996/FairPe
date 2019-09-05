@@ -20,7 +20,7 @@ class SearchPage extends React.Component {
       fetchSearchData(searchQuery)
         .then(resp => store.dispatch(gotProducts(resp.data, searchQuery)))
         .then(resolve)
-        .catch(err => console.log('error') || resolve({}));
+        .catch(err => console.log(err) || resolve({}));
     });
   }
 

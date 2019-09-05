@@ -30,15 +30,47 @@ const CustomInput = styled.input`
 `;
 class Register extends Component {
     render() {
+        const { data, changeHandler } = this.props;
+        const { registerName, registerEmail, registerPhone, registerPassword1, registerPassword2} = data;
         return (
             <>
                 <FormContainer>
                     <Title>Signup to shop at best prices</Title>
-                    <CustomInput type="text" placeholder="Your full name *" />
-                    <CustomInput type="text" placeholder="Email ID *" />
-                    <CustomInput type="text" placeholder="Mobile number *" />
-                    <CustomInput type="password" placeholder="Password *" />
-                    <CustomInput type="password" placeholder="Confirm Password *" />
+                    <CustomInput 
+                        type="text" 
+                        placeholder="Your full name *"
+                        name="registerName"
+                        value={registerName}
+                        onChange={changeHandler}
+                    />
+                    <CustomInput 
+                        type="text" 
+                        placeholder="Email ID *" 
+                        name="registerEmail"
+                        value={registerEmail}
+                        onChange={changeHandler}
+                    />
+                    <CustomInput 
+                        type="text" 
+                        placeholder="Mobile number *" 
+                        name="registerPhone"
+                        value={registerPhone}    
+                        onChange={changeHandler}
+                    />
+                    <CustomInput 
+                        type="password" 
+                        placeholder="Password *" 
+                        name="registerPassword1"
+                        value={registerPassword1}
+                        onChange={changeHandler}    
+                    />
+                    <CustomInput 
+                        type="password" 
+                        placeholder="Confirm Password *" 
+                        name="registerPassword2"
+                        value={registerPassword2}
+                        onChange={changeHandler}
+                    />
                 </FormContainer>
             </>
         )

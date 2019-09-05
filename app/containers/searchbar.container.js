@@ -3,7 +3,7 @@ import { withRouter } from "next/router";
 import Search from "../components/reusable/search";
 import queryString from "query-string";
 import Router from "next/router";
-import { filterResults, searchSuggestion } from "../actions/asyncAction";
+import { filterResults, searchSuggestion, fetchWishlist } from "../actions/asyncAction";
 import { loading } from "../actions/syncAction";
 
 class SearchContainer extends React.Component {
@@ -24,6 +24,7 @@ const mapDispatchToProps = dispatch => {
             Router.push(`/search?${query}`);
             return dispatch(filterResults(query, 1));
         },
+        fetchWishlist: () => dispatch(fetchWishlist()),
         searchSuggestion: term => dispatch(searchSuggestion(term)),
         loading: () => dispatch(loading())
     };

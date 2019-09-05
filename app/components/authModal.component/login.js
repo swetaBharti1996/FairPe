@@ -30,12 +30,26 @@ const CustomInput = styled.input`
 `;
 class Login extends Component {
     render() {
+        const { changeHandler, data } = this.props;
+        const { loginEmail, loginPassword } = data; 
         return (
             <>
                 <FormContainer>
                     <Title>Login to your account</Title>
-                    <CustomInput type="text" placeholder="Email/Mobile number" />
-                    <CustomInput type="password" placeholder="Password" />
+                    <CustomInput 
+                        type="text" 
+                        placeholder="Email/Mobile number" 
+                        name="loginEmail" 
+                        value={loginEmail}
+                        onChange = {changeHandler}
+                    />
+                    <CustomInput 
+                        type="password" 
+                        placeholder="Password" 
+                        name="loginPassword" 
+                        value={loginPassword}
+                        onChange = {changeHandler}
+                    />
                     <a>Forgot password?</a>
                 </FormContainer>
             </>

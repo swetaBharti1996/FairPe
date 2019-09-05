@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import Router from "next/router";
+import UserDropdown from "./userDropdown";
 
 const Wrapper = styled.div`
   height: 100px;
@@ -65,13 +66,22 @@ const Button = styled.a`
   text-align: center;
   font-size: 16px;
   border-radius: 24px;
-  background: ${props=>props.active? 'linear-gradient(111deg, #FF632A, #E20000)': '#fff' };
-  color: ${props => props.active? '#fff': "#000"};
+  background: ${props => props.active ? 'linear-gradient(111deg, #FF632A, #E20000)' : '#fff'};
+  color: ${props => props.active ? '#fff' : "#000"};
   border: 1px solid #FF632A;
   @media only screen and (max-width: 1440px){
     padding: 10px 25px;
     font-size: 14px;
   }
+`;
+const User = styled.div`
+  font-size: 16px;
+  font-weight: bolder;
+  color: #FF632A;
+  border-left: 1px solid #eee;
+  padding-left: 50px;
+  display: flex;
+  align-items: center;
 `;
 class Header extends Component {
   state = {};
@@ -79,8 +89,8 @@ class Header extends Component {
     return (
       <Wrapper>
         <Container>
-          <Logo onClick={()=> Router.push(`/`)}>
-            <img src="../../static/images/logo.png"/>
+          <Logo onClick={() => Router.push(`/`)}>
+            <img src="../../static/images/logo.png" />
           </Logo>
           <LinkContainer>
             <Link>Why FairPe</Link>
@@ -88,7 +98,11 @@ class Header extends Component {
             <Link>Contact us</Link>
             <ButtonContainer>
               <Button>Refer and earn</Button>
-              <Button active onClick={()=> this.props.openModal()}>Sign up</Button>
+              {!this.props.user ?
+                <Button active onClick={() => this.props.openModal(true)}>Sign up</Button>
+                :
+                <UserDropdown name={this.props.user} logout={this.props.logout}/>
+              }
             </ButtonContainer>
           </LinkContainer>
         </Container>

@@ -1,7 +1,10 @@
 export default {
+  auth: {},
   home: {},
   products: {},
   filters: {},
+  modal: {},
   search: {},
-  productDetail: {}
+  productDetail: {},
+  wishlist: {}
 };

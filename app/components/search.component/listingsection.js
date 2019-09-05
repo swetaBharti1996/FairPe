@@ -65,7 +65,36 @@ const LoadMore = styled.div`
     }
 `;
 class ListingSection extends Component {
+    state = {
+        load: true
+    }
+    isBottom(el) {
+        return el.getBoundingClientRect().bottom-300 <= window.innerHeight;
+    }
+    componentDidMount() {
+        document.addEventListener('scroll', this.trackScrolling);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('scroll', this.trackScrolling);
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.products !== prevProps.products) {
+          this.setState({load: true})
+        }
+      }
+
+    trackScrolling = () => {
+        const wrappedElement = document.getElementById('products');
+        if (this.isBottom(wrappedElement)) {
+            if(this.state.load && this.props.query.page<5)
+                this.loadMore();
+            // document.removeEventListener('scroll', this.trackScrolling);
+        }
+    };
     loadMore = () => {
+        this.setState({load: false})
         let page = Number(this.props.query.page) + 1;
         this.props.applyFilter('page', page);
         this.setState({ page: page });
@@ -76,7 +105,7 @@ class ListingSection extends Component {
         if (products)
             length = Object.keys(products).length;
         return (
-            <Wrapper>
+            <Wrapper id="products">
                 <Container>
                     <SearchContainer>
                         <SearchBar />

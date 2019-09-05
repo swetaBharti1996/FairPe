@@ -91,7 +91,8 @@ app
       httpProxy({
         changeOrigin: true,
         target: AppConstants.baseURL,
-        logLevel: "debug"
+        logLevel: "debug",
+        onError: onError
       })
     );
 

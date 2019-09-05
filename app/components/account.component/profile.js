@@ -93,6 +93,8 @@ const Activity = styled.div`
 `;
 class Profile extends Component{
     render(){
+        const { user } = this.props;
+        const { name, email } = user;
         return(
             <Wrapper>
                 <UserDetails>
@@ -101,8 +103,8 @@ class Profile extends Component{
                         <a>Change</a>
                     </ImageContainer>
                     <Details>
-                        <p>email@email.com</p>
-                        <Name>Somebody Surname</Name>
+                        <p>{email}</p>
+                        <Name>{name}</Name>
                         <Edit>Edit</Edit>
                     </Details>
                 </UserDetails>

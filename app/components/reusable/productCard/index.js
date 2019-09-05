@@ -1,6 +1,9 @@
-import React from "react";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import styled from "styled-components";
-import { AddToCart } from "../../../UI";
+import _ from "lodash";
+import { authModal } from '../../../actions/syncAction';
+import { wishlist } from "../../../actions/asyncAction";
 
 const Wrapper = styled.a`
   margin-bottom: 100px;
@@ -11,19 +14,22 @@ const Container = styled.div`
   font-family: 'Karla', sans-serif;
 `;
 const ImageContainer = styled.div`
-  width: 107px;
-  height: 160px;
-  > img {
-    width: 100%;
-  }
+  height: 180px;
+  padding-bottom: 20px;
 `;
 
+const BodyContainer = styled.div`
+  height: 110px;
+`;
 const Title = styled.h2`
   font-size: 18px;
   text-align: left;
   width: 100%;
   margin-top: 17px;
   color: #000;
+  &:hover{
+    color: #FF6300;
+  }
   @media only screen and (max-width: 1440px){
     font-size: 16px;
   }
@@ -97,37 +103,84 @@ const Wishlist = styled.div`
   }
 `;
 
-const ProductCard = ({product}) => {
-  let specs = JSON.parse(product.specifications);
-  return (
-    <Wrapper href={'/product/'+product.pid} target="_blank">
-      <Container>
-        <ImageContainer>
-          <img
-            src={product.image}
-            alt={product.title}
-          />
-        </ImageContainer>
-        <Title>{product.title}</Title>
+class ProductCard extends Component {
+  state = {
+    liked: false
+  }
+  componentDidMount() {
+    if (!_.isEmpty(this.props.wishlistData)) {
+      let flag = this.props.wishlistData.data.find((ele) => { return ele.pid == this.props.product.pid });
+      this.setState({ liked: flag })
+    }
+  }
+  handleWishlist = (e) => {
+    this.setState({ liked: !this.state.liked });
+    e.preventDefault();
+    const { auth, product, authModal, wishlist } = this.props;
 
-        <Author>
-          By <b>{specs.author}</b>
-        </Author>
-        <Binding>{specs.binding}</Binding>
+    const data = {
+      pid: product.pid,
+      title: product.title,
+      price: _.toString(product.mprice || product.price),
+      image: product.image,
+      publisher: JSON.parse(product.specifications).publisher,
+      author: JSON.parse(product.specifications).author
+    };
+    _.isEmpty(auth) ? authModal(true) : wishlist(data);
+  };
+  render() {
+    const { product } = this.props;
+    let specs = JSON.parse(product.specifications);
+    return (
+      <Wrapper href={'/product/' + product.pid} target="_blank">
+        <Container>
+          <ImageContainer>
+            <img
+              src={product.image}
+              alt={product.title}
+            />
+          </ImageContainer>
+          <BodyContainer>
+            <Title>{product.title}</Title>
 
-        <Box>
-          <PriceContainer>
-            <p>Price starts at</p>
-            <b>Rs. {product.mprice}</b>
-          </PriceContainer>
-          <Wishlist>
-            <img src="../../../static/images/wishlist_empty.png"/>
-          </Wishlist>
-        </Box>
-        {/* <AddToCart /> */}
-      </Container>
-    </Wrapper>
-  );
+            <Author>
+              By <b>{product.site_name}</b>
+            </Author>
+          </BodyContainer>
+
+          <Box>
+            <PriceContainer>
+              <p>Price starts at</p>
+              <b>Rs. {product.mprice}</b>
+            </PriceContainer>
+            <Wishlist onClick={this.handleWishlist}>
+              {this.state.liked ?
+                <img src="../../../static/images/wishlist_fill.png" />
+                :
+                <img src="../../../static/images/wishlist_empty.png" />
+              }
+            </Wishlist>
+          </Box>
+          {/* <AddToCart /> */}
+        </Container>
+      </Wrapper>
+    );
+  }
 };
 
-export default ProductCard;
+
+const mapStateToProps = state => {
+  return {
+    auth: state.auth,
+    wishlistData: state.wishlist
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    authModal: (flag) => dispatch(authModal(flag)),
+    wishlist: (data) => dispatch(wishlist(data))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductCard);

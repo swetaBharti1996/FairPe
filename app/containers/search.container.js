@@ -63,6 +63,7 @@ class SearchContainer extends React.Component {
       newQuery.facets = count;
     }
     const query = queryString.stringify(newQuery);
+    console.log(query);
     Router.push(`/search?${query}`);
     let page = 1;
     if(type=='page'){
