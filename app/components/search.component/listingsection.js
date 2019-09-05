@@ -114,7 +114,7 @@ class ListingSection extends Component {
                 <DataContainer>
                     <Container>
                         <ResultDetails>
-                            <span>{count} Results</span> from {total} results for "{query.term}"
+                            <span>{length} Results</span> from {total} results for "{query.term}"
                         </ResultDetails>
                         <ProductListing>
                             {_.map(products, (product, id) => (

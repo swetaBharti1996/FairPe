@@ -132,7 +132,7 @@ class SearchContainer extends React.Component {
         applyPriceFilter={this.applyPriceFilter}
         applyFilter={this.applyFilter}
         applyCategoryFilter={this.applyCategoryFilter}
-        filters={filters}
+        filters={filters.filters}
         count = {count}
         total = {total}
         query={query}

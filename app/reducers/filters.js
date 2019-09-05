@@ -9,7 +9,8 @@ export default (state = initialState.filters, action) => {
         case ActionTypes.FETCHED_PRODUCTS:
             const { query } = action;
             const filters = _.get(action, "payload.aggregations", {});
-            const parsed = parseAggregtions(filters, query);
+            let parsed = {};
+            parsed.filters = parseAggregtions(filters, query);
             parsed.query = queryString.parse(query);
             parsed.total = _.get(action, "payload.hits.total", 0);
             parsed.chunkSize = _.get(action, "payload.hits.hits.length", 0);
