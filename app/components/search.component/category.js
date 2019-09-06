@@ -43,7 +43,7 @@ const EachCategory = styled.div`
 const CategoryKey = styled.div`
   display: flex;
   flex-direction: row;
-  width: 60%;
+  width: 70%;
   margin-bottom:10px;
   align-items: center;
   justify-content: space-between;
@@ -68,6 +68,7 @@ const CategoryText1 = styled.p`
   font-family: "Karla", sans-serif;
   font-weight: bold;
   font-size: 24px;
+  text-transform: capitalize;
   margin-bottom: 10px;
 `;
 
@@ -138,13 +139,13 @@ class Category extends Component {
           {
             this.props.bucket.map(item => (
               <EachCategory>
-                <CategoryKey>
+                <CategoryKey onClick={() => this.handleList(item.key)}>
                   <CategoryHolder>
                     <CategoryText1>{item.key}</CategoryText1>
                   </CategoryHolder>
-                  {/* <Arrow onClick={() => this.handleList(item.key)} background={this.state.selected == item.key}>
-                    <i className="material-icons">{this.state.selected == item.key ? 'keyboard_arrow_down' : 'keyboard_arrow_right'}</i>
-                  </Arrow> */}
+                  <Arrow background={this.state.selected == item.key}>
+                  <i className="material-icons">{this.state[item.key] ? 'keyboard_arrow_down' : 'keyboard_arrow_right'}</i>
+                  </Arrow>
                 </CategoryKey>
                 {this.state[item.key] && this.subCatContainer(item.key, item['SubCategory1']['buckets'], 'SubCategory2', 2)}
               </EachCategory>
