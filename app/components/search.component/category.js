@@ -67,7 +67,7 @@ const CategoryText = styled.p`
 const CategoryText1 = styled.p`
   font-family: "Karla", sans-serif;
   font-weight: bold;
-  font-size: 24px;
+  font-size: 20px;
   text-transform: capitalize;
   margin-bottom: 10px;
 `;
@@ -79,7 +79,8 @@ class Category extends Component {
     count: 0
   };
   componentDidMount = () => {
-    this.handleList(this.props.bucket[0].key);
+    if(!_.isEmpty(this.props.bucket))
+      this.handleList(this.props.bucket[0].key);
   }
   handleSelect = (cat, key, i) => {
     this.setState({ selected: key });

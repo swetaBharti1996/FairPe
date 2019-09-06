@@ -42,6 +42,11 @@ class Filters extends Component {
         newBucket: []
     }
     componentDidMount = () => {
+        let filter = this.props.query[this.props.title];
+        if (filter) {
+            let arr = filter.split(",");
+            this.setState({selFilters: arr});
+        }
         if (this.props.bucket.length > 10) {
             this.setState({ length: 10 });
             let arr = this.props.bucket.slice(0, this.state.length);
@@ -64,7 +69,7 @@ class Filters extends Component {
                 brands = value;
             }
             this.setState({ selFilters: brands })
-            this.props.updateFilter(this.props.title, brands);
+            this.props.updateFilter(this.props.title, brands.join(","));
         }
     }
     onRemoveBrand = ({ value }) => {

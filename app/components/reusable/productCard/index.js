@@ -108,8 +108,10 @@ class ProductCard extends Component {
     liked: false
   }
   componentDidMount() {
-    if (!_.isEmpty(this.props.wishlistData) &&  !this.props.wishlistData.error=="unauthorized") {
+    // console.log(this.props.wishlistData);
+    if (!_.isEmpty(this.props.wishlistData) && !(this.props.wishlistData.error == "unauthorized")) {
       let flag = this.props.wishlistData.data.find((ele) => { return ele.pid == this.props.product.pid });
+      console.log(flag);
       this.setState({ liked: flag })
     }
   }

@@ -43,7 +43,7 @@ class Search extends Component {
                                             <Category bucket={filter[key]} updateCategory={applyCategoryFilter}/>
                                         }
                                         {key != "price" && key != "categoryBuckets" &&
-                                            <Filters bucket={filter[key]} updateFilter={applyFilter} title={key}/>
+                                            <Filters bucket={filter[key]} updateFilter={applyFilter} title={key} query={query}/>
                                         }
                                     </Container>
                                 ))}

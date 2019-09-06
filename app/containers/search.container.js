@@ -7,12 +7,10 @@ import { filterResults } from "../actions/asyncAction";
 import SearchPage from "../components/search.component";
 
 const stringFacet = [
-  // "brand",
-  // "site",
+  "brand",
+  "site",
   "publisher",
   "author"
-  // "category",
-  // "subcategory"
 ];
 const numberFacet = ["lower", "upper"];
 
@@ -21,7 +19,7 @@ const determineFacet = query => {
   let stringExists = 0;
   let numberExists = 0;
   stringFacet.forEach(f => {
-    if (query[f]) stringExists = 1;
+    if (query[f] && !_.isEmpty(query[f])) stringExists = 1;
   });
   numberFacet.forEach(f => {
     if (query[f]) numberExists = 2;
@@ -30,9 +28,6 @@ const determineFacet = query => {
   return facetCount;
 };
 class SearchContainer extends React.Component {
-  componentDidMount() {
-    // console.log(this.props.filters.query);
-  }
 
   applyPriceFilter = (lower, upper) => {
     const currentQuery = this.props.filters.query;
@@ -58,15 +53,15 @@ class SearchContainer extends React.Component {
       newQuery = _.omit(currentQuery, [type]);
     }
     newQuery = _.omit(newQuery, ["facets"]);
+    console.log(newQuery);
     const count = determineFacet(newQuery);
     if (count) {
       newQuery.facets = count;
     }
     const query = queryString.stringify(newQuery);
-    console.log(query);
     Router.push(`/search?${query}`);
     let page = 1;
-    if(type=='page'){
+    if (type == 'page') {
       page = value;
     }
     this.props.dispatch(filterResults(query, page));
@@ -133,8 +128,8 @@ class SearchContainer extends React.Component {
         applyFilter={this.applyFilter}
         applyCategoryFilter={this.applyCategoryFilter}
         filters={filters.filters}
-        count = {count}
-        total = {total}
+        count={count}
+        total={total}
         query={query}
         products={products}
       />
@@ -142,9 +137,9 @@ class SearchContainer extends React.Component {
   }
 }
 
-export default connect(s => ({ 
-  filters: s.filters, 
-  products: s.products.products, 
+export default connect(s => ({
+  filters: s.filters,
+  products: s.products.products,
   count: s.products.count,
-  total: s.products.total 
+  total: s.products.total
 }))(withRouter(SearchContainer));

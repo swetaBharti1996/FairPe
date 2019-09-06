@@ -160,7 +160,7 @@ class Search extends Component {
         let index = options.indexOf(hovered);
         if (e.keyCode == 13) {
             e.preventDefault();
-            this.onChange({ value: this.state.searchTerm ||  this.state.hovered });
+            this.onChange({ value: this.state.hovered || this.state.searchTerm });
             this.setState({list: [], showSuggestion: false});
         }
         if (e.keyCode === 40 && options.length) {

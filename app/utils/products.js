@@ -24,25 +24,25 @@ const findLevel2Bucket = (facet, filters) => {
   Object.keys(facet)
     .map(key => {
       if (key != 'agg_attr_strings_filter2' && key != 'Category') {
-            const filKey = key.substring(12, key.length);
-            try{
-              filters.push({ [filKey]: _.get(facet, `${key}.agg_filtered_special_5.facet_value.buckets`, []) });
-            }
-            catch{}
+        const filKey = key.substring(12, key.length);
+        try {
+          filters.push({ [filKey]: _.get(facet, `${key}.agg_filtered_special_5.facet_value.buckets`, []) });
         }
+        catch{ }
+      }
     })
   return;
 }
 const findLevel3Bucket = (facet, filters) => {
   Object.keys(facet)
     .map(key => {
-      if(key!='doc_count'){
+      if (key != 'doc_count') {
         const filKey = key.substring(12, key.length);
-        try{
-          filters.push({ [filKey]: _.get(facet,`${key}.facet_name.facet_value.buckets`) })
+        try {
+          filters.push({ [filKey]: _.get(facet, `${key}.facet_name.facet_value.buckets`) })
         }
         catch{
-          filters.push({ [filKey]: _.get(facet,`${key}.facet_name.buckets`) })
+          filters.push({ [filKey]: _.get(facet, `${key}.facet_name.buckets`) })
         }
       }
     })
@@ -52,37 +52,36 @@ export const parseAggregtions = (aggregations = {}, qs = '') => {
   const query = queryString.parse(qs);
   var filters = [];
   if (!query.category) {
-    try{
-      filters.push({'categoryBuckets' : _.get(aggregations, 'Category.ParentCategory.buckets', null)});
+    try {
+      filters.push({ 'categoryBuckets': _.get(aggregations, 'Category.ParentCategory.buckets', null) });
     }
-    catch{}
+    catch{ }
     return filters;
   }
   else {
     var filters = []
     var selFil = []
-    try{
-      filters.push({'categoryBuckets' : _.get(aggregations, 'Category.ParentCategory.buckets', null)});
-    }catch{}
-    console.warn(Object.keys(query).length);
-    if (Object.keys(query).length >= 6 ) {
+    try {
+      filters.push({ 'categoryBuckets': _.get(aggregations, 'Category.ParentCategory.buckets', null) });
+    } catch{ }
+    if (Object.keys(query).length > 6) {
       const selFacets = aggregations;
-      try{
+      try {
         const oldFacets = _.get(aggregations, 'agg_attr_strings_filter2', null);
         findLevel2Bucket(selFacets, filters);
         findLevel3Bucket(oldFacets, filters);
       }
-      catch{}
+      catch{ }
       return filters;
     }
     else {
       const stringFacet = _.get(aggregations, 'agg_string_facet', null);
       const numberFacet = _.get(aggregations, 'agg_number_facet', null);
-      try{
+      try {
         findLevel1Bucket(stringFacet, filters);
         findLevel1Bucket(numberFacet, filters);
       }
-      catch{}
+      catch{ }
       return filters;
     }
   }

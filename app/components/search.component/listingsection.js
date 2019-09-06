@@ -64,6 +64,18 @@ const LoadMore = styled.div`
         font-size: 32px;
     }
 `;
+const NoDataText = styled.div`
+    text-align: center;
+    font-weight: bolder;
+    font-size: 24px;
+    color: #888;
+    margin-top: 100px;
+`;
+const NoDataImg = styled.img`
+    display: block;
+    margin: 50px auto;
+    height: 300px;
+`;
 class ListingSection extends Component {
     state = {
         load: true
@@ -112,6 +124,7 @@ class ListingSection extends Component {
                     </SearchContainer>
                 </Container>
                 <DataContainer>
+                    {!_.isEmpty(products)?
                     <Container>
                         <ResultDetails>
                             <span>{length} Results</span> from {total} results for "{query.term}"
@@ -131,6 +144,12 @@ class ListingSection extends Component {
                             </LoadMore>
                         }
                     </Container>
+                    :
+                    <Container>
+                        <NoDataText>Sorry we didn't find anything. Try exploring something else!</NoDataText>
+                        <NoDataImg src="../../static/images/empty.svg"/>
+                    </Container>
+                    }
                 </DataContainer>
             </Wrapper>
         )
