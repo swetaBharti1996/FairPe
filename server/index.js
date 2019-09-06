@@ -17,7 +17,7 @@ const isProd = !isDev;
 const customHost = process.env.HOST;
 
 const prettyHost = customHost || "localhost";
-const PORT = parseInt(process.env.PORT, 10) || 3050;
+const PORT = parseInt(process.env.PORT, 10) || 3060;
 // const publicEnvFilename = "public.env";
 
 const app = next({ dir: "./app", dev: isDev });
@@ -81,7 +81,7 @@ app
       httpProxy({
         changeOrigin: true,
         target: AppConstants.suggestionURL || "http://192.168.0.20:6777",
-        logLevel: "debug",
+        logLevel: "debug"
         // onError: onError
       })
     );
