@@ -42,9 +42,13 @@ const ResultDetails = styled.div`
 `;
 const ProductListing = styled.div`
     display: grid;
-    grid-template-columns: repeat(auto-fit, 300px);
-    justify-content: space-between;
+    grid-template-columns: repeat(auto-fit, 320px);
     padding: 110px 0;
+    padding-left: 50px;
+    @media only screen and (max-width: 1440px){
+        grid-template-columns: repeat(auto-fit, 300px);
+        /* padding-left: 05px; */
+    }
     /* margin-bottom: 50px; */
 `;
 const LoadMore = styled.div`
@@ -98,8 +102,12 @@ class ListingSection extends Component {
       }
 
     trackScrolling = () => {
+        const { products, total } = this.props;
+        let length;
+        if (products)
+            length = Object.keys(products).length;
         const wrappedElement = document.getElementById('products');
-        if (this.isBottom(wrappedElement)) {
+        if (this.isBottom(wrappedElement) && length< total) {
             if(this.state.load && this.props.query.page<5)
                 this.loadMore();
             // document.removeEventListener('scroll', this.trackScrolling);
