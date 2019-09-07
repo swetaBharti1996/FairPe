@@ -87,7 +87,7 @@ class SearchContainer extends React.Component {
     }
     const query = queryString.stringify(newQuery);
     Router.push(`/search?${query}`);
-    this.props.dispatch(filterResults(query));
+    this.props.dispatch(filterResults(query, 1));
   };
   clearFilter = () => {
     const currentQuery = this.props.filters.query;

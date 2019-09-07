@@ -11,7 +11,9 @@ export default (state = initialState.products, action) => {
       parsed.products = parseProducts(list);
       parsed.count = list.length;
       parsed.total = _.get(action, "payload.hits.total");
+      console.warn('ron',parsed.products);
       if(action.page == 1){
+        console.log('robin');
         return parsed;
       }
       else{

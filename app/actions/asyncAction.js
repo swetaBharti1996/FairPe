@@ -10,7 +10,7 @@ export const searchSuggestion = term => dispatch =>
         .catch((err) => {
             console.log(err);
         });
-export const filterResults = (query, page) => dispatch =>
+export const filterResults = (query, page=1) => dispatch =>
     makeAsyncRequest("post", `/_search?${query}`).then(resp =>
         dispatch(syncActions.gotProducts(resp.data, query, page))
     );
