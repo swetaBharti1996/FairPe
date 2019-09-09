@@ -46,8 +46,8 @@ const ProductListing = styled.div`
     padding: 110px 0;
     padding-left: 50px;
     @media only screen and (max-width: 1440px){
-        grid-template-columns: repeat(auto-fit, 300px);
-        /* padding-left: 05px; */
+        grid-template-columns: repeat(auto-fit, 280px);
+        padding-left: 50px;
     }
     /* margin-bottom: 50px; */
 `;

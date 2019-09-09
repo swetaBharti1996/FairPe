@@ -33,6 +33,7 @@ export const login = data => dispatch => {
         resp => {
             dispatch(syncActions.gotUserDetails(resp.data.token));
             document.cookie = "authtoken=" + resp.data.token;
+            dispatch(fetchWishlist());
         }
     );
 }

@@ -108,27 +108,40 @@ class ProductCard extends Component {
     liked: false
   }
   componentDidMount() {
-    // console.log(this.props.wishlistData);
     if (!_.isEmpty(this.props.wishlistData) && !(this.props.wishlistData.error == "unauthorized")) {
       let flag = this.props.wishlistData.data.find((ele) => { return ele.pid == this.props.product.pid });
-      console.log(flag);
       this.setState({ liked: flag })
     }
   }
+  componentDidUpdate(prevProps) {
+    if (this.props.wishlistData !== prevProps.wishlistData) {
+      if (!_.isEmpty(this.props.wishlistData) && !(this.props.wishlistData.error == "unauthorized")) {
+        let flag = this.props.wishlistData.data.find((ele) => { return ele.pid == this.props.product.pid });
+        this.setState({ liked: flag })
+      }
+      else {
+        this.setState({ liked: false })
+      }
+    }
+  }
   handleWishlist = (e) => {
-    this.setState({ liked: !this.state.liked });
     e.preventDefault();
     const { auth, product, authModal, wishlist } = this.props;
-
-    const data = {
-      pid: product.pid,
-      title: product.title,
-      price: _.toString(product.mprice || product.price),
-      image: product.image,
-      publisher: JSON.parse(product.specifications).publisher,
-      author: JSON.parse(product.specifications).author
-    };
-    _.isEmpty(auth) ? authModal(true) : wishlist(data);
+    if (_.isEmpty(auth)) {
+      authModal(true)
+    }
+    else {
+      this.setState({ liked: !this.state.liked });
+      const data = {
+        pid: product.pid,
+        title: product.title,
+        price: _.toString(product.mprice || product.price),
+        image: product.image,
+        publisher: JSON.parse(product.specifications).publisher,
+        author: JSON.parse(product.specifications).author
+      };
+      wishlist(data);
+    }
   };
   render() {
     const { product } = this.props;

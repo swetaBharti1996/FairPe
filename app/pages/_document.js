@@ -28,6 +28,10 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap"
             rel="stylesheet"
           />
+          <link 
+            href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" 
+            rel="stylesheet"
+          /> 
           <link
             href="https://fonts.googleapis.com/icon?family=Material+Icons"
             rel="stylesheet"
