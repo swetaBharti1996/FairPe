@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
     display: flex;
-    background: transparent linear-gradient(141deg, #FF632A 0%, #E20000 100%) 0% 0% no-repeat padding-box;
+    background: transparent linear-gradient(141deg, rgba(255, 99, 42, 0.66) 0%, rgba(226, 0, 0, 0.66) 100%) 0% 0% no-repeat padding-box;
     width: 100%;
     min-height: 80vh;
     border-radius: 10px;
