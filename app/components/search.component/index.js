@@ -35,7 +35,7 @@ class Search extends Component {
         return (
             <Wrapper>
                 <FilterSection>
-                    {filters.length &&
+                    {!_.isEmpty(filters) &&
                         filters.map((filter,index)=>(
                             <>
                                 {Object.keys(filter).map((key, i)=>(

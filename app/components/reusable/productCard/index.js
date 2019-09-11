@@ -137,15 +137,12 @@ class ProductCard extends Component {
         title: product.title,
         price: _.toString(product.mprice || product.price),
         image: product.image,
-        publisher: JSON.parse(product.specifications).publisher,
-        author: JSON.parse(product.specifications).author
       };
       wishlist(data);
     }
   };
   render() {
     const { product } = this.props;
-    let specs = JSON.parse(product.specifications);
     return (
       <Wrapper href={'/product/' + product.pid} target="_blank">
         <Container>
