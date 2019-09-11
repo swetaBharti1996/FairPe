@@ -5,6 +5,8 @@ export default keyMirror({
   EMPTY_PRODUCTS: null,
   GOT_SUGGESTIONS: null,
   LOGGED_IN: null,
+  LOGIN_ERROR: null,
+  REGISTER_ERROR: null,
   LOGGED_OUT: null,
   FETCHED_SMALL_POSTER: null,
   FETCH_BANNER: null,

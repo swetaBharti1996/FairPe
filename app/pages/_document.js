@@ -37,6 +37,7 @@ export default class MyDocument extends Document {
             rel="stylesheet"
           />
           <link rel="stylesheet" href="/static/css/style.css" />
+          <link rel="stylesheet" href="/static/css/loader.css" />
           <style
             dangerouslySetInnerHTML={{ __html: this.props.selectStyles.css }}
           />

@@ -11,7 +11,10 @@ class AuthModalContainer extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    login_error: state.auth.login_error,
+    register_error: state.auth.register_error
+  };
 };
 
 const mapDispatchToProps = dispatch => {

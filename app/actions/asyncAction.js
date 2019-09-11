@@ -3,7 +3,7 @@ import { makeRequest, makeAsyncRequest } from "../constants/request";
 import AppConstants from "../constants/appConstant";
 
 export const searchSuggestion = term => dispatch =>
-    makeAsyncRequest("get", `/suggest?term=${term}`).then(resp => {
+    makeRequest("get", `/suggest?term=${term}`).then(resp => {
         console.log(resp.data)
         dispatch(syncActions.gotSearchResults(resp.data, term))
     })
@@ -26,6 +26,8 @@ export const signup = data => dispatch =>
     ).then(resp => {
         dispatch(syncActions.gotUserDetails(resp.data.token));
         document.cookie = "authtoken=" + resp.data.token;
+    }).catch(err=>{
+        dispatch(syncActions.registerError(err.response.data));
     });
 
 export const login = data => dispatch => {
@@ -35,7 +37,11 @@ export const login = data => dispatch => {
             document.cookie = "authtoken=" + resp.data.token;
             dispatch(fetchWishlist());
         }
-    );
+    )
+    .catch(err=>{
+        console.log(err.response.data);
+        dispatch(syncActions.loginError(err.response.data));
+    })
 }
 
 export const logout = () => dispatch =>

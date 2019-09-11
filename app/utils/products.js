@@ -36,13 +36,16 @@ const findLevel2Bucket = (facet, filters) => {
 const findLevel3Bucket = (facet, filters) => {
   Object.keys(facet)
     .map(key => {
-      if (key != 'doc_count') {
+      if (key != 'doc_count' && key != "meta") {
         const filKey = key.substring(12, key.length);
         try {
+          if(_.isEmpty(_.get(facet, `${key}.facet_name.facet_value.buckets`)))
+            throw "undefined";
           filters.push({ [filKey]: _.get(facet, `${key}.facet_name.facet_value.buckets`) })
         }
         catch{
-          filters.push({ [filKey]: _.get(facet, `${key}.facet_name.buckets`) })
+          console.log(filKey, _.get(facet, `${key}.facet_name.buckets`))
+          filters.push({ [filKey]: _.get(facet, `${key}.facet_name.buckets[0].facet_value.buckets`) })
         }
       }
     })

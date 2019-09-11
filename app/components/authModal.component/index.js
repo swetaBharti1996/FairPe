@@ -15,7 +15,7 @@ const Wrapper = styled.div`
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    overflow: hidden;
+    /* overflow: hidden; */
 `;
 const Container = styled.div`
     font-family: 'Karla', sans-serif;
@@ -30,6 +30,10 @@ const Container = styled.div`
     flex-direction: column;
     align-items: center;
     border-radius: 10px;
+    @media only screen and (max-width: 1440px){
+        width: 700px;
+        padding: 15px 0px;
+    }
 `;
 const Cross = styled.div`
     text-align: right;
@@ -41,11 +45,23 @@ const Cross = styled.div`
         background: #EEEEEE;
         border-radius: 50%;
         cursor: pointer;
+        @media only screen and (max-width: 1440px){
+            font-size: 14px;
+            padding: 10px 12px;
+        }
     }
 `;
 const Logo = styled.div`
     width: 120px;
     margin-bottom: 40px;
+    @media only screen and (max-width: 1440px){
+        margin-bottom: 20px;
+        >img{
+            width: 80%;
+            display: block;
+            margin: auto;
+        }
+    }
 `;
 const Footer = styled.div`
     width: 100%;
@@ -60,6 +76,9 @@ const Footer = styled.div`
             font-size: 18px;
             font-weight: bolder;
             cursor: pointer;
+        }
+        @media only screen and (max-width: 1440px){
+            margin-bottom: 10px;
         }
     }
 `;
@@ -78,6 +97,12 @@ const Button = styled.button`
     font-size: 18px;
     font-weight: bolder;
     margin-bottom: 30px;
+    @media only screen and (max-width: 1440px){
+        padding: 15px;
+        font-size: 16px;
+        margin-top: -25px;
+        margin-bottom: 20px;
+    }
 `;
 
 const MODE = {
@@ -122,6 +147,7 @@ class AuthModal extends Component {
         }
     }
     render() {
+        const { login_error, register_error } = this.props;
         return (
             <Wrapper>
                 <Container>
@@ -130,9 +156,9 @@ class AuthModal extends Component {
                         <img src="../../static/images/logo.png" />
                     </Logo>
                     {this.state.mode == MODE.LOGIN ?
-                        <Login data={this.state} changeHandler={this.changeHandler}/>
+                        <Login data={this.state} changeHandler={this.changeHandler} error={login_error}/>
                         :
-                        <Register data={this.state} changeHandler={this.changeHandler}/>
+                        <Register data={this.state} changeHandler={this.changeHandler} error={register_error}/>
                     }
                     <Footer>
                         <Button onClick={() => this.buttonHandler()}>

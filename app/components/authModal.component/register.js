@@ -17,6 +17,9 @@ const Title = styled.h3`
     font-size: 24px;
     color: #000;
     margin-bottom: 20px;
+    @media only screen and (max-width: 1440px){
+        font-size: 20px;
+    }
 `;
 const CustomInput = styled.input`
     border: none;
@@ -27,10 +30,19 @@ const CustomInput = styled.input`
     border-radius: 5px;
     margin-bottom: 10px !important;
     width: 100%;
+    @media only screen and (max-width: 1440px){
+        padding: 15px 25px;
+    }
+`;
+const Status = styled.p`
+    color: #FF632A;
+    font-size: 14px;
+    text-align: right;
+    margin-bottom: 10px;
 `;
 class Register extends Component {
     render() {
-        const { data, changeHandler } = this.props;
+        const { data, changeHandler, error } = this.props;
         const { registerName, registerEmail, registerPhone, registerPassword1, registerPassword2} = data;
         return (
             <>
@@ -43,6 +55,9 @@ class Register extends Component {
                         value={registerName}
                         onChange={changeHandler}
                     />
+                    {error && error.name && 
+                        <Status>{error.name}</Status>
+                    }
                     <CustomInput 
                         type="text" 
                         placeholder="Email ID *" 
@@ -50,6 +65,9 @@ class Register extends Component {
                         value={registerEmail}
                         onChange={changeHandler}
                     />
+                    {error && error.email && 
+                        <Status>{error.email}</Status>
+                    }
                     <CustomInput 
                         type="text" 
                         placeholder="Mobile number *" 
@@ -57,6 +75,9 @@ class Register extends Component {
                         value={registerPhone}    
                         onChange={changeHandler}
                     />
+                    {error && error.mobile && 
+                        <Status>{error.mobile}</Status>
+                    }
                     <CustomInput 
                         type="password" 
                         placeholder="Password *" 
@@ -64,6 +85,9 @@ class Register extends Component {
                         value={registerPassword1}
                         onChange={changeHandler}    
                     />
+                    {error && error.password && 
+                        <Status>{error.password}</Status>
+                    }
                     <CustomInput 
                         type="password" 
                         placeholder="Confirm Password *" 
@@ -71,6 +95,9 @@ class Register extends Component {
                         value={registerPassword2}
                         onChange={changeHandler}
                     />
+                    {error && error.password2 && 
+                        <Status>{error.password2}</Status>
+                    }
                 </FormContainer>
             </>
         )

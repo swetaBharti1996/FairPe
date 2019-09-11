@@ -32,6 +32,20 @@ export const gotUserDetails = data => {
     };
 };
 
+export const loginError = data => {
+    return {
+        type: ActionTypes.LOGIN_ERROR,
+        payload: data
+    }
+}
+
+export const registerError = data => {
+    return {
+        type: ActionTypes.REGISTER_ERROR,
+        payload: data
+    }
+}
+
 export const authModal = (flag) => {
     return {
         type: ActionTypes.AUTH_MODAL,

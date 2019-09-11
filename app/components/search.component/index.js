@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import ListingSection from './listingsection';
 import Category from './category';
 import Filters from './filter';
+import Price from './price';
+import _ from "lodash";
 
 const Wrapper = styled.div`
     min-height: 60vh;
@@ -33,7 +35,6 @@ class Search extends Component {
         return (
             <Wrapper>
                 <FilterSection>
-                    {/* <Filters> */}
                     {filters.length &&
                         filters.map((filter,index)=>(
                             <>
@@ -42,8 +43,11 @@ class Search extends Component {
                                         {key == "categoryBuckets" &&
                                             <Category bucket={filter[key]} updateCategory={applyCategoryFilter}/>
                                         }
-                                        {key != "price" && key != "categoryBuckets" &&
+                                        {key != "price" && key != "categoryBuckets" && !_.isEmpty(filter[key]) &&
                                             <Filters bucket={filter[key]} updateFilter={applyFilter} title={key} query={query}/>
+                                        }
+                                        {key == "price" && !_.isEmpty(filter[key]) &&
+                                            <Price bucket={filter[key]} updateFilter={applyPriceFilter}/>
                                         }
                                     </Container>
                                 ))}
