@@ -4,7 +4,6 @@ import _ from 'lodash';
 
 const MainContainer = styled.div`
   flex-flow: column;
-  margin-top: 120px;
   margin-bottom: 20px;
 `;
 const CategoryContainer = styled.div`

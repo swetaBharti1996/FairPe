@@ -23,7 +23,45 @@ const Container = styled.div`
     margin-left: 40px;
     margin-right: 40px;
 `;
+const SearchByCategories = styled.div`
+    height: 110px;
+    background: #E3E3E3;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    >div{
+        display: flex;
+        width: 75%;
+        margin: auto;
+        flex-direction: row;
+        justify-content: space-between;
+        >p{ 
+            color: #000000;
+            font-size: 16px;
+            font-family: 'Karla', sans-serif;
+            /* margin-right: 90px; */
+        }
+        >img{
+            height: 25px;
+            @media only screen and (max-width: 1440px){
+                font-size: 14px;
+                height: 20px;
+            }
+        }
+    }
+    @media only screen and (max-width: 1440px){
+        height: 100px;
+    }
+`;
 class Search extends Component {
+    state = {
+        showCat: true
+    }
+    toggleCategory = () => {
+        this.setState({showCat: !this.state.showCat})
+    }
     render() {
         const {
             filters,
@@ -38,19 +76,35 @@ class Search extends Component {
         return (
             <Wrapper>
                 <FilterSection>
+                    <SearchByCategories>
+                        <div>
+                            <p>Search by all categories</p>
+                            {this.state.showCat?
+                            <img 
+                                src="../../static/images/Category_Menu_D@2x.png" 
+                                onClick={this.toggleCategory}
+                            />
+                            :
+                            <img 
+                                src="../../static/images/Category_Menu@2x.png" 
+                                onClick={this.toggleCategory}
+                            />
+                            }
+                        </div>
+                    </SearchByCategories>
                     {!_.isEmpty(filters) &&
-                        filters.map((filter,index)=>(
+                        filters.map((filter, index) => (
                             <>
-                                {Object.keys(filter).map((key, i)=>(
+                                {Object.keys(filter).map((key, i) => (
                                     <Container>
-                                        {key == "categoryBuckets" &&
-                                            <Category bucket={filter[key]} updateCategory={applyCategoryFilter}/>
+                                        {key == "categoryBuckets" && this.state.showCat && 
+                                            <Category bucket={filter[key]} updateCategory={applyCategoryFilter} />
                                         }
                                         {key != "price" && key != "categoryBuckets" && !_.isEmpty(filter[key]) &&
-                                            <Filters bucket={filter[key]} updateFilter={applyFilter} title={key} query={query}/>
+                                            <Filters bucket={filter[key]} updateFilter={applyFilter} title={key} query={query} />
                                         }
                                         {key == "price" && !_.isEmpty(filter[key]) &&
-                                            <Price bucket={filter[key]} updateFilter={applyPriceFilter}/>
+                                            <Price bucket={filter[key]} updateFilter={applyPriceFilter} />
                                         }
                                     </Container>
                                 ))}
@@ -58,12 +112,12 @@ class Search extends Component {
                         ))
                     }
                 </FilterSection>
-                <ListingSection 
-                    products={this.props.products} 
-                    applyFilter = {applyFilter}
-                    count = {count}
-                    total = {total}
-                    query = {query}    
+                <ListingSection
+                    products={this.props.products}
+                    applyFilter={applyFilter}
+                    count={count}
+                    total={total}
+                    query={query}
                 />
             </Wrapper>
         )
