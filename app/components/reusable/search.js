@@ -23,14 +23,20 @@ const SearchBar = styled.input`
     margin-left: 5% !important;
     width: 85%;
     height: 100%;
-    padding: 25px 0px;
+    padding: 30px 0px;
     border: none !important;
     :focus{
         border: none;
     }
     ::placeholder {
        color: #999999;
-    };
+    }
+    @media only screen and (max-width: 1440px){
+        /* margin: 15px 0px; */
+        padding: 25px 0px;
+        font-size: 14px;
+        /* width: 16px;     */
+    }
 `;
 const SearchButton = styled.button`
     background-image: linear-gradient(127deg, #FF632A, #E20000);   
@@ -87,7 +93,7 @@ class Search extends Component {
         hovered: ""
     };
     handleInputChange = e => {
-        this.setState({ searchTerm: e.target.value });
+        this.setState({ searchTerm: e.target.value , hovered: ''});
     };
 
     onChange = ({ value }) => {

@@ -43,7 +43,7 @@ const EachCategory = styled.div`
 const CategoryKey = styled.div`
   display: flex;
   flex-direction: row;
-  width: 70%;
+  width: 95%;
   margin-bottom:10px;
   align-items: center;
   justify-content: space-between;
@@ -63,6 +63,9 @@ const CategoryText = styled.p`
   color: #000000;
   text-transform: capitalize;
   font-size: 18px;
+  @media only screen and (max-width: 1440px){
+    font-size: 16px;    
+  }
 `;
 const CategoryText1 = styled.p`
   font-family: "Karla", sans-serif;
@@ -70,6 +73,9 @@ const CategoryText1 = styled.p`
   font-size: 20px;
   text-transform: capitalize;
   margin-bottom: 10px;
+  @media only screen and (max-width: 1440px){
+    font-size: 18px;    
+  }
 `;
 
 var count = 0;
@@ -79,12 +85,12 @@ class Category extends Component {
     count: 0
   };
   componentDidMount = () => {
-    if(!_.isEmpty(this.props.bucket))
+    if (!_.isEmpty(this.props.bucket))
       this.handleList(this.props.bucket[0].key);
   }
   handleSelect = (cat, key, i) => {
     this.setState({ selected: key });
-    this.props.updateCategory(cat,key ,i);
+    this.props.updateCategory(cat, key, i);
   }
   handleList = (key) => {
     if (this.state[key])
@@ -108,7 +114,7 @@ class Category extends Component {
                 {item.key != 'nil' &&
                   <SubCategory>
                     <CategoryKey>
-                      <CategoryHolder onClick={() => this.handleSelect(cat, item.key,i - 1)} background={this.state.selected == item.key}>
+                      <CategoryHolder onClick={() => this.handleSelect(cat, item.key, i - 1)} background={this.state.selected == item.key}>
                         <CategoryText background={this.state.selected == item.key}>{item.key}</CategoryText>
                       </CategoryHolder>
                       {count > 0 ?
@@ -139,17 +145,21 @@ class Category extends Component {
         <CategoryContainer>
           {
             this.props.bucket.map(item => (
-              <EachCategory>
-                <CategoryKey onClick={() => this.handleList(item.key)}>
-                  <CategoryHolder>
-                    <CategoryText1>{item.key}</CategoryText1>
-                  </CategoryHolder>
-                  <Arrow background={this.state.selected == item.key}>
-                  <i className="material-icons">{this.state[item.key] ? 'keyboard_arrow_down' : 'keyboard_arrow_right'}</i>
-                  </Arrow>
-                </CategoryKey>
-                {this.state[item.key] && this.subCatContainer(item.key, item['SubCategory1']['buckets'], 'SubCategory2', 2)}
-              </EachCategory>
+              <>
+                {item.key != "nil" &&
+                  <EachCategory>
+                    <CategoryKey onClick={() => this.handleList(item.key)}>
+                      <CategoryHolder>
+                        <CategoryText1>{item.key}</CategoryText1>
+                      </CategoryHolder>
+                      <Arrow background={this.state.selected == item.key}>
+                        <i className="material-icons">{this.state[item.key] ? 'keyboard_arrow_down' : 'keyboard_arrow_right'}</i>
+                      </Arrow>
+                    </CategoryKey>
+                    {this.state[item.key] && this.subCatContainer(item.key, item['SubCategory1']['buckets'], 'SubCategory2', 2)}
+                  </EachCategory>
+                }
+              </>
             ))
           }
         </CategoryContainer>

@@ -8,7 +8,7 @@ const AfterAuthContainer = styled.div`
     cursor: pointer;
     color: #FF6300;
     border-left: 1px solid #ddd;
-    padding-left: 15%;
+    padding-left: 40%;
 `;
 
 const AfterAuthDropdown = styled.ul`

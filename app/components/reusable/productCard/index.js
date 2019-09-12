@@ -10,7 +10,7 @@ const Wrapper = styled.a`
   text-decoration: none;
 `;
 const Container = styled.div`
-  width: 205px;
+  width: 220px;
   font-family: 'Karla', sans-serif;
 `;
 const ImageContainer = styled.div`

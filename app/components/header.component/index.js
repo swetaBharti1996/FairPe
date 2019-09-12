@@ -22,13 +22,13 @@ const Container = styled.div`
   align-items: center;
 `;
 const Logo = styled.div`
-  cursor: pointer;
-  width:45%;
+  width:60%;
   >img{
     width: 120px;
+    cursor: pointer;
   }
   @media only screen and (max-width: 1440px){
-    width: 35%;
+    width: 50%;
     >img{
       width: 100px;
     }
@@ -38,10 +38,10 @@ const LinkContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 55%;
+  width: 40%;
   justify-content: space-between;
   @media only screen and (max-width: 1440px){
-    width: 65%;
+    width: 50%;
   }
 `;
 const Link = styled.a`
@@ -54,8 +54,8 @@ const Link = styled.a`
 const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
-  width: 35%;
-  justify-content: space-between;
+  width: 20%;
+  justify-content: flex-end;
 
 `;
 const Button = styled.a`
@@ -74,30 +74,22 @@ const Button = styled.a`
     font-size: 14px;
   }
 `;
-const User = styled.div`
-  font-size: 16px;
-  font-weight: bolder;
-  color: #FF632A;
-  border-left: 1px solid #eee;
-  padding-left: 50px;
-  display: flex;
-  align-items: center;
-`;
+
 class Header extends Component {
   state = {};
   render() {
     return (
       <Wrapper>
         <Container>
-          <Logo onClick={() => Router.push(`/`)}>
-            <img src="../../static/images/logo.png" />
+          <Logo>
+            <img src="../../static/images/logo.png" onClick={() => Router.push(`/`)}/>
           </Logo>
           <LinkContainer>
             <Link>Why FairPe</Link>
             <Link>Offline partners</Link>
             <Link>Contact us</Link>
             <ButtonContainer>
-              <Button>Refer and earn</Button>
+              {/* <Button>Refer and earn</Button> */}
               {!this.props.user ?
                 <Button active onClick={() => this.props.openModal(true)}>Sign up</Button>
                 :

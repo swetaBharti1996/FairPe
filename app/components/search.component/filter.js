@@ -25,15 +25,25 @@ const Checkbox = styled.div`
     >i{
         color: #FF632A;
     }
+    @media only screen and (max-width: 1440px){
+        height: 16px;
+        width: 16px;    
+    }
 `;
 const List = styled.p`
     display: flex;
     color: #666666;
     text-transform: capitalize;
+    @media only screen and (max-width: 1440px){
+        font-size: 14px;    
+    }
 `;
 const More = styled.p`
     text-align: right;
     color: #FF632A;
+    @media only screen and (max-width: 1440px){
+        font-size: 14px;    
+    }
 `;
 class Filters extends Component {
     state = {

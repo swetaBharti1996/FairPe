@@ -13,8 +13,11 @@ const Wrapper = styled.div`
     background: #F7F7F7;
 `;
 const FilterSection = styled.div`
-    width: 25%;
+    width: 20%;
     height: 100%;
+    @media only screen and (max-width: 1440px){
+        width: 25%;
+    }
 `;
 const Container = styled.div`
     margin-left: 40px;

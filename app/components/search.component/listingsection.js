@@ -5,9 +5,12 @@ import ProductCard from '../reusable/productCard';
 import _ from "lodash";
 
 const Wrapper = styled.div`
-    width: 75%;
+    width: 80%;
     background: #F7F7F7;
     margin-bottom: 400px;
+    @media only screen and (max-width: 1440px){
+        width: 75%;
+    }
 `;
 const Container = styled.div`
     width: 95%;
@@ -42,11 +45,11 @@ const ResultDetails = styled.div`
 `;
 const ProductListing = styled.div`
     display: grid;
-    grid-template-columns: repeat(auto-fit, 320px);
+    grid-template-columns: repeat(auto-fit, 350px);
     padding: 110px 0;
-    padding-left: 50px;
+    padding-left: 30px;
     @media only screen and (max-width: 1440px){
-        grid-template-columns: repeat(auto-fit, 280px);
+        grid-template-columns: repeat(auto-fit, 290px);
         padding-left: 50px;
     }
     /* margin-bottom: 50px; */
