@@ -124,6 +124,13 @@ class ProductCard extends Component {
       }
     }
   }
+  handleTitle = title => {
+    if (title.length > 50) {
+      title = title.slice(0, 50) + "...";
+    }
+    return title;
+  };
+
   handleWishlist = (e) => {
     e.preventDefault();
     const { auth, product, authModal, wishlist } = this.props;
@@ -153,7 +160,7 @@ class ProductCard extends Component {
             />
           </ImageContainer>
           <BodyContainer>
-            <Title>{product.title}</Title>
+            <Title title={product.title}>{this.handleTitle(product.title)}</Title>
 
             <Author>
               By <b>{product.site_name}</b>

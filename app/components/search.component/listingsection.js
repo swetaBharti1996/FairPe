@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import SearchBar from '../../containers/searchbar.container';
 import ProductCard from '../reusable/productCard';
 import _ from "lodash";
+import DropDown from '../reusable/dropdown';
 
 const Wrapper = styled.div`
     width: 80%;
@@ -36,6 +37,7 @@ const ResultDetails = styled.div`
     color: #666666;
     width: 100%;
     padding: 40px 0px;
+    margin-bottom: 20px;
     border-bottom: 1px solid #ddd;
     >span{
         font-size: 18px;
@@ -46,7 +48,7 @@ const ResultDetails = styled.div`
 const ProductListing = styled.div`
     display: grid;
     grid-template-columns: repeat(auto-fit, 350px);
-    padding: 110px 0;
+    padding: 80px 0;
     padding-left: 30px;
     @media only screen and (max-width: 1440px){
         grid-template-columns: repeat(auto-fit, 290px);
@@ -83,9 +85,17 @@ const NoDataImg = styled.img`
     margin: 50px auto;
     height: 300px;
 `;
+const DropDownContainer = styled.div`
+    display: flex;
+    align-content: flex-end;
+    justify-content: flex-end;
+    width: 100%;
+    height: 50px;
+`;
 class ListingSection extends Component {
     state = {
-        load: true
+        load: true,
+        query: {}
     }
     isBottom(el) {
         return el.getBoundingClientRect().bottom-300 <= window.innerHeight;
@@ -101,6 +111,7 @@ class ListingSection extends Component {
     componentDidUpdate(prevProps) {
         if (this.props.products !== prevProps.products) {
           this.setState({load: true})
+          this.setState({query: this.props.query});
         }
       }
 
@@ -140,6 +151,9 @@ class ListingSection extends Component {
                         <ResultDetails>
                             <span>{length} Results</span> from {total} results for "{query.term}"
                         </ResultDetails>
+                        <DropDownContainer>
+                            <DropDown/>
+                        </DropDownContainer>
                         <ProductListing>
                             {_.map(products, (product, id) => (
                                 <ProductCard
