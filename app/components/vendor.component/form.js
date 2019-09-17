@@ -82,11 +82,11 @@ class Form extends Component {
                     <Header>Register your shop with FairPe</Header>
                     <SubHeader>But why?</SubHeader>
                     <Content>
-                        This is para should be about the need for the shop owner to list his shop with FairPe, what’s his benefits etc. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        These days every offline store requires online promotion to bring in more customers. So by registering your shop with FairPe we can drive some impressions to your store. It will help you get real-time consumers. Also, you can beat your competition to become the best store in your area.
                     </Content>
-                    <Input type="text" placeholder="Your full name*"/>
-                    <Input type="text" placeholder="Email / Mobile Number"/>
-                    <Input type="text" placeholder="Location URL / Address of the shop*"/>
+                    <Input type="text" placeholder="Your full name*" />
+                    <Input type="text" placeholder="Email / Mobile Number" />
+                    <Input type="text" placeholder="Location URL / Address of the shop*" />
                     <Button>Register shop</Button>
                 </Container>
             </Wrapper>

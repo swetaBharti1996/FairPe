@@ -66,12 +66,12 @@ class Description extends Component {
                         <Title>India’s first platform for Offline products.</Title>
                         <SubTitle>Enjoy the advantages of shopping locally</SubTitle>
                         <Content>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            We believe the customer should always win! FairPe is a product search engine where you can find details of the products available both online and offline. Along with the required details we provide you real-time price comparison across more than 300 online stores and nearby offline stores. This gives our users more flexibility and options to make the right shopping decisions.
                         </Content>
                         <Button>Refer and Earn</Button>
                     </LeftContainer>
                     <RightContainer>
-                        <ShopImage src="../../static/images/shopping.svg"/>
+                        <ShopImage src="../../static/images/shopping.svg" />
                     </RightContainer>
                 </Container>
             </Wrapper>

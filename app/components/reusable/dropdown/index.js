@@ -7,14 +7,20 @@ const Wrapper = styled.div`
     flex-direction: column;
     background: #fff;
     border-radius: 10px;
-    width: 250px;
+    width: 300px;
     border: 1px solid #220A3E;
     border-radius : ${props => props.toggle? "10px 10px 0px 0px" : "10px"};
+    align-items: center;
+    /* justify-content: center; */
+    @media only screen and (max-width: 1440px){
+        width: 250px;
+    }
 `;
 const Container = styled.div`
     display: flex;
     flex-direction: row;
     cursor: pointer;
+    width: 100%;
 `;
 const Line = styled.div`
     width: 100%;
@@ -30,7 +36,7 @@ const Select = styled.p`
     color: #220A3E;
     font-weight: bolder;
     @media only screen and (max-width: 1440px){
-        padding: 25px 0px;
+        padding: 12px 10px;
         font-size: 16px;
     }
 `;
@@ -53,10 +59,7 @@ const SearchDropdown = styled.ul`
     border: 1px solid #220A3E;
     cursor: default;
     border-radius: 0px 0px 10px 10px;
-
-  @media screen and (max-width: ${props => props.theme.bpxs}) {
-    top: 43px;
-  }
+    z-index: 100;
 `;
 const SuggestionList = styled.div`
     width: 100%;
@@ -76,18 +79,13 @@ class DropDown extends Component {
     state = {
         value: "",
         showList: false,
-        list: [
-            "Popularity",
-            "Price -- Low to High",
-            "Price -- High to Low",
-            "Newest First"
-        ]
     };
 
-    clickHandler = (value) => {
+    clickHandler = (value, index) => {
         if (value) {
             this.setState({ value });
             this.setState({ showList: false})
+            this.props.onSort(index);
         }
     };
 
@@ -95,7 +93,8 @@ class DropDown extends Component {
         this.setState({ showList: !this.state.showList });
     };
     render() {
-        const { value, showList, list } = this.state;
+        const { value, showList } = this.state;
+        const { list } = this.props;
         return (
             <Wrapper toggle={showList}>
                 <Container onClick={() => this.toggleHandler()}>
@@ -113,7 +112,7 @@ class DropDown extends Component {
                                     return (
                                         <React.Fragment key={index}>
                                             <SuggestionList
-                                                onClick={()=>this.clickHandler(data)}
+                                                onClick={()=>this.clickHandler(data, index+1)}
                                             >
                                                 {data}
                                             </SuggestionList>

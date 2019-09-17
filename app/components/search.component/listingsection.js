@@ -92,13 +92,19 @@ const DropDownContainer = styled.div`
     width: 100%;
     height: 50px;
 `;
+const list = [
+    "Price -- Low to High",
+    "Price -- High to Low",
+    "Discount -- Low to High",
+    "Discount -- High to Low"
+];
 class ListingSection extends Component {
     state = {
         load: true,
         query: {}
     }
     isBottom(el) {
-        return el.getBoundingClientRect().bottom-300 <= window.innerHeight;
+        return el.getBoundingClientRect().bottom - 300 <= window.innerHeight;
     }
     componentDidMount() {
         document.addEventListener('scroll', this.trackScrolling);
@@ -110,10 +116,13 @@ class ListingSection extends Component {
 
     componentDidUpdate(prevProps) {
         if (this.props.products !== prevProps.products) {
-          this.setState({load: true})
-          this.setState({query: this.props.query});
+            this.setState({ load: true })
+            this.setState({ query: this.props.query });
         }
-      }
+    }
+    onSort = type => {
+        this.props.applyFilter("sort", type);
+    };
 
     trackScrolling = () => {
         const { products, total } = this.props;
@@ -121,14 +130,14 @@ class ListingSection extends Component {
         if (products)
             length = Object.keys(products).length;
         const wrappedElement = document.getElementById('products');
-        if (this.isBottom(wrappedElement) && length< total) {
-            if(this.state.load && this.props.query.page<5)
+        if (this.isBottom(wrappedElement) && length < total) {
+            if (this.state.load && this.props.query.page < 5)
                 this.loadMore();
             // document.removeEventListener('scroll', this.trackScrolling);
         }
     };
     loadMore = () => {
-        this.setState({load: false})
+        this.setState({ load: false })
         let page = Number(this.props.query.page) + 1;
         this.props.applyFilter('page', page);
         this.setState({ page: page });
@@ -146,34 +155,34 @@ class ListingSection extends Component {
                     </SearchContainer>
                 </Container>
                 <DataContainer>
-                    {!_.isEmpty(products)?
-                    <Container>
-                        <ResultDetails>
-                            <span>{length} Results</span> from {total} results for "{query.term}"
+                    {!_.isEmpty(products) ?
+                        <Container>
+                            <ResultDetails>
+                                <span>{length} Results</span> from {total} results for "{query.term}"
                         </ResultDetails>
-                        <DropDownContainer>
-                            <DropDown/>
-                        </DropDownContainer>
-                        <ProductListing>
-                            {_.map(products, (product, id) => (
-                                <ProductCard
-                                    key={id}
-                                    product={product}
-                                />
-                            ))}
-                        </ProductListing>
-                        {products && (length < total) &&
-                            <LoadMore onClick={() => this.loadMore()}>
-                                <a>Load More</a>
-                                <i className="material-icons">keyboard_arrow_down</i>
-                            </LoadMore>
-                        }
-                    </Container>
-                    :
-                    <Container>
-                        <NoDataText>Sorry we didn't find anything. Try exploring something else!</NoDataText>
-                        <NoDataImg src="../../static/images/empty.svg"/>
-                    </Container>
+                            <DropDownContainer>
+                                <DropDown list={list} onSort={this.onSort}/>
+                            </DropDownContainer>
+                            <ProductListing>
+                                {_.map(products, (product, id) => (
+                                    <ProductCard
+                                        key={id}
+                                        product={product}
+                                    />
+                                ))}
+                            </ProductListing>
+                            {products && (length < total) &&
+                                <LoadMore onClick={() => this.loadMore()}>
+                                    <a>Load More</a>
+                                    <i className="material-icons">keyboard_arrow_down</i>
+                                </LoadMore>
+                            }
+                        </Container>
+                        :
+                        <Container>
+                            <NoDataText>Sorry we didn't find anything. Try exploring something else!</NoDataText>
+                            <NoDataImg src="../../static/images/empty.svg" />
+                        </Container>
                     }
                 </DataContainer>
             </Wrapper>

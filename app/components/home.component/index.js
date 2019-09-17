@@ -86,13 +86,46 @@ const Down = styled.button`
   margin-bottom: 160px;
 `;
 
+const CATEGORY = [
+  "Jewellery", "Electronics", "Fashion", "Toys", "Sports"
+]
 class Home extends Component {
-  state = {};
+  state = {
+    current: 0,
+    category: ""
+  };
+  componentDidMount = () => {
+    this.typeWriter()
+  }
+  typeWriter = () => {
+    const { current, category } = this.state;
+    let str = "";
+    if (current < CATEGORY.length) {
+      let i = 0;
+      let index = 0;
+      setInterval(() => {
+        if (i < CATEGORY[index].length) {
+          str = str + CATEGORY[index].charAt(i);
+          this.setState({ category: str });
+          i++;
+        }
+        else {
+          str = "", i = 0;
+          if (index < CATEGORY.length-1){
+            index++;
+          }
+          else{
+            index = 0;
+          }
+        }
+      }, 250)
+    }
+  }
   render() {
     return (
       <Wrapper>
         <Cont>
-          <CategoryTag>Jewellery</CategoryTag>
+          <CategoryTag>{this.state.category}|</CategoryTag>
           <MainCaption>
             The best prices Online/Offline to shop locally
           </MainCaption>
