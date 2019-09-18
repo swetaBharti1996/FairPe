@@ -34,6 +34,9 @@ const Container = styled.div`
         width: 700px;
         padding: 15px 0px;
     }
+    @media only screen and (max-width: 992px) {
+        width: 90%;
+    }
 `;
 const Cross = styled.div`
     text-align: right;

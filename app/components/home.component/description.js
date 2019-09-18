@@ -11,18 +11,25 @@ const MiniTitle = styled.p`
 const Container = styled.div`
     display: flex;
     width: 100%;
-    flex-flow: row wrap;
+    flex-flow: row wrap-reverse;
 `;
 const LeftContainer = styled.div`
     display: flex;
     width: 50%;
     flex-direction: column;
+    @media only screen and (max-width: 992px) {
+        width: 100%;
+    }
 `;
 const RightContainer = styled.div`
     display: flex;
     width: 50%;
     align-items: center;
     justify-content: center;
+    @media only screen and (max-width: 992px) {
+        width: 100%;
+        margin-bottom: 50px;
+    }
 `;
 const Title = styled.h1`
     font-size: 30px;
@@ -30,6 +37,9 @@ const Title = styled.h1`
     margin-bottom: 12px;
     color: #333333;
     font-weight: bolder;
+    @media only screen and (max-width: 992px) {
+        width: 100%;
+    }
 `;
 const SubTitle = styled.h2`
     margin: 0px;
@@ -60,9 +70,9 @@ class Description extends Component {
     render() {
         return (
             <Wrapper>
-                <MiniTitle>Why Fairpe?</MiniTitle>
                 <Container>
                     <LeftContainer>
+                        <MiniTitle>Why Fairpe?</MiniTitle>
                         <Title>India’s first platform for Offline products.</Title>
                         <SubTitle>Enjoy the advantages of shopping locally</SubTitle>
                         <Content>

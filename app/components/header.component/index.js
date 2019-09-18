@@ -20,9 +20,10 @@ const Container = styled.div`
   margin: auto;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
 `;
 const Logo = styled.div`
-  width:60%;
+  width:50%;
   >img{
     width: 120px;
     cursor: pointer;
@@ -33,15 +34,23 @@ const Logo = styled.div`
       width: 100px;
     }
   }
+  @media only screen and (max-width: 992px) {
+    >img{
+      width: 80px;
+    }
+  }
 `;
 const LinkContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 40%;
+  width: 35%;
   justify-content: space-between;
   @media only screen and (max-width: 1440px){
-    width: 50%;
+    width: 35%;
+  }
+  @media only screen and (max-width: 992px) {
+    display: none;
   }
 `;
 const Link = styled.a`
@@ -54,9 +63,11 @@ const Link = styled.a`
 const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
-  width: 20%;
+  width: 10%;
   justify-content: flex-end;
-
+  @media only screen and (max-width: 992px) {
+    width: 40%;
+  }
 `;
 const Button = styled.a`
   padding: 15px 30px;
@@ -73,6 +84,9 @@ const Button = styled.a`
     padding: 10px 25px;
     font-size: 14px;
   }
+  @media only screen and (max-width: 992px) {
+
+  }
 `;
 
 class Header extends Component {
@@ -82,21 +96,21 @@ class Header extends Component {
       <Wrapper>
         <Container>
           <Logo>
-            <img src="../../static/images/logo.png" onClick={() => Router.push(`/`)}/>
+            <img src="../../static/images/logo.png" onClick={() => Router.push(`/`)} />
           </Logo>
           <LinkContainer>
             <Link>Why FairPe</Link>
             <Link>Offline partners</Link>
             <Link>Contact us</Link>
-            <ButtonContainer>
-              {/* <Button>Refer and earn</Button> */}
-              {!this.props.user ?
-                <Button active onClick={() => this.props.openModal(true)}>Sign up</Button>
-                :
-                <UserDropdown name={this.props.user} logout={this.props.logout}/>
-              }
-            </ButtonContainer>
           </LinkContainer>
+          <ButtonContainer>
+            {/* <Button>Refer and earn</Button> */}
+            {!this.props.user ?
+              <Button active onClick={() => this.props.openModal(true)}>Sign up</Button>
+              :
+              <UserDropdown name={this.props.user} logout={this.props.logout} />
+            }
+          </ButtonContainer>
         </Container>
       </Wrapper>
     );

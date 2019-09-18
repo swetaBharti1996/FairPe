@@ -15,6 +15,9 @@ const Wrapper = styled.div`
   @media only screen and (max-width: 1440px){
     margin-top: 50px;
   }
+  @media only screen and (max-width: 992px) {
+    margin-bottom: 200px;
+  }
 `;
 const Cont = styled.div`
   width: 70%;
@@ -22,6 +25,9 @@ const Cont = styled.div`
   @media only screen and (max-width: 1440px){
     width: 80%;
   } 
+  @media only screen and (max-width: 992px) {
+    width: 90%;
+  }
 `;
 const CategoryTag = styled.div`
   font-family: "Karla", sans-serif;
@@ -38,6 +44,12 @@ const CategoryTag = styled.div`
     font-size: 28px;
     width: 250px;
   }
+  @media only screen and (max-width: 992px) {
+    font-size: 24px;
+    padding: 10px 15px;
+    margin-bottom: 30px;
+    width: 200px;
+  } 
 `;
 const MainCaption = styled.h1`
   font-family: "Karla", sans-serif;
@@ -50,6 +62,10 @@ const MainCaption = styled.h1`
     font-size: 36px;
     line-height: 40px;
   }
+  @media only screen and (max-width: 992px) {
+    width: 100%;
+    font-size: 32px;
+  } 
 `;
 const Tagline = styled.p`
   font-family: "Karla", sans-serif;
@@ -61,6 +77,9 @@ const Tagline = styled.p`
     margin-bottom: 50px;
     font-size: 22px;
   }
+  @media only screen and (max-width: 992px) {
+    margin-bottom: 100px;
+  }
 `;
 const SearchContainer = styled.div`
   /* height: 90px; */
@@ -70,6 +89,10 @@ const SearchContainer = styled.div`
   @media only screen and (max-width: 1440px){
     height: 70px;
   }
+  @media only screen and (max-width: 992px) {
+    width: 100%;
+    margin-bottom: 20px;
+  } 
 `;
 const Down = styled.button`
   background: #fff;
@@ -84,6 +107,9 @@ const Down = styled.button`
   border: 1px solid #e2e2e2;
   border-radius: 50%;
   margin-bottom: 160px;
+  @media only screen and (max-width: 992px) {
+    display: none;
+  }
 `;
 
 const CATEGORY = [

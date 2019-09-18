@@ -6,10 +6,29 @@ const Wrapper = styled.div`
     font-family: 'Karla', sans-serif;
     margin-bottom: 70px;
 `;
+const BigTitle = styled.h1`
+    font-size: 88px;
+    text-align: center;
+    color: #F7F7F7;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    @media only screen and (max-width: 992px) {
+        font-size: 50px;
+    }
+`;
 const Title = styled.h1`
     font-size: 30px;
     text-align: center;
+    margin-top: -42px;
     margin-bottom: 70px;
+    @media only screen and (max-width: 992px) {
+        font-size: 24px;
+        margin-top: -32px;
+    }
+    @media only screen and (max-width: 992px) {
+        font-size: 18px;
+        margin-top: -26px;
+    }
 `;
 const Container = styled.div`
     display: flex;
@@ -22,24 +41,34 @@ const Category = styled.div`
     justify-content: center;
     align-items: center;
     margin-bottom:80px;
+    @media only screen and (max-width: 992px) {
+        width: 24%;
+    }
 `;
 const CatImage = styled.img`
     height: 60px;
     display: block;
     margin: 0px auto;
     margin-bottom: 20px;
+    @media only screen and (max-width: 992px) {
+        height: 40px;
+    }
 `;
 const CatTitle = styled.p`
     text-align:center;
     font-size: 18px;
     font-weight: bolder;
+    @media only screen and (max-width: 992px) {
+        font-size: 16px;
+    }
 `;
 
 class Categories extends Component{
     render(){
         return(
             <Wrapper>
-                <Title>Explore with these product categories</Title>
+                <BigTitle>PRODUCTS</BigTitle>
+                <Title>Buy from these product categories</Title>
                 <Container>
                     <Category>
                         <CatImage src="../../static/images/Electronics_ACTIVE@2x.png"/>

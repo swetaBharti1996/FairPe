@@ -11,6 +11,10 @@ const Wrapper = styled.div`
     box-shadow: 0 2px 4px 2px #ddd;
     width: 80%;
     /* height: 100%; */
+    @media only screen and (max-width: 992px) {
+        width: 100%;
+        border-radius: 32px;
+    }
 `;
 const Container = styled.div`
     display: flex;
@@ -19,7 +23,7 @@ const Container = styled.div`
 `;
 const SearchBar = styled.input`
     font-size: 16px;
-    margin: 20px 0px;
+    /* margin: 20px 0px; */
     margin-left: 5% !important;
     width: 85%;
     height: 100%;
@@ -37,6 +41,12 @@ const SearchBar = styled.input`
         font-size: 14px;
         /* width: 16px;     */
     }
+    @media only screen and (max-width: 992px) {
+        /* margin: 0px 30px; */
+        padding: 20px 0px;
+        width: 80%;
+        margin-left: 8% !important;
+    }
 `;
 const SearchButton = styled.button`
     background-image: linear-gradient(127deg, #FF632A, #E20000);   
@@ -48,6 +58,9 @@ const SearchButton = styled.button`
     justify-content: center;
     >img{
         width: 40%;
+    }
+    @media only screen and (max-width: 992px) {
+        width: 20%;
     }
 `;
 const SearchDropdown = styled.ul`
@@ -77,6 +90,11 @@ const SuggestionList = styled.div`
     background: ${props=>props.hover?"#eee": "#fff"};
     :hover{
         background: #eee;
+    }
+    @media only screen and (max-width: 992px) {
+        padding: 10px 8%;
+        font-size: 14px;
+        width: 80%;
     }
 `;
 class Search extends Component {

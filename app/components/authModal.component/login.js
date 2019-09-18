@@ -17,6 +17,9 @@ const FormContainer = styled.div`
     @media only screen and (max-width: 1440px){
         width: 50%;
     }
+    @media only screen and (max-width: 992px) {
+      width: 80%;
+    }
 `;
 const Title = styled.h3`
     text-align: center;

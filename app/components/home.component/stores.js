@@ -16,6 +16,12 @@ const Wrapper = styled.div`
         text-align: right;
         margin-bottom: 9px;
     }
+    @media only screen and (max-width: 992px) {
+        width: 100%;
+        >p{
+            margin-bottom: 5px;
+        }
+    }
 `;
 const StoreContainer = styled.div`
     width: 100%;

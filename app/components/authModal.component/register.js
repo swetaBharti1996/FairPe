@@ -11,6 +11,9 @@ const FormContainer = styled.div`
         color: #FF632A;
         text-align: right;
     }
+    @media only screen and (max-width: 992px) {
+        width: 80%;
+    }
 `;
 const Title = styled.h3`
     text-align: center;
