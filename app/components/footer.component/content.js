@@ -51,8 +51,12 @@ const Column = styled.div`
     >a{
         font-family: 'Karla', sans-serif;
         font-size: 16px;
-        font-weight: bolder;
+        font-weight: lighter;
         margin-bottom: 10px;
+        cursor: pointer;
+        &:hover{
+            color: #ff632a;
+        }
     }
 `;
 class Content extends Component {
@@ -67,12 +71,13 @@ class Content extends Component {
                     <RightContainer>
                         <Column>
                             <h1>Partner with us</h1>
-                            <Link>FAQ</Link>
-                            <Link>Customer Care</Link>
+                            <Link route={"vendor"}>Register shop</Link>
+                            <Link route={"about"}>Offline partners</Link>
+                            <Link route={"careers"}>Careers</Link>
                         </Column>
                         <Column>
                             <h1>Support</h1>
-                            <Link>FAQ</Link>
+                            <Link route={"faq"}>FAQ</Link>
                             <Link>Customer Care</Link>
                         </Column>
                         <Column>
