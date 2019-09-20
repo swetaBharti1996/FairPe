@@ -1,3 +1,5 @@
-import AddToCart from "./Button/addToCart";
+import Button from "./Button/button";
+import MainWrapper from "./Wrapper/MainWrapper";
+import PageWrapper from "./Wrapper/PageWrapper";
 
-export { AddToCart };
+export { Button, MainWrapper, PageWrapper };

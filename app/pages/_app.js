@@ -7,6 +7,8 @@ import Layout from "../layout";
 import cookies from "next-cookies";
 import NProgress from "nprogress";
 import Router from "next/router";
+import { ThemeProvider } from "styled-components";
+import theme from "../constants/theme";
 import { makeRequest } from "../constants/request";
 import { gotUserDetails, fetchWishlist } from "../actions/syncAction";
 
@@ -51,9 +53,11 @@ class MyApp extends App {
     return (
       <Container>
         <Provider store={store}>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
+          <ThemeProvider theme={theme}>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </ThemeProvider>
         </Provider>
       </Container>
     );

@@ -1,16 +1,14 @@
-import React, { Component } from "react";
 import styled from "styled-components";
 import Router from "next/router";
 import UserDropdown from "./userDropdown";
 import { Link } from "../../../server/routes";
+import { Button } from "../../UI";
 
 const Wrapper = styled.div`
   height: 100px;
-  background: #fff;
+  background: ${props => props.theme.white};
   display: flex;
-  box-shadow: 0 2px 4px 0px #ddd;
-  font-family: "Karla", sans-serif;
-  z-index: 10;
+  box-shadow: 0 2px 4px 0px ${props => props.theme.gray300};
   @media only screen and (max-width: 1440px) {
     height: 80px;
   }
@@ -18,19 +16,17 @@ const Wrapper = styled.div`
 const Container = styled.div`
   display: flex;
   width: 90%;
-  margin: auto;
+  margin: 0 auto;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
 `;
 const Logo = styled.div`
-  width: 50%;
   > img {
     width: 120px;
     cursor: pointer;
   }
   @media only screen and (max-width: 1440px) {
-    width: 50%;
     > img {
       width: 100px;
     }
@@ -41,58 +37,38 @@ const Logo = styled.div`
     }
   }
 `;
-const LinkContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 35%;
-  justify-content: space-between;
-  @media only screen and (max-width: 1440px) {
-    width: 35%;
-  }
-  @media only screen and (max-width: 992px) {
-    display: none;
-  }
-`;
+
 const List = styled.a`
   font-size: 18px;
-  color: #666666;
+  color: ${props => props.theme.gray700};
   cursor: pointer;
+  padding: 6px;
+  letter-spacing: -0.2px;
   @media only screen and (max-width: 1440px) {
     font-size: 16px;
   }
 `;
-const ButtonContainer = styled.div`
+
+const Nav = styled.ul`
   display: flex;
-  flex-direction: row;
-  width: 10%;
-  justify-content: flex-end;
-  @media only screen and (max-width: 992px) {
-    width: 40%;
-  }
-`;
-const Button = styled.a`
-  cursor: pointer;
-  padding: 15px 30px;
-  /* font-family: 'Helvetica', sans-serif; */
-  font-weight: bolder;
-  /* width: 110px; */
-  text-align: center;
-  font-size: 16px;
-  border-radius: 24px;
-  background: ${props =>
-    props.active ? "linear-gradient(111deg, #FF632A, #E20000)" : "#fff"};
-  color: ${props => (props.active ? "#fff" : "#000")};
-  border: 1px solid #ff632a;
-  @media only screen and (max-width: 1440px) {
-    padding: 10px 25px;
-    font-size: 14px;
-  }
-  @media only screen and (max-width: 992px) {
+  align-items: center;
+
+  > li {
+    margin-right: 16px;
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &:nth-child(4) {
+      margin-right: 8px;
+    }
+    &:nth-child(3) {
+      margin-right: 40px;
+    }
   }
 `;
 
-class Header extends Component {
+class Header extends React.Component {
   state = {};
   render() {
     return (
@@ -104,28 +80,39 @@ class Header extends Component {
               onClick={() => Router.push(`/`)}
             />
           </Logo>
-          <LinkContainer>
-            <Link route={"about"}>
-              <List>Why FairPe</List>
-            </Link>
 
-            <Link route={"offline"}>
-              <List>Offline partners</List>
-            </Link>
-            <Link route={"contact"}>
-              <List>Contact us</List>
-            </Link>
-          </LinkContainer>
-          <ButtonContainer>
-            {/* <Button>Refer and earn</Button> */}
-            {!this.props.user ? (
-              <Button active onClick={() => this.props.openModal(true)}>
-                Sign up
-              </Button>
-            ) : (
-              <UserDropdown name={this.props.user} logout={this.props.logout} />
-            )}
-          </ButtonContainer>
+          <Nav>
+            <li>
+              <Link route={"about"}>
+                <List>Why FairPe</List>
+              </Link>
+            </li>
+            <li>
+              <Link route={"offline"}>
+                <List>Offline partners</List>
+              </Link>
+            </li>
+            <li>
+              <Link route={"contact"}>
+                <List>Contact us</List>
+              </Link>
+            </li>
+            <li>
+              <Button>Log In</Button>
+            </li>
+            <li>
+              {!this.props.user ? (
+                <Button active onClick={() => this.props.openModal(true)}>
+                  Sign up
+                </Button>
+              ) : (
+                <UserDropdown
+                  name={this.props.user}
+                  logout={this.props.logout}
+                />
+              )}
+            </li>
+          </Nav>
         </Container>
       </Wrapper>
     );
