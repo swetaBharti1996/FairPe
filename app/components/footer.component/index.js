@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import Content from "./content";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -36,7 +37,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-bottom: 50px;
+  margin-bottom: 80px;
 `;
 const MailBox = styled.div`
   width: 670px;
@@ -191,6 +192,7 @@ const Foot = styled.div`
   margin: 0px auto;
   justify-content: space-between;
   padding-bottom: 20px;
+  padding-top: 20px;
 `;
 const Logo = styled.img`
   display: flex;
@@ -242,6 +244,7 @@ class Footer extends Component {
             <MailButton>Notify me about this</MailButton>
           </MailBox>
         </Container>
+        <Content/>
         <Foot>
           <Logo src="../../static/images/logo.png" />
           <PolicyBox>
