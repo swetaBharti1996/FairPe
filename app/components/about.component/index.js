@@ -6,12 +6,17 @@ const Wrapper = styled.div`
   text-align: center;
 `;
 
+const Show = styled.h1`
+  font-size: 33px;
+  margin-top: 30px;
+`;
+
 class About extends Component {
   state = {};
   render() {
     return (
       <Wrapper>
-        <h1>About us page</h1>
+        <Show>About us page</Show>
       </Wrapper>
     );
   }

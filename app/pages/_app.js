@@ -5,16 +5,29 @@ import AppConstant from "../constants/appConstant";
 import createStore from "../store";
 import Layout from "../layout";
 import cookies from "next-cookies";
+import NProgress from "nprogress";
+import Router from "next/router";
 import { makeRequest } from "../constants/request";
 import { gotUserDetails, fetchWishlist } from "../actions/syncAction";
 
+NProgress.configure({ showSpinner: false });
+Router.events.on("routeChangeStart", url => {
+  NProgress.start();
+});
+Router.events.on("routeChangeComplete", () => NProgress.done());
+Router.events.on("routeChangeError", () => NProgress.done());
 
-const getWishlist = async (c) => {
-  const resp = await makeRequest("get", `${AppConstant.default.baseURL}/api/wishlist`, null, {
-    Authorization: c.authtoken.replace("authtoken=", "")
-  });
+const getWishlist = async c => {
+  const resp = await makeRequest(
+    "get",
+    `${AppConstant.default.baseURL}/api/wishlist`,
+    null,
+    {
+      Authorization: c.authtoken.replace("authtoken=", "")
+    }
+  );
   return resp;
-}
+};
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
     const c = cookies(ctx);

@@ -5,13 +5,17 @@ const Wrapper = styled.div`
   min-height: 500px;
   text-align: center;
 `;
+const Show = styled.h1`
+  font-size: 33px;
+  margin-top: 30px;
+`;
 
 class Category extends Component {
   state = {};
   render() {
     return (
       <Wrapper>
-        <h1>Category page</h1>
+        <Show>{this.props.router.query.slug} page</Show>
       </Wrapper>
     );
   }

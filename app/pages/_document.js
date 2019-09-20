@@ -28,22 +28,24 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap"
             rel="stylesheet"
           />
-          <link 
-            href="https://fonts.googleapis.com/css?family=Montserrat:400,800&display=swap" 
-            rel="stylesheet"/> 
+          <link
+            href="https://fonts.googleapis.com/css?family=Montserrat:400,800&display=swap"
+            rel="stylesheet"
+          />
           <link
             href="https://fonts.googleapis.com/icon?family=Material+Icons"
             rel="stylesheet"
           />
           <link rel="stylesheet" href="/static/css/style.css" />
           <link rel="stylesheet" href="/static/css/loader.css" />
+          <link rel="stylesheet" href="/static/css/nprogress.css" />
           <style
             dangerouslySetInnerHTML={{ __html: this.props.selectStyles.css }}
           />
           {this.props.styleTags}
           <script />
         </Head>
-        <body style={{margin: '0px', padding: '0px'}}>
+        <body style={{ margin: "0px", padding: "0px" }}>
           <Main />
           <NextScript />
           <div id="__CUSTOM_CUBE_LOADER__">
