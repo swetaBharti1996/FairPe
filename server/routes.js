@@ -3,7 +3,7 @@ const routes = (module.exports = nextRoutes());
 
 routes.add("index", "/");
 routes.add("about", "/about");
-routes.add("offline", "/offline");
+routes.add("offline", "/offline-partners");
 routes.add("faq", "/faq");
 routes.add("vendor", "/vendor");
 routes.add("careers", "/careers");
