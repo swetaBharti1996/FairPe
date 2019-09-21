@@ -6,6 +6,7 @@ const Wrapper = styled.div`
   width: 100%;
   background: #f8f8f8;
   border-top: 1px solid #ff632a;
+  margin-top: 254px;
 `;
 const Box = styled.div`
   width: 964px;
