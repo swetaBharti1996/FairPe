@@ -6,6 +6,16 @@ const Wrapper = styled.div`
   min-height: 700px;
 `;
 
+const HeaderBackground = styled.div`
+  background-image: url("../../static/images/contact.jpg");
+  background-position: top; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover;
+  background-position-y: -281px;
+  @media only screen and (max-width: ${props => props.theme.bpxlg}) {
+    background-position-y: -165px;
+  }
+`;
 const Header = styled.div`
   height: 307px;
   background: transparent
@@ -135,14 +145,17 @@ class Contact extends Component {
   render() {
     return (
       <Wrapper>
-        <Header>
-          <PageWrapper>
-            <HeaderContainer>
-              <h2>Contact Us</h2>
-              <h3>Get To Know Us Better</h3>
-            </HeaderContainer>
-          </PageWrapper>
-        </Header>
+        <HeaderBackground>
+          <Header>
+            <PageWrapper>
+              <HeaderContainer>
+                <h2>Contact Us</h2>
+                <h3>Get To Know Us Better</h3>
+              </HeaderContainer>
+            </PageWrapper>
+          </Header>
+        </HeaderBackground>
+
         <PageWrapper>
           <Body>
             <Detail>
