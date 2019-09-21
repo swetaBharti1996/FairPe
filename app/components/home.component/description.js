@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { Link } from "../../../server/routes";
+import { Button } from "../../UI";
 
 const Wrapper = styled.div``;
 const MiniTitle = styled.p`
-  font-size: 18px;
+  font-size: 21px;
   margin-bottom: 60px;
   color: #220a3e;
+  font-weight: 600;
 `;
 const Container = styled.div`
   display: flex;
@@ -46,6 +48,7 @@ const SubTitle = styled.h2`
   color: #333333;
   font-size: 22px;
   margin-bottom: 50px;
+  letter-spacing: -0.5px;
 `;
 const Content = styled.p`
   font-size: 16px;
@@ -54,17 +57,6 @@ const Content = styled.p`
 `;
 const ShopImage = styled.img`
   width: 60%;
-`;
-const Button = styled.a`
-  border: none;
-  cursor: pointer;
-  width: 93px;
-  padding: 13px 30px;
-  border-radius: 24px;
-  text-align: center;
-  font-size: 18px;
-  color: #fff;
-  background-image: linear-gradient(105deg, #ff632a, #e20000);
 `;
 
 class Description extends Component {
@@ -85,7 +77,9 @@ class Description extends Component {
               flexibility and options to make the right shopping decisions.
             </Content>
             <Link route={"about"}>
-              <Button>Know More</Button>
+              <Button active style={{ width: 130 }}>
+                Know More
+              </Button>
             </Link>
           </LeftContainer>
           <RightContainer>

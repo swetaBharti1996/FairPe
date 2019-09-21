@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { Link } from "../../../server/routes";
+import _ from "lodash";
 
 const Wrapper = styled.div`
   width: 100%;
-  font-family: "Karla", sans-serif;
   margin-bottom: 70px;
 `;
 const BigTitle = styled.h1`
@@ -31,28 +31,30 @@ const Title = styled.h1`
     margin-top: -26px;
   }
 `;
-const Container = styled.div`
+const Container = styled.ul`
   display: flex;
   flex-flow: row wrap;
   width: 100%;
   justify-content: space-between;
-`;
-const Category = styled.a`
-  display: flex;
-  cursor: pointer;
-  width: 15%;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 80px;
-  flex-flow: column;
 
-  &:hover {
-    color: #ff632a;
-  }
-  @media only screen and (max-width: 992px) {
-    width: 24%;
+  > li {
+    display: flex;
+    cursor: pointer;
+    width: 15%;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 80px;
+    flex-flow: column;
+
+    &:hover {
+      color: #ff632a;
+    }
+    @media only screen and (max-width: 992px) {
+      width: 24%;
+    }
   }
 `;
+
 const CatImage = styled.img`
   height: 60px;
   display: block;
@@ -66,114 +68,46 @@ const CatTitle = styled.p`
   text-align: center;
   font-size: 18px;
   font-weight: bolder;
+  text-transform: capitalize;
   @media only screen and (max-width: 992px) {
     font-size: 16px;
   }
 `;
 
 class Categories extends Component {
+  state = {
+    categorys: [
+      "electronics",
+      "beauty",
+      "baby",
+      "books",
+      "fashion",
+      "gaming",
+      "jewellery",
+      "toys",
+      "kitchen",
+      "sports",
+      "large-appliances",
+      "more"
+    ]
+  };
   render() {
+    const { categorys } = this.state;
     return (
       <Wrapper>
         <BigTitle>PRODUCTS</BigTitle>
         <Title>Buy from these product categories</Title>
         <Container>
-          <Category>
-            <Link route={"category"} params={{ slug: "electronics" }}>
-              <a>
-                <CatImage src="../../static/images/Electronics@2x.png" />
-                <CatTitle>Electronics</CatTitle>
-              </a>
-            </Link>
-          </Category>
-          <Category>
-            <Link route={"category"} params={{ slug: "beauty" }}>
-              <a>
-                <CatImage src="../../static/images/Beauty@2x.png" />
-                <CatTitle>Beauty</CatTitle>
-              </a>
-            </Link>
-          </Category>
-          <Category>
-            <Link route={"category"} params={{ slug: "baby" }}>
-              <a>
-                <CatImage src="../../static/images/Baby@2x.png" />
-                <CatTitle>Baby</CatTitle>
-              </a>
-            </Link>
-          </Category>
-          <Category>
-            <Link route={"category"} params={{ slug: "book" }}>
-              <a>
-                <CatImage src="../../static/images/Books@2x.png" />
-                <CatTitle>Books</CatTitle>
-              </a>
-            </Link>
-          </Category>
-          <Category>
-            <Link route={"category"} params={{ slug: "fashion" }}>
-              <a>
-                <CatImage src="../../static/images/Fashion@2x.png" />
-                <CatTitle>Fashion</CatTitle>
-              </a>
-            </Link>
-          </Category>
-          <Category>
-            <Link route={"category"} params={{ slug: "gaming" }}>
-              <a>
-                <CatImage src="../../static/images/Gaming@2x.png" />
-                <CatTitle>Gaming</CatTitle>
-              </a>
-            </Link>
-          </Category>
-          <Category>
-            <Link route={"category"} params={{ slug: "jewellery" }}>
-              <a>
-                <CatImage src="../../static/images/Jewellery@2x.png" />
-                <CatTitle>Jewellery</CatTitle>
-              </a>
-            </Link>
-          </Category>
-          <Category>
-            <Link route={"category"} params={{ slug: "toy" }}>
-              <a>
-                <CatImage src="../../static/images/Toys@2x.png" />
-                <CatTitle>Toys</CatTitle>
-              </a>
-            </Link>
-          </Category>
-          <Category>
-            <Link route={"category"} params={{ slug: "kitchen" }}>
-              <a>
-                <CatImage src="../../static/images/Kitchen@2x.png" />
-                <CatTitle>Kitchen</CatTitle>
-              </a>
-            </Link>
-          </Category>
-          <Category>
-            <Link route={"category"} params={{ slug: "sport" }}>
-              <a>
-                <CatImage src="../../static/images/Sports@2x.png" />
-                <CatTitle>Sports</CatTitle>
-              </a>
-            </Link>
-          </Category>
-          <Category>
-            <Link route={"category"} params={{ slug: "large-appliance" }}>
-              <a>
-                <CatImage src="../../static/images/Large_Appliances@2x.png" />
-                <CatTitle>Large appliances</CatTitle>
-              </a>
-            </Link>
-          </Category>
-          <Category>
-            <Link route={"category"} params={{ slug: "more" }}>
-              <a>
-                <CatImage src="../../static/images/Electronics@2x.png" />
-                <CatTitle>More coming</CatTitle>
-              </a>
-            </Link>
-          </Category>
+          {_.map(categorys, (category, index) => (
+            <li>
+              <Link route={"category"} params={{ slug: category }}>
+                <a>
+                  <CatImage src={`../../static/images/${category}.png`} />
+                  <CatTitle>{category}</CatTitle>
+                </a>
+              </Link>
+            </li>
+          ))}
         </Container>
       </Wrapper>
     );

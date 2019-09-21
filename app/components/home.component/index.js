@@ -18,20 +18,10 @@ const Wrapper = styled.div`
     margin-bottom: 200px;
   }
 `;
-const Cont = styled.div`
-  /* width: 70%;
-  margin: auto;
-  @media only screen and (max-width: 1440px) {
-    width: 80%;
-  }
-  @media only screen and (max-width: 992px) {
-    width: 90%;
-  } */
-`;
+
 const CategoryTag = styled.div`
-  font-family: "Karla", sans-serif;
-  border-left: 2px solid #ff0000;
-  color: #ff632a;
+  border-left: 2px solid ${props => props.theme.secondary};
+  color: ${props => props.theme.primary};
   padding: 15px 15px;
   width: 310px;
   background: rgba(245, 245, 245, 0.57);
@@ -51,11 +41,13 @@ const CategoryTag = styled.div`
   }
 `;
 const MainCaption = styled.h1`
-  font-family: "Karla", sans-serif;
+  font-family: ${props => props.theme.font};
   width: 53%;
-  line-height: 60px;
-  font-size: 48px;
+  color: ${props => props.theme.black200};
+  /* line-height: 60px; */
+  font-size: 44px;
   margin-bottom: 20px;
+  letter-spacing: -1px;
   @media only screen and (max-width: 1440px) {
     width: 50%;
     font-size: 36px;
@@ -67,11 +59,11 @@ const MainCaption = styled.h1`
   }
 `;
 const Tagline = styled.p`
-  font-family: "Karla", sans-serif;
   font-size: 24px;
-  color: #666666;
+  color: ${props => props.theme.black600};
   margin-bottom: 70px;
-  font-weight: bolder;
+  font-weight: bold;
+  letter-spacing: -0.7px;
   @media only screen and (max-width: 1440px) {
     margin-bottom: 50px;
     font-size: 22px;
@@ -82,9 +74,9 @@ const Tagline = styled.p`
 `;
 const SearchContainer = styled.div`
   /* height: 90px; */
-  margin-bottom: 55px;
+  margin-bottom: 30px;
   height: 90px;
-  width: 90%;
+  width: 70%;
   @media only screen and (max-width: 1440px) {
     height: 70px;
   }
@@ -94,18 +86,20 @@ const SearchContainer = styled.div`
   }
 `;
 const Down = styled.button`
-  background: #fff;
+  cursor: pointer;
+  background: ${props => props.theme.white};
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ff632a;
+  color: ${props => props.theme.primary};
   height: 72px;
   width: 72px;
   padding: 0px;
   border: 1px solid #e2e2e2;
   border-radius: 50%;
   margin-bottom: 160px;
+  outline: none;
   @media only screen and (max-width: 992px) {
     display: none;
   }
@@ -146,22 +140,21 @@ class Home extends Component {
     return (
       <PageWrapper>
         <Wrapper>
-          <Cont>
-            <CategoryTag>{this.state.category}|</CategoryTag>
-            <MainCaption>
-              The best prices Online/Offline to shop locally
-            </MainCaption>
-            <Tagline>Search and buy at the cheapest price</Tagline>
-            <SearchContainer>
-              <Search />
-            </SearchContainer>
-            <Stores />
-            <Down>
-              <i className="material-icons">keyboard_arrow_down</i>
-            </Down>
-            <Categories />
-            <Description />
-          </Cont>
+          <CategoryTag>{this.state.category}|</CategoryTag>
+          <MainCaption>
+            The best prices Online/Offline to shop locally
+          </MainCaption>
+          <Tagline>Search and buy at the cheapest price</Tagline>
+          <SearchContainer>
+            <Search />
+          </SearchContainer>
+          <Stores />
+
+          {/* <Down>
+            <i className="material-icons">keyboard_arrow_down</i>
+          </Down> */}
+          <Categories />
+          <Description />
         </Wrapper>
       </PageWrapper>
     );

@@ -15,11 +15,14 @@ const Wrapper = styled.div`
 `;
 const Container = styled.div`
   display: flex;
-  width: 90%;
+  width: 80%;
   margin: 0 auto;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  @media only screen and (max-width: ${props => props.theme.bpxlg}) {
+    width: 90%;
+  }
 `;
 const Logo = styled.div`
   > img {
