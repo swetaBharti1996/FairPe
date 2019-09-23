@@ -10,12 +10,12 @@ const Wrapper = styled.div`
   background: ${props => props.theme.white};
   width: 100%;
   margin-top: 100px;
-  margin-bottom: 400px;
+  position: relative;
+
   @media only screen and (max-width: ${props => props.theme.bpxlg}) {
     margin-top: 50px;
   }
-  @media only screen and (max-width: 992px) {
-    margin-bottom: 200px;
+  @media only screen and (max-width: ${props => props.theme.bpmd}) {
   }
 `;
 
@@ -29,11 +29,11 @@ const CategoryTag = styled.div`
   font-weight: lighter;
   border-radius: 0px 35px 35px 0px;
   margin-bottom: 50px;
-  @media only screen and (max-width: 1440px) {
+  @media only screen and (max-width: ${props => props.theme.bpxlg}) {
     font-size: 28px;
     width: 250px;
   }
-  @media only screen and (max-width: 992px) {
+  @media only screen and (max-width: ${props => props.theme.bpmd}) {
     font-size: 24px;
     padding: 10px 15px;
     margin-bottom: 30px;
@@ -41,19 +41,21 @@ const CategoryTag = styled.div`
   }
 `;
 const MainCaption = styled.h1`
-  font-family: ${props => props.theme.font};
+  font-family: ${props => props.theme.font2};
   width: 53%;
+
+  text-transform: none !important;
   color: ${props => props.theme.black200};
   /* line-height: 60px; */
   font-size: 44px;
   margin-bottom: 20px;
-  letter-spacing: -1px;
-  @media only screen and (max-width: 1440px) {
+  /* letter-spacing: -1px; */
+  @media only screen and (max-width: ${props => props.theme.bpxlg}) {
     width: 50%;
     font-size: 36px;
-    line-height: 40px;
+    line-height: 44px;
   }
-  @media only screen and (max-width: 992px) {
+  @media only screen and (max-width: ${props => props.theme.bpmd}) {
     width: 100%;
     font-size: 32px;
   }
@@ -64,44 +66,60 @@ const Tagline = styled.p`
   margin-bottom: 70px;
   font-weight: bold;
   letter-spacing: -0.7px;
-  @media only screen and (max-width: 1440px) {
+  @media only screen and (max-width: ${props => props.theme.bpxlg}) {
     margin-bottom: 50px;
     font-size: 22px;
   }
-  @media only screen and (max-width: 992px) {
+  @media only screen and (max-width: ${props => props.theme.bpmd}) {
     margin-bottom: 100px;
   }
 `;
 const SearchContainer = styled.div`
+  position: relative;
+  z-index: 10;
   /* height: 90px; */
   margin-bottom: 30px;
   height: 90px;
   width: 70%;
-  @media only screen and (max-width: 1440px) {
+  @media only screen and (max-width: ${props => props.theme.bpxlg}) {
     height: 70px;
   }
-  @media only screen and (max-width: 992px) {
+  @media only screen and (max-width: ${props => props.theme.bpmd}) {
     width: 100%;
     margin-bottom: 20px;
   }
 `;
-const Down = styled.button`
-  cursor: pointer;
-  background: ${props => props.theme.white};
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: ${props => props.theme.primary};
-  height: 72px;
-  width: 72px;
-  padding: 0px;
-  border: 1px solid #e2e2e2;
-  border-radius: 50%;
-  margin-bottom: 160px;
-  outline: none;
-  @media only screen and (max-width: 992px) {
-    display: none;
+// const Down = styled.button`
+//   cursor: pointer;
+//   background: ${props => props.theme.white};
+//   margin: 0 auto;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   color: ${props => props.theme.primary};
+//   height: 72px;
+//   width: 72px;
+//   padding: 0px;
+//   border: 1px solid #e2e2e2;
+//   border-radius: 50%;
+//   margin-bottom: 160px;
+//   outline: none;
+//   @media only screen and (max-width: 992px) {
+//     display: none;
+//   }
+// `;
+
+const Illustrator = styled.div`
+  position: absolute;
+  top: -52px;
+  right: -15px;
+  width: 61%;
+  @media only screen and (max-width: ${props => props.theme.bpxlg}) {
+    top: -31px;
+  }
+  > img {
+    width: 100%;
+    height: 100%;
   }
 `;
 
@@ -140,7 +158,7 @@ class Home extends Component {
     return (
       <PageWrapper>
         <Wrapper>
-          <CategoryTag>{this.state.category}|</CategoryTag>
+          <CategoryTag>{"test"}|</CategoryTag>
           <MainCaption>
             The best prices Online/Offline to shop locally
           </MainCaption>
@@ -148,6 +166,9 @@ class Home extends Component {
           <SearchContainer>
             <Search />
           </SearchContainer>
+          <Illustrator>
+            <img src={"../../static/images/maybe.png"}></img>
+          </Illustrator>
           <Stores />
 
           {/* <Down>

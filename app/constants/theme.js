@@ -22,6 +22,7 @@ export default {
 
   /* Font  */
   font: '"Karla", sans-serif',
+  font2: '"Montserrat"',
 
   /* Breakpoints */
   bpxz: "360px",

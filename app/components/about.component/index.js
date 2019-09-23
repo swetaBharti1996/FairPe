@@ -24,7 +24,7 @@ const Header = styled.div`
 
   > h2 {
     color: ${props => props.theme.white};
-    font-size: 48px;
+    font-size: 38px;
     letter-spacing: -1px;
   }
 `;
@@ -56,7 +56,7 @@ const TextContainer = styled.div`
   width: 44%;
 
   > b {
-    font-size: 36px;
+    font-size: 29px;
     display: block;
     margin-bottom: 16px;
     font-family: "Montserrat";
@@ -68,8 +68,8 @@ const TextContainer = styled.div`
 `;
 
 const ImageContainer = styled.div`
-  width: 591px;
-  height: 422px;
+  width: 50%;
+  height: 384px;
   opacity: 1;
   > img {
     width: 100%;
@@ -80,8 +80,8 @@ const ImageContainer = styled.div`
 `;
 
 const OverlayImage = styled.div`
-  width: 591px;
-  height: 422px;
+  width: 50%;
+  height: 384px;
   opacity: 1;
   position: absolute;
   top: -99px;

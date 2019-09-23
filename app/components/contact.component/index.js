@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { PageWrapper } from "../../UI";
 
 const Wrapper = styled.div`
-  min-height: 700px;
+  min-height: 750px;
 `;
 
 const HeaderBackground = styled.div`
@@ -49,7 +49,6 @@ const HeaderContainer = styled.div`
 `;
 
 const Body = styled.div`
-  min-height: 500px;
   position: relative;
 `;
 
@@ -65,7 +64,7 @@ const Detail = styled.ul`
     }
 
     > p {
-      font-size: 18px;
+      font-size: 17px;
       color: #5a5a5a;
     }
   }

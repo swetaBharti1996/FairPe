@@ -9,13 +9,13 @@ const Wrapper = styled.div`
   background: ${props => props.theme.white};
   display: flex;
   box-shadow: 0 2px 4px 0px ${props => props.theme.gray300};
-  @media only screen and (max-width: 1440px) {
+  @media only screen and (max-width: ${props => props.theme.bpxlg}) {
     height: 80px;
   }
 `;
 const Container = styled.div`
   display: flex;
-  width: 80%;
+  width: 75%;
   margin: 0 auto;
   flex-direction: row;
   align-items: center;
@@ -29,12 +29,12 @@ const Logo = styled.div`
     width: 120px;
     cursor: pointer;
   }
-  @media only screen and (max-width: 1440px) {
+  @media only screen and (max-width: ${props => props.theme.bpxlg}) {
     > img {
       width: 100px;
     }
   }
-  @media only screen and (max-width: 992px) {
+  @media only screen and (max-width: ${props => props.theme.bpmd}) {
     > img {
       width: 80px;
     }
@@ -47,7 +47,7 @@ const List = styled.a`
   cursor: pointer;
   padding: 6px;
   letter-spacing: -0.2px;
-  @media only screen and (max-width: 1440px) {
+  @media only screen and (max-width: ${props => props.theme.bpxlg}) {
     font-size: 16px;
   }
 `;
@@ -86,22 +86,32 @@ class Header extends React.Component {
 
           <Nav>
             <li>
+              <Link route={"vendor"}>
+                <List>Become Partner</List>
+              </Link>
+            </li>
+            <li>
               <Link route={"about"}>
                 <List>Why FairPe</List>
               </Link>
             </li>
-            <li>
-              <Link route={"offline"}>
-                <List>Offline partners</List>
-              </Link>
-            </li>
+
             <li>
               <Link route={"contact"}>
                 <List>Contact us</List>
               </Link>
             </li>
             <li>
-              <Button>Log In</Button>
+              {!this.props.user ? (
+                <Button onClick={() => this.props.openModal(true)}>
+                  Log In
+                </Button>
+              ) : (
+                <UserDropdown
+                  name={this.props.user}
+                  logout={this.props.logout}
+                />
+              )}
             </li>
             <li>
               {!this.props.user ? (

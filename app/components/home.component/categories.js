@@ -99,7 +99,7 @@ class Categories extends Component {
         <Title>Buy from these product categories</Title>
         <Container>
           {_.map(categorys, (category, index) => (
-            <li>
+            <li key={index}>
               <Link route={"category"} params={{ slug: category }}>
                 <a>
                   <CatImage src={`../../static/images/${category}.png`} />

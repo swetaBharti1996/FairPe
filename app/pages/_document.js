@@ -29,7 +29,7 @@ export default class MyDocument extends Document {
             rel="stylesheet"
           />
           <link
-            href="https://fonts.googleapis.com/css?family=Montserrat:700&display=swap"
+            href="https://fonts.googleapis.com/css?family=Montserrat:300,700&display=swap"
             rel="stylesheet"
           ></link>
           <link

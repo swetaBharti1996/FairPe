@@ -5,7 +5,7 @@ routes.add("index", "/");
 routes.add("about", "/about");
 routes.add("offline", "/offline-partners");
 routes.add("faq", "/faq");
-routes.add("vendor", "/vendor");
+routes.add("vendor", "/become-partner");
 routes.add("careers", "/careers");
 routes.add("contact", "/contact");
 routes.add("category", "/category/:slug");

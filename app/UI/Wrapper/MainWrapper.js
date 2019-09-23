@@ -9,4 +9,5 @@ export default styled.div`
   vertical-align: baseline;
   background: 0 0;
   font-family: ${props => props.theme.font} !important;
+  font-size: 14px !important;
 `;

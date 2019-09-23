@@ -36,9 +36,13 @@ const RightContainer = styled.div`
 const Title = styled.h1`
   font-size: 30px;
   width: 60%;
+
+  font-family: ${props => props.theme.font};
   margin-bottom: 12px;
+  letter-spacing: -1px;
+  line-height: 1.2;
   color: #333333;
-  font-weight: bolder;
+  font-weight: 600;
   @media only screen and (max-width: 992px) {
     width: 100%;
   }
@@ -77,7 +81,7 @@ class Description extends Component {
               flexibility and options to make the right shopping decisions.
             </Content>
             <Link route={"about"}>
-              <Button active style={{ width: 130 }}>
+              <Button active style={{ width: 140 }}>
                 Know More
               </Button>
             </Link>

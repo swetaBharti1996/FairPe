@@ -6,9 +6,12 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   /* margin-bottom: 55px; */
-  background: #fff;
+
   border-radius: 49px;
-  box-shadow: 0 2px 4px 2px #ddd;
+  /* box-shadow: 0 2px 4px 2px #ddd; */
+  box-shadow: 0px 0px 30px #00000014;
+  border: 1px solid #ededed;
+  background: #ffffff 0% 0% no-repeat padding-box;
   width: 100%;
   /* height: 100%; */
   @media only screen and (max-width: 992px) {
@@ -22,23 +25,25 @@ const Container = styled.div`
   /* padding: 38px 48px; */
 `;
 const SearchBar = styled.input`
-  font-size: 16px;
+  font-size: 18px;
+  font-family: ${props => props.theme.font};
   /* margin: 20px 0px; */
   margin-left: 5% !important;
   width: 85%;
   height: 100%;
-  padding: 30px 0px;
+  padding: 22px 0px;
   border: none !important;
   :focus {
     border: none;
   }
   ::placeholder {
     color: #999999;
+    font-family: ${props => props.theme.font};
   }
   @media only screen and (max-width: 1440px) {
     /* margin: 15px 0px; */
-    padding: 25px 0px;
-    font-size: 14px;
+    padding: 22px 0px;
+    font-size: 16px;
     /* width: 16px;     */
   }
   @media only screen and (max-width: 992px) {
@@ -50,14 +55,16 @@ const SearchBar = styled.input`
 `;
 const SearchButton = styled.button`
   background-image: linear-gradient(127deg, #ff632a, #e20000);
-  width: 15%;
+  width: 11%;
   border: none;
   border-radius: 0px 49px 49px 0px;
   display: flex;
   align-items: center;
   justify-content: center;
+  outline: none;
+  cursor: pointer;
   > img {
-    width: 40%;
+    width: 50%;
   }
   @media only screen and (max-width: 992px) {
     width: 20%;

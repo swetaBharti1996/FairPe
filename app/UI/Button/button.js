@@ -1,17 +1,16 @@
 import styled from "styled-components";
 
 export default styled.button`
-  font-family: ${props => props.theme.font};
-  font-size: 0.9rem;
+  font-family: ${props => props.theme.font2};
+  font-size: 0.95rem;
   position: relative;
   transition: all 0.15s ease;
   letter-spacing: 0.025em;
-  text-transform: uppercase;
   will-change: transform;
   font-weight: 600;
   line-height: 1.5;
   display: inline-block;
-  padding: 0.625rem 1.25rem;
+  padding: 0.625rem 1.55rem;
   text-align: center;
   vertical-align: middle;
   white-space: nowrap;
@@ -21,9 +20,10 @@ export default styled.button`
   user-select: none;
   outline: none;
   cursor: pointer;
+  letter-spacing:-0.2px;
   width: ${props => (props.fluid ? "100%" : "initial")};
   color: ${props =>
-    props.active ? `${props.theme.white}` : `${props.theme.black}`};
+    props.active ? `${props.theme.white}` : `${props.theme.black600}`};
   background: ${props =>
     props.active
       ? `linear-gradient(111deg, ${props.theme.primary}, ${props.theme.secondary})`

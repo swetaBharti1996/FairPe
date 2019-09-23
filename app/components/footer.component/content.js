@@ -6,11 +6,9 @@ const Wrapper = styled.div`
   display: flex;
   width: 100%;
   margin: auto;
-  padding-bottom: 50px;
-  border-bottom: 1px solid #ff632a;
+  /* border-bottom: 1px solid #ff632a; */
 `;
 const Container = styled.div`
-  width: 90%;
   margin: auto;
   display: flex;
   flex-flow: row wrap;
@@ -79,14 +77,14 @@ class Content extends Component {
           <RightContainer>
             <Column>
               <h1>Partner with us</h1>
-              <Link route={"vendor"}>Register shop</Link>
-              <Link route={"about"}>Offline partners</Link>
+              <Link route={"vendor"}>Become Partners</Link>
+              <Link route={"about"}>About us</Link>
               <Link route={"careers"}>Careers</Link>
             </Column>
             <Column>
               <h1>Support</h1>
               <Link route={"faq"}>FAQ</Link>
-              <Link>Customer Care</Link>
+              <Link route={"contact"}>Message us</Link>
             </Column>
             <Column>
               <h1>Contact us</h1>

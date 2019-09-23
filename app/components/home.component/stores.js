@@ -2,21 +2,23 @@ import React, { Component } from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
+  position: relative;
+  z-index: 10;
   width: 25%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   margin-bottom: 140px;
-  @media only screen and (max-width: 1440px) {
-    width: 35%;
+  @media only screen and (max-width: ${props => props.theme.bpxlg}) {
+    width: 27%;
   }
   > p {
     font-size: 14px;
-    color: #666666;
+    color: ${props => props.theme.black600};
     text-align: right;
-    margin-bottom: 9px;
+    /* margin-bottom: 9px; */
   }
-  @media only screen and (max-width: 992px) {
+  @media only screen and (max-width: ${props => props.theme.bpmd}) {
     width: 100%;
     > p {
       margin-bottom: 5px;

@@ -10,23 +10,23 @@ const toggleLoader = show => {
     }
   }
 };
-AsyncRequest.interceptors.request.use(
-  config => {
-    toggleLoader(true);
-    return config;
-  },
-  error => Promise.reject(error)
-);
-AsyncRequest.interceptors.response.use(
-  config => {
-    toggleLoader(false);
-    return config;
-  },
-  error => {
-    toggleLoader(false);
-    return Promise.reject(error);
-  }
-);
+// AsyncRequest.interceptors.request.use(
+//   config => {
+//     toggleLoader(true);
+//     return config;
+//   },
+//   error => Promise.reject(error)
+// );
+// AsyncRequest.interceptors.response.use(
+//   config => {
+//     toggleLoader(false);
+//     return config;
+//   },
+//   error => {
+//     toggleLoader(false);
+//     return Promise.reject(error);
+//   }
+// );
 
 export const makeAsyncRequest = (method, url, data) => {
   const options = {
