@@ -8,9 +8,9 @@ import DropDown from "../reusable/dropdown";
 const Wrapper = styled.div`
   width: 80%;
   background: #f7f7f7;
-  margin-bottom: 400px;
+  margin-bottom: 40px;
   @media only screen and (max-width: 1440px) {
-    width: 75%;
+    flex: 1;
   }
 `;
 const Container = styled.div`
@@ -28,7 +28,7 @@ const InnerContainer = styled.div`
   align-items: flex-start;
 `;
 const SearchContainer = styled.div`
-  width: 90%;
+  width: 80%;
   height: 70px;
   @media only screen and (max-width: 1440px) {
     height: 60px;
@@ -37,15 +37,13 @@ const SearchContainer = styled.div`
 `;
 const DataContainer = styled.div`
   background: #fff;
-  height: 100%;
 `;
 const ResultDetails = styled.div`
   font-family: "Karla", sans-serif;
   font-size: 16px;
   color: #666666;
   width: 100%;
-  padding: 40px 0px;
-  margin-bottom: 20px;
+  padding: 24px 0px;
   border-bottom: 1px solid #ddd;
   > span {
     margin-left: 42px;

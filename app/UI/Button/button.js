@@ -10,7 +10,7 @@ export default styled.button`
   font-weight: 600;
   line-height: 1.5;
   display: inline-block;
-  padding: 0.625rem 1.55rem;
+  padding: 0.525rem 1.55rem;
   text-align: center;
   vertical-align: middle;
   white-space: nowrap;

@@ -76,7 +76,7 @@ const Tagline = styled.p`
 `;
 const SearchContainer = styled.div`
   position: relative;
-  z-index: 10;
+  z-index: 100;
   /* height: 90px; */
   margin-bottom: 30px;
   height: 90px;
@@ -89,37 +89,35 @@ const SearchContainer = styled.div`
     margin-bottom: 20px;
   }
 `;
-// const Down = styled.button`
-//   cursor: pointer;
-//   background: ${props => props.theme.white};
-//   margin: 0 auto;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   color: ${props => props.theme.primary};
-//   height: 72px;
-//   width: 72px;
-//   padding: 0px;
-//   border: 1px solid #e2e2e2;
-//   border-radius: 50%;
-//   margin-bottom: 160px;
-//   outline: none;
-//   @media only screen and (max-width: 992px) {
-//     display: none;
-//   }
-// `;
 
 const Illustrator = styled.div`
   position: absolute;
   top: -52px;
   right: -15px;
   width: 61%;
+  height: 533px;
+  background: url("../../static/images/maybe.png");
+
+  direction: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-size: cover;
   @media only screen and (max-width: ${props => props.theme.bpxlg}) {
-    top: -31px;
+    top: -68px;
   }
-  > img {
+  > div {
+    position: relative;
+
     width: 100%;
     height: 100%;
+    > img {
+      position: absolute;
+      width: 51%;
+      height: auto;
+      top: 171px;
+      right: 139px;
+    }
   }
 `;
 
@@ -155,10 +153,11 @@ class Home extends Component {
     }
   };
   render() {
+    const { category } = this.state;
     return (
       <PageWrapper>
         <Wrapper>
-          <CategoryTag>{"test"}|</CategoryTag>
+          <CategoryTag>{category}|</CategoryTag>
           <MainCaption>
             The best prices Online/Offline to shop locally
           </MainCaption>
@@ -167,7 +166,9 @@ class Home extends Component {
             <Search />
           </SearchContainer>
           <Illustrator>
-            <img src={"../../static/images/maybe.png"}></img>
+            <div>
+              <img src={"../../static/images/home1.svg"}></img>
+            </div>
           </Illustrator>
           <Stores />
 

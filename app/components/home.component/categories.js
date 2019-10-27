@@ -47,7 +47,7 @@ const Container = styled.ul`
     flex-flow: column;
 
     &:hover {
-      color: #ff632a;
+      color: ${props => props.theme.primary};
     }
     @media only screen and (max-width: 992px) {
       width: 24%;

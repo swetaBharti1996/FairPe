@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import { Button } from "../../UI";
 
 import ProductCard from "../reusable/productCard";
 
@@ -7,16 +8,17 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   background: white;
-  padding-left: 4%;
+  padding: 16px 0;
 `;
 const Wrapper = styled.div`
   /* width: 70%; */
   height: 100%;
   flex: 3.5;
   background: #eee;
-  margin-top: 20px;
-  @media only screen and (max-width: 1440px){
-    flex: 2.5;
+  /* margin-top: 20px; */
+  @media only screen and (max-width: 1440px) {
+    margin-left: 24px;
+    flex: 1;
   }
 `;
 const BoldText = styled.b`
@@ -26,23 +28,25 @@ const BoldText = styled.b`
 
 const Location = styled.div`
   display: flex;
-  /* margin-left: 2%; */
-  >img{
+  padding: 8px 0;
+  align-items: center;
+  > img {
     margin-top: -5px;
     width: auto;
     height: 25px;
     width: auto;
   }
 `;
-const Address = styled.div`
-  margin-left: 10px;
-  color: #666666;
+const Address = styled.p`
+  margin-left: 8px;
+  color: ${props => props.theme.default};
   line-height: 19px;
   font-size: 16px;
   align-items: left;
+  letter-spacing: -0.2px;
 `;
-const AddText = styled.div`
-  color: #ff632a;
+const AddText = styled.span`
+  color: ${props => props.theme.primary};
   line-height: 19px;
   font-size: 16px;
   align-items: left;
@@ -51,26 +55,29 @@ const AddText = styled.div`
 
 const Store = styled.div`
   width: 100%;
-  margin-top: 40px;
+  margin-top: 24px;
+
+  min-height: 237px;
   /* margin-left: 2%; */
 `;
 const TitleContainer = styled.div`
   display: flex;
 `;
-const Title = styled.div`
+const Title = styled.p`
   font-size: 24px;
   align-content: left;
   line-height: 36px;
   font-weight: bold;
+  letter-spacing: -0.5px;
+
+  color: ${props => props.theme.default};
 `;
 
 const TableHeader = styled.div`
-  border-bottom: 1px solid #333333;
-  border-top: 1px solid #333333;
-  padding-top: 11px;
-  padding-bottom: 11px;
+  border-bottom: 1px solid #999;
+  border-top: 1px solid #999;
+  padding: 8px 0;
   display: flex;
-  margin-top: 1%;
 `;
 
 const H_Store = styled.div`
@@ -108,9 +115,12 @@ const H_Pickup = styled.div`
 const Description = styled.a`
   text-decoration: none;
   display: flex;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  border-top: 1px solid #eee;
+  margin-bottom: 8px;
+  align-items: center;
+  min-height: 50px;
+  &:last-child {
+    margin-bottom: 0;
+  }
 `;
 const Offline_Description = styled.div`
   display: flex;
@@ -121,13 +131,16 @@ const Offline_Description = styled.div`
 const Desc = styled.div`
   display: flex;
   flex-direction: column;
+  border-bottom: 1px solid #999;
+  padding: 8px 0;
 `;
 const D_Store = styled.div`
   flex: 1;
   width: 80px;
   > img {
     display: block;
-    width: 50%;
+    padding: 8px;
+    border: 1px solid #b2b2b2;
   }
 `;
 
@@ -144,15 +157,16 @@ const Offline_D_Store = styled.div`
   display: flex;
   flex-direction: column;
 `;
-const D_Name = styled.div`
+const D_Name = styled.h1`
   flex: 2;
   font-size: 16px;
   line-height: 24px;
   font-weight: bold;
   padding: 0 25px;
-  :hover{
-    color: #ff632a;
-    cursor: pointer;
+  letter-spacing: -0.2px;
+  cursor: pointer;
+  :hover {
+    color: ${props => props.theme.primary};
   }
 `;
 const H_D_Name = styled.div`
@@ -213,11 +227,9 @@ const Off_dir = styled.div`
 
 const Allresult = styled.div`
   display: flex;
-  margin-top: 2%;
   justify-content: center;
   font-size: 16px;
   align-content: left;
-  line-height: 19px;
   color: #666666;
 `;
 const CardContainer = styled.div`
@@ -239,23 +251,24 @@ const CardContHead = styled.div`
 const PriceRefreshContainer = styled.div`
   display: flex;
   margin-left: auto;
-  padding-right: 20px;
-  align-items:center;
+  align-items: center;
 `;
 
-const PriceUpdate = styled.div`
+const PriceUpdate = styled.p`
   color: #999999;
   font-size: 14px;
   line-height: 17px;
   font-weight: bold;
+  letter-spacing: -0.2px;
 `;
 
-const Refresh = styled.div`
-  color: #ff632a;
+const Refresh = styled.p`
+  color: ${props => props.theme.primary};
   font-size: 16px;
   line-height: 19px;
   font-weight: bold;
-  margin-left: 10px;
+  margin-left: 8px;
+  letter-spacing: -0.2px;
 `;
 class StoreContainer extends Component {
   state = {};
@@ -282,53 +295,49 @@ class StoreContainer extends Component {
 
             <TableHeader>
               <H_Store>Store</H_Store>
-              <H_Name>Iten name/code</H_Name>
+              <H_Name>Item name/code</H_Name>
               <H_Price>MRP</H_Price>
               <H_Discount>Price</H_Discount>
               <H_Pickup>Pick-up</H_Pickup>
             </TableHeader>
             <Desc>
-              {
-                Object.keys(OnlineSites).map((key,index) => (
-                  <Description key={index} href={OnlineSites[key].productUrl} target="_blank">
-                    <D_Store>
-                      <img src="../../static/images/amazon.png" />
-                    </D_Store>
-                    <D_Name>
-                      {this.props.product.title}
-                    </D_Name>
-                    <D_Price>Rs. {OnlineSites[key].mrp}</D_Price>
-                    <D_Discount>Rs. {OnlineSites[key].price}</D_Discount>
-                    <D_Pickup>Online</D_Pickup>
-                  </Description>
-                ))
-              }
-              {
-                Object.keys(OfflineSites).map(key => (
-                  <Offline_Description>
-                    <Offline_D_Store>
-                      <img src="../../static/images/crossword.png" />
-                      <Off_distance>
-                        <BoldText>5.2 km</BoldText>
-                        away
-                  </Off_distance>
-                      <Off_dir>Show direction</Off_dir>
-                    </Offline_D_Store>
-                    <D_Name>
-                      {this.props.product.title}
-                    </D_Name>
-                    <D_Price>Rs. {OfflineSites[key].mrp}</D_Price>
-                    <D_Discount>Rs. {OfflineSites[key].price}</D_Discount>
-                    <Off_Pickup>Offline</Off_Pickup>
-                  </Offline_Description>
-                )
-                )}
+              {Object.keys(OnlineSites).map((key, index) => (
+                <Description
+                  key={index}
+                  href={OnlineSites[key].productUrl}
+                  target="_blank"
+                >
+                  <D_Store>
+                    <img src="../../static/images/amazon.png" />
+                  </D_Store>
+                  <D_Name>{this.props.product.title}</D_Name>
+                  <D_Price>Rs. {OnlineSites[key].mrp}</D_Price>
+                  <D_Discount>Rs. {OnlineSites[key].price}</D_Discount>
+                  <D_Pickup>
+                    <Button>Buy Now</Button>
+                  </D_Pickup>
+                </Description>
+              ))}
+              {Object.keys(OfflineSites).map(key => (
+                <Offline_Description>
+                  <Offline_D_Store>
+                    <img src="../../static/images/crossword.png" />
+                    <Off_distance>
+                      <BoldText>5.2 km</BoldText>
+                      away
+                    </Off_distance>
+                    <Off_dir>Show direction</Off_dir>
+                  </Offline_D_Store>
+                  <D_Name>{this.props.product.title}</D_Name>
+                  <D_Price>Rs. {OfflineSites[key].mrp}</D_Price>
+                  <D_Discount>Rs. {OfflineSites[key].price}</D_Discount>
+                  <Off_Pickup>Offline</Off_Pickup>
+                </Offline_Description>
+              ))}
             </Desc>
           </Store>
 
-          <Allresult>
-            <BoldText>All </BoldText> results listed
-          </Allresult>
+          <Allresult>--- All results listed ---</Allresult>
           {/* <CardContainer>
             <CardContHead>Related Products</CardContHead>
             <CardSection>

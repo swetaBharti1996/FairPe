@@ -42,19 +42,19 @@ const SearchBar = styled.input`
   }
   @media only screen and (max-width: 1440px) {
     /* margin: 15px 0px; */
-    padding: 22px 0px;
+    padding: 18px 0px;
     font-size: 16px;
     /* width: 16px;     */
   }
   @media only screen and (max-width: 992px) {
     /* margin: 0px 30px; */
-    padding: 20px 0px;
+    padding: 18px 0px;
     width: 80%;
     margin-left: 8% !important;
   }
 `;
 const SearchButton = styled.button`
-  background-image: linear-gradient(127deg, #ff632a, #e20000);
+  /* background-image: linear-gradient(127deg, #ff632a, #e20000); */
   width: 11%;
   border: none;
   border-radius: 0px 49px 49px 0px;
@@ -63,6 +63,9 @@ const SearchButton = styled.button`
   justify-content: center;
   outline: none;
   cursor: pointer;
+
+  background: ${props =>
+    `linear-gradient(127deg, ${props.theme.primary}, ${props.theme.secondary})`};
   > img {
     width: 50%;
   }

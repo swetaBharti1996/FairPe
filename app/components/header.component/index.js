@@ -47,6 +47,11 @@ const List = styled.a`
   cursor: pointer;
   padding: 6px;
   letter-spacing: -0.2px;
+  transition-duration: 300ms;
+
+  &:hover {
+    color: ${props => props.theme.primary};
+  }
   @media only screen and (max-width: ${props => props.theme.bpxlg}) {
     font-size: 16px;
   }
@@ -58,6 +63,7 @@ const Nav = styled.ul`
 
   > li {
     margin-right: 16px;
+
     &:last-child {
       margin-right: 0;
     }

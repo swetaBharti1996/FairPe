@@ -6,7 +6,7 @@ import { authModal } from "../../../actions/syncAction";
 import { wishlist } from "../../../actions/asyncAction";
 
 const Wrapper = styled.a`
-  margin-bottom: 70px;
+  margin-bottom: 24px;
   text-decoration: none;
   display: flex;
   justify-content: center;
@@ -35,10 +35,10 @@ const ImageContainer = styled.div`
 `;
 
 const BodyContainer = styled.div`
-  height: 110px;
+  height: 42px;
 `;
 const Title = styled.h2`
-  font-size: 18px;
+  font-size: 17px;
   text-align: left;
   width: 100%;
   margin-top: 17px;
@@ -84,9 +84,9 @@ const Box = styled.div`
 
   border-bottom: 1px solid #cecece;
   border-top: 1px solid #cecece;
-  margin-top: 11px;
+  margin-top: 8px;
   @media only screen and (max-width: 1440px) {
-    padding: 14px 0;
+    padding: 6px 0;
   }
 `;
 
@@ -150,8 +150,8 @@ class ProductCard extends Component {
     }
   }
   handleTitle = title => {
-    if (title.length > 50) {
-      title = title.slice(0, 50) + "...";
+    if (title.length > 30) {
+      title = title.slice(0, 30) + "...";
     }
     return title;
   };
@@ -192,15 +192,15 @@ class ProductCard extends Component {
               {this.handleTitle(product.title)}
             </Title>
 
-            <Author>
+            {/* <Author>
               By <b>{product.site_name}</b>
-            </Author>
+            </Author> */}
           </BodyContainer>
 
           <Box>
             <PriceContainer>
               <p>Price starts at</p>
-              <b>Rs. {product.mprice}</b>
+              <b>Rs {product.mprice}</b>
             </PriceContainer>
             <Wishlist onClick={this.handleWishlist}>
               {this.state.liked ? (

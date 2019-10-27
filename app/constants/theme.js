@@ -1,7 +1,7 @@
 export default {
-  default: "#303030",
-  primary: "#FF632A",
-  secondary: "#E20000",
+  default: "#404041",
+  primary: "#6376f1",
+  secondary: "#c079f7",
   shadowColor: "#ddd",
   white: "#ffffff",
   black: "#000000",

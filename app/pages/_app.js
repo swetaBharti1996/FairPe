@@ -19,17 +19,17 @@ Router.events.on("routeChangeStart", url => {
 Router.events.on("routeChangeComplete", () => NProgress.done());
 Router.events.on("routeChangeError", () => NProgress.done());
 
-const getWishlist = async c => {
-  const resp = await makeRequest(
-    "get",
-    `${AppConstant.default.baseURL}/api/wishlist`,
-    null,
-    {
-      Authorization: c.authtoken.replace("authtoken=", "")
-    }
-  );
-  return resp;
-};
+// const getWishlist = async c => {
+//   const resp = await makeRequest(
+//     "get",
+//     `${AppConstant.default.baseURL}/api/wishlist`,
+//     null,
+//     {
+//       Authorization: c.authtoken.replace("authtoken=", "")
+//     }
+//   );
+//   return resp;
+// };
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
     const c = cookies(ctx);

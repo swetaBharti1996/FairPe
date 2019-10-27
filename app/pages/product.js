@@ -5,17 +5,20 @@ import { gotProductDetail, gotProductSeo } from "../actions/syncAction";
 import Product from "../containers/product.container";
 
 const fetchProductDetail = id => {
-  return makeRequest("get", `${AppConstants.default.baseURL}/api/product/${id}`);
+  return makeRequest(
+    "get",
+    `${AppConstants.default.baseURL}/api/fairpe/product/${id}`
+  );
 };
 class Index extends React.Component {
   static async getInitialProps(props) {
     const { store, query, req } = props;
     const { id } = query;
 
-    await axios
-      .post(`${AppConstants.default.baseURL}/api/seo/productpage`, { pid: id })
-      .then(resp => store.dispatch(gotProductSeo(resp.data)))
-      .catch(err => console.log(err));
+    // await axios
+    //   .post(`${AppConstants.default.baseURL}/api/seo/productpage`, { pid: id })
+    //   .then(resp => store.dispatch(gotProductSeo(resp.data)))
+    //   .catch(err => console.log(err));
 
     return new Promise((resolve, reject) => {
       fetchProductDetail(id)

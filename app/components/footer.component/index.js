@@ -5,8 +5,8 @@ import Content from "./content";
 const Wrapper = styled.div`
   margin: 0 auto;
   background: #f8f8f8;
-  border-top: 1px solid #ff632a;
-  border-bottom: 1px solid #ff632a;
+  border-top: 1px solid ${props => props.theme.primary};
+  border-bottom: 1px solid ${props => props.theme.primary};
   position: relative;
   margin-top: 260px;
 `;
@@ -71,7 +71,7 @@ const MailInput = styled.input`
 const MailButton = styled.div`
   cursor: pointer;
   width: 40%;
-  background: #220a3e;
+  background: ${props => props.theme.primary};
   font-size: 16px;
   text-align: center;
   color: white;
@@ -201,7 +201,7 @@ class Footer extends Component {
               <InnerBox>
                 <ImageBox>
                   <div>
-                    <img src="../../static/images/deliver.svg" />
+                    <img src="../../static/images/delivery.svg" />
                   </div>
                 </ImageBox>
                 <LabelBox>

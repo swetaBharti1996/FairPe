@@ -60,7 +60,7 @@ const Detail = styled.ul`
     margin-bottom: 16px;
     > b {
       font-size: 22px;
-      color: ${props => props.theme.primary};
+      /* color: ${props => props.theme.primary}; */
     }
 
     > p {

@@ -16,7 +16,7 @@ const FilterSection = styled.div`
   width: 20%;
   height: 100%;
   @media only screen and (max-width: 1440px) {
-    width: 25%;
+    width: 21%;
   }
 `;
 const Container = styled.div`
@@ -33,13 +33,14 @@ const SearchByCategories = styled.div`
   margin-bottom: 20px;
   > div {
     display: flex;
-    width: 75%;
+    width: 70%;
     margin: auto;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     > p {
       color: #000000;
-      font-size: 16px;
+      font-size: 18px;
       font-family: "Karla", sans-serif;
       /* margin-right: 90px; */
     }
@@ -79,7 +80,7 @@ class Search extends Component {
         <FilterSection>
           <SearchByCategories>
             <div>
-              <p>Search by all categories</p>
+              <p>All categories</p>
               {this.state.showCat ? (
                 <img
                   src="../../static/images/Category_Menu_D@2x.png"
