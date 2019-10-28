@@ -76,18 +76,14 @@ const Binding = styled.p`
 `;
 
 const Box = styled.div`
-  padding: 21px 0;
   display: flex;
   flex-flow: row;
   justify-content: space-between;
   align-items: flex-start;
-
   border-bottom: 1px solid #cecece;
   border-top: 1px solid #cecece;
   margin-top: 8px;
-  @media only screen and (max-width: 1440px) {
-    padding: 6px 0;
-  }
+  padding: 6px 0;
 `;
 
 const PriceContainer = styled.div`

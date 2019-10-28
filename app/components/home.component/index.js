@@ -92,12 +92,11 @@ const SearchContainer = styled.div`
 
 const Illustrator = styled.div`
   position: absolute;
-  top: -52px;
+  top: -61px;
   right: -15px;
   width: 61%;
-  height: 533px;
+  height: 610px;
   background: url("../../static/images/maybe.png");
-
   direction: flex;
   justify-content: center;
   align-items: center;
@@ -105,6 +104,7 @@ const Illustrator = styled.div`
   background-size: cover;
   @media only screen and (max-width: ${props => props.theme.bpxlg}) {
     top: -68px;
+    height: 533px;
   }
   > div {
     position: relative;

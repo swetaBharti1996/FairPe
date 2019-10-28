@@ -32,7 +32,9 @@ const StoreContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   > img {
-    height: 45px;
+    height: auto;
+    width: 53px;
+    margin-right: 8px;
   }
   > p {
     color: #666666;
