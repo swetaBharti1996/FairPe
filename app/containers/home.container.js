@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { withRouter } from "next/router";
 import Home from "../components/home.component";
-import {} from "../actions/asyncAction";
+import {filterResults} from "../actions/asyncAction";
 import {} from "../actions/syncAction";
 
 class HomeContainer extends React.Component {
@@ -15,7 +15,9 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    filterResults:(query) =>dispatch(filterResults(query))
+  };
 };
 
 export default connect(

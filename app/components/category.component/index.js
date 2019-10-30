@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import ProductCard from "../reusable/productCard"
 import { PageWrapper } from "../../UI";
 import _ from "lodash";
 
@@ -172,6 +173,28 @@ const ListCategory = styled.div`
   }
 `;
 
+const ProductListing = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  padding: 0 24px;
+
+  /* display: grid;
+  grid-template-columns: repeat(auto-fit, 350px);
+  padding: 80px 0;
+  padding-left: 30px;
+  @media only screen and (max-width: 1440px) {
+    grid-template-columns: repeat(auto-fit, 290px);
+    padding-left: 50px;
+  } */
+  /* margin-bottom: 50px; */
+`;
+
+const ProductContainer = styled.div`
+  width: 100%;
+  margin: 16px 0;
+`;
+
 const BrandContainer = styled.div`
   margin-top: 24px;
   margin-bottom: 30px;
@@ -219,7 +242,14 @@ class Category extends Component {
       }
     ]
   };
+
+
+
+ 
+
   render() {
+    const {filters, products} = this.props;
+    console.log("filters======",products)
     return (
       <Wrapper>
         <PageWrapper>
@@ -242,7 +272,14 @@ class Category extends Component {
               <h3>Explore Your favourite Fashion Stores</h3>
 
               <Stores>
-                <li>
+              <ProductContainer>
+                <ProductListing>
+                  {_.map(products.products, (product, id) => (
+                    <ProductCard key={id} product={product} />
+                  ))}
+                </ProductListing>
+              </ProductContainer>
+                {/* <li>
                   <div>
                     <img src={"../../static/images/image1.png"}></img>
                   </div>
@@ -267,7 +304,7 @@ class Category extends Component {
                     <img src={"../../static/images/image4.png"}></img>
                   </div>
                   <span>Bata</span>
-                </li>
+                </li> */}
                 {/* <li>
                   <div>
                     <img src={"../../static/images/image5.png"}></img>

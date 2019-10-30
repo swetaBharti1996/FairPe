@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import queryString from "query-string";
 import { Link } from "../../../server/routes";
 import _ from "lodash";
 
@@ -91,6 +92,18 @@ class Categories extends Component {
       "more"
     ]
   };
+
+  onSearchclick = (category) => {
+    console.log("clicked here")
+    const newQuery = {
+      term: category,
+      page: 1
+    };
+    const query = queryString.stringify(newQuery);
+    console.log(query)
+    this.props.filterResults(query);
+    // this.props.dispatch(filterResults(query));
+  }
   render() {
     const { categorys } = this.state;
     return (
@@ -100,8 +113,8 @@ class Categories extends Component {
         <Container>
           {_.map(categorys, (category, index) => (
             <li key={index}>
-              <Link route={"category"} params={{ slug: category }}>
-                <a>
+              <Link route={"category"} params={{ slug: category }} >
+                <a onClick={()=>this.onSearchclick(category)}>
                   <CatImage src={`../../static/images/${category}.png`} />
                   <CatTitle>{category}</CatTitle>
                 </a>

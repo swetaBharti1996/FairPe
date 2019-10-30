@@ -11,10 +11,13 @@ export const searchSuggestion = term => dispatch =>
     .catch(err => {
       console.log(err);
     });
-export const filterResults = (query, page = 1) => dispatch =>
-  makeAsyncRequest("post", `/_search?${query}`).then(resp =>
+export const filterResults = (query, page = 1) => dispatch =>{
+  
+  makeAsyncRequest("post", `/_search?${query}`).then(resp =>{
+    console.log("recieved",resp.data)
     dispatch(syncActions.gotProducts(resp.data, query, page))
-  );
+  });
+}
 export const productDetail = id => dispatch =>
   makeRequest("get", `${AppConstants.default.baseURL}/api/product/${id}`).then(
     resp => dispatch(syncActions.gotProductDetail(resp.data))

@@ -1,7 +1,8 @@
 import { connect } from "react-redux";
 import { withRouter } from "next/router";
 import Category from "../components/category.component";
-import {} from "../actions/asyncAction";
+import queryString from "query-string";
+import {filterResults} from "../actions/asyncAction";
 import {} from "../actions/syncAction";
 
 class CategoryContainer extends React.Component {
@@ -11,11 +12,16 @@ class CategoryContainer extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    filters: state.filters,
+    products: state.products
+  };
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    
+  };
 };
 
 export default connect(
