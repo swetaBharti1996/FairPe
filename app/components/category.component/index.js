@@ -124,7 +124,7 @@ const Stores = styled.ul`
     }
     > div {
       opacity: 1;
-      height: 250px;
+      height: auto;
       > img {
         /* box-shadow: 0px 3px 6px #00000029; */
         border-radius: 10px;
@@ -145,7 +145,7 @@ const Stores = styled.ul`
 `;
 
 const ListCategory = styled.div`
-  margin-top: 35px;
+  margin-top: 44px;
 
   > ul {
     > li {
@@ -158,7 +158,7 @@ const ListCategory = styled.div`
 
       > ul {
         > li {
-          margin-top: 20px;
+          margin-top: 12px;
           color: #1d1d1d;
           font-size: 16px;
           text-transform: capitalize;
@@ -268,7 +268,7 @@ class Category extends Component {
                   </div>
                   <span>Bata</span>
                 </li>
-                <li>
+                {/* <li>
                   <div>
                     <img src={"../../static/images/image5.png"}></img>
                   </div>
@@ -280,7 +280,7 @@ class Category extends Component {
                     <img src={"../../static/images/image6.png"}></img>
                   </div>
                   <span>Brand Factory</span>
-                </li>
+                </li> */}
               </Stores>
             </LeftBody>
             <RightBody>
@@ -304,7 +304,7 @@ class Category extends Component {
             </RightBody>
           </Body>
 
-          <BrandContainer>
+          {/* <BrandContainer>
             <h3>Explore Your favourite Brands</h3>
             <ul>
               <li>
@@ -348,7 +348,7 @@ class Category extends Component {
                 </div>
               </li>
             </ul>
-          </BrandContainer>
+          </BrandContainer> */}
         </PageWrapper>
       </Wrapper>
     );

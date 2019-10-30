@@ -53,7 +53,7 @@ const Column = styled.div`
     margin-bottom: 10px;
     cursor: pointer;
     &:hover {
-      color: #ff632a;
+      color: ${props => props.theme.primary};
     }
   }
 `;

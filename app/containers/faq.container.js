@@ -1,8 +1,7 @@
 import { connect } from "react-redux";
 import { withRouter } from "next/router";
 import FAQ from "../components/faq.component";
-import {} from "../actions/asyncAction";
-import {} from "../actions/syncAction";
+import { question } from "../actions/asyncAction";
 
 class FaqContainer extends React.Component {
   render() {
@@ -11,12 +10,12 @@ class FaqContainer extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return {
-  };
+  return {};
 };
 
 const mapDispatchToProps = dispatch => {
   return {
+    question: data => dispatch(question(data))
   };
 };
 

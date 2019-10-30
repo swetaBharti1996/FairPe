@@ -3,7 +3,9 @@ import styled from "styled-components";
 import Form from "./form";
 import { PageWrapper } from "../../UI";
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  margin-top: 100px;
+`;
 const Header = styled.div`
   height: 10vh;
   padding: 80px 15%;
@@ -126,13 +128,14 @@ class Faq extends Component {
     else this.setState({ selected: key });
   };
   render() {
+    const { question } = this.props;
     return (
       <Wrapper>
         <Header>
           <SubHeader>All your concerns are taken care</SubHeader>
           <Title>FAQ</Title>
         </Header>
-        <PageWrapper>
+        <PageWrapper style={{ position: "static" }}>
           <Container>
             <FaqContainer>
               {faqData.map((item, key) => (
@@ -153,7 +156,7 @@ class Faq extends Component {
               ))}
             </FaqContainer>
             <FormContainer>
-              <Form />
+              <Form question={question} />
             </FormContainer>
           </Container>
         </PageWrapper>

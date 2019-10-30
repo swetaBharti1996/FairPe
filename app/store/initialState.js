@@ -6,5 +6,6 @@ export default {
   modal: {},
   search: {},
   productDetail: {},
-  wishlist: {}
+  wishlist: {},
+  notification: {}
 };

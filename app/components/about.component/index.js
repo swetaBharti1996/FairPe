@@ -2,10 +2,6 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { PageWrapper } from "../../UI";
 
-const Wrapper = styled.div`
-  min-height: 500px;
-`;
-
 const Show = styled.h1`
   font-size: 33px;
   margin-top: 30px;
@@ -43,8 +39,8 @@ const Box = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  align-items: center;
   &:first-child {
-    justify-content: flex-end;
     padding-bottom: 80px;
   }
   &:last-child {
@@ -74,7 +70,7 @@ const ImageContainer = styled.div`
   > img {
     width: 100%;
     height: 100%;
-    box-shadow: 0px 3px 6px #00000029;
+
     border-radius: 10px;
   }
 `;
@@ -82,14 +78,14 @@ const ImageContainer = styled.div`
 const OverlayImage = styled.div`
   width: 50%;
   height: 384px;
-  opacity: 1;
+  /* opacity: 1;
   position: absolute;
   top: -99px;
-  left: 0;
+  left: 0; */
   > img {
     width: 100%;
     height: 100%;
-    box-shadow: 0px 3px 6px #00000029;
+
     border-radius: 10px;
   }
 `;
@@ -98,53 +94,43 @@ class About extends Component {
   state = {};
   render() {
     return (
-      <Wrapper>
-        <Header>
-          <h2>Why Fairpe ?</h2>
-        </Header>
-        <PageWrapper>
-          <Body>
-            <Box>
-              <OverlayImage>
-                <img src={"../../static/images/about1.jpg"}></img>
-              </OverlayImage>
-              <TextContainer>
-                <b>Changing Your Shopping Experience</b>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam
-                  hendrerit nisi sed sollicitudin pellentesque. Nunc posuere
-                  purus rhoncus pulvinar aliquam. Ut aliquet tristique nisl
-                  vitae volutpat. Nulla aliquet porttitor venenatis. Donec a dui
-                  et dui fringilla consectetur id nec massa. Aliquam erat
-                  volutpat. Sed ut dui ut lacus dictum fermentum vel tincidunt
-                  neque. Sed sed lacinia lectus. Duis sit amet sodales felis.
-                  Duis nunc eros, mattis at dui ac, convallis semper risus. In
-                  adipiscing ultrices tellus, in suscipit massa vehicula eu.”
-                </p>
-              </TextContainer>
-            </Box>
-            <Box>
-              <TextContainer>
-                <b>What We do and why we do it?</b>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam
-                  hendrerit nisi sed sollicitudin pellentesque. Nunc posuere
-                  purus rhoncus pulvinar aliquam. Ut aliquet tristique nisl
-                  vitae volutpat. Nulla aliquet porttitor venenatis. Donec a dui
-                  et dui fringilla consectetur id nec massa. Aliquam erat
-                  volutpat. Sed ut dui ut lacus dictum fermentum vel tincidunt
-                  neque. Sed sed lacinia lectus. Duis sit amet sodales felis.
-                  Duis nunc eros, mattis at dui ac, convallis semper risus. In
-                  adipiscing ultrices tellus, in suscipit massa vehicula eu.”
-                </p>
-              </TextContainer>
-              <ImageContainer>
-                <img src={"../../static/images/about2.jpg"}></img>
-              </ImageContainer>
-            </Box>
-          </Body>
-        </PageWrapper>
-      </Wrapper>
+      <PageWrapper>
+        <Body>
+          <Box>
+            <OverlayImage>
+              <img src={"../../static/images/about1.svg"}></img>
+            </OverlayImage>
+            <TextContainer>
+              <b>What is Fairpe ?</b>
+              <p>
+                We believe the customer should always win! Fairpe is a product
+                search engine where you can find details of the products
+                available both online and offline. Along with the required
+                details we provide you real time price comparison across more
+                than 300 online stores and nearby offline stores. This gives our
+                users more flexibility and options to make the right shopping
+                decisions.
+              </p>
+            </TextContainer>
+          </Box>
+          <Box>
+            <TextContainer>
+              <b>How fairpe works?</b>
+              <p>
+                Search the product you want to buy. Just like you search on
+                Amazon or Flipkart. Check out the details of the product, along
+                with the price on the online marketplaces and the nearby stores.
+                With the help of latest tools and technologies and our in
+                process patent algorithms we are able to analyse the products
+                and prices all places and give you the right insights.
+              </p>
+            </TextContainer>
+            <ImageContainer>
+              <img src={"../../static/images/about2.svg"}></img>
+            </ImageContainer>
+          </Box>
+        </Body>
+      </PageWrapper>
     );
   }
 }

@@ -43,7 +43,7 @@ const Cross = styled.div`
   width: 95%;
   > span {
     font-size: 16px;
-    color: #ff632a;
+    color: ${props => props.theme.primary};
     padding: 12px 16px;
     background: #eeeeee;
     border-radius: 50%;
@@ -56,26 +56,24 @@ const Cross = styled.div`
 `;
 const Logo = styled.div`
   width: 120px;
-  margin-bottom: 40px;
-  @media only screen and (max-width: 1440px) {
-    margin-bottom: 20px;
-    > img {
-      width: 80%;
-      display: block;
-      margin: auto;
-    }
+  margin-bottom: 20px;
+  > img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: auto;
   }
 `;
 const Footer = styled.div`
   width: 100%;
-  border-top: 1px solid #ff632a;
+  border-top: 1px solid ${props => props.theme.primary};
   > p {
     font-size: 16px;
     color: #707070;
     text-align: center;
     margin-bottom: 20px;
     > span {
-      color: #ff632a;
+      color: ${props => props.theme.primary};
       font-size: 18px;
       font-weight: bolder;
       cursor: pointer;
@@ -90,7 +88,10 @@ const Button = styled.button`
   margin: auto;
   margin-top: -30px;
   border: none;
-  background: linear-gradient(111deg, #ff632a, #e20000);
+  background: ${props =>
+    props.active
+      ? `linear-gradient(111deg, ${props.theme.primary}, ${props.theme.secondary})`
+      : "#fff"};
   border-radius: 30px;
   padding: 20px;
   width: 150px;
@@ -100,6 +101,8 @@ const Button = styled.button`
   font-size: 18px;
   font-weight: bolder;
   margin-bottom: 30px;
+  outline: none;
+  cursor: pointer;
   @media only screen and (max-width: 1440px) {
     padding: 15px;
     font-size: 16px;
@@ -171,17 +174,17 @@ class AuthModal extends Component {
             />
           )}
           <Footer>
-            <Button onClick={() => this.buttonHandler()}>
+            <Button active onClick={() => this.buttonHandler()}>
               {this.state.mode == MODE.LOGIN ? "Login" : "Sign up"}
             </Button>
             {this.state.mode == MODE.LOGIN ? (
               <p>
-                Not a member yet?{" "}
+                Not a member yet?
                 <span onClick={() => this.changeMode()}>Sign up</span>
               </p>
             ) : (
               <p>
-                Already a member?{" "}
+                Already a member?
                 <span onClick={() => this.changeMode()}>Login</span>
               </p>
             )}

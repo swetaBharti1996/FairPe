@@ -4,12 +4,8 @@ import styled from "styled-components";
 const Wrapper = styled.div`
   display: flex;
   background: transparent
-    linear-gradient(
-      141deg,
-      rgba(255, 99, 42, 0.95) 0%,
-      rgba(226, 0, 0, 0.95) 100%
-    )
-    0% 0% no-repeat padding-box;
+    linear-gradient(141deg, rgb(113, 119, 242) 0%, rgb(218, 180, 74) 100%) 0% 0%
+    no-repeat padding-box;
   width: 100%;
   min-height: 80vh;
   border-radius: 10px;
@@ -58,7 +54,7 @@ const Input = styled.input`
 const Button = styled.button`
   font-weight: bolder;
   font-size: 18px;
-  color: #ff632a;
+  color: ${props => props.theme.primary};
   background: #fff;
   border: none;
   border-radius: 24px;
@@ -74,7 +70,27 @@ const Button = styled.button`
 `;
 
 class Form extends Component {
+  state = {
+    name: "",
+    email: "",
+    address: ""
+  };
+
+  _handleInput = event =>
+    this.setState({ [event.target.name]: event.target.value });
+
+  _onSubmit = () => {
+    this.props
+      .partner(this.state)
+      .then(resp => {
+        console.log("Message Sent");
+        this.setState({ name: "", email: "", address: "" });
+      })
+      .catch(err => console.error(err));
+  };
+
   render() {
+    const { name, email, address } = this.state;
     return (
       <Wrapper>
         <Container>
@@ -87,13 +103,28 @@ class Form extends Component {
             consumers. Also, you can beat your competition to become the best
             store in your area.
           </Content>
-          <Input type="text" placeholder="Your full name*" />
-          <Input type="text" placeholder="Email / Mobile Number" />
           <Input
+            name="name"
+            type="text"
+            placeholder="Your full name*"
+            value={name}
+            onChange={this._handleInput}
+          />
+          <Input
+            name="email"
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={this._handleInput}
+          />
+          <Input
+            name="address"
             type="text"
             placeholder="Location URL / Address of the shop*"
+            value={address}
+            onChange={this._handleInput}
           />
-          <Button>Register shop</Button>
+          <Button onClick={this._onSubmit}>Register shop</Button>
         </Container>
       </Wrapper>
     );

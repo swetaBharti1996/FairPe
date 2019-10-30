@@ -11,6 +11,10 @@ import { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
 import { makeRequest } from "../constants/request";
 import { gotUserDetails, fetchWishlist } from "../actions/syncAction";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+
+library.add(faSearch);
 
 NProgress.configure({ showSpinner: false });
 Router.events.on("routeChangeStart", url => {

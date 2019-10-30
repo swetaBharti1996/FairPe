@@ -3,14 +3,16 @@ import styled from "styled-components";
 import _ from "lodash";
 import StarRate from "react-star-rating-component";
 
+const Wrapper = styled.div`
+  width: 327px;
+  position: sticky;
+  top: 24px;
+`;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-const Wrapper = styled.div`
-  width: 327px;
-`;
 const ProductBox = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
   box-shadow: 4px 2px 12px #00000014;
@@ -25,10 +27,14 @@ const UpperContainer = styled.div`
 `;
 
 const ImageContainer = styled.div`
-  width: 150px;
+  width: 300px;
   height: 223px;
+  margin: 16px 0;
+  text-align: center;
+  overflow: hidden;
   > img {
-    height: 100%;
+    height: -webkit-fill-available;
+    width: auto;
   }
 `;
 
@@ -112,7 +118,12 @@ const Title = styled.p`
 
 class ProductContainer extends Component {
   state = {
-    SUB: [{ name: "Comparison" }, { name: "Description" }, { name: "Review" }]
+    SUB: [
+      { name: "Comparison" },
+      { name: "Specification" },
+      { name: "Description" },
+      { name: "Review" }
+    ]
   };
   render() {
     const { product, lowestPrice } = this.props;

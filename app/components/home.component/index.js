@@ -9,9 +9,8 @@ import { PageWrapper } from "../../UI";
 const Wrapper = styled.div`
   background: ${props => props.theme.white};
   width: 100%;
-  margin-top: 100px;
   position: relative;
-
+  margin-top: 100px;
   @media only screen and (max-width: ${props => props.theme.bpxlg}) {
     margin-top: 50px;
   }
@@ -127,9 +126,8 @@ class Home extends Component {
     current: 0,
     category: ""
   };
-  componentDidMount = () => {
-    this.typeWriter();
-  };
+  componentDidMount = () => this.typeWriter();
+
   typeWriter = () => {
     const { current, category } = this.state;
     let str = "";
@@ -143,19 +141,17 @@ class Home extends Component {
           i++;
         } else {
           (str = ""), (i = 0);
-          if (index < CATEGORY.length - 1) {
-            index++;
-          } else {
-            index = 0;
-          }
+          if (index < CATEGORY.length - 1) index++;
+          else index = 0;
         }
       }, 250);
     }
   };
+
   render() {
     const { category } = this.state;
     return (
-      <PageWrapper>
+      <PageWrapper style={{ position: "relative" }}>
         <Wrapper>
           <CategoryTag>{category}|</CategoryTag>
           <MainCaption>
@@ -172,9 +168,6 @@ class Home extends Component {
           </Illustrator>
           <Stores />
 
-          {/* <Down>
-            <i className="material-icons">keyboard_arrow_down</i>
-          </Down> */}
           <Categories />
           <Description />
         </Wrapper>

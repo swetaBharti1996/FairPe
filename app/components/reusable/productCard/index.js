@@ -44,7 +44,7 @@ const Title = styled.h2`
   margin-top: 17px;
   color: #000;
   &:hover {
-    color: #ff6300;
+    color: ${props => props.theme.primary};
   }
   @media only screen and (max-width: 1440px) {
     font-size: 16px;

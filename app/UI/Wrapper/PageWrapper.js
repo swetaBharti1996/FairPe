@@ -4,8 +4,9 @@ export default styled.div`
   width: 75%;
   margin: auto;
   height: 100%;
-
   padding-bottom: 24px;
+  position: relative;
+  top: 100px;
   @media only screen and (max-width: ${props => props.theme.bpxlg}) {
     width: 90%;
   }

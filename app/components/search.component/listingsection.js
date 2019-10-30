@@ -43,14 +43,15 @@ const ResultDetails = styled.div`
   font-size: 16px;
   color: #666666;
   width: 100%;
-  padding: 24px 0px;
+  padding: 16px 0px;
   border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
   > span {
     margin-left: 42px;
     font-size: 18px;
-    font-weight: bolder;
     color: #220a3e;
-    display: inline-block;
+    width: inherit;
   }
 `;
 const ProductListing = styled.div`
@@ -77,12 +78,12 @@ const LoadMore = styled.div`
   justify-content: center;
   cursor: pointer;
   > a {
-    color: #ff632a;
+    color: ${props => props.theme.primary};
     font-weight: bolder;
     font-size: 22px;
   }
   > i {
-    color: #e20000;
+    color: ${props => props.theme.primary};
     font-size: 32px;
   }
 `;
@@ -103,7 +104,7 @@ const DropDownContainer = styled.div`
   align-content: flex-end;
   justify-content: flex-end;
   width: 100%;
-  height: 50px;
+  height: 42px;
 `;
 const list = [
   "Price -- Low to High",
@@ -173,12 +174,14 @@ class ListingSection extends Component {
           {!_.isEmpty(products) ? (
             <InnerContainer>
               <ResultDetails>
-                <span>{length} Results</span> from {total} results for "
-                {query.term}"
+                <span>
+                  <b>{length} Results</b> from {total} results for "{query.term}
+                  "
+                </span>
+                <DropDownContainer>
+                  <DropDown list={list} onSort={this.onSort} />
+                </DropDownContainer>
               </ResultDetails>
-              {/* <DropDownContainer>
-                <DropDown list={list} onSort={this.onSort} />
-              </DropDownContainer> */}
 
               <ProductContainer>
                 <ProductListing>

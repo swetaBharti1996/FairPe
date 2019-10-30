@@ -1,8 +1,7 @@
 import { connect } from "react-redux";
 import { withRouter } from "next/router";
 import Footer from "../components/footer.component";
-import {} from "../actions/asyncAction";
-import {} from "../actions/syncAction";
+import { subscribe } from "../actions/asyncAction";
 
 class FooterContainer extends React.Component {
   render() {
@@ -15,7 +14,9 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    subscribe: data => dispatch(subscribe(data))
+  };
 };
 
 export default connect(

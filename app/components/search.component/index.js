@@ -11,6 +11,11 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   background: #f7f7f7;
+  margin-top: 100px;
+
+  @media only screen and (max-width: 1440px) {
+    margin-top: 80px;
+  }
 `;
 const FilterSection = styled.div`
   width: 20%;

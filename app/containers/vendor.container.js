@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { withRouter } from "next/router";
 import Vendor from "../components/vendor.component";
-import {} from "../actions/asyncAction";
+import { partner } from "../actions/asyncAction";
 import {} from "../actions/syncAction";
 
 class VendorContainer extends React.Component {
@@ -11,12 +11,12 @@ class VendorContainer extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return {
-  };
+  return {};
 };
 
 const mapDispatchToProps = dispatch => {
   return {
+    partner: data => dispatch(partner(data))
   };
 };
 

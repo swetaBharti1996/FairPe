@@ -50,13 +50,14 @@ const Desc = styled.p`
 
 class Vendor extends Component {
   render() {
+    const { partner } = this.props;
     return (
       <PageWrapper>
         <Wrapper>
           <Row>
             <BigColumn>
               <Data>
-                <Form />
+                <Form partner={partner} />
               </Data>
               <Data>
                 <Image image="../../static/images/vendor_2.jpg" />

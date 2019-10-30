@@ -1,8 +1,7 @@
 import { connect } from "react-redux";
 import { withRouter } from "next/router";
 import Contact from "../components/contact.component";
-import {} from "../actions/asyncAction";
-import {} from "../actions/syncAction";
+import { contact } from "../actions/asyncAction";
 
 class ContactContainer extends React.Component {
   render() {
@@ -15,7 +14,9 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    contact: data => dispatch(contact(data))
+  };
 };
 
 export default connect(

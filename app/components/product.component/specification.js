@@ -27,16 +27,16 @@ const Empty = styled.p`
   letter-spacing: -1px;
 `;
 
-const Description = () => {
+const Specification = () => {
   return (
     <Wrapper>
-      <Title>Description</Title>
+      <Title>Specification</Title>
 
       <Body>
-        <Empty>No Desciption</Empty>
+        <Empty>No Specification</Empty>
       </Body>
     </Wrapper>
   );
 };
 
-export default Description;
+export default Specification;

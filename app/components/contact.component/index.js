@@ -4,6 +4,7 @@ import { PageWrapper } from "../../UI";
 
 const Wrapper = styled.div`
   min-height: 750px;
+  margin-top: 100px;
 `;
 
 const HeaderBackground = styled.div`
@@ -140,8 +141,27 @@ const SubmitButton = styled.button`
 `;
 
 class Contact extends Component {
-  state = {};
+  state = {
+    name: "",
+    email: "",
+    message: ""
+  };
+
+  _handleInput = event =>
+    this.setState({ [event.target.name]: event.target.value });
+
+  _onSubmit = () => {
+    this.props
+      .contact(this.state)
+      .then(resp => {
+        console.log("Message Sent");
+        this.setState({ name: "", email: "", message: "" });
+      })
+      .catch(err => console.error(err));
+  };
+
   render() {
+    const { name, email, message } = this.state;
     return (
       <Wrapper>
         <HeaderBackground>
@@ -155,7 +175,7 @@ class Contact extends Component {
           </Header>
         </HeaderBackground>
 
-        <PageWrapper>
+        <PageWrapper style={{ marginTop: 0, position: "static" }}>
           <Body>
             <Detail>
               <li>
@@ -178,12 +198,30 @@ class Contact extends Component {
             <FormContainer>
               <FormInside>
                 <b>Send Us A Message</b>
-                <Input type="text" placeholder="Name"></Input>
-                <Input type="text" placeholder="Email"></Input>
+                <Input
+                  name="name"
+                  type="text"
+                  placeholder="Name"
+                  value={name}
+                  onChange={this._handleInput}
+                ></Input>
+                <Input
+                  name="email"
+                  type="email"
+                  placeholder="Email"
+                  value={email}
+                  onChange={this._handleInput}
+                ></Input>
 
-                <TextArea placeholder="Message" rows="10"></TextArea>
+                <TextArea
+                  name="message"
+                  placeholder="Message"
+                  rows="10"
+                  value={message}
+                  onChange={this._handleInput}
+                ></TextArea>
 
-                <SubmitButton>Submit</SubmitButton>
+                <SubmitButton onClick={this._onSubmit}>Submit</SubmitButton>
               </FormInside>
             </FormContainer>
           </Body>

@@ -5,9 +5,14 @@ import ProductContainer from "./productContainer";
 import StoreContainer from "./storeContainer";
 import { PageWrapper } from "../../UI";
 import Description from "./description";
+import Specification from "./specification";
+import Review from "./review";
+import Search from "../../components/reusable/search";
 
 const Container = styled.div`
   display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 `;
 const Wrapper = styled.div`
   width: 100%;
@@ -27,6 +32,49 @@ const ErrorImg = styled.img`
   display: block;
   margin: auto;
   margin-bottom: 100px;
+`;
+
+const RightSide = styled.div`
+  margin-left: 24px;
+  flex: 1;
+`;
+
+const SearchContainer = styled.div`
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  > div {
+    &:first-child {
+      width: 327px;
+      background: #e3e3e3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    &:last-child {
+      background: #f7f7f7;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      height: 100px;
+    }
+  }
+`;
+
+const Box = styled.div`
+  width: 70%;
+  margin: 0 auto;
+
+  display: flex;
+  justify-content: space-between;
+  > p {
+    color: #000000;
+    font-size: 14px;
+    line-height: 16px;
+    margin-bottom: 0;
+  }
+  > i {
+  }
 `;
 class Product extends Component {
   state = {};
@@ -91,18 +139,19 @@ class Product extends Component {
             </Fragment>
           ) : (
             <Container>
-              <Fragment>
-                <ProductContainer
-                  lowestPrice={this._getLowestPrice(
-                    this._getAllPrice(products)
-                  )}
-                  product={this.props.products}
-                />
+              <ProductContainer
+                lowestPrice={this._getLowestPrice(this._getAllPrice(products))}
+                product={this.props.products}
+              />
+              <RightSide>
                 <StoreContainer
                   allProduct={this._getALLProduct(products)}
                   product={this.props.products}
                 />
-              </Fragment>
+                <Specification></Specification>
+                <Description></Description>
+                <Review></Review>
+              </RightSide>
             </Container>
           )}
         </Wrapper>

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { PageWrapper, Button } from "../../UI";
+import { Link } from "../../../server/routes";
 
 const Wrapper = styled.div`
   margin-bottom: 300px;
@@ -73,7 +74,7 @@ const Card = styled.div`
   > h3 {
     font-size: 16px;
     margin-bottom: 10px;
-    color: #ff632a;
+    color: ${props => props.theme.primary};
   }
   > p {
     font-size: 16px;
@@ -111,7 +112,7 @@ class Careers extends Component {
             <Title>Join the wonderful team at FairPe</Title>
           </Overlay>
         </HeaderContainer>
-        <PageWrapper>
+        <PageWrapper style={{ position: "static" }}>
           <Container>
             <h2>Current Openings</h2>
             <CardContainer>
@@ -120,7 +121,9 @@ class Careers extends Component {
                   <h2>{item.title}</h2>
                   <h3>{item.location}</h3>
                   <p>{item.description}</p>
-                  <Button style={{ width: "45%" }}>Apply</Button>
+                  <Link route={"contact"}>
+                    <Button style={{ width: "45%" }}>Apply</Button>
+                  </Link>
                 </Card>
               ))}
             </CardContainer>

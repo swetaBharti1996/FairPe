@@ -10,4 +10,6 @@ export default styled.div`
   background: 0 0;
   font-family: ${props => props.theme.font} !important;
   font-size: 14px !important;
+  display: flex;
+  flex-flow: column;
 `;

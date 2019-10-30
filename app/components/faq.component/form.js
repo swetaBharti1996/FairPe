@@ -65,19 +65,64 @@ const Button = styled.button`
 `;
 
 class Form extends Component {
+  state = {
+    name: "",
+    email: "",
+    mobile: "",
+    question: ""
+  };
+
+  _handleInput = event =>
+    this.setState({ [event.target.name]: event.target.value });
+
+  _onSubmit = () => {
+    this.props
+      .question(this.state)
+      .then(resp => {
+        console.log("Message Sent");
+        this.setState({ name: "", email: "", mobile: "", question: "" });
+      })
+      .catch(err => console.error(err));
+  };
+
   render() {
+    const { name, email, mobile, question } = this.state;
     return (
       <>
         <Wrapper>
           <Container>
             <h3>Not satisfied? Write to us.</h3>
-            <input type="text" placeholder="Your full name*" />
-            <input type="text" placeholder="Email*" />
-            <input type="text" placeholder="Mobile" />
-            <textarea rows="4" placeholder="Your concern/question*"></textarea>
+            <input
+              name="name"
+              type="text"
+              placeholder="Your full name*"
+              value={name}
+              onChange={this._handleInput}
+            />
+            <input
+              name="email"
+              type="text"
+              placeholder="Email*"
+              value={email}
+              onChange={this._handleInput}
+            />
+            <input
+              name="mobile"
+              type="number"
+              placeholder="Mobile"
+              value={mobile}
+              onChange={this._handleInput}
+            />
+            <textarea
+              name="question"
+              rows="4"
+              placeholder="Your concern/question*"
+              value={question}
+              onChange={this._handleInput}
+            ></textarea>
           </Container>
         </Wrapper>
-        <Button>Submit</Button>
+        <Button onClick={this._onSubmit}>Submit</Button>
       </>
     );
   }

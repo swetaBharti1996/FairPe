@@ -27,16 +27,16 @@ const Empty = styled.p`
   letter-spacing: -1px;
 `;
 
-const Description = () => {
+const Review = () => {
   return (
     <Wrapper>
-      <Title>Description</Title>
+      <Title>Review</Title>
 
       <Body>
-        <Empty>No Desciption</Empty>
+        <Empty>No Review</Empty>
       </Body>
     </Wrapper>
   );
 };
 
-export default Description;
+export default Review;

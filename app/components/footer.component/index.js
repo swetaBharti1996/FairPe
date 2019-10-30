@@ -60,16 +60,17 @@ const MailBox = styled.div`
   bottom: -24px;
 `;
 const MailInput = styled.input`
-  border-radius: 31px 0px 0px 31px;
+  border-radius: 31px 0px 0px 31px !important;
   border: 1px solid #707070;
   font-size: 14px;
   outline: none;
-
   padding: 17px 30px;
+  border-right: none;
 `;
 
-const MailButton = styled.div`
+const MailButton = styled.a`
   cursor: pointer;
+  display: block;
   width: 40%;
   background: ${props => props.theme.primary};
   font-size: 16px;
@@ -191,8 +192,16 @@ const PolicyBox = styled.div`
 `;
 
 class Footer extends Component {
-  state = {};
+  state = {
+    email: null
+  };
+
+  _handleInput = event =>
+    this.setState({ [event.target.name]: event.target.value });
+
+  _onSubscribe = email => this.props.subscribe({ email });
   render() {
+    const { email } = this.state;
     return (
       <>
         <Wrapper>
@@ -218,8 +227,16 @@ class Footer extends Component {
                   </BoxText>
                 </LabelBox>
                 <MailBox>
-                  <MailInput placeholder="Your email address/ Mobile number" />
-                  <MailButton>Notify me about this</MailButton>
+                  <MailInput
+                    name="email"
+                    type="email"
+                    value={email}
+                    placeholder="Your email address/ Mobile number"
+                    onChange={this._handleInput}
+                  />
+                  <MailButton onClick={() => this._onSubscribe(email)}>
+                    Notify me about this
+                  </MailButton>
                 </MailBox>
               </InnerBox>
             </Box>

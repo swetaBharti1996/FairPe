@@ -3,15 +3,11 @@ import styled from "styled-components";
 import { Button } from "../../UI";
 import _ from "lodash";
 
-const Container = styled.div`
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   background: white;
   padding: 16px 0;
-`;
-const Wrapper = styled.div`
-  margin-left: 24px;
-  flex: 1;
 `;
 
 const Location = styled.div`
@@ -120,7 +116,6 @@ const TableHeader = styled.tr`
 
 const TableBody = styled.tr`
   display: flex;
-
   font-weight: bold;
   color: ${props => props.theme.default};
   letter-spacing: -0.2px;
@@ -154,6 +149,7 @@ const MainText = styled.h1`
 
 const ProductTitle = styled.h1`
   font-size: inherit;
+  width: 90%;
   > a {
     cursor: pointer;
     font-size: inherit;
@@ -168,78 +164,76 @@ const StoreContainer = props => {
   const { allProduct } = props;
   return (
     <Wrapper>
-      <Container>
-        <Location>
-          <img src="../../static/images/location_1.png" />
+      {/* <Location>
+        <img src="../../static/images/location_1.png" />
 
-          <Address>9th Main, HSR Layout, Bangalore</Address>
-          <AddText>Change your location</AddText>
-        </Location>
-        <Store>
-          <TitleContainer>
-            <Title>Product in Stores</Title>
-            <PriceRefreshContainer>
-              <PriceUpdate>Prices Updated</PriceUpdate>
-              <Refresh>Refresh</Refresh>
-            </PriceRefreshContainer>
-          </TitleContainer>
+        <Address>9th Main, HSR Layout, Bangalore</Address>
+        <AddText>Change your location</AddText>
+      </Location> */}
+      <Store>
+        <TitleContainer>
+          <Title>Product in Stores</Title>
+          <PriceRefreshContainer>
+            <PriceUpdate>Prices Updated</PriceUpdate>
+            <Refresh>Refresh</Refresh>
+          </PriceRefreshContainer>
+        </TitleContainer>
 
-          <Table>
-            <thead>
-              <TableHeader>
-                <th>
-                  <span>Store</span>
-                </th>
-                <th>
-                  <span>Item Name / Code</span>
-                </th>
-                <th>
-                  <span>Price</span>
-                </th>
-                <th>
-                  <span>Discount</span>
-                </th>
-                <th>
-                  <span style={{ padding: "0 16px" }}>Pick-up</span>
-                </th>
-              </TableHeader>
-            </thead>
-            <tbody>
-              {_.map(allProduct, (product, i) => {
-                return (
-                  <TableBody key={i}>
-                    <td>
-                      <LogoContainer>
-                        <img src={`../../static/images/${product.site}.png`} />
-                      </LogoContainer>
-                    </td>
-                    <td>
-                      <ProductTitle>
-                        <a href={product.url} target={"_blank"}>
-                          {product.title}
-                        </a>
-                      </ProductTitle>
-                    </td>
-                    <td>
-                      <MainText>{`Rs ${product.price}`}</MainText>
-                    </td>
-                    <td>
-                      <MainText>{`${product.discount}%`}</MainText>
-                    </td>
-                    <td>
-                      <Button>
-                        {product.type === "online" ? "Buy now" : "View Store"}
-                      </Button>
-                    </td>
-                  </TableBody>
-                );
-              })}
-            </tbody>
-          </Table>
-        </Store>
+        <Table>
+          <thead>
+            <TableHeader>
+              <th>
+                <span>Store</span>
+              </th>
+              <th>
+                <span>Item Name / Code</span>
+              </th>
+              <th>
+                <span>Price</span>
+              </th>
+              <th>
+                <span>Discount</span>
+              </th>
+              <th>
+                <span style={{ padding: "0 16px" }}>Pick-up</span>
+              </th>
+            </TableHeader>
+          </thead>
+          <tbody>
+            {_.map(allProduct, (product, i) => {
+              return (
+                <TableBody key={i}>
+                  <td>
+                    <LogoContainer>
+                      <img src={`../../static/images/${product.site}.png`} />
+                    </LogoContainer>
+                  </td>
+                  <td>
+                    <ProductTitle>
+                      <a href={product.url} target={"_blank"}>
+                        {product.title}
+                      </a>
+                    </ProductTitle>
+                  </td>
+                  <td>
+                    <MainText>{`Rs ${product.price}`}</MainText>
+                  </td>
+                  <td>
+                    <MainText>{`${product.discount}%`}</MainText>
+                  </td>
+                  <td>
+                    <Button>
+                      {product.type === "online" ? "Buy now" : "View Store"}
+                    </Button>
+                  </td>
+                </TableBody>
+              );
+            })}
+          </tbody>
+        </Table>
+      </Store>
 
-        <Allresult>--- All results listed ---</Allresult>
-      </Container>
+      <Allresult>--- All results listed ---</Allresult>
     </Wrapper>
   );
 };
