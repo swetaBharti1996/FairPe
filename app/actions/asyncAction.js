@@ -106,12 +106,7 @@ export const changePassword = data => dispatch => {
     `${AppConstants.default.baseURL}/api/fairpe/password`,
     data,
     { Authorization: document.cookie.replace("authtoken=", "") }
-  )
-    .then(resp => {
-      document.cookie = "authtoken=" + "";
-      dispatch(syncActions.changePassword());
-    })
-    .catch(err => console.error(err));
+  ).then(resp => dispatch(syncActions.changePassword()));
 };
 
 export const categoryData = query => dispatch =>
