@@ -8,5 +8,11 @@ export default keyMirror({
   PRODUCT_DETAIL: null,
   PARTNER: null,
   CONTACT: null,
-  QUESTION: null
+  QUESTION: null,
+
+  //AUTH
+  LOGIN: null,
+  SIGNUP: null,
+  LOGOUT: null,
+  CHANGE_PASSWORD: null
 });

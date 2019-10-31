@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { withRouter } from "next/router";
 import Account from "../components/account.component";
-import { fetchWishlist } from "../actions/asyncAction";
+import { changePassword, logout } from "../actions/asyncAction";
 import {} from "../actions/syncAction";
 
 class AccountContainer extends React.Component {
@@ -19,7 +19,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchWishlist: () => dispatch(fetchWishlist())
+    changePassword: data => dispatch(changePassword(data)),
+    logout: () => dispatch(logout())
   };
 };
 

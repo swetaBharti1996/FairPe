@@ -75,9 +75,15 @@ class Content extends Component {
           <RightContainer>
             <Column>
               <h1>Partner with us</h1>
-              <Link route={"vendor"}>Become Partners</Link>
-              <Link route={"about"}>About us</Link>
-              <Link route={"careers"}>Careers</Link>
+              <Link route={"vendor"}>
+                <a>Become Partners </a>
+              </Link>
+              <Link route={"about"}>
+                <a>About us</a>
+              </Link>
+              <Link route={"careers"}>
+                <a> Careers</a>
+              </Link>
             </Column>
             <Column>
               <h1>Support</h1>
@@ -86,10 +92,18 @@ class Content extends Component {
             </Column>
             <Column>
               <h1>Contact us</h1>
-              <Link>hello@fairpe.com</Link>
-              <Link>Facebook</Link>
-              <Link>Instagram</Link>
-              <Link>Twitter</Link>
+              <Link>
+                <a>hello@fairpe.com</a>
+              </Link>
+              <Link>
+                <a>Facebook</a>
+              </Link>
+              <Link>
+                <a>Instagram</a>
+              </Link>
+              <Link>
+                <a>Twitter</a>
+              </Link>
             </Column>
           </RightContainer>
         </Container>

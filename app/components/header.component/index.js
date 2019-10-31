@@ -71,12 +71,12 @@ const Nav = styled.ul`
     margin-right: 16px;
 
     &:last-child {
-      margin-right: 0;
+      display: flex;
+      justify-content: flex-end;
+      width: 228px;
+      flex: 1;
     }
 
-    &:nth-child(4) {
-      margin-right: 8px;
-    }
     &:nth-child(3) {
       margin-right: 40px;
     }
@@ -188,6 +188,8 @@ class Header extends React.Component {
   };
 
   render() {
+    const { user, logout } = this.props;
+
     return (
       <Wrapper>
         <Container>
@@ -224,30 +226,25 @@ class Header extends React.Component {
                   <List>Contact us</List>
                 </Link>
               </li>
-              <li>
-                {!this.props.user ? (
-                  <Button onClick={() => this.props.openModal(true)}>
+
+              {user && !user.name ? (
+                <li>
+                  <Button
+                    style={{ marginRight: 16 }}
+                    onClick={() => this.props.openModal(true)}
+                  >
                     Log In
                   </Button>
-                ) : (
-                  <UserDropdown
-                    name={this.props.user}
-                    logout={this.props.logout}
-                  />
-                )}
-              </li>
-              <li>
-                {!this.props.user ? (
+
                   <Button active onClick={() => this.props.openModal(true)}>
                     Sign up
                   </Button>
-                ) : (
-                  <UserDropdown
-                    name={this.props.user}
-                    logout={this.props.logout}
-                  />
-                )}
-              </li>
+                </li>
+              ) : (
+                <li>
+                  <UserDropdown user={user} logout={logout} />
+                </li>
+              )}
             </Nav>
           </div>
         </Container>

@@ -10,13 +10,13 @@ import Router from "next/router";
 import { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
 import { makeRequest } from "../constants/request";
-import { gotUserDetails, fetchWishlist } from "../actions/syncAction";
+import { login, fetchWishlist } from "../actions/syncAction";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faUser } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faSearch);
+library.add(faSearch, faUser);
 
-NProgress.configure({ showSpinner: false });
+NProgress.configure({ showSpinner: true });
 Router.events.on("routeChangeStart", url => {
   NProgress.start();
 });
@@ -39,10 +39,10 @@ class MyApp extends App {
     const c = cookies(ctx);
     const isServer = !!ctx.req;
     if (!!c.authtoken && isServer) {
-      ctx.store.dispatch(gotUserDetails(c.authtoken));
-      getWishlist(c)
-        .then(resp => ctx.store.dispatch(fetchWishlist(resp.data)))
-        .catch(err => console.log(err));
+      ctx.store.dispatch(login(c.authtoken));
+      // getWishlist(c)
+      //   .then(resp => ctx.store.dispatch(fetchWishlist(resp.data)))
+      //   .catch(err => console.log(err));
     }
     const pageProps = Component.getInitialProps
       ? await Component.getInitialProps(ctx)

@@ -5,13 +5,6 @@ export const gotProductSeo = data => ({
   payload: data
 });
 
-export const gotUserDetails = data => {
-  return {
-    type: ActionTypes.LOGGED_IN,
-    payload: data
-  };
-};
-
 export const loginError = data => {
   return {
     type: ActionTypes.LOGIN_ERROR,
@@ -92,3 +85,29 @@ export const contact = () => ({
 export const question = () => ({
   type: ActionTypes.QUESTION
 });
+
+export const login = data => {
+  return {
+    type: ActionTypes.LOGIN,
+    payload: data
+  };
+};
+
+export const signup = data => {
+  return {
+    type: ActionTypes.SIGNUP,
+    payload: data
+  };
+};
+
+export const logout = () => {
+  return {
+    type: ActionTypes.LOGOUT
+  };
+};
+
+export const changePassword = () => {
+  return {
+    type: ActionTypes.CHANGE_PASSWORD
+  };
+};

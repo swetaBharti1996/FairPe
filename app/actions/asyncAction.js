@@ -19,41 +19,6 @@ export const productDetail = id => dispatch =>
   makeRequest("get", `${AppConstants.default.baseURL}/api/product/${id}`).then(
     resp => dispatch(syncActions.gotProductDetail(resp.data))
   );
-export const signup = data => dispatch =>
-  makeAsyncRequest(
-    "post",
-    `${AppConstants.default.baseURL}/api/auth/register`,
-    data
-  )
-    .then(resp => {
-      dispatch(syncActions.gotUserDetails(resp.data.token));
-      document.cookie = "authtoken=" + resp.data.token;
-    })
-    .catch(err => {
-      dispatch(syncActions.registerError(err.response.data));
-    });
-
-export const login = data => dispatch => {
-  makeAsyncRequest(
-    "post",
-    `${AppConstants.default.baseURL}/backend/api/fairpe/login`,
-    data
-  )
-    .then(resp => {
-      dispatch(syncActions.gotUserDetails(resp.data.token));
-      dispatch(fetchWishlist());
-    })
-    .catch(err => console.error(err));
-};
-
-export const logout = () => dispatch =>
-  makeAsyncRequest(
-    "post",
-    `${AppConstants.default.baseURL}/api/auth/logout`
-  ).then(resp => {
-    dispatch(syncActions.logoutUser());
-    document.cookie = "authtoken=" + "";
-  });
 
 export const wishlist = data => dispatch =>
   makeRequest("post", `${AppConstants.default.baseURL}/api/wishlist`, data, {
@@ -70,7 +35,7 @@ export const fetchWishlist = () => dispatch =>
 export const subscribe = data => dispatch =>
   makeRequest(
     "post",
-    `${AppConstants.default.baseURL}/backend/api/fairpe/subscribe`,
+    `${AppConstants.default.baseURL}/api/fairpe/subscribe`,
     data,
     {}
   ).then(resp => dispatch(syncActions.subscribe()));
@@ -78,7 +43,7 @@ export const subscribe = data => dispatch =>
 export const partner = data => dispatch =>
   makeRequest(
     "post",
-    `${AppConstants.default.baseURL}/backend/api/fairpe/partner`,
+    `${AppConstants.default.baseURL}/api/fairpe/partner`,
     data,
     {}
   ).then(resp => dispatch(syncActions.partner()));
@@ -86,7 +51,7 @@ export const partner = data => dispatch =>
 export const contact = data => dispatch =>
   makeRequest(
     "post",
-    `${AppConstants.default.baseURL}/backend/api/fairpe/contacted`,
+    `${AppConstants.default.baseURL}/api/fairpe/contacted`,
     data,
     {}
   ).then(resp => dispatch(syncActions.contact()));
@@ -94,7 +59,53 @@ export const contact = data => dispatch =>
 export const question = data => dispatch =>
   makeRequest(
     "post",
-    `${AppConstants.default.baseURL}/backend/api/fairpe/question`,
+    `${AppConstants.default.baseURL}/api/fairpe/question`,
     data,
     {}
   ).then(resp => dispatch(syncActions.question()));
+
+export const login = data => dispatch => {
+  makeAsyncRequest(
+    "post",
+    `${AppConstants.default.baseURL}/api/fairpe/login`,
+    data
+  ).then(resp => {
+    document.cookie = "authtoken=" + resp.data.token;
+    dispatch(syncActions.login(resp.data.token));
+    // dispatch(fetchWishlist());
+  });
+};
+
+export const signup = data => dispatch =>
+  makeAsyncRequest(
+    "post",
+    `${AppConstants.default.baseURL}/api/fairpe/signup`,
+    data
+  ).then(resp => {
+    document.cookie = "authtoken=" + resp.data.token;
+    dispatch(syncActions.signup(resp.data.token));
+  });
+
+export const logout = () => dispatch => {
+  makeRequest(
+    "post",
+    `${AppConstants.default.baseURL}/api/fairpe/logout`,
+    null,
+    { Authorization: document.cookie.replace("authtoken=", "") }
+  ).then(resp => {
+    document.cookie = "authtoken=" + "";
+    dispatch(syncActions.logout());
+  });
+};
+
+export const changePassword = data => dispatch => {
+  makeRequest(
+    "post",
+    `${AppConstants.default.baseURL}/api/fairpe/password`,
+    data,
+    { Authorization: document.cookie.replace("authtoken=", "") }
+  ).then(resp => {
+    document.cookie = "authtoken=" + "";
+    dispatch(syncActions.changePassword());
+  });
+};

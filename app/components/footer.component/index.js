@@ -193,7 +193,7 @@ const PolicyBox = styled.div`
 
 class Footer extends Component {
   state = {
-    email: null
+    email: ""
   };
 
   _handleInput = event =>

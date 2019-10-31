@@ -5,7 +5,7 @@ import {} from "../actions/syncAction";
 
 const mapStateToProps = state => {
   return {
-    user: state.auth.name
+    user: state.auth
   };
 };
 
