@@ -9,7 +9,7 @@ export default (state = initialState.wishlist, action) => {
         ...state,
         ...action.payload
       };
-    case ActionTypes.LOGGED_OUT:
+    case ActionTypes.LOGOUT:
         return {};
     default:
       return state;

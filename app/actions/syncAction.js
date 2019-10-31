@@ -23,7 +23,7 @@ export const emptyProducts = () => ({
   type: ActionTypes.EMPTY_PRODUCTS
 });
 
-export const fetchWishlist = data => ({
+export const gotWishlist = data => ({
   type: ActionTypes.FETCH_WISHLIST,
   payload: data
 });
