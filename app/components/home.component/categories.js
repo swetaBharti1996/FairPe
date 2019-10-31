@@ -102,6 +102,7 @@ class Categories extends Component {
     const query = queryString.stringify(newQuery);
     console.log(query)
     this.props.filterResults(query);
+    this.props.categoryData(category)
     // this.props.dispatch(filterResults(query));
   }
   render() {

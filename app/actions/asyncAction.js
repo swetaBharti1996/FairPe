@@ -101,3 +101,9 @@ export const question = data => dispatch =>
     data,
     {}
   ).then(resp => dispatch(syncActions.question()));
+
+
+  export const categoryData = query => dispatch =>
+  makeRequest("get", `${AppConstants.default.baseURL}/backend/api/fairpe/category?category=${query}`).then(
+    resp => dispatch(syncActions.gotCategoryData(resp.data))
+  );

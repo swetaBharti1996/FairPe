@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import ProductCard from "../reusable/productCard"
 import { PageWrapper } from "../../UI";
+import {clearCategoryData} from "../../actions/syncAction";
 import _ from "lodash";
 
 const Wrapper = styled.div`
@@ -178,7 +179,6 @@ const ProductListing = styled.div`
   flex-flow: row wrap;
   justify-content: flex-start;
   padding: 0 24px;
-
   /* display: grid;
   grid-template-columns: repeat(auto-fit, 350px);
   padding: 80px 0;
@@ -243,25 +243,31 @@ class Category extends Component {
     ]
   };
 
+componentWillUnmount = () => {
+  clearCategoryData();
+}
 
-
+ capitalize = (s) => {
+  if (typeof s !== 'string') return ''
+  return s.charAt(0).toUpperCase() + s.slice(1)
+}
  
 
   render() {
-    const {filters, products} = this.props;
-    console.log("filters======",products)
+    const {filters, products, category} = this.props;
+    console.log("filters======",category)
     return (
       <Wrapper>
         <PageWrapper>
           <Header>
             <div>
-              <img src={"../../static/images/fashion1.png"}></img>
+              <img src={category.banner && category.banner.url}></img>
             </div>
 
             <HeaderInfo>
               <div>
                 <p>Present the best version of yourself</p>
-                <b>Fashion</b>
+                <b>{category.category && category.category.toUpperCase()}</b>
                 <span>Explore</span>
               </div>
             </HeaderInfo>
@@ -269,15 +275,17 @@ class Category extends Component {
 
           <Body>
             <LeftBody>
-              <h3>Explore Your favourite Fashion Stores</h3>
+              <h3>Explore Your favourite {this.capitalize(category.category)} Stores</h3>
 
               <Stores>
               <ProductContainer>
+                {products.products &&
                 <ProductListing>
                   {_.map(products.products, (product, id) => (
                     <ProductCard key={id} product={product} />
                   ))}
                 </ProductListing>
+                }
               </ProductContainer>
                 {/* <li>
                   <div>
@@ -323,20 +331,22 @@ class Category extends Component {
             <RightBody>
               <div>
                 <p>Explore A Category</p>
+                {category.subcategory ? 
                 <ListCategory>
                   <ul>
-                    {_.map(this.state.categorys, (category, index1) => (
+                    {_.map(category.subcategory, (category, index1) => (
                       <li>
-                        <b>{category.sub}</b>
+                        <b>{category.main}</b>
                         <ul>
-                          {_.map(category.data.value, (d, index2) => (
+                          {_.map(category.sub, (d, index2) => (
                             <li>{d}</li>
                           ))}
                         </ul>
                       </li>
                     ))}
                   </ul>
-                </ListCategory>
+                </ListCategory>:
+                <ListCategory><p>No Data</p></ListCategory>}
               </div>
             </RightBody>
           </Body>

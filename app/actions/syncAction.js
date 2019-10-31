@@ -92,3 +92,13 @@ export const contact = () => ({
 export const question = () => ({
   type: ActionTypes.QUESTION
 });
+
+
+export const gotCategoryData = (data) => ({
+  type: ActionTypes.CATEGORY,
+  payload: data
+})
+
+export const clearCategoryData = () => ({
+  type: ActionTypes.CLEAR_CAT
+})

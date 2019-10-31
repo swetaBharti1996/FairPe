@@ -14,7 +14,8 @@ class CategoryContainer extends React.Component {
 const mapStateToProps = state => {
   return {
     filters: state.filters,
-    products: state.products
+    products: state.products,
+    category: state.home.category
   };
 };
 

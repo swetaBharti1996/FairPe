@@ -168,7 +168,7 @@ class Home extends Component {
           </Illustrator>
           <Stores />
 
-          <Categories filterResults={this.props.filterResults}/>
+          <Categories filterResults={this.props.filterResults} categoryData={this.props.categoryData}/>
           <Description />
         </Wrapper>
       </PageWrapper>
