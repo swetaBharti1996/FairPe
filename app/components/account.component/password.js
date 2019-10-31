@@ -51,8 +51,7 @@ class Password extends Component {
 
   _onSave = () => {
     const { changePassword, logout } = this.props;
-    this.props
-      .changePassword(this.state)
+    changePassword(this.state)
       .then(resp => {
         console.log("Message Sent");
         this.setState({ previousPassword: "", password: "", password2: "" });

@@ -11,10 +11,12 @@ export const searchSuggestion = term => dispatch =>
     .catch(err => {
       console.log(err);
     });
-export const filterResults = (query, page = 1) => dispatch =>
-  makeAsyncRequest("post", `/_search?${query}`).then(resp =>
-    dispatch(syncActions.gotProducts(resp.data, query, page))
-  );
+export const filterResults = (query, page = 1) => dispatch => {
+  makeAsyncRequest("post", `/_search?${query}`).then(resp => {
+    console.log("recieved", resp.data);
+    dispatch(syncActions.gotProducts(resp.data, query, page));
+  });
+};
 export const productDetail = id => dispatch =>
   makeRequest("get", `${AppConstants.default.baseURL}/api/product/${id}`).then(
     resp => dispatch(syncActions.gotProductDetail(resp.data))
@@ -104,8 +106,16 @@ export const changePassword = data => dispatch => {
     `${AppConstants.default.baseURL}/api/fairpe/password`,
     data,
     { Authorization: document.cookie.replace("authtoken=", "") }
-  ).then(resp => {
-    document.cookie = "authtoken=" + "";
-    dispatch(syncActions.changePassword());
-  });
+  )
+    .then(resp => {
+      document.cookie = "authtoken=" + "";
+      dispatch(syncActions.changePassword());
+    })
+    .catch(err => console.error(err));
 };
+
+export const categoryData = query => dispatch =>
+  makeRequest(
+    "get",
+    `${AppConstants.default.baseURL}/api/fairpe/category?category=${query}`
+  ).then(resp => dispatch(syncActions.gotCategoryData(resp.data)));

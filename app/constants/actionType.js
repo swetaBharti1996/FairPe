@@ -14,5 +14,8 @@ export default keyMirror({
   LOGIN: null,
   SIGNUP: null,
   LOGOUT: null,
-  CHANGE_PASSWORD: null
+  CHANGE_PASSWORD: null,
+
+  CATEGORY: null,
+  CLEAR_CAT: null
 });

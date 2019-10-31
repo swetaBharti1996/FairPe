@@ -111,3 +111,12 @@ export const changePassword = () => {
     type: ActionTypes.CHANGE_PASSWORD
   };
 };
+
+export const gotCategoryData = data => ({
+  type: ActionTypes.CATEGORY,
+  payload: data
+});
+
+export const clearCategoryData = () => ({
+  type: ActionTypes.CLEAR_CAT
+});
