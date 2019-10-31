@@ -38,10 +38,14 @@ class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
     const c = cookies(ctx);
     const isServer = !!ctx.req;
+
     if (!!c.authtoken && isServer) {
       ctx.store.dispatch(login(c.authtoken));
       getWishlist(c)
-        .then(resp => ctx.store.dispatch(gotWishlist(resp.data)))
+        .then(resp => {
+          console.log(resp.data);
+          ctx.store.dispatch(gotWishlist(resp.data));
+        })
         .catch(err => console.log(err));
     }
     const pageProps = Component.getInitialProps
