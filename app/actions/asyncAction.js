@@ -18,19 +18,30 @@ export const filterResults = (query, page = 1) => dispatch => {
   });
 };
 export const productDetail = id => dispatch =>
-  makeRequest("get", `${AppConstants.default.baseURL}/api/product/${id}`).then(
-    resp => dispatch(syncActions.gotProductDetail(resp.data))
-  );
+  makeRequest(
+    "get",
+    `${AppConstants.default.baseURL}/api/fairpe/product/${id}`
+  ).then(resp => dispatch(syncActions.gotProductDetail(resp.data)));
 
 export const wishlist = data => dispatch =>
-  makeRequest("post", `${AppConstants.default.baseURL}/api/fairpe/wishlist`, data, {
-    Authorization: document.cookie.replace("authtoken=", "")
-  }).then(resp => dispatch(fetchWishlist()));
+  makeRequest(
+    "post",
+    `${AppConstants.default.baseURL}/api/fairpe/wishlist`,
+    data,
+    {
+      Authorization: document.cookie.replace("authtoken=", "")
+    }
+  ).then(resp => dispatch(fetchWishlist()));
 
 export const fetchWishlist = () => dispatch =>
-  makeRequest("get", `${AppConstants.default.baseURL}/api/fairpe/wishlist`, null, {
-    Authorization: document.cookie.replace("authtoken=", "")
-  }).then(resp => dispatch(syncActions.gotWishlist(resp.data)));
+  makeRequest(
+    "get",
+    `${AppConstants.default.baseURL}/api/fairpe/wishlist`,
+    null,
+    {
+      Authorization: document.cookie.replace("authtoken=", "")
+    }
+  ).then(resp => dispatch(syncActions.gotWishlist(resp.data)));
 
 //
 
