@@ -12,20 +12,22 @@ const fetchCategory = id => {
   );
 };
 
+const fetchProducts = (query,page=1)=>{
+  return makeRequest(
+    "post",
+    `${AppConstants.default.searchURL}/_search?${query}`
+  )
+}
+
 class Index extends React.Component {
   static async getInitialProps(props) {
     const { store, query, req } = props;
 
     const { slug } = query;
+    let promise = [];
+    
 
-    await axios
-      .post(
-        `${AppConstants.default.searchCategoryURL}/_search?page=1&term=${slug}`
-      )
-      .then(resp => store.dispatch(gotProducts(resp.data, { term: slug }, 1)))
-      .catch(err => console.log(err));
-
-    return new Promise((resolve, reject) => {
+    promise[0] =  new Promise((resolve, reject) => {
       fetchCategory(slug)
         .then(resp => {
           store.dispatch(gotCategoryData(resp.data));
@@ -33,7 +35,25 @@ class Index extends React.Component {
         .then(resolve)
         .catch(err => console.log(err) || resolve({}));
     });
+    promise[1] = new Promise((resolve, reject) => {
+      const newQuery = {
+        term: slug,
+        page: 1
+      };
+      const query1 = queryString.stringify(newQuery);
+      fetchProducts(query1)
+      .then(resp => {
+        store.dispatch(gotProducts(resp.data,query1,1));
+      })
+      .then(resolve)
+      .catch(err => console.log(err) || resolve({}));
+    });
+
+    await Promise.all(promise);
+    return true;
+
   }
+
 
   render() {
     return <Category />;
