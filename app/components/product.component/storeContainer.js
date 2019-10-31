@@ -40,7 +40,8 @@ const AddText = styled.span`
 const Store = styled.div`
   width: 100%;
   margin-top: 24px;
-  min-height: 237px;
+  
+
 `;
 const TitleContainer = styled.div`
   display: flex;
@@ -170,7 +171,7 @@ const StoreContainer = props => {
         <Address>9th Main, HSR Layout, Bangalore</Address>
         <AddText>Change your location</AddText>
       </Location> */}
-      <Store>
+      <Store >
         <TitleContainer>
           <Title>Product in Stores</Title>
           <PriceRefreshContainer>

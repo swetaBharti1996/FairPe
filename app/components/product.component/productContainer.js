@@ -117,14 +117,22 @@ const Title = styled.p`
 `;
 
 class ProductContainer extends Component {
+
+
+
   state = {
     SUB: [
       { name: "Comparison" },
       { name: "Specification" },
-      { name: "Description" },
-      { name: "Review" }
+      { name: "Description" }
+      // { name: "Review" }
     ]
+
   };
+
+
+ 
+
   render() {
     const { product, lowestPrice } = this.props;
     const { SUB } = this.state;
@@ -156,8 +164,8 @@ class ProductContainer extends Component {
             </LowerContainer>
 
             {_.map(SUB, (d, i) => (
-              <Detail key={i}>
-                <Title>{d.name}</Title>
+              <Detail key={i} onClick={()=>this.props.handleSubMenuClick(d.name)}>
+                <Title >{d.name}</Title>
               </Detail>
             ))}
           </ProductBox>

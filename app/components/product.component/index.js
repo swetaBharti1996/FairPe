@@ -37,6 +37,7 @@ const ErrorImg = styled.img`
 const RightSide = styled.div`
   margin-left: 24px;
   flex: 1;
+  
 `;
 
 const SearchContainer = styled.div`
@@ -76,7 +77,20 @@ const Box = styled.div`
   > i {
   }
 `;
+
+const StoreCon = styled.div`
+min-height: 800px;
+  overflow-x: auto;
+  overflow: hidden;
+`;
+
 class Product extends Component {
+
+  constructor(props) {
+    super(props);
+    this.myDivToFocus = React.createRef();
+  }
+
   state = {};
 
   _getAllPrice = products => {
@@ -124,8 +138,24 @@ class Product extends Component {
     return PRODUCT;
   };
 
+  handleSubMenuClick=(data)=>{
+    console.log("clicked",this.myDivToFocus)
+    window.scrollTo({ behavior: 'smooth', top: this.myDivToFocus.current.offsetHeight })
+    // this.myDivToFocus.current.scrollIntoView({ behavior: 'smooth', block: 'start', })
+    // window.scrollTo(0, this.myDivToFocus.current.offsetHeight)
+    // if (this.myDivToFocus.current) {
+    //   console.log("clicked",this.myDivToFocus.current)
+    //   this.myDivToFocus.current.scrollBy({
+    //     top: 100,
+    //     behavior: "smooth"
+    //   });
+    // }
+
+  }
+
   render() {
     const { products } = this.props;
+    console.log("products",products)
 
     return (
       <PageWrapper>
@@ -142,15 +172,20 @@ class Product extends Component {
               <ProductContainer
                 lowestPrice={this._getLowestPrice(this._getAllPrice(products))}
                 product={this.props.products}
+                handleSubMenuClick={this.handleSubMenuClick}
               />
               <RightSide>
+                <StoreCon ref={this.myDivToFocus}>
                 <StoreContainer
                   allProduct={this._getALLProduct(products)}
                   product={this.props.products}
                 />
-                <Specification></Specification>
-                <Description></Description>
-                <Review></Review>
+                </StoreCon>
+                {!_.isEmpty(products.specification) &&
+                <Specification specification={products.specification} />}
+                {!_.isEmpty(products.description) &&
+                <Description  description={products.description}/>}
+                {/* <Review></Review> */}
               </RightSide>
             </Container>
           )}

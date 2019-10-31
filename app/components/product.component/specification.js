@@ -1,4 +1,4 @@
-import React from "react";
+import React,{Component} from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -27,16 +27,19 @@ const Empty = styled.p`
   letter-spacing: -1px;
 `;
 
-const Specification = () => {
+class Specification extends Component{
+  render(){
+    const {specification} = this.props;
   return (
     <Wrapper>
       <Title>Specification</Title>
 
       <Body>
-        <Empty>No Specification</Empty>
+        <Empty>{specification}</Empty>
       </Body>
     </Wrapper>
   );
+  }
 };
 
 export default Specification;
