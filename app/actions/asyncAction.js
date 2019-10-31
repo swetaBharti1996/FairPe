@@ -23,14 +23,14 @@ export const productDetail = id => dispatch =>
   );
 
 export const wishlist = data => dispatch =>
-  makeRequest("post", `${AppConstants.default.baseURL}/api/wishlist`, data, {
+  makeRequest("post", `${AppConstants.default.baseURL}/api/fairpe/wishlist`, data, {
     Authorization: document.cookie.replace("authtoken=", "")
   }).then(resp => dispatch(fetchWishlist()));
 
 export const fetchWishlist = () => dispatch =>
-  makeRequest("get", `${AppConstants.default.baseURL}/api/wishlist`, null, {
+  makeRequest("get", `${AppConstants.default.baseURL}/api/fairpe/wishlist`, null, {
     Authorization: document.cookie.replace("authtoken=", "")
-  }).then(resp => dispatch(syncActions.fetchWishlist(resp.data)));
+  }).then(resp => dispatch(syncActions.gotWishlist(resp.data)));
 
 //
 

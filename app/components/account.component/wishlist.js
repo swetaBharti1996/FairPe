@@ -21,7 +21,8 @@ const Content = styled.div`
 `;
 
 const Wishlist = props => {
-  const {} = props;
+  const {wishlist} = props;
+  console.log("wishlist",wishlist)
   return (
     <Wrapper>
       <Navbar>

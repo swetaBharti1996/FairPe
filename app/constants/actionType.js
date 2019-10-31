@@ -5,6 +5,7 @@ export default keyMirror({
   AUTH_MODAL: null,
   GOT_SUGGESTIONS: null,
   FETCHED_PRODUCTS: null,
+  FETCH_WISHLIST:null,
   PRODUCT_DETAIL: null,
   PARTNER: null,
   CONTACT: null,

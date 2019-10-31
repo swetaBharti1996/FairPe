@@ -10,7 +10,7 @@ import Router from "next/router";
 import { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
 import { makeRequest } from "../constants/request";
-import { login, fetchWishlist } from "../actions/syncAction";
+import { login, gotWishlist } from "../actions/syncAction";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faSearch, faUser } from "@fortawesome/free-solid-svg-icons";
 
@@ -23,26 +23,26 @@ Router.events.on("routeChangeStart", url => {
 Router.events.on("routeChangeComplete", () => NProgress.done());
 Router.events.on("routeChangeError", () => NProgress.done());
 
-// const getWishlist = async c => {
-//   const resp = await makeRequest(
-//     "get",
-//     `${AppConstant.default.baseURL}/api/wishlist`,
-//     null,
-//     {
-//       Authorization: c.authtoken.replace("authtoken=", "")
-//     }
-//   );
-//   return resp;
-// };
+const getWishlist = async c => {
+  const resp = await makeRequest(
+    "get",
+    `${AppConstant.default.baseURL}/api/fairpe/wishlist`,
+    null,
+    {
+      Authorization: c.authtoken.replace("authtoken=", "")
+    }
+  );
+  return resp;
+};
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
     const c = cookies(ctx);
     const isServer = !!ctx.req;
     if (!!c.authtoken && isServer) {
       ctx.store.dispatch(login(c.authtoken));
-      // getWishlist(c)
-      //   .then(resp => ctx.store.dispatch(fetchWishlist(resp.data)))
-      //   .catch(err => console.log(err));
+      getWishlist(c)
+        .then(resp => ctx.store.dispatch(gotWishlist(resp.data)))
+        .catch(err => console.log(err));
     }
     const pageProps = Component.getInitialProps
       ? await Component.getInitialProps(ctx)

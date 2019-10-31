@@ -280,7 +280,7 @@ class Category extends Component {
               </h3>
 
               <Stores>
-                {/* <ProductContainer>
+                <ProductContainer>
                   {products.products && (
                     <ProductListing>
                       {_.map(products.products, (product, id) => (
@@ -288,7 +288,7 @@ class Category extends Component {
                       ))}
                     </ProductListing>
                   )}
-                </ProductContainer> */}
+                </ProductContainer>
                 {/* <li>
                   <div>
                     <img src={"../../static/images/image1.png"}></img>
