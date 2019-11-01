@@ -32,6 +32,12 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css?family=Montserrat:300,700&display=swap"
             rel="stylesheet"
           ></link>
+
+          <link
+            href="https://use.fontawesome.com/releases/v5.7.2/css/svg-with-js.css"
+            rel="stylesheet"
+          />
+
           <link
             href="https://fonts.googleapis.com/icon?family=Material+Icons"
             rel="stylesheet"

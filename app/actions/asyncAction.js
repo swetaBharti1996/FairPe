@@ -83,9 +83,9 @@ export const login = data => dispatch => {
     `${AppConstants.default.baseURL}/api/fairpe/login`,
     data
   ).then(resp => {
-    document.cookie = "authtoken=" + resp.data.token;
+    document.cookie = `authtoken=${resp.data.token}; path=/`;
     dispatch(syncActions.login(resp.data.token));
-    // dispatch(fetchWishlist());
+    dispatch(fetchWishlist());
   });
 };
 
@@ -95,7 +95,7 @@ export const signup = data => dispatch =>
     `${AppConstants.default.baseURL}/api/fairpe/signup`,
     data
   ).then(resp => {
-    document.cookie = "authtoken=" + resp.data.token;
+    document.cookie = `authtoken=${resp.data.token}; path=/`;
     dispatch(syncActions.signup(resp.data.token));
   });
 
@@ -106,7 +106,7 @@ export const logout = () => dispatch => {
     null,
     { Authorization: document.cookie.replace("authtoken=", "") }
   ).then(resp => {
-    document.cookie = "authtoken=" + "";
+    document.cookie = "authtoken=; path=/";
     dispatch(syncActions.logout());
   });
 };
