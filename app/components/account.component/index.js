@@ -16,7 +16,6 @@ const Container = styled.div`
   margin-top: 24px;
 `;
 const RightContainer = styled.div`
-  flex: 1;
   display: flex;
   flex-direction: column;
   margin-left: 24px;

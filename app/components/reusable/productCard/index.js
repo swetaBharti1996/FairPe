@@ -197,7 +197,7 @@ class ProductCard extends Component {
           <Box>
             <PriceContainer>
               <p>Price starts at</p>
-              <b>Rs {product.mprice}</b>
+              <b>Rs {product.price}</b>
             </PriceContainer>
             <Wishlist onClick={this.handleWishlist}>
               {this.state.liked ? (
