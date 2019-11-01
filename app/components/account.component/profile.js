@@ -106,7 +106,7 @@ const Email = styled.p`
 
 class Profile extends Component {
   render() {
-    const { user, active, handleTabChange } = this.props;
+    const { user, active, handleTabChange, wishlist } = this.props;
     const { name, email } = user;
     return (
       <Wrapper>
@@ -128,7 +128,7 @@ class Profile extends Component {
             }}
           >
             <span>Wishlist</span>
-            <span>(2)</span>
+            <span>({wishlist.data.length})</span>
           </Activity>
           <Activity
             active={active === "password" ? true : false}

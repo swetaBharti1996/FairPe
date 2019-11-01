@@ -3,6 +3,7 @@ import styled from "styled-components";
 import _ from "lodash";
 import StarRate from "react-star-rating-component";
 
+
 const Wrapper = styled.div`
   width: 327px;
   position: sticky;
@@ -38,12 +39,13 @@ const ImageContainer = styled.div`
   }
 `;
 
-const Heart = styled.i`
+const Heart = styled.div`
   position: absolute;
   z-index: 1000;
   top: 0;
   right: 0;
   margin: 16px;
+  cursor:pointer;
 `;
 const LowerContainer = styled.div`
   display: flex;
@@ -126,8 +128,55 @@ class ProductContainer extends Component {
       { name: "Specification" },
       { name: "Description" }
       // { name: "Review" }
-    ]
+    ],
+    liked: false
 
+  };
+
+
+  componentDidMount() {
+    console.log("===============",this.props.wishlistData)
+    if (!_.isEmpty(this.props.wishlistData) && !(this.props.wishlistData.error == "unauthorized")) {
+      let flag = this.props.wishlistData.data.find(ele => {
+        return ele.pid == this.props.product.pid;
+      });
+      this.setState({ liked: flag });
+    }
+  }
+  componentDidUpdate(prevProps) {
+    if (this.props.wishlistData !== prevProps.wishlistData) {
+      if (
+        !_.isEmpty(this.props.wishlistData) &&
+        !(this.props.wishlistData.error == "unauthorized")
+      ) {
+        let flag = this.props.wishlistData.data.find(ele => {
+          return ele.pid == this.props.product.pid;
+        });
+        this.setState({ liked: flag });
+      } else {
+        this.setState({ liked: false });
+      }
+    }
+  }
+
+  handleWishlist = e => {
+    
+    e.preventDefault();
+    const { auth, product, authModal, wishlist } = this.props;
+    if (_.isEmpty(auth)) {
+      authModal(true);
+      
+    } else {
+      this.setState({ liked: !this.state.liked });
+      const data = {
+        pid: product.id,
+        title: product.title,
+        price: _.toString(product.mprice || product.price),
+        image: product.image
+      };
+      console.log("clicked",product)
+      wishlist(data);
+    }
   };
 
 
@@ -145,8 +194,12 @@ class ProductContainer extends Component {
               <ImageContainer>
                 <img src={product.image} />
               </ImageContainer>
-              <Heart>
-                <img src="../../static/images/wishlist_fill.png" />
+              <Heart onClick={this.handleWishlist}>
+              {this.state.liked ? (
+                <img src="../../../static/images/wishlist_fill.png" />
+              ) : (
+                <img src="../../../static/images/wishlist_empty.png" />
+              )}
               </Heart>
             </UpperContainer>
             <LowerContainer>

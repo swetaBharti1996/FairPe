@@ -154,7 +154,7 @@ class Product extends Component {
   }
 
   render() {
-    const { products } = this.props;
+    const { products,user, wishlistData, wishlist, authModal } = this.props;
     console.log("products",products)
 
     return (
@@ -173,6 +173,10 @@ class Product extends Component {
                 lowestPrice={this._getLowestPrice(this._getAllPrice(products))}
                 product={this.props.products}
                 handleSubMenuClick={this.handleSubMenuClick}
+                auth={user}
+                wishlistData={wishlistData}
+                wishlist={wishlist}
+                authModal={authModal}
               />
               <RightSide>
                 <StoreCon ref={this.myDivToFocus}>

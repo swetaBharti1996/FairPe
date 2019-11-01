@@ -1,6 +1,7 @@
-import React from "react";
+import React,{Component} from "react";
 import styled from "styled-components";
-
+import ProductCard from "../reusable/productCard2";
+import _ from "lodash";
 const Wrapper = styled.div``;
 
 const Navbar = styled.div`
@@ -20,22 +21,26 @@ const Content = styled.div`
   padding-top: 50px;
 `;
 
-const Wishlist = props => {
-  const {wishlist} = props;
+
+
+class Wishlist extends Component{
+  render(){
+  const {wishlist} = this.props;
   console.log("wishlist",wishlist)
   return (
     <Wrapper>
       <Navbar>
-        <NavItem>My Wishlist (2)</NavItem>
+        <NavItem>My Wishlist ({wishlist.data.length})</NavItem>
       </Navbar>
       <Content>
-        {/* {this.props.wishlist &&
-          _.map(this.props.wishlist.data, (data, index) => {
+        {wishlist &&
+          _.map(wishlist.data, (data, index) => {
             return <ProductCard data={data} />;
-          })} */}
+          })}
       </Content>
     </Wrapper>
   );
+        }
 };
 
 export default Wishlist;

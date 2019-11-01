@@ -1,8 +1,8 @@
 import { connect } from "react-redux";
 import { withRouter } from "next/router";
 import Product from "../components/product.component";
-import {} from "../actions/asyncAction";
-import {} from "../actions/syncAction";
+import {wishlist} from "../actions/asyncAction";
+import {authModal} from "../actions/syncAction";
 
 class ProductContainer extends React.Component {
   render() {
@@ -12,12 +12,18 @@ class ProductContainer extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    products: state.productDetail
+    products: state.productDetail,
+    user: state.auth,
+    wishlistData: state.wishlist
+
   };
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+ authModal:(flag) => dispatch(authModal(flag)),
+ wishlist: (data) => dispatch(wishlist(data))
+  };
 };
 
 export default connect(

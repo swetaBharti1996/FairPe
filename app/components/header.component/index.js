@@ -154,31 +154,32 @@ class Header extends React.Component {
     this.setState(prevState => ({
       showSearch: !prevState.showSearch
     }));
+    
   };
 
-  _renderSearch = () => {
-    const { pathname } = this.props.newRouter;
-    const { showSearch } = this.state;
+  // _renderSearch = () => {
+  //   const { pathname } = this.props.newRouter;
+  //   const { showSearch } = this.state;
 
-    if (pathname === "/product") {
-      return (
-        <SearchContainer>
-          {showSearch ? (
-            <Search>
-              <input></input>
-              <NormalSearchIcon onClick={this._onSearch}>
-                <FontAwesomeIcon icon="search" />
-              </NormalSearchIcon>
-            </Search>
-          ) : (
-            <SearchIcon onClick={this._onSearch}>
-              <FontAwesomeIcon icon="search" />
-            </SearchIcon>
-          )}
-        </SearchContainer>
-      );
-    } else return null;
-  };
+  //   if (pathname === "/product") {
+  //     return (
+  //       <SearchContainer>
+  //         {showSearch ? (
+  //           <Search>
+  //             <input></input>
+  //             <NormalSearchIcon onClick={this._onSearch}>
+  //               <FontAwesomeIcon icon="search" />
+  //             </NormalSearchIcon>
+  //           </Search>
+  //         ) : (
+  //           <SearchIcon onClick={this._onSearch}>
+  //             <FontAwesomeIcon icon="search" />
+  //           </SearchIcon>
+  //         )}
+  //       </SearchContainer>
+  //     );
+  //   } else return null;
+  // };
 
   _renderHeader = () => {
     window.addEventListener("scroll", () => {
@@ -208,7 +209,7 @@ class Header extends React.Component {
               justifyContent: "flex-end"
             }}
           >
-            {this._renderSearch()}
+            {/* {this._renderSearch()} */}
             <Nav>
               <li>
                 <Link route={"vendor"}>
