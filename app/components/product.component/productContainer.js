@@ -45,7 +45,6 @@ const Heart = styled.a`
   right: 0;
   margin: 16px;
   display: block;
-
   cursor: pointer;
 `;
 const LowerContainer = styled.div`
@@ -199,7 +198,10 @@ class ProductContainer extends Component {
             </LowerContainer>
 
             {_.map(SUB, (d, i) => (
-              <Detail key={i}>
+              <Detail
+                key={i}
+                onClick={() => this.props.handleSubMenuClick(d.name)}
+              >
                 <Title>{d.name}</Title>
               </Detail>
             ))}

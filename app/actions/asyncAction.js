@@ -23,7 +23,8 @@ export const productDetail = id => dispatch =>
     `${AppConstants.default.baseURL}/api/fairpe/product/${id}`
   ).then(resp => dispatch(syncActions.gotProductDetail(resp.data)));
 
-export const wishlist = data => dispatch =>
+export const wishlist = data => dispatch =>{
+console.log("here")
   makeRequest(
     "post",
     `${AppConstants.default.baseURL}/api/fairpe/wishlist`,
@@ -31,7 +32,7 @@ export const wishlist = data => dispatch =>
     {
       Authorization: document.cookie.replace("authtoken=", "")
     }
-  ).then(resp => dispatch(fetchWishlist()));
+  ).then(resp => dispatch(fetchWishlist()));}
 
 export const fetchWishlist = () => dispatch =>
   makeRequest(

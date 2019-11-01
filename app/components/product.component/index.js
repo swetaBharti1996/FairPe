@@ -154,7 +154,6 @@ class Product extends Component {
                 authModal={authModal}
                 wishlist={wishlist}
                 wishlistData={wishlistData}
-                auth={auth}
               />
               <RightSide>
                 <StoreContainer

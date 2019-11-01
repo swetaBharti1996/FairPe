@@ -1,6 +1,7 @@
-import React from "react";
+import React, { Component } from "react";
 import styled from "styled-components";
-
+import ProductCard from "../reusable/productCard2";
+import _ from "lodash";
 const Wrapper = styled.div``;
 
 const Navbar = styled.div`
@@ -33,10 +34,10 @@ const Wishlist = props => {
         </NavItem>
       </Navbar>
       <Content>
-        {/* {this.props.wishlist &&
-          _.map(this.props.wishlist.data, (data, index) => {
+        {wishlist &&
+          _.map(wishlist.data, (data, index) => {
             return <ProductCard data={data} />;
-          })} */}
+          })}
       </Content>
     </Wrapper>
   );

@@ -7,6 +7,7 @@ import Search from "../../containers/searchbar.container";
 import { PageWrapper } from "../../UI";
 import Wishlist from "./wishlist";
 import Password from "./password";
+import { wishlist } from "../../actions/asyncAction";
 
 const Container = styled.div`
   display: flex;
@@ -83,7 +84,7 @@ class Account extends Component {
   };
 
   render() {
-    const { user, query } = this.props;
+    const { user, query, wishlist, wishlistData } = this.props;
     const { active } = this.state;
 
     return (
@@ -95,6 +96,7 @@ class Account extends Component {
                 user={user}
                 active={active}
                 handleTabChange={this._handleTabChange}
+                wishlistData={wishlistData}
               />
               <RightContainer>{this._renderPage(query.ext)}</RightContainer>
             </Container>

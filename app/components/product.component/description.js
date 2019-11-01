@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -20,23 +20,30 @@ const Body = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 8px;
+  border-radius: 15px;
 `;
 
 const Empty = styled.p`
   font-size: 20px;
   letter-spacing: -1px;
+  padding: 10px;
 `;
 
-const Description = () => {
+class Description extends Component{
+
+
+render(){
+  const {description}= this.props;
+  console.log("description",this.props.description)
   return (
     <Wrapper>
       <Title>Description</Title>
-
       <Body>
-        <Empty>No Desciption</Empty>
+        <Empty>{description}</Empty>
       </Body>
     </Wrapper>
   );
+}
 };
 
 export default Description;

@@ -131,6 +131,7 @@ class ProductCard extends Component {
     }
   }
   componentDidUpdate(prevProps) {
+    console.log(this.props.wishlistData)
     if (this.props.wishlistData !== prevProps.wishlistData) {
       if (
         !_.isEmpty(this.props.wishlistData) &&
