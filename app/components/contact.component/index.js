@@ -37,15 +37,20 @@ const HeaderContainer = styled.div`
   flex-flow: column;
   height: 100%;
 
-  color: ${props => props.theme.white};
   > h2 {
     font-size: 32px;
     font-family: ${props => props.theme.font};
+    margin: 0;
+    font-weight: 600;
+    color: ${props => props.theme.white};
   }
   > h3 {
     font-size: 48px;
     font-family: ${props => props.theme.font};
     letter-spacing: -1px;
+    margin: 0;
+    font-weight: 600;
+    color: ${props => props.theme.white};
   }
 `;
 

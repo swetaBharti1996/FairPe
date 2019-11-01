@@ -72,6 +72,16 @@ const MailBox = styled.div`
   position: absolute;
   right: 150px;
   bottom: -24px;
+
+  line-height: 0.7;
+
+  box-sizing: content-box !important;
+  &::before {
+    box-sizing: content-box !important;
+  }
+  &::after {
+    box-sizing: content-box !important;
+  }
   @media only screen and (max-width: ${props => props.theme.bpxs}) {
   }
 `;
@@ -82,6 +92,7 @@ const MailInput = styled.input`
   outline: none;
   padding: 17px 30px;
   border-right: none;
+  width: 298px;
 
   @media only screen and (max-width: ${props => props.theme.bpxs}) {
   }
@@ -99,6 +110,11 @@ const MailButton = styled.a`
   font-style: bold;
   padding: 17px 30px;
   letter-spacing: -0.5px;
+  width: 200px;
+
+  &:hover {
+    color: #fff;
+  }
 `;
 const RespMailButton = styled.div`
   cursor: pointer;
@@ -266,7 +282,7 @@ class Footer extends Component {
             <Content />
           </Container>
         </Wrapper>
-        <Foot>
+        {/* <Foot>
           <FootInside>
             <Logo src="../../static/images/logo.png" />
             <PolicyBox>
@@ -274,7 +290,7 @@ class Footer extends Component {
               <p>Terms</p>
             </PolicyBox>
           </FootInside>
-        </Foot>
+        </Foot> */}
       </>
     );
   }

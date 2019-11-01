@@ -12,12 +12,19 @@ import theme from "../constants/theme";
 import { makeRequest } from "../constants/request";
 import { login, gotWishlist } from "../actions/syncAction";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faSearch, faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faSearch,
+  faUser,
+  faBars,
+  faFilter
+} from "@fortawesome/free-solid-svg-icons";
 
-library.add(faSearch, faUser);
+library.add(faSearch, faUser, faBars, faFilter);
 
-NProgress.configure({ showSpinner: true });
+NProgress.configure({ showSpinner: false });
 Router.events.on("routeChangeStart", url => {
+  console.log("start");
+
   NProgress.start();
 });
 Router.events.on("routeChangeComplete", () => NProgress.done());
@@ -58,15 +65,13 @@ class MyApp extends App {
     const { Component, pageProps, store } = this.props;
 
     return (
-      <Container>
-        <Provider store={store}>
-          <ThemeProvider theme={theme}>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </ThemeProvider>
-        </Provider>
-      </Container>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </ThemeProvider>
+      </Provider>
     );
   }
 }

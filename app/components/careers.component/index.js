@@ -60,6 +60,7 @@ const Container = styled.div`
     color: #000;
     text-align: center;
     margin-bottom: 40px;
+    font-weight: 600;
   }
 
   @media only screen and (max-width: ${props => props.theme.bpxs}) {
@@ -91,11 +92,13 @@ const Card = styled.div`
     color: #000;
     margin-bottom: 10px;
     letter-spacing: -0.5px;
+    font-weight: 600;
   }
   > h3 {
     font-size: 16px;
     margin-bottom: 10px;
     color: ${props => props.theme.primary};
+    font-weight: 600;
   }
   > p {
     font-size: 16px;

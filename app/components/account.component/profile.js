@@ -12,7 +12,8 @@ const Wrapper = styled.div`
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
   padding: 24px;
   font-family: "Karla", sans-serif;
-  
+  max-height: 300px;
+
   @media only screen and (max-width: ${props => props.theme.bpxs}) {
     width: 100%;
     box-sizing: border-box;
@@ -60,6 +61,7 @@ const Name = styled.p`
   font-weight: bolder;
   text-transform: capitalize;
   letter-spacing: -0.5px;
+  margin: 0;
 `;
 const Edit = styled.a`
   font-size: 14px;
@@ -102,6 +104,7 @@ const Activity = styled.a`
 const Email = styled.p`
   font-size: 16px;
   letter-spacing: -0.4px;
+  margin: 0;
 `;
 
 class Profile extends Component {

@@ -14,6 +14,8 @@ const Wrapper = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
   width: 100%;
   /* height: 100%; */
+
+  position: relative;
   @media only screen and (max-width: 992px) {
     width: 100%;
     border-radius: 32px;
@@ -22,6 +24,7 @@ const Wrapper = styled.div`
 const Container = styled.div`
   display: flex;
   flex-direction: row;
+
   /* padding: 38px 48px; */
 `;
 const SearchBar = styled.input`
@@ -85,6 +88,13 @@ const SearchDropdown = styled.ul`
   color: #777;
   cursor: default;
   border-radius: 49px;
+  position: absolute;
+  z-index: 100000;
+  margin: 0;
+  top: 60px;
+
+  background: #ffffff 0% 0% no-repeat padding-box;
+  box-shadow: 4px 2px 12px #00000014;
 
   @media screen and (max-width: ${props => props.theme.bpxs}) {
     top: 43px;

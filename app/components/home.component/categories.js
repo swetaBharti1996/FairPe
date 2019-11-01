@@ -14,6 +14,8 @@ const BigTitle = styled.h1`
   color: #f7f7f7;
   font-family: "Montserrat", sans-serif;
   font-weight: 800;
+
+  margin-bottom: 0;
   @media only screen and (max-width: 992px) {
     font-size: 50px;
   }
@@ -23,6 +25,7 @@ const Title = styled.h1`
   text-align: center;
   margin-top: -42px;
   margin-bottom: 70px;
+
   @media only screen and (max-width: 992px) {
     font-size: 24px;
     margin-top: -32px;
@@ -37,6 +40,7 @@ const Container = styled.ul`
   flex-flow: row wrap;
   width: 100%;
   justify-content: space-between;
+  margin: 0;
 
   > li {
     display: flex;
@@ -69,7 +73,10 @@ const CatTitle = styled.p`
   text-align: center;
   font-size: 18px;
   font-weight: bolder;
+  color: ${props => props.theme.default};
   text-transform: capitalize;
+
+  margin: 0;
   @media only screen and (max-width: 992px) {
     font-size: 16px;
   }
@@ -93,18 +100,15 @@ class Categories extends Component {
     ]
   };
 
-  onSearchclick = (category) => {
-    console.log("clicked here")
+  onSearchclick = category => {
     const newQuery = {
       term: category,
       page: 1
     };
     const query = queryString.stringify(newQuery);
-    console.log(query)
     this.props.filterResults(query);
-    this.props.categoryData(category)
-    // this.props.dispatch(filterResults(query));
-  }
+    this.props.categoryData(category);
+  };
   render() {
     const { categorys } = this.state;
     return (
@@ -114,8 +118,8 @@ class Categories extends Component {
         <Container>
           {_.map(categorys, (category, index) => (
             <li key={index}>
-              <Link route={"category"} params={{ slug: category }} >
-                <a onClick={()=>this.onSearchclick(category)}>
+              <Link route={"category"} params={{ slug: category }}>
+                <a onClick={() => this.onSearchclick(category)}>
                   <CatImage src={`../../static/images/${category}.png`} />
                   <CatTitle>{category}</CatTitle>
                 </a>

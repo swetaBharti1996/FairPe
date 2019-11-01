@@ -34,11 +34,15 @@ const HeaderContent = styled.div`
 const SubHeader = styled.p`
   font-size: 18px;
   color: #fff;
+  margin: 0;
 `;
 const Title = styled.h1`
   color: #fff;
   font-size: 48px;
   font-family: "Montserrat", sans-serif;
+
+  margin: 0;
+  font-weight: 600;
   @media only screen and (max-width: ${props => props.theme.bpxs}) {
     font-size: 32px;
   }
@@ -86,12 +90,15 @@ const FaqCard = styled.div`
     font-size: 18px;
     width: 90%;
     letter-spacing: -0.5px;
+    font-weight: 600;
+    margin: 0;
   }
   > p {
     width: 100%;
     color: #666666;
     margin-top: 10px;
     letter-spacing: -0.5px;
+    margin: 0;
   }
   @media only screen and (max-width: ${props => props.theme.bpxs}) {
     width: auto;

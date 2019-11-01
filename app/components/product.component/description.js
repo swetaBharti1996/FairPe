@@ -11,6 +11,7 @@ const Title = styled.p`
   font-weight: bold;
   letter-spacing: -0.5px;
   color: #404041;
+  margin: 0;
 `;
 
 const Body = styled.div`
@@ -24,6 +25,7 @@ const Empty = styled.p`
   font-size: 17px;
   letter-spacing: -0.4px;
   padding: 10px 0;
+  margin: 0;
 `;
 
 class Description extends Component {

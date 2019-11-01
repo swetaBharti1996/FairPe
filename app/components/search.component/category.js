@@ -65,6 +65,8 @@ const CategoryText = styled.p`
 
   margin: 0;
   font-size: 18px;
+
+  margin: 0;
   @media only screen and (max-width: 1440px) {
     font-size: 16px;
   }
@@ -74,6 +76,7 @@ const CategoryText1 = styled.p`
   font-weight: bold;
   font-size: 20px;
   text-transform: capitalize;
+  margin: 0;
   /* margin-bottom: 10px; */
   @media only screen and (max-width: 1440px) {
     font-size: 18px;

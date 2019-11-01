@@ -53,6 +53,7 @@ const HeaderInfo = styled.div`
       font-size: 24px;
       text-align: left;
       margin-bottom: 12px;
+      line-height: 1.2;
     }
     > b {
       color: #504d4d;
@@ -90,8 +91,9 @@ const LeftBody = styled.div`
     font-size: 28px;
     color: #292929;
     text-align: left;
-
     letter-spacing: -0.5px;
+    font-weight: 600;
+    margin: 0;
   }
 
   @media only screen and (max-width: ${props => props.theme.bpxs}) {
@@ -114,6 +116,7 @@ const RightBody = styled.div`
       font-size: 22px;
       text-align: left;
       letter-spacing: -1px;
+      margin: 0;
     }
   }
   @media only screen and (max-width: ${props => props.theme.bpxs}) {

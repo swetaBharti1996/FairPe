@@ -23,6 +23,7 @@ const RightContainer = styled.div`
   flex-direction: column;
   margin-left: 24px;
   padding: 16px;
+  flex: 1;
   @media only screen and (max-width: ${props => props.theme.bpxs}) {
     margin: 0;
     padding: 0;

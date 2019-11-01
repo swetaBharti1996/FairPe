@@ -19,6 +19,7 @@ const Container = styled.div`
     color: #fff;
     font-size: 24px;
     margin-bottom: 50px;
+    font-weight: 600;
   }
   > input {
     font-family: "Karla", sans-serif;

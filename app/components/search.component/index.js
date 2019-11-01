@@ -28,8 +28,8 @@ const FilterSection = styled.div`
   }
 `;
 const Container = styled.div`
-  margin-left: 40px;
-  margin-right: 40px;
+  /* margin-left: 40px;
+  margin-right: 40px; */
 `;
 const SearchByCategories = styled.div`
   height: 110px;
@@ -51,6 +51,8 @@ const SearchByCategories = styled.div`
       font-size: 18px;
       font-family: "Karla", sans-serif;
       /* margin-right: 90px; */
+
+      margin-bottom: 0;
     }
     > img {
       cursor: pointer;
@@ -133,6 +135,10 @@ class Search extends Component {
           count={count}
           total={total}
           query={query}
+          filters={filters}
+          showCat={this.state.showCat}
+          applyCategoryFilter={applyCategoryFilter}
+          applyPriceFilter={applyPriceFilter}
         />
       </Wrapper>
     );

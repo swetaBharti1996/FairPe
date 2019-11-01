@@ -2,8 +2,20 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import SearchBar from "../../containers/searchbar.container";
 import ProductCard from "../reusable/productCard";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import _ from "lodash";
 import DropDown from "../reusable/dropdown";
+import { Drawer } from "antd";
+import Filters from "./filter";
+import Price from "./price";
+import Category from "./category";
+
+const CustomDrawer = styled(Drawer)`
+  > div[class="ant-drawer-content-wrapper"] {
+    position: absolute;
+    top: 80px;
+  }
+`;
 
 const Wrapper = styled.div`
   width: 80%;
@@ -20,8 +32,11 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  height: 110px;
+  justify-content: center;
   @media only screen and (max-width: ${props => props.theme.bpxs}) {
     width: 100%;
+    display: none;
   }
 `;
 
@@ -33,8 +48,7 @@ const InnerContainer = styled.div`
 `;
 const SearchContainer = styled.div`
   width: 80%;
-  height: 70px;
-  padding: 20px 0px;
+
   @media only screen and (max-width: ${props => props.theme.bpxs}) {
     display: none;
   }
@@ -59,10 +73,15 @@ const ResultDetails = styled.div`
   }
 
   @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    align-items: center;
+    flex-flow: column-reverse;
+
     > span {
       margin: 0;
-
+      margin-right: 6px;
       font-size: 14px;
+      width: 93%;
+      display: block;
     }
   }
 `;
@@ -124,7 +143,35 @@ const DropDownContainer = styled.div`
 
   @media only screen and (max-width: ${props => props.theme.bpxs}) {
     height: 34px;
+    justify-content: flex-start;
   }
+`;
+
+const FilterBox = styled.div`
+  > span {
+    display: none;
+  }
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 12px;
+    align-items: center;
+    > span {
+      display: block;
+    }
+  }
+`;
+
+const ContainerFilter = styled.div`
+  /* margin-left: 40px;
+  margin-right: 40px; */
+`;
+
+const Icon = styled.span`
+  cursor: pointer;
 `;
 const list = [
   "Price -- Low to High",
@@ -140,7 +187,8 @@ const ProductContainer = styled.div`
 class ListingSection extends Component {
   state = {
     load: true,
-    query: {}
+    query: {},
+    drawer: false
   };
   isBottom(el) {
     return el.getBoundingClientRect().bottom - 300 <= window.innerHeight;
@@ -179,10 +227,28 @@ class ListingSection extends Component {
     this.props.applyFilter("page", page);
     this.setState({ page: page });
   };
+
+  _toggleDrawer = () => {
+    this.setState(prevState => ({
+      drawer: !prevState.drawer
+    }));
+  };
   render() {
-    const { products, count, total, query } = this.props;
+    const {
+      products,
+      count,
+      total,
+      query,
+      filters,
+      showCat,
+      applyCategoryFilter,
+      applyFilter,
+      applyPriceFilter
+    } = this.props;
     let length;
     if (products) length = Object.keys(products).length;
+
+    const { drawer } = this.state;
     return (
       <Wrapper id="products">
         <Container>
@@ -193,16 +259,60 @@ class ListingSection extends Component {
         <DataContainer>
           {!_.isEmpty(products) ? (
             <InnerContainer>
+              <CustomDrawer
+                title={"Filter"}
+                placement="left"
+                visible={drawer}
+                onClose={this._toggleDrawer}
+                closable={false}
+              >
+                {!_.isEmpty(filters) &&
+                  _.map(filters || [], (filter, index) => (
+                    <>
+                      {Object.keys(filter).map((key, i) => (
+                        <ContainerFilter>
+                          {key == "categoryBuckets" && showCat && (
+                            <Category
+                              bucket={filter[key]}
+                              updateCategory={applyCategoryFilter}
+                            />
+                          )}
+                          {key != "price" &&
+                            key != "categoryBuckets" &&
+                            !_.isEmpty(filter[key]) && (
+                              <Filters
+                                bucket={filter[key]}
+                                updateFilter={applyFilter}
+                                title={key}
+                                query={query}
+                              />
+                            )}
+                          {key == "price" && !_.isEmpty(filter[key]) && (
+                            <Price
+                              bucket={filter[key]}
+                              updateFilter={applyPriceFilter}
+                            />
+                          )}
+                        </ContainerFilter>
+                      ))}
+                    </>
+                  ))}
+              </CustomDrawer>
               <ResultDetails>
                 <span>
                   <b>{length} Results</b> from {total} results for "{query.term}
                   "
                 </span>
-                <DropDownContainer>
-                  <DropDown list={list} onSort={this.onSort} />
-                </DropDownContainer>
-              </ResultDetails>
+                <FilterBox>
+                  <DropDownContainer>
+                    <DropDown list={list} onSort={this.onSort} />
+                  </DropDownContainer>
 
+                  <Icon onClick={this._toggleDrawer}>
+                    <FontAwesomeIcon icon="filter" />
+                  </Icon>
+                </FilterBox>
+              </ResultDetails>
               <ProductContainer>
                 <ProductListing>
                   {_.map(products, (product, id) => (
@@ -210,7 +320,6 @@ class ListingSection extends Component {
                   ))}
                 </ProductListing>
               </ProductContainer>
-
               {products && length < total && (
                 <LoadMore onClick={() => this.loadMore()}>
                   <a>Load More</a>

@@ -32,6 +32,7 @@ const LeftContainer = styled.div`
     font-size: 18px;
     color: #000;
     margin-bottom: 10px;
+    font-weight: 600;
   }
   > p {
     font-family: "Karla", sans-serif;

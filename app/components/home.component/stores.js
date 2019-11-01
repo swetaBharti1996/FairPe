@@ -13,6 +13,7 @@ const Wrapper = styled.div`
     font-size: 14px;
     color: ${props => props.theme.black600};
     text-align: right;
+    margin: 0;
   }
   @media only screen and (max-width: ${props => props.theme.bpxs}) {
     width: 73%;
@@ -34,6 +35,7 @@ const StoreContainer = styled.div`
     color: #666666;
     font-size: 14px;
     font-weight: bolder;
+    margin: 0;
   }
 `;
 class Stores extends Component {

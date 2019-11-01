@@ -31,12 +31,24 @@ const Container = styled.div`
   }
 `;
 const ImageContainer = styled.div`
-  height: 180px;
-  padding-bottom: 20px;
-  padding: 8px;
   display: flex;
-  justify-content: center;
+  align-self: center;
   align-items: center;
+  height: 200px;
+  max-height: 200px;
+  line-height: 200px;
+  transition: transform 0.2s ease-in-out;
+  overflow: hidden;
+
+  > img {
+    margin: auto;
+    opacity: 1;
+    max-width: 100%;
+    max-height: 94%;
+    @media screen and (max-width: ${props => props.theme.bpxs}) {
+      max-width: 85%;
+    }
+  }
 `;
 
 const BodyContainer = styled.div`
@@ -48,6 +60,8 @@ const Title = styled.h2`
   width: 100%;
   margin-top: 17px;
   color: #000;
+
+  font-weight: 600;
   &:hover {
     color: ${props => props.theme.primary};
   }
@@ -96,6 +110,7 @@ const PriceContainer = styled.div`
     line-height: 19px;
     font-size: 16px;
     color: #666;
+    margin-bottom: 0;
   }
   > b {
     line-height: 28px;
@@ -106,6 +121,7 @@ const PriceContainer = styled.div`
   @media only screen and (max-width: 1440px) {
     > p {
       font-size: 14px;
+      margin-bottom: 0;
     }
     > b {
       font-size: 22px;
@@ -176,6 +192,8 @@ class ProductCard extends Component {
   };
   render() {
     const { product } = this.props;
+
+    console.log(product);
     return (
       <Wrapper {...this.props} href={"/product/" + product.pid} target="_blank">
         <Container>
@@ -202,7 +220,7 @@ class ProductCard extends Component {
           <Box>
             <PriceContainer>
               <p>Price starts at</p>
-              <b>Rs {product.price}</b>
+              <b>Rs {product.mprice || product.price}</b>
             </PriceContainer>
             <Wishlist onClick={this.handleWishlist}>
               {this.state.liked ? (

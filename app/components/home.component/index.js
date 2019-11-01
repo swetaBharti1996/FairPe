@@ -42,6 +42,7 @@ const MainCaption = styled.h1`
   font-size: 40px;
   margin-bottom: 16px;
   letter-spacing: -0.7px;
+  font-weight: 600;
   line-height: 1.2;
   @media only screen and (max-width: ${props => props.theme.bpxs}) {
     width: 100%;

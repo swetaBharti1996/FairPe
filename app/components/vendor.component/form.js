@@ -25,6 +25,7 @@ const Header = styled.h1`
   font-family: "Montserrat", sans-serif;
   margin-bottom: 50px;
   font-size: 32px;
+  font-weight: 600;
 
   @media only screen and (max-width: ${props => props.theme.bpxs}) {
     margin-bottom: 24px;

@@ -2,14 +2,14 @@ import styled from "styled-components";
 import { Link, Router } from "../../../server/routes";
 
 const AfterAuthContainer = styled.div`
-  position: relative;
   display: flex;
   align-items: center;
   cursor: pointer;
   color: ${props => props.theme.primary};
   border-left: 1px solid #999;
-  padding: 0 24px;
+  padding: 6px 24px;
   font-size: 18px;
+  background: #f7f7f7;
 `;
 
 const AfterAuthDropdown = styled.ul`
@@ -54,9 +54,8 @@ const AfterAuthDropdown = styled.ul`
   }
 
   @media screen and (max-width: ${props => props.theme.bpxs}) {
-    position: static;
-    padding-top: 2px;
-    margin-top: 10px;
+    top: 46px;
+    right: 8px;
   }
 `;
 

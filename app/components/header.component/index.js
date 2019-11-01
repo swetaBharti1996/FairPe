@@ -4,7 +4,14 @@ import UserDropdown from "./userDropdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "../../../server/routes";
 import { Button } from "../../UI";
+import { Drawer } from "antd";
 
+const CustomDrawer = styled(Drawer)`
+  > div[class="ant-drawer-content-wrapper"] {
+    position: absolute;
+    top: 80px;
+  }
+`;
 const Wrapper = styled.div`
   height: 80px;
   background: ${props => props.theme.white};
@@ -62,20 +69,37 @@ const List = styled.a`
 const Nav = styled.ul`
   display: flex;
   align-items: center;
+  margin: 0;
 
   > li {
     margin-right: 6px;
+
+    @media only screen and (max-width: ${props => props.theme.bpxs}) {
+      margin-bottom: 8px;
+    }
 
     &:last-child {
       display: flex;
       justify-content: flex-end;
       width: 228px;
       flex: 1;
+      position: relative;
+
+      @media only screen and (max-width: ${props => props.theme.bpxs}) {
+        justify-content: flex-start;
+        width: 100%;
+        margin-top: 32px;
+      }
     }
 
     &:nth-child(3) {
       margin-right: 40px;
     }
+  }
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: flex-start;
   }
 `;
 const SearchIcon = styled.a`
@@ -143,12 +167,37 @@ const SearchContainer = styled.div`
   align-items: center;
 `;
 
+const Icon = styled.a`
+  display: none;
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    font-size: 28px;
+    margin-right: 16px;
+    display: block;
+    cursor: pointer;
+    color: ${props => props.theme.default};
+
+    &:active {
+      color: inherit;
+    }
+
+    &:hover {
+      color: inherit;
+    }
+  }
+`;
+
 class Header extends React.Component {
-  state = { showSearch: false, displaySearch: false };
+  state = { showSearch: false, displaySearch: false, drawer: false };
 
   _onSearch = event => {
     this.setState(prevState => ({
       showSearch: !prevState.showSearch
+    }));
+  };
+
+  _toggleDrawer = () => {
+    this.setState(prevState => ({
+      drawer: !prevState.drawer
     }));
   };
 
@@ -186,9 +235,16 @@ class Header extends React.Component {
   render() {
     const { user, logout } = this.props;
 
+    const { drawer } = this.state;
+
     return (
       <Wrapper>
         <Container>
+          <div>
+            <Icon onClick={this._toggleDrawer}>
+              <FontAwesomeIcon icon="bars" />
+            </Icon>
+          </div>
           <Logo>
             <img
               src="../../static/images/logo.png"
@@ -237,6 +293,66 @@ class Header extends React.Component {
             </Nav>
           </LeftContainer>
         </Container>
+
+        <CustomDrawer
+          placement="left"
+          visible={drawer}
+          onClose={this._toggleDrawer}
+          closable={false}
+        >
+          <Nav>
+            <li>
+              <Link route={"vendor"}>
+                <List onClick={() => this.setState({ drawer: false })}>
+                  Become Partner
+                </List>
+              </Link>
+            </li>
+            <li>
+              <Link route={"about"}>
+                <List onClick={() => this.setState({ drawer: false })}>
+                  Why FairPe
+                </List>
+              </Link>
+            </li>
+
+            <li>
+              <Link route={"contact"}>
+                <List onClick={() => this.setState({ drawer: false })}>
+                  Contact us
+                </List>
+              </Link>
+            </li>
+
+            {user && !user.name ? (
+              <li>
+                <Button
+                  style={{ marginRight: 12 }}
+                  onClick={() => {
+                    this.props.openModal(true);
+                    this.setState({ drawer: false });
+                  }}
+                >
+                  Log In
+                </Button>
+
+                <Button
+                  active
+                  onClick={() => {
+                    this.props.openModal(true);
+                    this.setState({ drawer: false });
+                  }}
+                >
+                  Sign up
+                </Button>
+              </li>
+            ) : (
+              <li>
+                <UserDropdown user={user} logout={logout} />
+              </li>
+            )}
+          </Nav>
+        </CustomDrawer>
       </Wrapper>
     );
   }

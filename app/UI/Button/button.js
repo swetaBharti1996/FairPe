@@ -32,4 +32,9 @@ export default styled.a`
   @media only screen and (max-width: ${props => props.theme.bpxs}) {
     font-size: 0.75rem;
   }
+
+  &:hover {
+    color: ${props =>
+      props.active ? `${props.theme.white}` : `${props.theme.default}`};
+  }
 `;

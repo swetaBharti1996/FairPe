@@ -42,13 +42,17 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/icon?family=Material+Icons"
             rel="stylesheet"
           />
-          <link rel="stylesheet" href="/static/css/style.css" />
+
           <link rel="stylesheet" href="/static/css/loader.css" />
-          <link rel="stylesheet" href="/static/css/nprogress.css" />
+
           <style
             dangerouslySetInnerHTML={{ __html: this.props.selectStyles.css }}
           />
+
           {this.props.styleTags}
+          <link rel="stylesheet" href="/static/css/style.css" />
+          <link rel="stylesheet" href="/static/css/nprogress.css" />
+
           <script />
         </Head>
         <body style={{ margin: "0px", padding: "0px" }}>

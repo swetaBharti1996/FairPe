@@ -180,11 +180,13 @@ const LogoContainer = styled.div`
 
 const MainText = styled.h1`
   font-size: inherit;
+  margin: 0;
 `;
 
 const ProductTitle = styled.h1`
   font-size: inherit;
   width: 90%;
+  margin: 0;
   > a {
     cursor: pointer;
     font-size: inherit;

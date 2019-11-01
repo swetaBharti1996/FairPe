@@ -17,6 +17,7 @@ const NavItem = styled.p`
   font-weight: bolder;
   color: ${props => props.theme.default};
   letter-spacing: -0.9px;
+  margin: 0;
 `;
 const Content = styled.div`
   padding: 24px 0;
@@ -32,6 +33,9 @@ const Input = styled.input`
   width: 51%;
   margin-bottom: 24px;
   display: block;
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    width: 100%;
+  }
 
   &:last-child {
     margin-bottom: 0;

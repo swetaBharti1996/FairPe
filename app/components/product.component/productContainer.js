@@ -6,7 +6,7 @@ import StarRate from "react-star-rating-component";
 const Wrapper = styled.div`
   width: 327px;
   position: sticky;
-  top: 24px;
+  top: 100px;
   @media only screen and (max-width: ${props => props.theme.bpxs}) {
     width: 100%;
     position: static;
