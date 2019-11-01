@@ -27,7 +27,7 @@ onError = (err, req, res) =>
   res.end("Something went wrong. And we are reporting a custom error message.");
 
 const robotsOptions = {
-  root: "app/static/",
+  root: "app/public/static/",
   headers: {
     "Content-Type": "text/plain;charset=UTF-8"
   }
