@@ -21,12 +21,16 @@ const Content = styled.div`
 `;
 
 const Wishlist = props => {
-  const {wishlist} = props;
-  console.log("wishlist",wishlist)
+  const { wishlist, wishlistData } = props;
+
   return (
     <Wrapper>
       <Navbar>
-        <NavItem>My Wishlist (2)</NavItem>
+        <NavItem>
+          My Wishlist (
+          {(wishlistData && wishlistData.data && wishlistData.data.length) || 0}
+          )
+        </NavItem>
       </Navbar>
       <Content>
         {/* {this.props.wishlist &&

@@ -10,7 +10,7 @@ export default (state = initialState.wishlist, action) => {
         ...action.payload
       };
     case ActionTypes.LOGOUT:
-        return {};
+      return {};
     default:
       return state;
   }

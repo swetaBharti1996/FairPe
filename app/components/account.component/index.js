@@ -68,11 +68,11 @@ class Account extends Component {
   _handleTabChange = tab => this.setState({ active: tab });
 
   _renderPage = page => {
-    const { changePassword, logout } = this.props;
+    const { changePassword, logout, wishlistData, wishlist } = this.props;
 
     switch (page) {
       case MODE.WISHLIST:
-        return <Wishlist />;
+        return <Wishlist wishlist={wishlist} wishlistData={wishlistData} />;
 
       case MODE.PASSWORD:
         return <Password changePassword={changePassword} logout={logout} />;

@@ -178,7 +178,7 @@ const ProductListing = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
-  padding: 0 24px;
+  padding-right: 24px;
   /* display: grid;
   grid-template-columns: repeat(auto-fit, 350px);
   padding: 80px 0;
@@ -275,8 +275,8 @@ class Category extends Component {
           <Body>
             <LeftBody>
               <h3>
-                Explore Your favourite {this.capitalize(category.category)}{" "}
-                Stores
+                {`Explore Your favourite ${this.capitalize(category.category)}
+                 Product`}
               </h3>
 
               <Stores>

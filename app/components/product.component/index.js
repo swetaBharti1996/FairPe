@@ -8,6 +8,7 @@ import Description from "./description";
 import Specification from "./specification";
 import Review from "./review";
 import Search from "../../components/reusable/search";
+import { fetchWishlist } from "../../actions/asyncAction";
 
 const Container = styled.div`
   display: flex;
@@ -76,6 +77,12 @@ const Box = styled.div`
   > i {
   }
 `;
+
+const TAB = {
+  COMPARISON: "comparison",
+  SPECIFICATION: "specification",
+  DESCRIPTION: "description"
+};
 class Product extends Component {
   state = {};
 
@@ -124,8 +131,10 @@ class Product extends Component {
     return PRODUCT;
   };
 
+  _setPosition = () => {};
+
   render() {
-    const { products } = this.props;
+    const { products, authModal, wishlist, wishlistData, auth } = this.props;
 
     return (
       <PageWrapper>
@@ -142,15 +151,18 @@ class Product extends Component {
               <ProductContainer
                 lowestPrice={this._getLowestPrice(this._getAllPrice(products))}
                 product={this.props.products}
+                authModal={authModal}
+                wishlist={wishlist}
+                wishlistData={wishlistData}
+                auth={auth}
               />
               <RightSide>
                 <StoreContainer
                   allProduct={this._getALLProduct(products)}
                   product={this.props.products}
                 />
-                <Specification></Specification>
-                <Description></Description>
-                <Review></Review>
+                <Specification id={TAB.SPECIFICATION} />
+                <Description id={TAB.DESCRIPTION} />
               </RightSide>
             </Container>
           )}

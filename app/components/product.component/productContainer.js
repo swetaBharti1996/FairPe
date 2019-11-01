@@ -38,12 +38,15 @@ const ImageContainer = styled.div`
   }
 `;
 
-const Heart = styled.i`
+const Heart = styled.a`
   position: absolute;
   z-index: 1000;
   top: 0;
   right: 0;
   margin: 16px;
+  display: block;
+
+  cursor: pointer;
 `;
 const LowerContainer = styled.div`
   display: flex;
@@ -121,13 +124,49 @@ class ProductContainer extends Component {
     SUB: [
       { name: "Comparison" },
       { name: "Specification" },
-      { name: "Description" },
-      { name: "Review" }
+      { name: "Description" }
+      // { name: "Review" }
     ]
   };
+
+  handleWishlist = e => {
+    const { auth, product, authModal, wishlist, lowestPrice } = this.props;
+
+    if (_.isEmpty(auth)) authModal(true);
+    else {
+      const data = {
+        pid: product.id,
+        title: product.title,
+        price: _.toString(Object.values(lowestPrice)[0] || ""),
+        image: product.image
+      };
+      wishlist(data);
+    }
+  };
+
+  _checkWishlist = () => {
+    const { wishlistData, product } = this.props;
+    const allPID = [];
+
+    _.map(wishlistData.data || [], (d, i) => {
+      allPID.push(d.pid);
+    });
+
+    if (allPID.includes(product.id)) return true;
+    else return false;
+  };
+
   render() {
-    const { product, lowestPrice } = this.props;
+    const {
+      product,
+      lowestPrice,
+      authModal,
+      wishlist,
+      wishlistData
+    } = this.props;
     const { SUB } = this.state;
+
+    this._checkWishlist();
 
     return (
       <Wrapper>
@@ -137,18 +176,22 @@ class ProductContainer extends Component {
               <ImageContainer>
                 <img src={product.image} />
               </ImageContainer>
-              <Heart>
-                <img src="../../static/images/wishlist_fill.png" />
+              <Heart onClick={this.handleWishlist}>
+                {this._checkWishlist() ? (
+                  <img src="../../static/images/wishlist_fill.png" />
+                ) : (
+                  <img src="../../static/images/wishlist_empty.png" />
+                )}
               </Heart>
             </UpperContainer>
             <LowerContainer>
               <Details>{product.title}</Details>
-              <RatingContainer>
+              {/* <RatingContainer>
                 <Rating>
                   <StarRate name={"productRating"} value={4}></StarRate>
                 </Rating>
                 <Reviews>No Reviews Yet</Reviews>
-              </RatingContainer>
+              </RatingContainer> */}
               <LabelText>Price Starts at</LabelText>
               <CartContainer>
                 <Price>Rs {Object.values(lowestPrice)[0]} </Price>
