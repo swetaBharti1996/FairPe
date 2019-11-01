@@ -19,7 +19,6 @@ const Container = styled.div`
   }
 `;
 const RightContainer = styled.div`
-  flex: 1;
   display: flex;
   flex-direction: column;
   margin-left: 24px;

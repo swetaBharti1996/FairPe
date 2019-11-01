@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import ProductCard from "../reusable/productCard2";
+import ProductCard from "../reusable/productCard";
 import _ from "lodash";
 const Wrapper = styled.div``;
 
@@ -18,11 +18,16 @@ const NavItem = styled.p`
   letter-spacing: -0.9px;
 `;
 const Content = styled.div`
+display: flex;
+flex-flow: row wrap;
+justify-content: flex-start;
+height: 100%;
   padding-top: 50px;
 `;
 
 const Wishlist = props => {
   const { wishlist, wishlistData } = props;
+  console.log("wishlist",wishlistData)
 
   return (
     <Wrapper>
@@ -35,8 +40,8 @@ const Wishlist = props => {
       </Navbar>
       <Content>
         {wishlist &&
-          _.map(wishlist.data, (data, index) => {
-            return <ProductCard data={data} />;
+          _.map(wishlistData.data, (data, index) => {
+            return <ProductCard product={data} key={index} />;
           })}
       </Content>
     </Wrapper>
