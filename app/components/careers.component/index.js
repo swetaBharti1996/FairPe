@@ -6,6 +6,10 @@ import { Link } from "../../../server/routes";
 const Wrapper = styled.div`
   margin-bottom: 300px;
   font-family: "Karla", sans-serif;
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    margin-bottom: 24px;
+  }
 `;
 const HeaderContainer = styled.div`
   height: 60vh;
@@ -14,6 +18,10 @@ const HeaderContainer = styled.div`
   background-position: bottom;
   background-size: cover;
   margin-bottom: 50px;
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    display: none;
+  }
 `;
 const Overlay = styled.div`
   height: 100%;
@@ -53,12 +61,24 @@ const Container = styled.div`
     text-align: center;
     margin-bottom: 40px;
   }
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    padding-top: 40px;
+
+    > h2 {
+      letter-spacing: -0.5px;
+    }
+  }
 `;
 const CardContainer = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
   align-items: flex-start;
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    flex-flow: column;
+  }
 `;
 const Card = styled.div`
   background: #fff;
@@ -70,6 +90,7 @@ const Card = styled.div`
     font-size: 24px;
     color: #000;
     margin-bottom: 10px;
+    letter-spacing: -0.5px;
   }
   > h3 {
     font-size: 16px;
@@ -80,6 +101,19 @@ const Card = styled.div`
     font-size: 16px;
     color: #666;
     margin-bottom: 40px;
+    letter-spacing: -0.5px;
+  }
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    width: 100%;
+    flex: 1;
+    padding: 24px;
+    box-sizing: border-box;
+
+    margin-bottom: 32px;
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 `;
 const Data = [

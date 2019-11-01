@@ -5,8 +5,11 @@ const Wrapper = styled.div`
   background: #360a6a;
   /* height: 50vh; */
   width: 100%;
-  margin-top: -30px;
+  margin-top: 30px;
   border-radius: 10px;
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    margin: 0;
+  }
 `;
 const Container = styled.div`
   width: 80%;
@@ -30,9 +33,6 @@ const Container = styled.div`
     ::placeholder {
       color: #fff !important;
     }
-    @media only screen and (max-width: 1440px) {
-      font-size: 16px;
-    }
   }
   > textarea {
     font-family: "Karla", sans-serif;
@@ -46,6 +46,21 @@ const Container = styled.div`
     margin-bottom: 20px !important;
     ::placeholder {
       color: #fff !important;
+    }
+  }
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    margin: 0;
+    padding: 24px;
+    width: 100%;
+
+    box-sizing: border-box;
+    > h3 {
+      font-size: 21px;
+      margin-bottom: 24px;
+    }
+    > input {
+      padding: 13px 25px;
     }
   }
 `;

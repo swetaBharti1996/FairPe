@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export default styled.button`
+export default styled.a`
   font-family: ${props => props.theme.font2};
   font-size: 0.95rem;
   position: relative;
@@ -20,14 +20,16 @@ export default styled.button`
   user-select: none;
   outline: none;
   cursor: pointer;
-  letter-spacing:-0.2px;
+  letter-spacing: -0.5px;
   width: ${props => (props.fluid ? "100%" : "initial")};
   color: ${props =>
-    props.active ? `${props.theme.white}` : `${props.theme.black600}`};
+    props.active ? `${props.theme.white}` : `${props.theme.default}`};
   background: ${props =>
     props.active
       ? `linear-gradient(111deg, ${props.theme.primary}, ${props.theme.secondary})`
       : "#fff"};
-  /* box-shadow: ${props =>
-    `0 4px 6px ${props.theme.gray800}1c, 0 1px 3px ${props.theme.black}14`}; */
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    font-size: 0.75rem;
+  }
 `;

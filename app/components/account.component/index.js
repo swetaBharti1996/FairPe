@@ -13,7 +13,10 @@ const Container = styled.div`
   display: flex;
   width: 100%;
   flex-direction: row;
-  margin-top: 24px;
+  padding-top: 24px;
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    flex-flow: column;
+  }
 `;
 const RightContainer = styled.div`
   flex: 1;
@@ -21,6 +24,11 @@ const RightContainer = styled.div`
   flex-direction: column;
   margin-left: 24px;
   padding: 16px;
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    margin: 0;
+    padding: 0;
+    margin-top: 32px;
+  }
 `;
 
 const Navbar = styled.div`

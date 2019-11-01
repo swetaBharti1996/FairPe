@@ -4,15 +4,24 @@ import { Link } from "../../../server/routes";
 
 const Wrapper = styled.div`
   display: flex;
-  width: 100%;
-  margin: auto;
-  /* border-bottom: 1px solid #ff632a; */
+  width: ${props => props.theme.smallScreen};
+  margin: 0 auto;
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    width: 100%;
+    margin: 0 auto;
+  }
 `;
 const Container = styled.div`
   margin: auto;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    flex-flow: column;
+    justify-content: flex-start;
+  }
 `;
 const LeftContainer = styled.div`
   width: 30%;
@@ -28,12 +37,22 @@ const LeftContainer = styled.div`
     font-family: "Karla", sans-serif;
     font-size: 16px;
   }
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    width: 100%;
+    margin-bottom: 24px;
+  }
 `;
 const RightContainer = styled.div`
   width: 50%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    width: 100%;
+    flex-flow: column;
+  }
 `;
 const Column = styled.div`
   display: flex;
@@ -43,17 +62,27 @@ const Column = styled.div`
     font-family: "Karla", sans-serif;
     font-size: 22px;
     font-weight: bolder;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     color: #000;
   }
   > a {
     font-family: "Karla", sans-serif;
     font-size: 16px;
     font-weight: lighter;
-    margin-bottom: 10px;
+    margin-bottom: 4px;
     cursor: pointer;
     &:hover {
       color: ${props => props.theme.primary};
+    }
+  }
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    width: 100%;
+    margin-bottom: 16px;
+    > h1 {
+    }
+    &:last-child {
+      margin-bottom: 0;
     }
   }
 `;

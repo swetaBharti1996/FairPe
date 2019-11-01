@@ -10,113 +10,93 @@ const Wrapper = styled.div`
   background: ${props => props.theme.white};
   width: 100%;
   position: relative;
-  margin-top: 100px;
-  @media only screen and (max-width: ${props => props.theme.bpxlg}) {
-    margin-top: 50px;
-  }
-  @media only screen and (max-width: ${props => props.theme.bpmd}) {
+  margin-top: 160px;
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    margin-top: 160px;
   }
 `;
 
-const CategoryTag = styled.div`
+const CategoryTag = styled.p`
   border-left: 2px solid ${props => props.theme.secondary};
   color: ${props => props.theme.primary};
-  padding: 15px 15px;
+  padding: 15px;
   width: 310px;
   background: rgba(245, 245, 245, 0.57);
-  font-size: 36px;
+  font-size: 27px;
   font-weight: lighter;
   border-radius: 0px 35px 35px 0px;
-  margin-bottom: 50px;
-  @media only screen and (max-width: ${props => props.theme.bpxlg}) {
-    font-size: 28px;
-    width: 250px;
-  }
-  @media only screen and (max-width: ${props => props.theme.bpmd}) {
-    font-size: 24px;
-    padding: 10px 15px;
-    margin-bottom: 30px;
-    width: 200px;
+  margin-bottom: 32px;
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    padding: 11px;
+    width: 60%;
+    font-size: 20px;
   }
 `;
 const MainCaption = styled.h1`
   font-family: ${props => props.theme.font2};
   width: 53%;
-
   text-transform: none !important;
-  color: ${props => props.theme.black200};
-  /* line-height: 60px; */
-  font-size: 44px;
-  margin-bottom: 20px;
-  /* letter-spacing: -1px; */
-  @media only screen and (max-width: ${props => props.theme.bpxlg}) {
-    width: 50%;
-    font-size: 36px;
-    line-height: 44px;
-  }
-  @media only screen and (max-width: ${props => props.theme.bpmd}) {
+  color: ${props => props.theme.default};
+  font-size: 40px;
+  margin-bottom: 16px;
+  letter-spacing: -0.7px;
+  line-height: 1.2;
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
     width: 100%;
-    font-size: 32px;
+    font-size: 28px;
   }
 `;
 const Tagline = styled.p`
   font-size: 24px;
-  color: ${props => props.theme.black600};
+  color: ${props => props.theme.gray600};
   margin-bottom: 70px;
   font-weight: bold;
   letter-spacing: -0.7px;
-  @media only screen and (max-width: ${props => props.theme.bpxlg}) {
-    margin-bottom: 50px;
-    font-size: 22px;
-  }
-  @media only screen and (max-width: ${props => props.theme.bpmd}) {
-    margin-bottom: 100px;
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    font-size: 19px;
+    margin-bottom: 70px;
   }
 `;
 const SearchContainer = styled.div`
   position: relative;
   z-index: 100;
   /* height: 90px; */
-  margin-bottom: 30px;
-  height: 90px;
+  margin-bottom: 16px;
   width: 70%;
-  @media only screen and (max-width: ${props => props.theme.bpxlg}) {
-    height: 70px;
-  }
-  @media only screen and (max-width: ${props => props.theme.bpmd}) {
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
     width: 100%;
-    margin-bottom: 20px;
   }
 `;
 
 const Illustrator = styled.div`
   position: absolute;
-  top: -61px;
-  right: -15px;
-  width: 61%;
-  height: 610px;
+  top: -100px;
+  right: -13px;
+  width: 63%;
+  height: 614px;
   background: url("../../static/images/maybe.png");
   direction: flex;
   justify-content: center;
   align-items: center;
-
   background-size: cover;
-  @media only screen and (max-width: ${props => props.theme.bpxlg}) {
-    top: -68px;
-    height: 533px;
-  }
+
   > div {
     position: relative;
-
     width: 100%;
     height: 100%;
     > img {
       position: absolute;
       width: 51%;
       height: auto;
-      top: 171px;
-      right: 139px;
+      top: 222px;
+      right: 103px;
     }
+  }
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    display: none;
   }
 `;
 
@@ -151,7 +131,7 @@ class Home extends Component {
   render() {
     const { category } = this.state;
     return (
-      <PageWrapper style={{ position: "relative" }}>
+      <PageWrapper>
         <Wrapper>
           <CategoryTag>{category}|</CategoryTag>
           <MainCaption>
@@ -168,7 +148,10 @@ class Home extends Component {
           </Illustrator>
           <Stores />
 
-          <Categories filterResults={this.props.filterResults} categoryData={this.props.categoryData}/>
+          <Categories
+            filterResults={this.props.filterResults}
+            categoryData={this.props.categoryData}
+          />
           <Description />
         </Wrapper>
       </PageWrapper>

@@ -21,6 +21,9 @@ const NavItem = styled.p`
 const Content = styled.div`
   padding: 24px 0;
   margin-top: 24px;
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    margin: 0;
+  }
 `;
 
 const Input = styled.input`

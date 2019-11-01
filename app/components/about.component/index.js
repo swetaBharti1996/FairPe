@@ -28,23 +28,38 @@ const Header = styled.div`
 const Body = styled.div`
   width: 84%;
   margin: auto;
-  @media only screen and (max-width: ${props => props.theme.bpxlg}) {
+  padding-top: 40px;
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
     width: 100%;
   }
 `;
 
 const Box = styled.div`
   position: relative;
-  margin-top: 40px;
+
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   align-items: center;
   &:first-child {
     padding-bottom: 80px;
+
+    @media only screen and (max-width: ${props => props.theme.bpxs}) {
+      padding-bottom: 24px;
+    }
   }
   &:last-child {
     margin-bottom: 40px;
+
+    @media only screen and (max-width: ${props => props.theme.bpxs}) {
+      flex-flow: column;
+
+      margin-bottom: 24px;
+    }
+  }
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    margin: 0;
+    flex-flow: column-reverse;
   }
 `;
 
@@ -61,6 +76,13 @@ const TextContainer = styled.div`
     color: #6d6d6d;
     font-size: 16px;
   }
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    width: 100%;
+    > b {
+      font-size: 21px;
+    }
+  }
 `;
 
 const ImageContainer = styled.div`
@@ -72,6 +94,10 @@ const ImageContainer = styled.div`
     height: 100%;
 
     border-radius: 10px;
+  }
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    width: 80%;
   }
 `;
 
@@ -87,6 +113,10 @@ const OverlayImage = styled.div`
     height: 100%;
 
     border-radius: 10px;
+  }
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    width: 80%;
   }
 `;
 

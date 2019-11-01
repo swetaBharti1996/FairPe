@@ -6,10 +6,14 @@ export default styled.div`
   border: 0;
   outline: 0;
   font-size: 100%;
-  vertical-align: baseline;
   background: 0 0;
   font-family: ${props => props.theme.font} !important;
   font-size: 14px !important;
-  display: flex;
-  flex-flow: column;
+  /* position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: auto;
+  z-index: -1; */
 `;

@@ -5,7 +5,7 @@ import { PageWrapper } from "../../UI";
 
 const Wrapper = styled.div`
   margin: auto;
-  margin-top: 30px;
+  padding-top: 30px;
   display: flex;
 `;
 const Row = styled.div`
@@ -13,16 +13,26 @@ const Row = styled.div`
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    flex-flow: column;
+  }
 `;
 const BigColumn = styled.div`
   display: flex;
   flex-direction: column;
   width: 59%;
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    width: 100%;
+  }
 `;
 const SmallColumn = styled.div`
   display: flex;
   flex-direction: column;
   width: 39%;
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    width: 100%;
+  }
 `;
 const Data = styled.div`
   margin-bottom: 30px;

@@ -12,10 +12,10 @@ const Wrapper = styled.div`
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
   padding: 24px;
   font-family: "Karla", sans-serif;
-  max-height: 30vh;
-  @media only screen and (max-width: 1440px) {
-    width: 20%;
-    max-height: 35vh;
+  
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    width: 100%;
+    box-sizing: border-box;
   }
 `;
 const UserDetails = styled.div`

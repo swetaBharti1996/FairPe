@@ -30,5 +30,8 @@ export default {
   bpsm: "768px",
   bpmd: "992px",
   bplg: "1200px",
-  bpxlg: "1366px"
+  bpxlg: "1366px",
+
+  bigScreen: "1400px",
+  smallScreen: "1200px"
 };

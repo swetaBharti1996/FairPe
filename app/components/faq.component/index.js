@@ -4,11 +4,11 @@ import Form from "./form";
 import { PageWrapper } from "../../UI";
 
 const Wrapper = styled.div`
-  margin-top: 100px;
+  margin-top: 80px;
 `;
 const Header = styled.div`
-  height: 10vh;
-  padding: 80px 15%;
+  height: 24vh;
+
   background: transparent
     linear-gradient(
       270deg,
@@ -18,8 +18,17 @@ const Header = styled.div`
       #803215c4 100%
     )
     0% 0% no-repeat padding-box;
-  @media only screen and (max-width: 1440px) {
-    padding: 80px 10%;
+  display: flex;
+`;
+
+const HeaderContent = styled.div`
+  width: ${props => props.theme.smallScreen};
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  margin: 0 auto;
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    width: 93%;
   }
 `;
 const SubHeader = styled.p`
@@ -30,15 +39,17 @@ const Title = styled.h1`
   color: #fff;
   font-size: 48px;
   font-family: "Montserrat", sans-serif;
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    font-size: 32px;
+  }
 `;
 const Container = styled.div`
   display: flex;
   flex-flow: row wrap;
-
   margin: auto;
   justify-content: space-between;
-  @media only screen and (max-width: 1440px) {
-    width: 80%;
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    flex-flow: column;
   }
 `;
 const FaqContainer = styled.div`
@@ -46,11 +57,19 @@ const FaqContainer = styled.div`
   flex-direction: column;
   width: 45%;
   margin-top: 30px;
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    width: 100%;
+    margin-bottom: 40px;
+  }
 `;
 const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 42%;
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    width: 100%;
+  }
 `;
 const FaqCard = styled.div`
   display: flex;
@@ -66,11 +85,16 @@ const FaqCard = styled.div`
   > h4 {
     font-size: 18px;
     width: 90%;
+    letter-spacing: -0.5px;
   }
   > p {
     width: 100%;
     color: #666666;
     margin-top: 10px;
+    letter-spacing: -0.5px;
+  }
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    width: auto;
   }
 `;
 const Arrow = styled.div`
@@ -132,10 +156,12 @@ class Faq extends Component {
     return (
       <Wrapper>
         <Header>
-          <SubHeader>All your concerns are taken care</SubHeader>
-          <Title>FAQ</Title>
+          <HeaderContent>
+            <SubHeader>All your concerns are taken care</SubHeader>
+            <Title>FAQ</Title>
+          </HeaderContent>
         </Header>
-        <PageWrapper style={{ position: "static" }}>
+        <PageWrapper style={{ marginTop: 24 }}>
           <Container>
             <FaqContainer>
               {faqData.map((item, key) => (

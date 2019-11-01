@@ -5,15 +5,8 @@ import { PageWrapper } from "../../UI";
 import { clearCategoryData } from "../../actions/syncAction";
 import _ from "lodash";
 
-const Wrapper = styled.div`
-  min-height: 500px;
-  text-align: center;
-
-  font-family: "Montserrat";
-`;
-
 const Header = styled.div`
-  margin-top: 30px;
+  padding-top: 24px;
   position: relative;
 
   > div {
@@ -25,6 +18,14 @@ const Header = styled.div`
     > img {
       width: 100%;
       height: 100%;
+    }
+  }
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    > div {
+      &:first-child {
+        width: 100%;
+        height: 160px;
+      }
     }
   }
 `;
@@ -68,11 +69,17 @@ const HeaderInfo = styled.div`
       text-align: left;
     }
   }
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    display: none;
+  }
 `;
 
 const Body = styled.div`
-  margin-top: 64px;
+  margin-top: 32px;
   display: flex;
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    flex-flow: column-reverse;
+  }
 `;
 
 const LeftBody = styled.div`
@@ -83,6 +90,15 @@ const LeftBody = styled.div`
     font-size: 28px;
     color: #292929;
     text-align: left;
+
+    letter-spacing: -0.5px;
+  }
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    width: 100%;
+    > h3 {
+      font-size: 24px;
+    }
   }
 `;
 
@@ -91,25 +107,24 @@ const RightBody = styled.div`
 
   > div {
     margin-left: 50px;
-    @media only screen and (max-width: ${props => props.theme.bpxlg}) {
-      margin-left: 35px;
-    }
 
     > p {
       font-family: "Karla";
       color: #1d1d1d;
-      font-size: 24px;
+      font-size: 22px;
       text-align: left;
-      @media only screen and (max-width: ${props => props.theme.bpxlg}) {
-        font-size: 23px;
-      }
+      letter-spacing: -1px;
+    }
+  }
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    > div {
+      margin: 0;
     }
   }
 `;
 
 const Stores = styled.ul`
-  margin-top: 35px;
-
+  margin-top: 24px;
   display: flex;
   flex-flow: row wrap;
 
@@ -118,9 +133,6 @@ const Stores = styled.ul`
     margin-right: 32px;
     margin-bottom: 35px;
 
-    @media only screen and (max-width: ${props => props.theme.bpxlg}) {
-      width: 48.37%;
-    }
     &:nth-child(2n) {
       margin-right: 0;
     }
@@ -128,7 +140,6 @@ const Stores = styled.ul`
       opacity: 1;
       height: auto;
       > img {
-        /* box-shadow: 0px 3px 6px #00000029; */
         border-radius: 10px;
         width: 100%;
         height: 100%;
@@ -144,10 +155,13 @@ const Stores = styled.ul`
       margin-top: 8px;
     }
   }
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    border-top: 1px solid #999;
+  }
 `;
 
 const ListCategory = styled.div`
-  margin-top: 44px;
+  margin-top: 40px;
 
   > ul {
     > li {
@@ -156,11 +170,15 @@ const ListCategory = styled.div`
         color: #1d1d1d;
         font-size: 18px;
         text-transform: capitalize;
+        line-height: 1.2;
+        letter-spacing: -0.5px;
+        display: block;
+        margin-bottom: 16px;
       }
 
       > ul {
         > li {
-          margin-top: 12px;
+          margin-top: 8px;
           color: #1d1d1d;
           font-size: 16px;
           text-transform: capitalize;
@@ -178,16 +196,12 @@ const ProductListing = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
-  padding-right: 24px;
-  /* display: grid;
-  grid-template-columns: repeat(auto-fit, 350px);
-  padding: 80px 0;
-  padding-left: 30px;
-  @media only screen and (max-width: 1440px) {
-    grid-template-columns: repeat(auto-fit, 290px);
-    padding-left: 50px;
-  } */
-  /* margin-bottom: 50px; */
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    justify-content: center;
+    > a {
+      width: 46.5% !important;
+    }
+  }
 `;
 
 const ProductContainer = styled.div`
@@ -254,156 +268,73 @@ class Category extends Component {
 
   render() {
     const { filters, products, category } = this.props;
-    console.log("filters======", category);
+
     return (
-      <Wrapper>
-        <PageWrapper>
-          <Header>
+      <PageWrapper>
+        <Header>
+          <div>
+            <img src={category.banner && category.banner.url}></img>
+          </div>
+
+          <HeaderInfo>
             <div>
-              <img src={category.banner && category.banner.url}></img>
+              <p>Present the best version of yourself</p>
+              <b>{category.category && category.category.toUpperCase()}</b>
+              <span>Explore</span>
             </div>
+          </HeaderInfo>
+        </Header>
 
-            <HeaderInfo>
-              <div>
-                <p>Present the best version of yourself</p>
-                <b>{category.category && category.category.toUpperCase()}</b>
-                <span>Explore</span>
-              </div>
-            </HeaderInfo>
-          </Header>
-
-          <Body>
-            <LeftBody>
-              <h3>
-                {`Explore Your favourite ${this.capitalize(category.category)}
+        <Body>
+          <LeftBody>
+            <h3>
+              {`Explore Your favourite ${this.capitalize(category.category)}
                  Product`}
-              </h3>
+            </h3>
 
-              <Stores>
-                <ProductContainer>
-                  {products.products && (
-                    <ProductListing>
-                      {_.map(products.products, (product, id) => (
-                        <ProductCard key={id} product={product} />
-                      ))}
-                    </ProductListing>
-                  )}
-                </ProductContainer>
-                {/* <li>
-                  <div>
-                    <img src={"../../static/images/image1.png"}></img>
-                  </div>
-                  <span>Max</span>
-                </li>
-
-                <li>
-                  <div>
-                    <img src={"../../static/images/image2.png"}></img>
-                  </div>
-                  <span>Reliance Trends</span>
-                </li>
-                <li>
-                  <div>
-                    <img src={"../../static/images/image3.png"}></img>
-                  </div>
-                  <span>SOCH</span>
-                </li>
-
-                <li>
-                  <div>
-                    <img src={"../../static/images/image4.png"}></img>
-                  </div>
-                  <span>Bata</span>
-                </li> */}
-                {/* <li>
-                  <div>
-                    <img src={"../../static/images/image5.png"}></img>
-                  </div>
-                  <span>Vans</span>
-                </li>
-
-                <li>
-                  <div>
-                    <img src={"../../static/images/image6.png"}></img>
-                  </div>
-                  <span>Brand Factory</span>
-                </li> */}
-              </Stores>
-            </LeftBody>
-            <RightBody>
-              <div>
-                <p>Explore A Category</p>
-                {category.subcategory ? (
-                  <ListCategory>
-                    <ul>
-                      {_.map(category.subcategory, (category, index1) => (
-                        <li>
-                          <b>{category.main}</b>
-                          <ul>
-                            {_.map(category.sub, (d, index2) => (
-                              <li>{d}</li>
-                            ))}
-                          </ul>
-                        </li>
-                      ))}
-                    </ul>
-                  </ListCategory>
-                ) : (
-                  <ListCategory>
-                    <p>No Data</p>
-                  </ListCategory>
+            <Stores>
+              <ProductContainer>
+                {products.products && (
+                  <ProductListing>
+                    {_.map(products.products, (product, id) => (
+                      <ProductCard
+                        style={{ width: "25%" }}
+                        key={id}
+                        product={product}
+                      />
+                    ))}
+                  </ProductListing>
                 )}
-              </div>
-            </RightBody>
-          </Body>
-
-          {/* <BrandContainer>
-            <h3>Explore Your favourite Brands</h3>
-            <ul>
-              <li>
-                <div>
-                  <img src={"../../static/images/peterengland.png"}></img>
-                </div>
-              </li>
-              <li>
-                <div>
-                  <img src={"../../static/images/nike.png"}></img>
-                </div>
-              </li>
-              <li>
-                <div>
-                  <img src={"../../static/images/vans.png"}></img>
-                </div>
-              </li>
-              <li>
-                <div>
-                  <img src={"../../static/images/max.png"}></img>
-                </div>
-              </li>
-              <li>
-                <div>
-                  <img src={"../../static/images/peterengland.png"}></img>
-                </div>
-              </li>
-              <li>
-                <div>
-                  <img src={"../../static/images/nike.png"}></img>
-                </div>
-              </li>
-              <li>
-                <div>
-                  <img src={"../../static/images/vans.png"}></img>
-                </div>
-              </li>
-              <li>
-                <div>
-                  <img src={"../../static/images/max.png"}></img>
-                </div>
-              </li>
-            </ul>
-          </BrandContainer> */}
-        </PageWrapper>
-      </Wrapper>
+              </ProductContainer>
+            </Stores>
+          </LeftBody>
+          <RightBody>
+            <div>
+              <p>Explore A Category</p>
+              {category.subcategory ? (
+                <ListCategory>
+                  <ul>
+                    {_.map(category.subcategory, (category, index1) => (
+                      <li>
+                        <b>{category.main}</b>
+                        <ul>
+                          {_.map(category.sub, (d, index2) => (
+                            <li>{d}</li>
+                          ))}
+                        </ul>
+                      </li>
+                    ))}
+                  </ul>
+                </ListCategory>
+              ) : (
+                <ListCategory>
+                  <p>No Data</p>
+                </ListCategory>
+              )}
+            </div>
+          </RightBody>
+        </Body>
+      </PageWrapper>
     );
   }
 }

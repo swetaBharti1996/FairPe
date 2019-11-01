@@ -4,7 +4,7 @@ import { PageWrapper } from "../../UI";
 
 const Wrapper = styled.div`
   min-height: 750px;
-  margin-top: 100px;
+  margin-top: 80px;
 `;
 
 const HeaderBackground = styled.div`
@@ -13,8 +13,8 @@ const HeaderBackground = styled.div`
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover;
   background-position-y: -281px;
-  @media only screen and (max-width: ${props => props.theme.bpxlg}) {
-    background-position-y: -165px;
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    display: none;
   }
 `;
 const Header = styled.div`
@@ -51,6 +51,12 @@ const HeaderContainer = styled.div`
 
 const Body = styled.div`
   position: relative;
+  display: flex;
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    padding-top: 32px;
+
+    flex-flow: column-reverse;
+  }
 `;
 
 const Detail = styled.ul`
@@ -61,12 +67,25 @@ const Detail = styled.ul`
     margin-bottom: 16px;
     > b {
       font-size: 22px;
-      /* color: ${props => props.theme.primary}; */
     }
 
     > p {
       font-size: 17px;
       color: #5a5a5a;
+    }
+  }
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    width: 90%;
+    margin: 0 auto;
+
+    > li {
+      > b {
+        letter-spacing: -1px;
+      }
+      > p {
+        letter-spacing: -0.5px;
+      }
     }
   }
 `;
@@ -81,6 +100,13 @@ const FormContainer = styled.div`
   height: 481px;
   top: -146px;
   right: 0;
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    position: static;
+    width: 100%;
+    margin-bottom: 24px;
+    height: auto;
+  }
 `;
 
 const FormInside = styled.div`
@@ -91,6 +117,16 @@ const FormInside = styled.div`
     color: ${props => props.theme.white};
     margin-bottom: 32px;
     display: block;
+  }
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    padding: 24px;
+
+    > b {
+      font-size: 24px;
+      letter-spacing: -1px;
+      margin-bottom: 24px;
+    }
   }
 `;
 
@@ -106,6 +142,10 @@ const Input = styled.input`
   font-size: 18px;
   margin-bottom: 24px !important;
   color: ${props => props.theme.white} !important;
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    margin-bottom: 16px !important;
+    height: 40px;
+  }
 `;
 
 const TextArea = styled.textarea`
@@ -138,6 +178,11 @@ const SubmitButton = styled.button`
   outline: none;
   cursor: pointer;
   border: none;
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    width: 130px;
+    height: 39px;
+    font-size: 16px;
+  }
 `;
 
 class Contact extends Component {

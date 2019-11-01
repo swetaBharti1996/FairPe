@@ -1,18 +1,15 @@
 import styled from "styled-components";
 
 export default styled.div`
-  width: 75%;
-  margin: auto;
+  width: ${props => props.theme.smallScreen};
+  margin: 0 auto;
   height: 100%;
   padding-bottom: 24px;
-  position: relative;
-  top: 100px;
+  margin-top: 80px;
   min-height: 500px;
-  @media only screen and (max-width: ${props => props.theme.bpxlg}) {
-    width: 90%;
-    top: 80px;
-  }
-  @media only screen and (max-width: 992px) {
-    width: 90%;
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    width: 93%;
+    margin: 0 auto;
+    margin-top: 80px;
   }
 `;

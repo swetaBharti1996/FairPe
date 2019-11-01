@@ -25,18 +25,33 @@ const Header = styled.h1`
   font-family: "Montserrat", sans-serif;
   margin-bottom: 50px;
   font-size: 32px;
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    margin-bottom: 24px;
+    font-size: 28px;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+  }
 `;
 const SubHeader = styled.h4`
   color: #fff;
   font-size: 22px;
   font-family: "Karla", sans-serif;
   margin-bottom: 20px;
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    margin-bottom: 8px;
+  }
 `;
 const Content = styled.p`
   color: #fff;
   font-family: "Karla", sans-serif;
   margin-bottom: 20px;
   font-size: 16px;
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    letter-spacing: -0.3px;
+  }
 `;
 const Input = styled.input`
   background: rgba(255, 255, 255, 0.2);
@@ -49,6 +64,10 @@ const Input = styled.input`
   margin-bottom: 20px !important;
   ::placeholder {
     color: #fff !important;
+  }
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    width: 100%;
   }
 `;
 const Button = styled.button`
@@ -64,8 +83,11 @@ const Button = styled.button`
   padding: 15px 0;
   font-family: "Karla", sans-serif;
   text-align: center;
-  @media only screen and (max-width: 1440px) {
-    font-size: 16px;
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    font-size: 15px;
+
+    width: 100%;
   }
 `;
 

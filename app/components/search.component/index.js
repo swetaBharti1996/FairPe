@@ -11,17 +11,20 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   background: #f7f7f7;
-  margin-top: 100px;
+  margin-top: 80px;
 
-  @media only screen and (max-width: 1440px) {
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    width: 93%;
+    margin: 0 auto;
+    background: #fff;
     margin-top: 80px;
   }
 `;
 const FilterSection = styled.div`
   width: 20%;
-  height: 100%;
-  @media only screen and (max-width: 1440px) {
-    width: 21%;
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    display: none;
   }
 `;
 const Container = styled.div`
@@ -52,14 +55,7 @@ const SearchByCategories = styled.div`
     > img {
       cursor: pointer;
       height: 25px;
-      @media only screen and (max-width: 1440px) {
-        font-size: 14px;
-        height: 20px;
-      }
     }
-  }
-  @media only screen and (max-width: 1440px) {
-    height: 100px;
   }
 `;
 class Search extends Component {

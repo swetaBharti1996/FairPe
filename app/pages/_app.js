@@ -16,12 +16,12 @@ import { faSearch, faUser } from "@fortawesome/free-solid-svg-icons";
 
 library.add(faSearch, faUser);
 
-// NProgress.configure({ showSpinner: true });
-// Router.events.on("routeChangeStart", url => {
-//   NProgress.start();
-// });
-// Router.events.on("routeChangeComplete", () => NProgress.done());
-// Router.events.on("routeChangeError", () => NProgress.done());
+NProgress.configure({ showSpinner: true });
+Router.events.on("routeChangeStart", url => {
+  NProgress.start();
+});
+Router.events.on("routeChangeComplete", () => NProgress.done());
+Router.events.on("routeChangeError", () => NProgress.done());
 
 const getWishlist = async c => {
   const resp = await makeRequest(
@@ -43,7 +43,6 @@ class MyApp extends App {
       ctx.store.dispatch(login(c.authtoken));
       await getWishlist(c)
         .then(resp => {
-          console.log(resp.data);
           ctx.store.dispatch(gotWishlist(resp.data));
         })
         .catch(err => console.log(err));

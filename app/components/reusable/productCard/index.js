@@ -12,8 +12,13 @@ const Wrapper = styled.a`
   justify-content: center;
   width: 20%;
 
-  @media only screen and (max-width: 1440px) {
-    width: 25%;
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    width: 46.5%;
+    margin-right: 24px;
+
+    &:nth-child(2n) {
+      margin-right: 0;
+    }
   }
 
   /* border: 1px solid; */
@@ -131,7 +136,7 @@ class ProductCard extends Component {
     }
   }
   componentDidUpdate(prevProps) {
-    console.log(this.props.wishlistData)
+    console.log(this.props.wishlistData);
     if (this.props.wishlistData !== prevProps.wishlistData) {
       if (
         !_.isEmpty(this.props.wishlistData) &&
@@ -172,7 +177,7 @@ class ProductCard extends Component {
   render() {
     const { product } = this.props;
     return (
-      <Wrapper href={"/product/" + product.pid} target="_blank">
+      <Wrapper {...this.props} href={"/product/" + product.pid} target="_blank">
         <Container>
           <ImageContainer>
             <img

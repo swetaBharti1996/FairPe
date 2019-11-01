@@ -180,12 +180,22 @@ class AuthModal extends Component {
             {this.state.mode == MODE.LOGIN ? (
               <p>
                 Not a member yet?
-                <span onClick={() => this.changeMode()}>Sign up</span>
+                <span
+                  style={{ marginLeft: 8, letterSpacing: -0.5 }}
+                  onClick={() => this.changeMode()}
+                >
+                  Sign up
+                </span>
               </p>
             ) : (
               <p>
                 Already a member?
-                <span onClick={() => this.changeMode()}>Login</span>
+                <span
+                  style={{ marginLeft: 8, letterSpacing: -0.5 }}
+                  onClick={() => this.changeMode()}
+                >
+                  Login
+                </span>
               </p>
             )}
           </Footer>

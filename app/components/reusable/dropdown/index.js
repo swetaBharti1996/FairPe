@@ -13,6 +13,11 @@ const Wrapper = styled.div`
   align-items: center;
   position: relative;
   margin-right: 8px;
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    width: 172px;
+    margin: 0;
+  }
 `;
 const Container = styled.div`
   display: flex;
@@ -32,10 +37,13 @@ const Select = styled.p`
   width: 80%;
   height: 100%;
   color: #220a3e;
-  font-weight: bolder;
   display: flex;
   align-items: center;
   padding-left: 16px;
+  letter-spacing: -0.7px;
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    font-size: 15px;
+  }
 `;
 const DownButton = styled.div`
   width: 20%;
@@ -54,6 +62,11 @@ const SearchDropdown = styled.ul`
   top: 42px;
   width: 214px;
   padding: 16px 0;
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    width: 172px;
+    margin: 0;
+  }
 `;
 const SuggestionList = styled.div`
   font-size: 16px;
@@ -73,6 +86,10 @@ const SuggestionList = styled.div`
   &:hover {
     background: #fff;
     color: #220a3e;
+  }
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    font-size: 14px;
   }
 `;
 class DropDown extends Component {

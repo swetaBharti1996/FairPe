@@ -14,36 +14,30 @@ const Title = styled.p`
 `;
 
 const Body = styled.div`
-  background: #eee;
   min-height: 200px;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 8px;
-  border-radius: 15px;
+  justify-content: flex-start;
+  align-items: flex-start;
 `;
 
 const Empty = styled.p`
-  font-size: 20px;
-  letter-spacing: -1px;
-  padding: 10px;
+  font-size: 17px;
+  letter-spacing: -0.4px;
+  padding: 10px 0;
 `;
 
-class Description extends Component{
-
-
-render(){
-  const {description}= this.props;
-  console.log("description",this.props.description)
-  return (
-    <Wrapper>
-      <Title>Description</Title>
-      <Body>
-        <Empty>{description}</Empty>
-      </Body>
-    </Wrapper>
-  );
+class Description extends Component {
+  render() {
+    const { description } = this.props;
+    return (
+      <Wrapper>
+        <Title>Description</Title>
+        <Body>
+          <Empty>{description}</Empty>
+        </Body>
+      </Wrapper>
+    );
+  }
 }
-};
 
 export default Description;

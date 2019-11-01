@@ -9,8 +9,9 @@ const Wrapper = styled.div`
   width: 80%;
   background: #f7f7f7;
   margin-bottom: 40px;
-  @media only screen and (max-width: 1440px) {
-    flex: 1;
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    width: 100%;
   }
 `;
 const Container = styled.div`
@@ -19,6 +20,9 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    width: 100%;
+  }
 `;
 
 const InnerContainer = styled.div`
@@ -30,10 +34,10 @@ const InnerContainer = styled.div`
 const SearchContainer = styled.div`
   width: 80%;
   height: 70px;
-  @media only screen and (max-width: 1440px) {
-    height: 60px;
-  }
   padding: 20px 0px;
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    display: none;
+  }
 `;
 const DataContainer = styled.div`
   background: #fff;
@@ -53,12 +57,24 @@ const ResultDetails = styled.div`
     color: #220a3e;
     width: inherit;
   }
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    > span {
+      margin: 0;
+
+      font-size: 14px;
+    }
+  }
 `;
 const ProductListing = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
   padding: 0 24px;
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    padding: 0;
+  }
 
   /* display: grid;
   grid-template-columns: repeat(auto-fit, 350px);
@@ -105,12 +121,16 @@ const DropDownContainer = styled.div`
   justify-content: flex-end;
   width: 100%;
   height: 42px;
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    height: 34px;
+  }
 `;
 const list = [
   "Price -- Low to High",
   "Price -- High to Low",
-  "Discount -- Low to High",
-  "Discount -- High to Low"
+  "Dis -- Low to High",
+  "Dis -- High to Low"
 ];
 
 const ProductContainer = styled.div`

@@ -8,18 +8,22 @@ import Description from "./description";
 import Specification from "./specification";
 import Review from "./review";
 import Search from "../../components/reusable/search";
-import { fetchWishlist } from "../../actions/asyncAction";
+
+const Wrapper = styled.div`
+  width: 100%;
+  min-height: 700px;
+  padding-top: 24px;
+`;
 
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    flex-flow: column;
+  }
 `;
-const Wrapper = styled.div`
-  width: 100%;
-  min-height: 700px;
-  margin-top: 8px;
-`;
+
 const ErrorText = styled.div`
   margin-top: 15vh;
   font-size: 32px;
@@ -38,6 +42,12 @@ const ErrorImg = styled.img`
 const RightSide = styled.div`
   margin-left: 24px;
   flex: 1;
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    margin: 0;
+    flex: 1;
+    width: 100%;
+  }
 `;
 
 const SearchContainer = styled.div`
@@ -154,14 +164,18 @@ class Product extends Component {
                 authModal={authModal}
                 wishlist={wishlist}
                 wishlistData={wishlistData}
+                auth={auth}
               />
               <RightSide>
                 <StoreContainer
                   allProduct={this._getALLProduct(products)}
                   product={this.props.products}
                 />
-                <Specification id={TAB.SPECIFICATION} />
-                <Description id={TAB.DESCRIPTION} />
+                {/* <Specification id={TAB.SPECIFICATION} /> */}
+                <Description
+                  description={products.description || ""}
+                  id={TAB.DESCRIPTION}
+                />
               </RightSide>
             </Container>
           )}

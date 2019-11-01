@@ -75,7 +75,7 @@ class Login extends Component {
             onChange={changeHandler}
           />
           {error && error.password && <Status>{error.password}</Status>}
-          <a>Forgot password?</a>
+          {/* <a>Forgot password?</a> */}
         </FormContainer>
       </>
     );

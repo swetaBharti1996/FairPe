@@ -8,6 +8,9 @@ const Wrapper = styled.div`
   flex-direction: column;
   background: white;
   padding: 16px 0;
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    width: 100%;
+  }
 `;
 
 const Location = styled.div`
@@ -40,8 +43,6 @@ const AddText = styled.span`
 const Store = styled.div`
   width: 100%;
   margin-top: 24px;
-  
-
 `;
 const TitleContainer = styled.div`
   display: flex;
@@ -113,6 +114,17 @@ const TableHeader = styled.tr`
       flex: 2;
     }
   }
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    > th {
+      &:nth-child(2) {
+        display: none;
+      }
+      &:nth-child(4) {
+        display: none;
+      }
+    }
+  }
 `;
 
 const TableBody = styled.tr`
@@ -122,6 +134,11 @@ const TableBody = styled.tr`
   letter-spacing: -0.2px;
   padding: 8px;
   align-items: center;
+  border-bottom: 1px solid #dee2e6;
+
+  &:last-child {
+    border-bottom: none;
+  }
 
   > td {
     flex: 1;
@@ -129,6 +146,17 @@ const TableBody = styled.tr`
 
     &:nth-child(2) {
       flex: 2;
+    }
+  }
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    > td {
+      &:nth-child(2) {
+        display: none;
+      }
+      &:nth-child(4) {
+        display: none;
+      }
     }
   }
 `;
@@ -141,6 +169,12 @@ const LogoContainer = styled.div`
   > img {
     width: 74px;
     height: auto;
+  }
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    > img {
+      width: 53px;
+    }
   }
 `;
 
@@ -159,6 +193,9 @@ const ProductTitle = styled.h1`
       color: ${props => props.theme.primary};
     }
   }
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    display: none;
+  }
 `;
 
 const StoreContainer = props => {
@@ -171,13 +208,13 @@ const StoreContainer = props => {
         <Address>9th Main, HSR Layout, Bangalore</Address>
         <AddText>Change your location</AddText>
       </Location> */}
-      <Store >
+      <Store>
         <TitleContainer>
           <Title>Product in Stores</Title>
-          <PriceRefreshContainer>
+          {/* <PriceRefreshContainer>
             <PriceUpdate>Prices Updated</PriceUpdate>
             <Refresh>Refresh</Refresh>
-          </PriceRefreshContainer>
+          </PriceRefreshContainer> */}
         </TitleContainer>
 
         <Table>
@@ -223,7 +260,7 @@ const StoreContainer = props => {
                     <MainText>{`${product.discount}%`}</MainText>
                   </td>
                   <td>
-                    <Button>
+                    <Button href={product.url} target={"_blank"}>
                       {product.type === "online" ? "Buy now" : "View Store"}
                     </Button>
                   </td>
@@ -234,7 +271,7 @@ const StoreContainer = props => {
         </Table>
       </Store>
 
-      <Allresult>--- All results listed ---</Allresult>
+      {/* <Allresult>--- All results listed ---</Allresult> */}
     </Wrapper>
   );
 };

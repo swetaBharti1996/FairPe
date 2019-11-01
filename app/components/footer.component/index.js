@@ -9,6 +9,10 @@ const Wrapper = styled.div`
   border-bottom: 1px solid ${props => props.theme.primary};
   position: relative;
   margin-top: 260px;
+  width: 100%;
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    margin-top: 40px;
+  }
 `;
 const Box = styled.div`
   position: absolute;
@@ -20,6 +24,14 @@ const Box = styled.div`
   margin: 0 auto;
   background: #fff;
   z-index: 50;
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    position: static;
+    width: 100%;
+    height: 200px;
+    margin-bottom: 40px;
+    display: none;
+  }
 `;
 
 const InnerBox = styled.div`
@@ -30,17 +42,19 @@ const InnerBox = styled.div`
   border: 1px solid #ededed;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 10px;
-  flex-flow: row wrap;
+  flex-flow: row;
 `;
 const Container = styled.div`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  width: 75%;
+  width: ${props => props.theme.smallScreen};
   padding: 50px 0;
   margin-top: 165px;
-  @media only screen and (max-width: ${props => props.theme.bpxlg}) {
-    width: 90%;
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    width: 93%;
+    margin: 0 auto;
+    padding: 24px 0;
   }
 `;
 // const Container = styled.div`
@@ -58,6 +72,8 @@ const MailBox = styled.div`
   position: absolute;
   right: 150px;
   bottom: -24px;
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+  }
 `;
 const MailInput = styled.input`
   border-radius: 31px 0px 0px 31px !important;
@@ -66,6 +82,9 @@ const MailInput = styled.input`
   outline: none;
   padding: 17px 30px;
   border-right: none;
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+  }
 `;
 
 const MailButton = styled.a`
@@ -109,16 +128,10 @@ const ImageBox = styled.div`
     margin: 0 24px;
     > img {
       width: 100%;
-      height: 100%;
+      height: auto;
     }
   }
-  @media only screen and (max-width: 992px) {
-    width: 100%;
-    justify-content: flex-start;
-    img {
-      width: 40%;
-      margin-top: 30px;
-    }
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
   }
 `;
 
@@ -129,6 +142,10 @@ const LabelBox = styled.div`
   flex-flow: column;
   justify-content: center;
   align-items: center;
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    padding: 0 4px;
+  }
 `;
 
 const BoxTextHead = styled.div`
@@ -139,9 +156,9 @@ const BoxTextHead = styled.div`
   letter-spacing: -1px;
   font-size: 24px;
   line-height: 28px;
-  @media only screen and (max-width: 1440px) {
-    font-size: 24px;
-    line-height: 28px;
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    font-size: 17px;
+    line-height: 1.2;
   }
 `;
 const BoxText = styled.div`
@@ -152,6 +169,11 @@ const BoxText = styled.div`
   text-align: left;
   color: #333333;
   letter-spacing: -0.2px;
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    font-size: 13px;
+    line-height: 1.2;
+  }
 `;
 const Foot = styled.div`
   background: #f8f8f8;

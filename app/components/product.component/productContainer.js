@@ -7,6 +7,11 @@ const Wrapper = styled.div`
   width: 327px;
   position: sticky;
   top: 24px;
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    width: 100%;
+    position: static;
+    margin-bottom: 24px;
+  }
 `;
 const Container = styled.div`
   display: flex;
@@ -28,13 +33,16 @@ const UpperContainer = styled.div`
 
 const ImageContainer = styled.div`
   width: 300px;
-  height: 223px;
+  height: 350px;
   margin: 16px 0;
   text-align: center;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   > img {
-    height: -webkit-fill-available;
-    width: auto;
+    height: auto;
+    width: 75%;
   }
 `;
 
@@ -121,9 +129,9 @@ const Title = styled.p`
 class ProductContainer extends Component {
   state = {
     SUB: [
-      { name: "Comparison" },
-      { name: "Specification" },
-      { name: "Description" }
+      // { name: "Comparison" },
+      // { name: "Specification" },
+      // { name: "Description" }
       // { name: "Review" }
     ]
   };

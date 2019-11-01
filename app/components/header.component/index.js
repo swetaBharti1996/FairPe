@@ -6,60 +6,56 @@ import { Link } from "../../../server/routes";
 import { Button } from "../../UI";
 
 const Wrapper = styled.div`
-  height: 100px;
+  height: 80px;
   background: ${props => props.theme.white};
-  display: flex;
   box-shadow: 0 2px 4px 0px ${props => props.theme.gray300};
   position: fixed;
   top: 0;
+  display: flex;
   width: 100%;
   z-index: 10000;
-
-  @media only screen and (max-width: ${props => props.theme.bpxlg}) {
-    height: 80px;
-  }
+  align-items: center;
+  justify-content: center;
 `;
 const Container = styled.div`
+  width: ${props => props.theme.smallScreen};
   display: flex;
-  width: 75%;
-  margin: 0 auto;
-  flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-  @media only screen and (max-width: ${props => props.theme.bpxlg}) {
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
     width: 90%;
+    margin: 0 auto;
   }
 `;
 const Logo = styled.div`
+  width: 120px;
+  cursor: pointer;
   > img {
-    width: 120px;
-    cursor: pointer;
+    width: 100%;
+    height: auto;
   }
-  @media only screen and (max-width: ${props => props.theme.bpxlg}) {
-    > img {
-      width: 100px;
-    }
-  }
-  @media only screen and (max-width: ${props => props.theme.bpmd}) {
-    > img {
-      width: 80px;
-    }
+`;
+
+const LeftContainer = styled.div`
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: flex-end;
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    display: none;
   }
 `;
 
 const List = styled.a`
-  font-size: 18px;
-  color: ${props => props.theme.gray700};
+  font-size: 17px;
+  color: ${props => props.theme.default};
   cursor: pointer;
   padding: 6px;
-  letter-spacing: -0.2px;
+  letter-spacing: -0.3px;
   transition-duration: 300ms;
-
   &:hover {
     color: ${props => props.theme.primary};
-  }
-  @media only screen and (max-width: ${props => props.theme.bpxlg}) {
-    font-size: 16px;
   }
 `;
 
@@ -68,7 +64,7 @@ const Nav = styled.ul`
   align-items: center;
 
   > li {
-    margin-right: 16px;
+    margin-right: 6px;
 
     &:last-child {
       display: flex;
@@ -154,7 +150,6 @@ class Header extends React.Component {
     this.setState(prevState => ({
       showSearch: !prevState.showSearch
     }));
-    
   };
 
   // _renderSearch = () => {
@@ -181,12 +176,12 @@ class Header extends React.Component {
   //   } else return null;
   // };
 
-  _renderHeader = () => {
-    window.addEventListener("scroll", () => {
-      if (window.screenY > 500) this.setState({ displaySearch: true });
-      else this.setState({ displaySearch: false });
-    });
-  };
+  // _renderHeader = () => {
+  //   window.addEventListener("scroll", () => {
+  //     if (window.screenY > 500) this.setState({ displaySearch: true });
+  //     else this.setState({ displaySearch: false });
+  //   });
+  // };
 
   render() {
     const { user, logout } = this.props;
@@ -201,14 +196,7 @@ class Header extends React.Component {
             />
           </Logo>
 
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              flex: 1,
-              justifyContent: "flex-end"
-            }}
-          >
+          <LeftContainer>
             {/* {this._renderSearch()} */}
             <Nav>
               <li>
@@ -231,7 +219,7 @@ class Header extends React.Component {
               {user && !user.name ? (
                 <li>
                   <Button
-                    style={{ marginRight: 16 }}
+                    style={{ marginRight: 12 }}
                     onClick={() => this.props.openModal(true)}
                   >
                     Log In
@@ -247,7 +235,7 @@ class Header extends React.Component {
                 </li>
               )}
             </Nav>
-          </div>
+          </LeftContainer>
         </Container>
       </Wrapper>
     );
