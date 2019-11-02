@@ -12,6 +12,7 @@ const CustomDrawer = styled(Drawer)`
     top: 80px;
   }
 `;
+
 const Wrapper = styled.div`
   height: 80px;
   background: ${props => props.theme.white};
