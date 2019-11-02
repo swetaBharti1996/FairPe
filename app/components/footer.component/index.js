@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import Content from "./content";
+import { message } from "antd";
 
 const Wrapper = styled.div`
   margin: 0 auto;
@@ -72,7 +73,7 @@ const MailBox = styled.div`
   position: absolute;
   right: 150px;
   bottom: -24px;
-
+  flex-flow: column-reverse;
   line-height: 0.7;
 
   box-sizing: content-box !important;
@@ -229,6 +230,14 @@ const PolicyBox = styled.div`
   }
 `;
 
+const Status = styled.p`
+  color: #ff632a;
+  font-size: 14px;
+  text-align: right;
+  margin-bottom: 10px;
+  padding-right: 16px;
+`;
+
 class Footer extends Component {
   state = {
     email: ""
@@ -238,8 +247,11 @@ class Footer extends Component {
     this.setState({ [event.target.name]: event.target.value });
 
   _onSubscribe = email => this.props.subscribe({ email });
+
   render() {
     const { email } = this.state;
+
+    const { error } = this.props;
     return (
       <>
         <Wrapper>
@@ -265,16 +277,21 @@ class Footer extends Component {
                   </BoxText>
                 </LabelBox>
                 <MailBox>
-                  <MailInput
-                    name="email"
-                    type="email"
-                    value={email}
-                    placeholder="Your email address/ Mobile number"
-                    onChange={this._handleInput}
-                  />
-                  <MailButton onClick={() => this._onSubscribe(email)}>
-                    Notify me about this
-                  </MailButton>
+                  <div style={{ display: "flex" }}>
+                    <MailInput
+                      name="email"
+                      type="email"
+                      value={email}
+                      placeholder="Your email address/ Mobile number"
+                      onChange={this._handleInput}
+                    />
+
+                    <MailButton onClick={() => this._onSubscribe(email)}>
+                      Notify me about this
+                    </MailButton>
+                  </div>
+
+                  {error && error.error && <Status>{error.error.error}</Status>}
                 </MailBox>
               </InnerBox>
             </Box>

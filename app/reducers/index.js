@@ -8,6 +8,7 @@ import search from "./search";
 import productDetail from "./productDetail";
 import wishlist from "./wishlist";
 import notification from "./notification";
+import error from "./error";
 
 const rootReducer = combineReducers({
   auth,
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
   search,
   productDetail,
   notification,
-  wishlist
+  wishlist,
+  error
 });
 
 export default rootReducer;

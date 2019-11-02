@@ -150,7 +150,7 @@ class AuthModal extends Component {
     }
   };
   render() {
-    const { login_error, register_error } = this.props;
+    const { error } = this.props;
     return (
       <Wrapper>
         <Container>
@@ -164,13 +164,13 @@ class AuthModal extends Component {
             <Login
               data={this.state}
               changeHandler={this.changeHandler}
-              error={login_error}
+              error={error}
             />
           ) : (
             <Register
               data={this.state}
               changeHandler={this.changeHandler}
-              error={register_error}
+              error={error}
             />
           )}
           <Footer>

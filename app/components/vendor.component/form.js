@@ -92,6 +92,14 @@ const Button = styled.button`
   }
 `;
 
+const Status = styled.p`
+  text-align: left;
+  color: red;
+  font-size: 14px;
+  margin-top: 8px;
+  padding: 0 8px;
+`;
+
 class Form extends Component {
   state = {
     name: "",
@@ -103,17 +111,13 @@ class Form extends Component {
     this.setState({ [event.target.name]: event.target.value });
 
   _onSubmit = () => {
-    this.props
-      .partner(this.state)
-      .then(resp => {
-        console.log("Message Sent");
-        this.setState({ name: "", email: "", address: "" });
-      })
-      .catch(err => console.error(err));
+    this.props.partner(this.state);
   };
 
   render() {
     const { name, email, address } = this.state;
+
+    const { error } = this.props;
     return (
       <Wrapper>
         <Container>
@@ -148,6 +152,7 @@ class Form extends Component {
             onChange={this._handleInput}
           />
           <Button onClick={this._onSubmit}>Register shop</Button>
+          {error && error.error && <Status>{error.error.error}</Status>}
         </Container>
       </Wrapper>
     );

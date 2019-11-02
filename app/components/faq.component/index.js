@@ -159,7 +159,7 @@ class Faq extends Component {
     else this.setState({ selected: key });
   };
   render() {
-    const { question } = this.props;
+    const { question, error } = this.props;
     return (
       <Wrapper>
         <Header>
@@ -189,7 +189,7 @@ class Faq extends Component {
               ))}
             </FaqContainer>
             <FormContainer>
-              <Form question={question} />
+              <Form question={question} error={error} />
             </FormContainer>
           </Container>
         </PageWrapper>

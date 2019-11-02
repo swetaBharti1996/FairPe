@@ -53,6 +53,7 @@ class Register extends Component {
       registerPassword1,
       registerPassword2
     } = data;
+
     return (
       <>
         <FormContainer>
@@ -64,7 +65,7 @@ class Register extends Component {
             value={registerName}
             onChange={changeHandler}
           />
-          {error && error.name && <Status>{error.name}</Status>}
+          {error && error.error && <Status>{error.error.name}</Status>}
           <CustomInput
             type="text"
             placeholder="Email ID *"
@@ -72,7 +73,7 @@ class Register extends Component {
             value={registerEmail}
             onChange={changeHandler}
           />
-          {error && error.email && <Status>{error.email}</Status>}
+          {error && error.error && <Status>{error.error.email}</Status>}
           <CustomInput
             type="text"
             placeholder="Mobile number *"
@@ -80,7 +81,7 @@ class Register extends Component {
             value={registerPhone}
             onChange={changeHandler}
           />
-          {error && error.mobile && <Status>{error.mobile}</Status>}
+          {error && error.error && <Status>{error.error.mobile}</Status>}
           <CustomInput
             type="password"
             placeholder="Password *"
@@ -88,7 +89,7 @@ class Register extends Component {
             value={registerPassword1}
             onChange={changeHandler}
           />
-          {error && error.password && <Status>{error.password}</Status>}
+          {error && error.error && <Status>{error.error.password}</Status>}
           <CustomInput
             type="password"
             placeholder="Confirm Password *"
@@ -96,7 +97,9 @@ class Register extends Component {
             value={registerPassword2}
             onChange={changeHandler}
           />
-          {error && error.password2 && <Status>{error.password2}</Status>}
+          {error && error.error && (
+            <Status>{error.error.password2 || error.error.error}</Status>
+          )}
         </FormContainer>
       </>
     );

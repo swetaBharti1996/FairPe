@@ -54,7 +54,7 @@ class Login extends Component {
   render() {
     const { changeHandler, data, error } = this.props;
     const { loginEmail, loginPassword } = data;
-    console.log(error);
+
     return (
       <>
         <FormContainer>
@@ -66,7 +66,7 @@ class Login extends Component {
             value={loginEmail}
             onChange={changeHandler}
           />
-          {error && error.email && <Status>{error.email}</Status>}
+          {error && error.error && <Status>{error.error.email}</Status>}
           <CustomInput
             type="password"
             placeholder="Password"
@@ -74,7 +74,9 @@ class Login extends Component {
             value={loginPassword}
             onChange={changeHandler}
           />
-          {error && error.password && <Status>{error.password}</Status>}
+          {error && error.error && (
+            <Status>{error.error.password || error.error.error}</Status>
+          )}
           {/* <a>Forgot password?</a> */}
         </FormContainer>
       </>

@@ -7,5 +7,6 @@ export default {
   search: {},
   productDetail: {},
   wishlist: {},
-  notification: {}
+  notification: {},
+  error: {}
 };

@@ -120,3 +120,8 @@ export const gotCategoryData = data => ({
 export const clearCategoryData = () => ({
   type: ActionTypes.CLEAR_CAT
 });
+
+export const error = data => ({
+  type: ActionTypes.ERROR,
+  payload: data
+});

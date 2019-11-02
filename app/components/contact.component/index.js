@@ -190,6 +190,15 @@ const SubmitButton = styled.button`
   }
 `;
 
+const Status = styled.p`
+  color: #ff632a;
+  font-size: 14px;
+  text-align: left;
+  padding: 0 47px;
+  margin-bottom: 0;
+  margin-top: -19px;
+`;
+
 class Contact extends Component {
   state = {
     name: "",
@@ -201,17 +210,13 @@ class Contact extends Component {
     this.setState({ [event.target.name]: event.target.value });
 
   _onSubmit = () => {
-    this.props
-      .contact(this.state)
-      .then(resp => {
-        console.log("Message Sent");
-        this.setState({ name: "", email: "", message: "" });
-      })
-      .catch(err => console.error(err));
+    this.props.contact(this.state);
   };
 
   render() {
     const { name, email, message } = this.state;
+
+    const { error } = this.props;
     return (
       <Wrapper>
         <HeaderBackground>
@@ -273,6 +278,10 @@ class Contact extends Component {
 
                 <SubmitButton onClick={this._onSubmit}>Submit</SubmitButton>
               </FormInside>
+
+              {error && error.error && (
+                <Status>{error.error.password2 || error.error.error}</Status>
+              )}
             </FormContainer>
           </Body>
         </PageWrapper>

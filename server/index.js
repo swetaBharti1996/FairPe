@@ -98,7 +98,7 @@ app
 
     server.use(handle);
 
-    server.listen(PORT, err => {
+    server.listen(PORT, "localhost", err => {
       if (err) throw err;
       console.log("> Server started on port:", PORT);
     });

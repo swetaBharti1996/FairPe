@@ -10,7 +10,7 @@ import Router from "next/router";
 import { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
 import { makeRequest } from "../constants/request";
-import { login, gotWishlist } from "../actions/syncAction";
+import { login, gotWishlist, error } from "../actions/syncAction";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faSearch,
@@ -52,6 +52,9 @@ class MyApp extends App {
         })
         .catch(err => console.log(err));
     }
+
+    ctx.store.dispatch(error({}));
+
     const pageProps = Component.getInitialProps
       ? await Component.getInitialProps(ctx)
       : {};

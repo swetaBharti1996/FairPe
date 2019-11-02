@@ -10,7 +10,9 @@ class ContactContainer extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    error: state.error
+  };
 };
 
 const mapDispatchToProps = dispatch => {

@@ -78,6 +78,16 @@ const Button = styled.button`
   font-weight: bolder;
   border-radius: 24px;
   outline: none;
+  cursor: pointer;
+`;
+
+const Status = styled.p`
+  color: #ff632a;
+  font-size: 14px;
+  margin-bottom: 0;
+  text-align: left;
+  margin-top: 8px;
+  padding: 0 54px;
 `;
 
 class Form extends Component {
@@ -92,17 +102,13 @@ class Form extends Component {
     this.setState({ [event.target.name]: event.target.value });
 
   _onSubmit = () => {
-    this.props
-      .question(this.state)
-      .then(resp => {
-        console.log("Message Sent");
-        this.setState({ name: "", email: "", mobile: "", question: "" });
-      })
-      .catch(err => console.error(err));
+    this.props.question(this.state);
   };
 
   render() {
     const { name, email, mobile, question } = this.state;
+    const { error } = this.props;
+
     return (
       <>
         <Wrapper>
@@ -138,7 +144,10 @@ class Form extends Component {
             ></textarea>
           </Container>
         </Wrapper>
-        <Button onClick={this._onSubmit}>Submit</Button>
+        <Button onClick={this._onSubmit}>Submit</Button>{" "}
+        {error && error.error && (
+          <Status>{error.error.password2 || error.error.error}</Status>
+        )}
       </>
     );
   }
