@@ -6,12 +6,7 @@ import Router from "next/router";
 import { filterResults } from "../actions/asyncAction";
 import SearchPage from "../components/search.component";
 
-const stringFacet = [
-  "brand",
-  "site",
-  "publisher",
-  "author"
-];
+const stringFacet = ["brand", "site", "publisher", "author"];
 const numberFacet = ["lower", "upper"];
 
 const determineFacet = query => {
@@ -28,7 +23,6 @@ const determineFacet = query => {
   return facetCount;
 };
 class SearchContainer extends React.Component {
-
   applyPriceFilter = (lower, upper) => {
     const currentQuery = this.props.filters.query;
 
@@ -53,17 +47,24 @@ class SearchContainer extends React.Component {
       newQuery = _.omit(currentQuery, [type]);
     }
     newQuery = _.omit(newQuery, ["facets"]);
-    console.log(newQuery);
+
     const count = determineFacet(newQuery);
     if (count) {
       newQuery.facets = count;
     }
+
+    newQuery.page = 1;
+    if (type == "page") {
+      newQuery.page = value;
+    }
     const query = queryString.stringify(newQuery);
     Router.push(`/search?${query}`);
+
     let page = 1;
-    if (type == 'page') {
+    if (type == "page") {
       page = value;
     }
+
     this.props.dispatch(filterResults(query, page));
   };
 
@@ -130,7 +131,7 @@ class SearchContainer extends React.Component {
         filters={filters.filters}
         count={count}
         total={total}
-        query={query}
+        query={filters.query}
         products={products}
       />
     );

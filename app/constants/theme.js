@@ -33,5 +33,5 @@ export default {
   bpxlg: "1366px",
 
   bigScreen: "1400px",
-  smallScreen: "1200px"
+  smallScreen: "1280px"
 };

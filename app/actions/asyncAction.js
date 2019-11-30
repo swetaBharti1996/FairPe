@@ -2,18 +2,17 @@ import * as syncActions from "./syncAction";
 import { makeRequest, makeAsyncRequest } from "../constants/request";
 import AppConstants from "../constants/appConstant";
 
+import { message } from "antd";
+
 export const searchSuggestion = term => dispatch =>
   makeRequest("get", `/suggest?term=${term}`)
     .then(resp => {
-      console.log(resp.data);
       dispatch(syncActions.gotSearchResults(resp.data, term));
     })
-    .catch(err => {
-      console.log(err);
-    });
+    .catch(err => {});
+
 export const filterResults = (query, page = 1) => dispatch => {
   makeAsyncRequest("post", `/_search?${query}`).then(resp => {
-    console.log("recieved", resp.data);
     dispatch(syncActions.gotProducts(resp.data, query, page));
   });
 };
@@ -24,7 +23,6 @@ export const productDetail = id => dispatch =>
   ).then(resp => dispatch(syncActions.gotProductDetail(resp.data)));
 
 export const wishlist = data => dispatch => {
-  console.log("here");
   makeRequest(
     "post",
     `${AppConstants.default.baseURL}/api/fairpe/wishlist`,
@@ -57,8 +55,12 @@ export const subscribe = data => dispatch =>
     .then(resp => {
       dispatch(syncActions.subscribe());
       dispatch(syncActions.error({}));
+      message.success("subscribed");
     })
-    .catch(err => dispatch(syncActions.error(err.response.data)));
+    .catch(err => {
+      message.error("error occured");
+      dispatch(syncActions.error(err.response.data));
+    });
 
 export const partner = data => dispatch =>
   makeRequest(
@@ -68,10 +70,14 @@ export const partner = data => dispatch =>
     {}
   )
     .then(resp => {
+      message.success("send");
       dispatch(syncActions.partner());
       dispatch(syncActions.error({}));
     })
-    .catch(err => dispatch(syncActions.error(err.response.data)));
+    .catch(err => {
+      message.error("error occured");
+      dispatch(syncActions.error(err.response.data));
+    });
 
 export const contact = data => dispatch =>
   makeRequest(
@@ -81,10 +87,14 @@ export const contact = data => dispatch =>
     {}
   )
     .then(resp => {
+      message.success("send");
       dispatch(syncActions.contact());
       dispatch(syncActions.error({}));
     })
-    .catch(err => dispatch(syncActions.error(err.response.data)));
+    .catch(err => {
+      message.error("error occured");
+      dispatch(syncActions.error(err.response.data));
+    });
 
 export const question = data => dispatch =>
   makeRequest(
@@ -94,10 +104,14 @@ export const question = data => dispatch =>
     {}
   )
     .then(resp => {
+      message.success("send");
       dispatch(syncActions.question());
       dispatch(syncActions.error({}));
     })
-    .catch(err => dispatch(syncActions.error(err.response.data)));
+    .catch(err => {
+      message.error("error occured");
+      dispatch(syncActions.error(err.response.data));
+    });
 
 export const login = data => dispatch =>
   makeAsyncRequest(

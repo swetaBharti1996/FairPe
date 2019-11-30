@@ -21,7 +21,7 @@ const Wrapper = styled.div`
   top: 0;
   display: flex;
   width: 100%;
-  z-index: 10000;
+  z-index: 100;
   align-items: center;
   justify-content: center;
 `;
@@ -161,7 +161,7 @@ const Search = styled.div`
 `;
 
 const SearchContainer = styled.div`
-  margin-right: 16px;
+  margin-right: 40px;
   width: 35%;
   position: relative;
   display: flex;
@@ -188,12 +188,16 @@ const Icon = styled.a`
 `;
 
 class Header extends React.Component {
-  state = { showSearch: false, displaySearch: false, drawer: false };
+  state = { showSearch: false, displaySearch: false, drawer: false, term: "" };
 
   _onSearch = event => {
     this.setState(prevState => ({
       showSearch: !prevState.showSearch
     }));
+
+    // if (this.state.showSearch) {
+    //   this.props.onSearch(term);
+    // }
   };
 
   _toggleDrawer = () => {
@@ -202,29 +206,37 @@ class Header extends React.Component {
     }));
   };
 
-  // _renderSearch = () => {
-  //   const { pathname } = this.props.newRouter;
-  //   const { showSearch } = this.state;
+  _renderSearch = () => {
+    const { pathname } = this.props.newRouter;
+    const { showSearch, term } = this.state;
 
-  //   if (pathname === "/product") {
-  //     return (
-  //       <SearchContainer>
-  //         {showSearch ? (
-  //           <Search>
-  //             <input></input>
-  //             <NormalSearchIcon onClick={this._onSearch}>
-  //               <FontAwesomeIcon icon="search" />
-  //             </NormalSearchIcon>
-  //           </Search>
-  //         ) : (
-  //           <SearchIcon onClick={this._onSearch}>
-  //             <FontAwesomeIcon icon="search" />
-  //           </SearchIcon>
-  //         )}
-  //       </SearchContainer>
-  //     );
-  //   } else return null;
-  // };
+    if (pathname === "/product") {
+      return (
+        <SearchContainer>
+          {/* {showSearch ? ( */}
+          <Search>
+            <input
+              value={term}
+              onChange={() => this.setState({ term: event.target.value })}
+            />
+            <NormalSearchIcon
+              onClick={() => {
+                term && this.props.onSearch(term);
+              }}
+            >
+              <FontAwesomeIcon icon="search" />
+            </NormalSearchIcon>
+          </Search>
+          {/* // ) : ( //{" "}
+          <SearchIcon onClick={this._onSearch}>
+            // <FontAwesomeIcon icon="search" />
+            //{" "}
+          </SearchIcon>
+          // )} */}
+        </SearchContainer>
+      );
+    } else return null;
+  };
 
   // _renderHeader = () => {
   //   window.addEventListener("scroll", () => {
@@ -254,7 +266,7 @@ class Header extends React.Component {
           </Logo>
 
           <LeftContainer>
-            {/* {this._renderSearch()} */}
+            {this._renderSearch()}
             <Nav>
               <li>
                 <Link route={"vendor"}>

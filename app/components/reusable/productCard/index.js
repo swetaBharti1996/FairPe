@@ -193,7 +193,6 @@ class ProductCard extends Component {
   render() {
     const { product } = this.props;
 
-    console.log(product);
     return (
       <Wrapper {...this.props} href={"/product/" + product.pid} target="_blank">
         <Container>
@@ -251,7 +250,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProductCard);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductCard);

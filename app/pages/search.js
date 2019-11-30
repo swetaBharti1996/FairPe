@@ -15,6 +15,7 @@ const fetchSearchData = async query => {
 class SearchPage extends React.Component {
   static async getInitialProps(props) {
     const { store, query, req } = props;
+
     const searchQuery = queryString.stringify(query);
     return new Promise((resolve, reject) => {
       fetchSearchData(searchQuery)
@@ -23,7 +24,6 @@ class SearchPage extends React.Component {
         .catch(err => console.log(err) || resolve({}));
     });
   }
-
 
   render() {
     return <Search />;

@@ -86,19 +86,18 @@ const Body = styled.div`
 const LeftBody = styled.div`
   width: 81%;
 
-  > h3 {
+  > div > h3 {
     font-family: "Montserrat";
-    font-size: 28px;
+    font-size: 23px;
     color: #292929;
     text-align: left;
-    letter-spacing: -0.5px;
     font-weight: 600;
     margin: 0;
   }
 
   @media only screen and (max-width: ${props => props.theme.bpxs}) {
     width: 100%;
-    > h3 {
+    > div > h3 {
       font-size: 24px;
     }
   }
@@ -212,53 +211,65 @@ const ProductContainer = styled.div`
   margin: 16px 0;
 `;
 
-const BrandContainer = styled.div`
-  margin-top: 24px;
-  margin-bottom: 30px;
-  > h3 {
-    font-family: "Montserrat";
-    font-size: 28px;
-    color: #292929;
-    text-align: left;
+const SimilarStore = styled.div`
+  flex: 1;
+  margin-right: 16px;
+  height: 200px;
+  &:last-child {
+    margin-right: 0;
   }
-  > ul {
-    display: flex;
-    flex-flow: row wrap;
-    margin-top: 24px;
+`;
 
-    > li {
-      margin-right: 40px;
-      > div {
-        /* border: 1px solid; */
-        width: 100px;
-        height: 50px;
+const SimilarStoreContainer = styled.div`
+  display: flex;
+  flex-flow: row;
+  margin-bottom: 16px;
+`;
 
-        > img {
-          width: 100%;
-          height: 100%;
-        }
-      }
+const BrandContainer = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  margin-bottom: 16px;
+  justify-content: flex-start;
+`;
+
+const BrandBox = styled.div`
+  width: 134.35px;
+  height: 75px;
+  border: 1px solid #eee;
+  margin-right: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 16px;
+
+  &:nth-child(7n) {
+    margin-right: 0;
+  }
+
+  > img {
+    width: 80%;
+    height: 80%;
+  }
+`;
+
+const ContentBox = styled.div`
+  margin-bottom: 24px;
+
+  > p {
+    margin: 0;
+    font-size: 16px;
+    color: #333333;
+    > a {
+      color: #6376f1;
+      font-weight: bold;
     }
   }
 `;
 
 class Category extends Component {
-  state = {
-    categorys: [
-      {
-        sub: "men",
-        data: { value: ["formals", "shoes", "shirts", "casuals", "jeans"] }
-      },
-      {
-        sub: "woman",
-        data: { value: ["formals", "shoes", "shirts", "casuals", "jeans"] }
-      },
-      {
-        sub: "kids",
-        data: { value: ["formals", "shoes", "shirts", "casuals", "jeans"] }
-      }
-    ]
-  };
+  state = {};
 
   componentWillUnmount = () => {
     clearCategoryData();
@@ -290,26 +301,69 @@ class Category extends Component {
 
         <Body>
           <LeftBody>
-            <h3>
-              {`Explore Your favourite ${this.capitalize(category.category)}
-                 Product`}
-            </h3>
+            {!_.isEmpty(category.content) && (
+              <ContentBox
+                dangerouslySetInnerHTML={{ __html: category.content }}
+              />
+            )}
 
-            <Stores>
-              <ProductContainer>
-                {products.products && (
-                  <ProductListing>
-                    {_.map(products.products, (product, id) => (
-                      <ProductCard
-                        style={{ width: "25%" }}
-                        key={id}
-                        product={product}
-                      />
-                    ))}
-                  </ProductListing>
-                )}
-              </ProductContainer>
-            </Stores>
+            {!_.isEmpty(category.store) && (
+              <div style={{ marginBottom: 32 }}>
+                <h3 style={{ marginBottom: 16 }}>Similar Offline Store</h3>
+
+                <SimilarStoreContainer>
+                  {_.map(category.store, (data, i) => {
+                    return (
+                      <SimilarStore>
+                        <img
+                          style={{ width: "100%", height: "100%" }}
+                          src={data.url}
+                        />
+                      </SimilarStore>
+                    );
+                  })}
+                </SimilarStoreContainer>
+              </div>
+            )}
+
+            {!_.isEmpty(category.brand) && (
+              <div style={{ marginBottom: 32 }}>
+                <h3>Top {this.capitalize(category.category)} Brand</h3>
+
+                <BrandContainer>
+                  {_.map(category.brand, (data, i) => {
+                    return (
+                      <BrandBox>
+                        <img src={data.url} />
+                      </BrandBox>
+                    );
+                  })}
+                </BrandContainer>
+              </div>
+            )}
+
+            <div>
+              <h3>
+                {`Explore Your favourite ${this.capitalize(category.category)}
+                 Product`}
+              </h3>
+
+              <Stores>
+                <ProductContainer>
+                  {products.products && (
+                    <ProductListing>
+                      {_.map(products.products, (product, id) => (
+                        <ProductCard
+                          style={{ width: "25%" }}
+                          key={id}
+                          product={product}
+                        />
+                      ))}
+                    </ProductListing>
+                  )}
+                </ProductContainer>
+              </Stores>
+            </div>
           </LeftBody>
           <RightBody>
             <div>

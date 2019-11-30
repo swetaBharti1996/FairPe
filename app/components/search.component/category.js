@@ -5,6 +5,7 @@ import _ from "lodash";
 const MainContainer = styled.div`
   flex-flow: column;
   margin-bottom: 20px;
+  padding: 0 8px;
 `;
 const CategoryContainer = styled.div`
   align-items: flex-start;

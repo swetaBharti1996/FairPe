@@ -107,18 +107,22 @@ class Product extends Component {
     return ALL_PRICE;
   };
 
-  _calcDisount = () => {};
+  _calcDisount = (mrp, price) => {
+    return (((mrp - price) / mrp) * 100).toFixed(2);
+  };
 
   _getLowestPrice = DATA => _.minBy(DATA);
 
   _getALLProduct = DATA => {
     const PRODUCT = [];
 
+    console.log(DATA);
+
     _.map(DATA.OnlineSites, (data, k) =>
       PRODUCT.push({
         site: k,
         price: data.price,
-        discount: 20,
+        discount: this._calcDisount(data.mrp, data.price),
         title: DATA.title,
         type: "online",
         url: data.productUrl

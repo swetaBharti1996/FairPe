@@ -62,7 +62,7 @@ const Tagline = styled.p`
 `;
 const SearchContainer = styled.div`
   position: relative;
-  z-index: 100;
+  z-index: 90;
   /* height: 90px; */
   margin-bottom: 16px;
   width: 70%;

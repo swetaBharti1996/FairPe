@@ -1,141 +1,133 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import { Checkbox } from "antd";
+import _ from "lodash";
 
 const Wrapper = styled.div`
   margin-bottom: 20px;
+  padding: 0 16px;
 `;
 const Title = styled.h1`
   font-size: 16px;
   font-family: "Karla", sans-serif;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
+  font-weight: 600;
 `;
 const ListContainer = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  max-height: 300px;
+  overflow-y: scroll;
 `;
-const Checkbox = styled.div`
-  display: flex;
-  height: 20px;
-  width: 20px;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid #666;
-  margin-right: 5px;
-  margin-bottom: 10px;
-  > i {
-    color: #ff632a;
-  }
-  @media only screen and (max-width: 1440px) {
-    height: 16px;
-    width: 16px;
-  }
-`;
-const List = styled.p`
-  display: flex;
-  color: #666666;
-  text-transform: capitalize;
-  @media only screen and (max-width: 1440px) {
-    font-size: 14px;
-  }
-`;
+
 const More = styled.p`
-  text-align: right;
-  color: #ff632a;
+  color: #7782f3;
+  text-align: left;
+  margin-top: 8px;
+  cursor: pointer;
   @media only screen and (max-width: 1440px) {
-    font-size: 14px;
+    font-size: 15px;
   }
 `;
 class Filters extends Component {
   state = {
-    selFilters: [],
-    length: this.props.bucket.length,
-    newBucket: []
+    length: 10,
+    more: false,
+    term: ""
   };
-  componentDidMount = () => {
-    let filter = this.props.query[this.props.title];
-    if (filter) {
-      let arr = filter.split(",");
-      this.setState({ selFilters: arr });
-    }
-    if (this.props.bucket.length > 10) {
-      this.setState({ length: 10 });
-      let arr = this.props.bucket.slice(0, this.state.length);
-      this.setState({ newBucket: arr });
-    } else {
-      this.setState({ newBucket: this.props.bucket });
-    }
-  };
-  onSelBrand = value => {
-    if (value) {
-      let brands = this.state.selFilters;
-      if (brands) {
-        let newArr = [];
-        if (!_.includes(brands, value)) {
-          newArr = [...brands, value];
-        }
-        brands = newArr.splice(",");
-      } else {
-        brands = value;
-      }
-      this.setState({ selFilters: brands });
-      this.props.updateFilter(this.props.title, brands.join(","));
-    }
-  };
-  onRemoveBrand = ({ value }) => {
-    if (value) {
-      let tempVal = [...this.state.selFilters];
-      let index = tempVal.indexOf(value);
 
-      if (index > -1) {
-        tempVal.splice(index, 1);
-        this.setState({ selFilters: tempVal });
-        this.props.updateFilter(this.props.title, tempVal);
-      }
-    }
+  checkSelected = brand => {
+    const { query } = this.props;
+
+    const BRAND = query.brand ? query.brand.split(",") : [];
+    if (BRAND.indexOf(brand) > -1) return true;
+    else return false;
   };
-  showMore = () => {
-    let arr, len;
-    if (this.state.length + 10 < this.props.bucket.length) {
-      len = this.state.length + 10;
-      arr = this.props.bucket.slice(0, len);
+  showMore = length => {
+    this.setState({ more: true, length });
+  };
+
+  showLess = () => {
+    this.setState({ more: false, length: 10 });
+  };
+
+  handleBrand = title => {
+    if (title.length > 25) {
+      title = title.slice(0, 25) + "...";
+    }
+    return title;
+  };
+  onBrandSelect = brand => {
+    const { query, updateFilter } = this.props;
+    const BRAND = query.brand ? query.brand.split(",") : [];
+    if (BRAND.indexOf(brand) > -1) {
+      BRAND.splice(BRAND.indexOf(brand), 1);
     } else {
-      len = this.props.bucket.length - this.state.length;
-      len = len + this.state.length;
-      arr = this.props.bucket.slice(0, len);
+      BRAND.push(brand);
     }
-    this.setState({ newBucket: arr, length: len });
+
+    updateFilter("brand", BRAND.join(","));
   };
+
   render() {
     const { bucket, title } = this.props;
-    const { selFilters, newBucket, length } = this.state;
+    const { length, more, term } = this.state;
+
     return (
       <Wrapper>
-        <Title>{title}</Title>
-        {newBucket &&
-          newBucket.map((data, index) => {
-            if (index < this.state.length) {
-              return (
-                <>
-                  <ListContainer>
-                    <Checkbox
-                      onClick={() =>
-                        selFilters.includes(data.key)
-                          ? this.onRemoveBrand({ value: data.key })
-                          : this.onSelBrand(data.key)
-                      }
-                    >
-                      {selFilters.includes(data.key) && (
-                        <i class="material-icons">check</i>
-                      )}
-                    </Checkbox>
-                    <List>{data.key}</List>
-                  </ListContainer>
-                </>
-              );
-            }
-          })}
-        {bucket && length < bucket.length && (
-          <More onClick={() => this.showMore()}>Show More</More>
+        {more ? (
+          <input
+            value={term}
+            style={{ padding: "4px 16px", marginBottom: 16, width: "100%" }}
+            placeholder={"Search Brand"}
+            onChange={event => this.setState({ term: event.target.value })}
+          />
+        ) : (
+          <Title>{title}</Title>
+        )}
+
+        <ListContainer>
+          {bucket &&
+            _.map(
+              _.isEmpty(term)
+                ? bucket
+                : bucket.filter(d => {
+                    if (d.key.toLowerCase().includes(_.lowerCase(term)))
+                      return d;
+                  }),
+              (data, index) => {
+                if (_.isEmpty(data.key)) return null;
+                if (index > length) return null;
+
+                return (
+                  <Checkbox
+                    key={index}
+                    checked={this.checkSelected(data.key)}
+                    onClick={() => this.onBrandSelect(data.key)}
+                    style={{
+                      margin: 0,
+                      fontSize: 15,
+                      color: "#404041",
+                      letterSpacing: -0.3
+                    }}
+                  >
+                    {this.handleBrand(data.key)}
+                  </Checkbox>
+                );
+              }
+            )}
+        </ListContainer>
+
+        {bucket.length > 10 && (
+          <>
+            {more ? (
+              <More onClick={() => this.showLess()}>Show less</More>
+            ) : (
+              <More onClick={() => this.showMore(bucket.length)}>
+                Show all {bucket.length} brand
+              </More>
+            )}
+          </>
         )}
       </Wrapper>
     );

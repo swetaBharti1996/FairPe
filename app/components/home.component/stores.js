@@ -44,9 +44,9 @@ class Stores extends Component {
       <Wrapper>
         <p> Results showing from </p>
         <StoreContainer>
-          <img src="../../static/images/amazon.png" />
-          <img src="../../static/images/flipkart.png" />
-          <img src="../../static/images/paytm.png" />
+          <img src="../../static/images/amazon.jpg" />
+          <img src="../../static/images/flipkart.jpg" />
+          <img src="../../static/images/paytmmall.jpg" />
           <p>& Offline shops</p>
         </StoreContainer>
       </Wrapper>

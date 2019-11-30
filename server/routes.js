@@ -11,3 +11,4 @@ routes.add("contact", "/contact");
 routes.add("category", "/category/:slug");
 routes.add("product", "/product/:id");
 routes.add("account", "/account/:ext");
+routes.add("privacy", "/privacy-policy");

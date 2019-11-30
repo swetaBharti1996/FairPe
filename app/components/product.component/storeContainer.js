@@ -245,7 +245,7 @@ const StoreContainer = props => {
                 <TableBody key={i}>
                   <td>
                     <LogoContainer>
-                      <img src={`../../static/images/${product.site}.png`} />
+                      <img src={`../../static/images/${product.site}.jpg`} />
                     </LogoContainer>
                   </td>
                   <td>

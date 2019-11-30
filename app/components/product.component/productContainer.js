@@ -41,8 +41,10 @@ const ImageContainer = styled.div`
   justify-content: center;
   align-items: center;
   > img {
-    height: auto;
-    width: 75%;
+    margin: auto;
+    opacity: 1;
+    max-width: 100%;
+    max-height: 94%;
   }
 `;
 

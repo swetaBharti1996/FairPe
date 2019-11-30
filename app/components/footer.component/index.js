@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import Content from "./content";
 import { message } from "antd";
+import _ from "lodash";
 
 const Wrapper = styled.div`
   margin: 0 auto;
@@ -197,17 +198,14 @@ const Foot = styled.div`
 `;
 
 const FootInside = styled.div`
-  width: 75%;
+  width: ${props => props.theme.smallScreen};
   margin: 0 auto;
   display: flex;
   flex-direction: row;
   margin: 0px auto;
   justify-content: space-between;
-  padding-bottom: 20px;
-  padding-top: 20px;
-  @media only screen and (max-width: ${props => props.theme.bpxlg}) {
-    width: 90%;
-  }
+  align-items: center;
+  padding: 16px 0;
 `;
 
 const Logo = styled.img`
@@ -218,12 +216,18 @@ const Logo = styled.img`
 const PolicyBox = styled.div`
   display: flex;
   flex-direction: row;
-  width: 10%;
   justify-content: space-between;
   > p {
     color: #707070;
     font-size: 14px;
     font-family: "Karla", sans-serif;
+    margin: 0;
+    letter-spacing: -0.5px;
+    margin-right: 24px;
+    cursor: pointer;
+    &:last-child {
+      margin-right: 0;
+    }
   }
   @media only screen and (max-width: 992px) {
     width: 30%;
@@ -246,7 +250,11 @@ class Footer extends Component {
   _handleInput = event =>
     this.setState({ [event.target.name]: event.target.value });
 
-  _onSubscribe = email => this.props.subscribe({ email });
+  _onSubscribe = email => {
+    if (!_.isEmpty(email)) {
+      this.props.subscribe({ email });
+    }
+  };
 
   render() {
     const { email } = this.state;
@@ -299,15 +307,15 @@ class Footer extends Component {
             <Content />
           </Container>
         </Wrapper>
-        {/* <Foot>
+        <Foot>
           <FootInside>
             <Logo src="../../static/images/logo.png" />
             <PolicyBox>
-              <p>Policy</p>
-              <p>Terms</p>
+              <p>Terms & Service</p>
+              <p>Privacy Policy</p>
             </PolicyBox>
           </FootInside>
-        </Foot> */}
+        </Foot>
       </>
     );
   }
