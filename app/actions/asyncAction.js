@@ -16,6 +16,15 @@ export const filterResults = (query, page = 1) => dispatch => {
     dispatch(syncActions.gotProducts(resp.data, query, page));
   });
 };
+
+export const categoryResults = (query, page = 1) => dispatch => {
+  makeAsyncRequest(
+    "post",
+    `${AppConstants.default.searchCategoryURL}/_search?${query}`
+  ).then(resp => {
+    dispatch(syncActions.gotProducts(resp.data, query, page));
+  });
+};
 export const productDetail = id => dispatch =>
   makeRequest(
     "get",

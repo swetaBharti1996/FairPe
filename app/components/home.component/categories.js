@@ -106,7 +106,7 @@ class Categories extends Component {
       page: 1
     };
     const query = queryString.stringify(newQuery);
-    this.props.filterResults(query);
+    this.props.categoryResults(query);
     this.props.categoryData(category);
   };
   render() {

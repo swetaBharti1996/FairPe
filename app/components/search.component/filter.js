@@ -52,8 +52,8 @@ class Filters extends Component {
   };
 
   handleBrand = title => {
-    if (title.length > 25) {
-      title = title.slice(0, 25) + "...";
+    if (title.length > 20) {
+      title = title.slice(0, 20) + "...";
     }
     return title;
   };
@@ -106,9 +106,10 @@ class Filters extends Component {
                     onClick={() => this.onBrandSelect(data.key)}
                     style={{
                       margin: 0,
-                      fontSize: 15,
-                      color: "#404041",
-                      letterSpacing: -0.3
+                      fontSize: 16,
+                      color: "#000",
+                      letterSpacing: -0.3,
+                      fontFamily: "Karla"
                     }}
                   >
                     {this.handleBrand(data.key)}

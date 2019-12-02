@@ -12,12 +12,12 @@ const fetchCategory = id => {
   );
 };
 
-const fetchProducts = (query,page=1)=>{
+const fetchProducts = (query, page = 1) => {
   return makeRequest(
     "post",
-    `${AppConstants.default.searchURL}/_search?${query}`
-  )
-}
+    `${AppConstants.default.searchCategoryURL}/_search?${query}`
+  );
+};
 
 class Index extends React.Component {
   static async getInitialProps(props) {
@@ -25,9 +25,8 @@ class Index extends React.Component {
 
     const { slug } = query;
     let promise = [];
-    
 
-    promise[0] =  new Promise((resolve, reject) => {
+    promise[0] = new Promise((resolve, reject) => {
       fetchCategory(slug)
         .then(resp => {
           store.dispatch(gotCategoryData(resp.data));
@@ -42,18 +41,16 @@ class Index extends React.Component {
       };
       const query1 = queryString.stringify(newQuery);
       fetchProducts(query1)
-      .then(resp => {
-        store.dispatch(gotProducts(resp.data,query1,1));
-      })
-      .then(resolve)
-      .catch(err => console.log(err) || resolve({}));
+        .then(resp => {
+          store.dispatch(gotProducts(resp.data, query1, 1));
+        })
+        .then(resolve)
+        .catch(err => console.log(err) || resolve({}));
     });
 
     await Promise.all(promise);
     return true;
-
   }
-
 
   render() {
     return <Category />;

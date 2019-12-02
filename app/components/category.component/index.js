@@ -4,6 +4,7 @@ import ProductCard from "../reusable/productCard";
 import { PageWrapper } from "../../UI";
 import { clearCategoryData } from "../../actions/syncAction";
 import _ from "lodash";
+import { categoryResults } from "../../actions/asyncAction";
 
 const Header = styled.div`
   padding-top: 24px;
@@ -233,7 +234,8 @@ const BrandContainer = styled.div`
   justify-content: flex-start;
 `;
 
-const BrandBox = styled.div`
+const BrandBox = styled.a`
+  display: block;
   width: 134.35px;
   height: 75px;
   border: 1px solid #eee;
@@ -281,7 +283,7 @@ class Category extends Component {
   };
 
   render() {
-    const { filters, products, category } = this.props;
+    const { filters, products, category, onSubCat, onSearch } = this.props;
 
     return (
       <PageWrapper>
@@ -333,7 +335,9 @@ class Category extends Component {
                 <BrandContainer>
                   {_.map(category.brand, (data, i) => {
                     return (
-                      <BrandBox>
+                      <BrandBox
+                        onClick={() => onSearch(_.lowerCase(data.brand))}
+                      >
                         <img src={data.url} />
                       </BrandBox>
                     );
@@ -376,7 +380,14 @@ class Category extends Component {
                         <b>{category.main}</b>
                         <ul>
                           {_.map(category.sub, (d, index2) => (
-                            <li>{d}</li>
+                            <li>
+                              <a
+                                style={{ color: "inherit" }}
+                                onClick={() => onSubCat(d)}
+                              >
+                                {d}
+                              </a>
+                            </li>
                           ))}
                         </ul>
                       </li>

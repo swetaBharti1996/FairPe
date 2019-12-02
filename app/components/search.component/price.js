@@ -87,23 +87,33 @@ class RangeSlider extends Component {
     high: 100
   };
   componentDidMount = () => {
+    const { high } = this.state;
     if (!_.isEmpty(this.props.bucket)) {
       this.setState({ low: this.props.bucket[0].key });
-      this.setState({
-        high: this.props.bucket[this.props.bucket.length - 1].key
-      });
+
+      if (this.props.bucket[this.props.bucket.length - 1].key > high) {
+        this.setState({
+          high: this.props.bucket[this.props.bucket.length - 1].key
+        });
+        max = this.props.bucket[this.props.bucket.length - 1].key;
+      }
+
       min = this.props.bucket[0].key;
-      max = this.props.bucket[this.props.bucket.length - 1].key;
     }
   };
   componentDidUpdate = prevProps => {
+    const { high } = this.state;
     if (this.props.bucket != prevProps.bucket) {
       this.setState({ low: this.props.bucket[0].key });
-      this.setState({
-        high: this.props.bucket[this.props.bucket.length - 1].key
-      });
+
+      if (this.props.bucket[this.props.bucket.length - 1].key > high) {
+        this.setState({
+          high: this.props.bucket[this.props.bucket.length - 1].key
+        });
+        max = this.props.bucket[this.props.bucket.length - 1].key;
+      }
+
       min = this.props.bucket[0].key;
-      max = this.props.bucket[this.props.bucket.length - 1].key;
     }
   };
   onChangeHandler = (event, newValue) => {

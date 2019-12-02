@@ -152,6 +152,7 @@ class Home extends Component {
           <Categories
             filterResults={this.props.filterResults}
             categoryData={this.props.categoryData}
+            categoryResults={this.props.categoryResults}
           />
           <Description />
         </Wrapper>
