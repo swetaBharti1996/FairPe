@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import styled from "styled-components";
 import _ from "lodash";
 import ProductContainer from "./productContainer";
@@ -8,6 +8,7 @@ import Description from "./description";
 import Specification from "./specification";
 import Review from "./review";
 import Search from "../../components/reusable/search";
+import Geocode from "react-geocode";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -93,10 +94,49 @@ const TAB = {
   SPECIFICATION: "specification",
   DESCRIPTION: "description"
 };
-class Product extends Component {
-  state = {};
 
-  _getAllPrice = products => {
+const Product = props => {
+  const [location, setLocation] = useState(null);
+  useEffect(() => {
+    currentLocation();
+  }, []);
+
+  const currentLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(success, error, options);
+    } else {
+      x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+  };
+
+  const options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0
+  };
+  const success = pos => {
+    var crd = pos.coords;
+
+    // console.log(pos);
+
+    // Geocode.fromLatLng(crd.latitude, crd.longitude).then(
+    //   response => {
+    //     const address = response.results[0].formatted_address;
+    //     setLocation(address);
+    //   },
+    //   error => {
+    //     console.error(error);
+    //   }
+    // );
+  };
+
+  const error = err => {
+    console.warn(`ERROR(${err.code}): ${err.message}`);
+  };
+
+  const { products, authModal, wishlist, wishlistData, auth } = props;
+
+  const _getAllPrice = products => {
     const ALL_PRICE = [];
     _.map(products.OnlineSites, (data, k) =>
       ALL_PRICE.push({ [k]: data.price })
@@ -107,22 +147,23 @@ class Product extends Component {
     return ALL_PRICE;
   };
 
-  _calcDisount = (mrp, price) => {
+  const _calcDisount = (mrp, price) => {
     return (((mrp - price) / mrp) * 100).toFixed(2);
   };
 
-  _getLowestPrice = DATA => _.minBy(DATA);
+  const _getLowestPrice = DATA => {
+    return _.minBy(DATA, d => {
+      return d[Object.keys(d)];
+    });
+  };
 
-  _getALLProduct = DATA => {
+  const _getALLProduct = DATA => {
     const PRODUCT = [];
-
-    console.log(DATA);
-
     _.map(DATA.OnlineSites, (data, k) =>
       PRODUCT.push({
         site: k,
         price: data.price,
-        discount: this._calcDisount(data.mrp, data.price),
+        discount: _calcDisount(data.mrp, data.price),
         title: DATA.title,
         type: "online",
         url: data.productUrl
@@ -145,48 +186,41 @@ class Product extends Component {
     return PRODUCT;
   };
 
-  _setPosition = () => {};
-
-  render() {
-    const { products, authModal, wishlist, wishlistData, auth } = this.props;
-
-    return (
-      <PageWrapper>
-        <Wrapper>
-          {_.isEmpty(products) ? (
-            <Fragment>
-              <ErrorText>
-                Something went wrong! Please try again later!
-              </ErrorText>
-              <ErrorImg src="../../static/images/error.svg" />
-            </Fragment>
-          ) : (
-            <Container>
-              <ProductContainer
-                lowestPrice={this._getLowestPrice(this._getAllPrice(products))}
-                product={this.props.products}
-                authModal={authModal}
-                wishlist={wishlist}
-                wishlistData={wishlistData}
-                auth={auth}
+  // console.log(location);
+  return (
+    <PageWrapper>
+      <Wrapper>
+        {_.isEmpty(products) ? (
+          <Fragment>
+            <ErrorText>Something went wrong! Please try again later!</ErrorText>
+            <ErrorImg src="../../static/images/error.svg" />
+          </Fragment>
+        ) : (
+          <Container>
+            <ProductContainer
+              lowestPrice={_getLowestPrice(_getAllPrice(products))}
+              product={products}
+              authModal={authModal}
+              wishlist={wishlist}
+              wishlistData={wishlistData}
+              auth={auth}
+            />
+            <RightSide>
+              <StoreContainer
+                allProduct={_getALLProduct(products)}
+                product={products}
               />
-              <RightSide>
-                <StoreContainer
-                  allProduct={this._getALLProduct(products)}
-                  product={this.props.products}
-                />
-                {/* <Specification id={TAB.SPECIFICATION} /> */}
-                <Description
-                  description={products.description || ""}
-                  id={TAB.DESCRIPTION}
-                />
-              </RightSide>
-            </Container>
-          )}
-        </Wrapper>
-      </PageWrapper>
-    );
-  }
-}
+              {/* <Specification id={TAB.SPECIFICATION} /> */}
+              <Description
+                description={products.description || ""}
+                id={TAB.DESCRIPTION}
+              />
+            </RightSide>
+          </Container>
+        )}
+      </Wrapper>
+    </PageWrapper>
+  );
+};
 
 export default Product;

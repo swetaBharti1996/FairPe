@@ -218,6 +218,11 @@ class Header extends React.Component {
             <input
               value={term}
               onChange={() => this.setState({ term: event.target.value })}
+              onKeyDown={e => {
+                if (e.key === "Enter") {
+                  term && this.props.onSearch(term);
+                }
+              }}
             />
             <NormalSearchIcon
               onClick={() => {

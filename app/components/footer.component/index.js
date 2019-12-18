@@ -102,7 +102,9 @@ const MailInput = styled.input`
 
 const MailButton = styled.a`
   cursor: pointer;
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 40%;
   background: ${props => props.theme.primary};
   font-size: 16px;

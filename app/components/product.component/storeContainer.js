@@ -1,7 +1,8 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Button } from "../../UI";
 import _ from "lodash";
+import { Modal, Input } from "antd";
 
 const Wrapper = styled.div`
   display: flex;
@@ -31,13 +32,18 @@ const Address = styled.p`
   font-size: 16px;
   align-items: left;
   letter-spacing: -0.2px;
+  margin-bottom: 0;
 `;
-const AddText = styled.span`
+const AddText = styled.a`
   color: ${props => props.theme.primary};
   line-height: 19px;
   font-size: 16px;
   align-items: left;
   margin-left: 10px;
+  letter-spacing: -0.2px;
+  &:hover {
+    color: ${props => props.theme.primary};
+  }
 `;
 
 const Store = styled.div`
@@ -201,22 +207,52 @@ const ProductTitle = styled.h1`
 `;
 
 const StoreContainer = props => {
+  const [showModal, setModal] = useState(false);
+
   const { allProduct } = props;
   return (
     <Wrapper>
-      {/* <Location>
+      <Location>
         <img src="../../static/images/location_1.png" />
 
         <Address>9th Main, HSR Layout, Bangalore</Address>
-        <AddText>Change your location</AddText>
-      </Location> */}
+        <AddText onClick={() => setModal(true)}>Change your location</AddText>
+      </Location>
+      <Modal
+        visible={showModal}
+        onCancel={() => setModal(false)}
+        footer={false}
+      >
+        <div
+          style={{
+            widt: "100%",
+            height: 40,
+            borderBottom: "1px solid #b2b2b2",
+            marginTop: 16,
+            display: "flex",
+            justifyContent: "flex-start",
+            alignItems: "center",
+            padding: "0 8px"
+          }}
+        >
+          <img
+            style={{ marginRight: 8 }}
+            src="../../static/images/location_1.png"
+          />
+          <a style={{ fontSize: 16 }}>Current Location</a>
+        </div>
+
+        <div style={{ marginTop: 16, minHeight: 300 }}>
+          <Input placeholder={"Search Places ..."} size="large" />
+        </div>
+      </Modal>
       <Store>
         <TitleContainer>
           <Title>Product in Stores</Title>
-          {/* <PriceRefreshContainer>
+          <PriceRefreshContainer>
             <PriceUpdate>Prices Updated</PriceUpdate>
             <Refresh>Refresh</Refresh>
-          </PriceRefreshContainer> */}
+          </PriceRefreshContainer>
         </TitleContainer>
 
         <Table>

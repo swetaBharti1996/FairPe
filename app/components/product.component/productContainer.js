@@ -139,18 +139,17 @@ class ProductContainer extends Component {
   };
 
   handleWishlist = e => {
-    const { auth, product, authModal, wishlist, lowestPrice } = this.props;
-
-    if (_.isEmpty(auth)) authModal(true);
-    else {
-      const data = {
-        pid: product.id,
-        title: product.title,
-        price: _.toString(Object.values(lowestPrice)[0] || ""),
-        image: product.image
-      };
-      wishlist(data);
-    }
+    // const { auth, product, authModal, wishlist, lowestPrice } = this.props;
+    // if (_.isEmpty(auth)) authModal(true);
+    // else {
+    //   const data = {
+    //     pid: product.id,
+    //     title: product.title,
+    //     price: _.toString(Object.values(lowestPrice)[0] || ""),
+    //     image: product.image
+    //   };
+    //   wishlist(data);
+    // }
   };
 
   _checkWishlist = () => {

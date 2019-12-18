@@ -10,7 +10,7 @@ const Wrapper = styled.a`
   text-decoration: none;
   display: flex;
   justify-content: center;
-  width: 20%;
+  width: 25%;
 
   @media only screen and (max-width: ${props => props.theme.bpxs}) {
     width: 46.5%;
