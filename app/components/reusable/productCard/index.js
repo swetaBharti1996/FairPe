@@ -52,13 +52,23 @@ const ImageContainer = styled.div`
 `;
 
 const BodyContainer = styled.div`
-  height: 42px;
+  /* height: 42px; */
+  margin-bottom: 4px;
+
+  > span {
+    color: #666;
+
+    letter-spacing: -0.2px;
+    &:hover {
+      color: #666;
+    }
+  }
 `;
 const Title = styled.h2`
   font-size: 17px;
   text-align: left;
   width: 100%;
-  margin-top: 17px;
+  margin-top: 4px;
   color: #000;
 
   font-weight: 600;
@@ -118,6 +128,7 @@ const PriceContainer = styled.div`
     color: #000;
     margin-top: 6px;
   }
+
   @media only screen and (max-width: 1440px) {
     > p {
       font-size: 14px;
@@ -209,6 +220,7 @@ class ProductCard extends Component {
             <Title title={product.title}>
               {this.handleTitle(product.title)}
             </Title>
+            <span>available at {product.score} store</span>
 
             {/* <Author>
               By <b>{product.site_name}</b>
