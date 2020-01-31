@@ -10,6 +10,8 @@ export default keyMirror({
   PARTNER: null,
   CONTACT: null,
   QUESTION: null,
+  CURRENT_LOCATION: null,
+  LIVE_PRICE: null,
 
   //AUTH
   LOGIN: null,

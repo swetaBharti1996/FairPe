@@ -63,6 +63,16 @@ export const gotProductDetail = data => ({
   payload: data
 });
 
+export const gotLivePrice = data => ({
+  type: ActionTypes.LIVE_PRICE,
+  payload: data
+});
+
+export const gotCurrentLocation = data => ({
+  type: ActionTypes.CURRENT_LOCATION,
+  payload: data
+});
+
 export const authModal = flag => {
   return {
     type: ActionTypes.AUTH_MODAL,

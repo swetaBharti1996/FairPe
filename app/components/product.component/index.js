@@ -134,16 +134,34 @@ const Product = props => {
     console.warn(`ERROR(${err.code}): ${err.message}`);
   };
 
-  const { products, authModal, wishlist, wishlistData, auth } = props;
+  const {
+    products,
+    authModal,
+    wishlist,
+    wishlistData,
+    auth,
+    getCurrentLocation,
+    loc,
+    getLivePrice,
+    livePrice
+  } = props;
 
-  const _getAllPrice = products => {
+  const _getAllPrice = DATA => {
     const ALL_PRICE = [];
-    _.map(products.OnlineSites, (data, k) =>
-      ALL_PRICE.push({ [k]: data.price })
-    );
-    _.map(products.OfflineSites, (data, k) =>
-      ALL_PRICE.push({ [k]: data.price })
-    );
+
+    let temp = Object.keys((DATA && DATA.OnlineSites) || []);
+    let temp2 = Object.keys((DATA && DATA.OfflineSites) || []);
+
+    _.map(temp, (data, k) => {
+      let d = DATA.OnlineSites[data][0];
+      ALL_PRICE.push({ [temp]: d.price });
+    });
+
+    _.map(temp2, (data, k) => {
+      let d = DATA.OfflineSites[data][0];
+      ALL_PRICE.push({ [temp]: d.price });
+    });
+
     return ALL_PRICE;
   };
 
@@ -159,27 +177,35 @@ const Product = props => {
 
   const _getALLProduct = DATA => {
     const PRODUCT = [];
-    _.map(DATA.OnlineSites, (data, k) =>
+
+    let temp = Object.keys((DATA && DATA.OnlineSites) || []);
+    let temp2 = Object.keys((DATA && DATA.OfflineSites) || []);
+
+    _.map(temp, (data, key) => {
+      let d = DATA.OnlineSites[data][0];
+
       PRODUCT.push({
-        site: k,
-        price: data.price,
-        discount: _calcDisount(data.mrp, data.price),
+        site: data,
+        price: d.price,
+        discount: _calcDisount(d.mrp, d.price),
         title: DATA.title,
         type: "online",
-        url: data.productUrl
-      })
-    );
+        url: d.productUrl
+      });
+    });
 
-    _.map(DATA.OfflineSites, (data, k) =>
+    _.map(temp2, (data, key) => {
+      let d = DATA.OfflineSites[data][0];
+
       PRODUCT.push({
-        site: k,
-        price: data.price,
-        discount: 30,
+        site: data,
+        price: d.price,
+        discount: _calcDisount(d.mrp, d.price),
         title: DATA.title,
         type: "offline",
-        url: data.productUrl
-      })
-    );
+        url: d.productUrl
+      });
+    });
 
     // Sort with Lowest Price then return
 
@@ -190,7 +216,7 @@ const Product = props => {
   return (
     <PageWrapper>
       <Wrapper>
-        {_.isEmpty(products) ? (
+        {_.isEmpty(products && products.data) ? (
           <Fragment>
             <ErrorText>Something went wrong! Please try again later!</ErrorText>
             <ErrorImg src="../../static/images/error.svg" />
@@ -198,8 +224,10 @@ const Product = props => {
         ) : (
           <Container>
             <ProductContainer
-              lowestPrice={_getLowestPrice(_getAllPrice(products))}
-              product={products}
+              lowestPrice={_getLowestPrice(
+                _getAllPrice(products && products.data)
+              )}
+              product={products && products.data}
               authModal={authModal}
               wishlist={wishlist}
               wishlistData={wishlistData}
@@ -207,12 +235,19 @@ const Product = props => {
             />
             <RightSide>
               <StoreContainer
-                allProduct={_getALLProduct(products)}
-                product={products}
+                allProduct={_getALLProduct(products && products.data)}
+                product={products && products.data}
+                locationData={products && products.locationData}
+                getCurrentLocation={getCurrentLocation}
+                location={loc}
+                getLivePrice={getLivePrice}
+                livePrice={livePrice}
               />
               {/* <Specification id={TAB.SPECIFICATION} /> */}
               <Description
-                description={products.description || ""}
+                description={
+                  (products && products.data && products.data.description) || ""
+                }
                 id={TAB.DESCRIPTION}
               />
             </RightSide>

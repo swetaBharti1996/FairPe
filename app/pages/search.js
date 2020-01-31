@@ -16,6 +16,11 @@ class SearchPage extends React.Component {
   static async getInitialProps(props) {
     const { store, query, req } = props;
 
+    const isServer = !!req;
+
+    // console.log(isServer);
+
+    // if (isServer) {
     const searchQuery = queryString.stringify(query);
     return new Promise((resolve, reject) => {
       fetchSearchData(searchQuery)
@@ -23,6 +28,7 @@ class SearchPage extends React.Component {
         .then(resolve)
         .catch(err => console.log(err) || resolve({}));
     });
+    // } else return;
   }
 
   render() {

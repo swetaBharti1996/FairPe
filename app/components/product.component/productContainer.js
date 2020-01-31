@@ -174,7 +174,8 @@ class ProductContainer extends Component {
     } = this.props;
     const { SUB } = this.state;
 
-    this._checkWishlist();
+    // return <div>test</div>;
+    // this._checkWishlist();
 
     return (
       <Wrapper>
@@ -182,15 +183,15 @@ class ProductContainer extends Component {
           <ProductBox>
             <UpperContainer>
               <ImageContainer>
-                <img src={product.image} />
+                <img src={product && product.image} />
               </ImageContainer>
-              <Heart onClick={this.handleWishlist}>
+              {/* <Heart onClick={this.handleWishlist}>
                 {this._checkWishlist() ? (
                   <img src="../../static/images/wishlist_fill.png" />
                 ) : (
                   <img src="../../static/images/wishlist_empty.png" />
                 )}
-              </Heart>
+              </Heart> */}
             </UpperContainer>
             <LowerContainer>
               <Details>{product.title}</Details>
@@ -202,7 +203,7 @@ class ProductContainer extends Component {
               </RatingContainer> */}
               <LabelText>Price Starts at</LabelText>
               <CartContainer>
-                <Price>Rs {Object.values(lowestPrice)[0]} </Price>
+                <Price>Rs {lowestPrice && Object.values(lowestPrice)[0]}</Price>
               </CartContainer>
             </LowerContainer>
 

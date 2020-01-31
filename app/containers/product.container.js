@@ -1,7 +1,11 @@
 import { connect } from "react-redux";
 import { withRouter } from "next/router";
 import Product from "../components/product.component";
-import { wishlist } from "../actions/asyncAction";
+import {
+  wishlist,
+  getCurrentLocation,
+  getLivePrice
+} from "../actions/asyncAction";
 import { authModal } from "../actions/syncAction";
 
 class ProductContainer extends React.Component {
@@ -14,14 +18,18 @@ const mapStateToProps = state => {
   return {
     products: state.productDetail,
     wishlistData: state.wishlist,
-    auth: state.auth
+    auth: state.auth,
+    loc: state.location,
+    livePrice: state.livePrice
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     wishlist: data => dispatch(wishlist(data)),
-    authModal: flag => dispatch(authModal(flag))
+    authModal: flag => dispatch(authModal(flag)),
+    getCurrentLocation: (data, CB) => dispatch(getCurrentLocation(data, CB)),
+    getLivePrice: (data, CB) => dispatch(getLivePrice(data, CB))
   };
 };
 

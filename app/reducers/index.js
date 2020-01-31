@@ -8,6 +8,8 @@ import search from "./search";
 import productDetail from "./productDetail";
 import wishlist from "./wishlist";
 import notification from "./notification";
+import location from "./location";
+import livePrice from "./livePrice";
 import error from "./error";
 
 const rootReducer = combineReducers({
@@ -20,6 +22,8 @@ const rootReducer = combineReducers({
   productDetail,
   notification,
   wishlist,
+  location,
+  livePrice,
   error
 });
 

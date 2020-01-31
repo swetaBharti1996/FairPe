@@ -11,11 +11,10 @@ export default (state = initialState.products, action) => {
       parsed.products = parseProducts(list);
       parsed.count = list.length;
       parsed.total = _.get(action, "payload.hits.total");
-      if(action.page == 1){
+      if (action.page == 1) {
         return parsed;
-      }
-      else{
-        parsed.products =  _.assign({}, state.products, parsed.products);
+      } else {
+        parsed.products = _.assign({}, state.products, parsed.products);
         return parsed;
       }
     case ActionTypes.EMPTY_PRODUCTS:

@@ -8,5 +8,7 @@ export default {
   productDetail: {},
   wishlist: {},
   notification: {},
+  location: {},
+  livePrice: {},
   error: {}
 };

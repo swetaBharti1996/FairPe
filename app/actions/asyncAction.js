@@ -31,6 +31,16 @@ export const productDetail = id => dispatch =>
     `${AppConstants.default.baseURL}/api/fairpe/product/${id}`
   ).then(resp => dispatch(syncActions.gotProductDetail(resp.data)));
 
+export const getLivePrice = (id, CB) => dispatch =>
+  makeRequest("get", `${AppConstants.default.livePriceURL}/_price?pid=${id}`)
+    .then(resp => {
+      dispatch(syncActions.gotLivePrice(resp.data));
+      CB(true);
+    })
+    .catch(err => {
+      CB(false);
+    });
+
 export const wishlist = data => dispatch => {
   makeRequest(
     "post",
@@ -40,6 +50,21 @@ export const wishlist = data => dispatch => {
       Authorization: document.cookie.replace("authtoken=", "")
     }
   ).then(resp => dispatch(fetchWishlist()));
+};
+
+export const getCurrentLocation = (data, CB) => dispatch => {
+  makeAsyncRequest(
+    "post",
+    `${AppConstants.default.baseURL}/api/google/location/geocoding`,
+    data
+  )
+    .then(resp => {
+      dispatch(syncActions.gotCurrentLocation(resp.data));
+      CB();
+    })
+    .catch(err => {
+      CB();
+    });
 };
 
 export const fetchWishlist = () => dispatch =>
