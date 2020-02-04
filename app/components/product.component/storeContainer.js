@@ -195,6 +195,7 @@ const LogoContainer = styled.div`
 const MainText = styled.h1`
   font-size: inherit;
   margin: 0;
+  color: ${props => (props.color ? "#000" : "red")};
 `;
 
 const ProductTitle = styled.h1`
@@ -376,6 +377,7 @@ const StoreContainer = props => {
       return _.filter(livePrice, (d, j) => {
         if (data.url.includes(d[0])) {
           if (d[1] === "NOT FOUND") {
+            data.price = "OUT OF STOCK";
             return data;
           } else {
             data.price = d[1];
@@ -687,10 +689,20 @@ const StoreContainer = props => {
                         </ProductTitle>
                       </td>
                       <td>
-                        <MainText>{`Rs ${product.price}`}</MainText>
+                        <MainText
+                          color={
+                            product.price === "OUT OF STOCK" ? false : true
+                          }
+                        >
+                          {product.price === "OUT OF STOCK"
+                            ? "OUT OF STOCK"
+                            : `Rs ${product.price}`}
+                        </MainText>
                       </td>
                       <td>
-                        <MainText>{`${product.discount}%`}</MainText>
+                        <MainText
+                          color={true}
+                        >{`${product.discount}%`}</MainText>
                       </td>
                       <td>
                         {product.type === "online" ? (
