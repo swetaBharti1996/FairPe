@@ -55,7 +55,14 @@ export default class MyDocument extends Document {
 
           <script />
         </Head>
-        <body style={{ margin: "0px", padding: "0px" }}>
+        <body
+          style={{
+            margin: "0px",
+            padding: "0px"
+            // backgroundImage:
+            //   "linear-gradient( 135deg, rgb(98, 118, 241) 0%, rgb(191, 121, 247)"
+          }}
+        >
           <Main />
           <NextScript />
           <div id="__CUSTOM_CUBE_LOADER__">

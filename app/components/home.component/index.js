@@ -134,7 +134,7 @@ class Home extends Component {
     return (
       <PageWrapper>
         <Wrapper>
-          <CategoryTag>{category}|</CategoryTag>
+          {/* <CategoryTag>{category}|</CategoryTag>
           <MainCaption>
             The best prices Online/Offline to shop locally
           </MainCaption>
@@ -154,7 +154,7 @@ class Home extends Component {
             categoryData={this.props.categoryData}
             categoryResults={this.props.categoryResults}
           />
-          <Description />
+          <Description /> */}
         </Wrapper>
       </PageWrapper>
     );

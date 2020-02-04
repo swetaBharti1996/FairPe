@@ -17,10 +17,24 @@ import {
   faUser,
   faBars,
   faFilter,
-  faDirections
+  faDirections,
+  faMapMarkerAlt,
+  faAngleDown,
+  faLocationArrow,
+  faInfoCircle
 } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faSearch, faUser, faBars, faFilter, faDirections);
+library.add(
+  faSearch,
+  faUser,
+  faBars,
+  faFilter,
+  faDirections,
+  faMapMarkerAlt,
+  faAngleDown,
+  faLocationArrow,
+  faInfoCircle
+);
 
 NProgress.configure({ showSpinner: false });
 Router.events.on("routeChangeStart", url => {

@@ -3,8 +3,10 @@ import Router from "next/router";
 import UserDropdown from "./userDropdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "../../../server/routes";
-import { Button } from "../../UI";
-import { Drawer } from "antd";
+// import { Button } from "../../UI";
+import { Drawer, Input, Button } from "antd";
+
+const { Search } = Input;
 
 const CustomDrawer = styled(Drawer)`
   > div[class="ant-drawer-content-wrapper"] {
@@ -14,7 +16,7 @@ const CustomDrawer = styled(Drawer)`
 `;
 
 const Wrapper = styled.div`
-  height: 80px;
+  height: 70px;
   background: ${props => props.theme.white};
   box-shadow: 0 2px 4px 0px ${props => props.theme.gray300};
   position: fixed;
@@ -144,21 +146,21 @@ const NormalSearchIcon = styled.a`
   border: 1px solid transparent;
 `;
 
-const Search = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  border: 1px solid #b2b2b2;
-  border-radius: 24px;
-  padding: 0.525rem 1.55rem;
-  padding-right: 0;
-  > input {
-    width: 100%;
-    border: none;
-    box-shadow: none;
-    outline: none;
-  }
-`;
+// const Search = styled.div`
+//   width: 100%;
+//   display: flex;
+//   align-items: center;
+//   border: 1px solid #b2b2b2;
+//   border-radius: 24px;
+//   padding: 0.525rem 1.55rem;
+//   padding-right: 0;
+//   > input {
+//     width: 100%;
+//     border: none;
+//     box-shadow: none;
+//     outline: none;
+//   }
+// `;
 
 const SearchContainer = styled.div`
   margin-right: 40px;
@@ -184,6 +186,33 @@ const Icon = styled.a`
     &:hover {
       color: inherit;
     }
+  }
+`;
+
+const LocationBox = styled.div`
+  position: fixed;
+  height: 220px;
+  top: 74px;
+  left: 173px;
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+  color: #333;
+  width: 440px;
+
+  &::before {
+    margin-left: -6px;
+    bottom: 100%;
+    left: 14%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 16px solid #eee;
   }
 `;
 
@@ -214,7 +243,7 @@ class Header extends React.Component {
       return (
         <SearchContainer>
           {/* {showSearch ? ( */}
-          <Search>
+          {/* <Search>
             <input
               value={term}
               onChange={() => this.setState({ term: event.target.value })}
@@ -231,7 +260,7 @@ class Header extends React.Component {
             >
               <FontAwesomeIcon icon="search" />
             </NormalSearchIcon>
-          </Search>
+          </Search> */}
           {/* // ) : ( //{" "}
           <SearchIcon onClick={this._onSearch}>
             // <FontAwesomeIcon icon="search" />
@@ -257,7 +286,7 @@ class Header extends React.Component {
 
     return (
       <Wrapper>
-        <Container>
+        <Container style={{ height: "100%" }}>
           <div>
             <Icon onClick={this._toggleDrawer}>
               <FontAwesomeIcon icon="bars" />
@@ -270,7 +299,77 @@ class Header extends React.Component {
             />
           </Logo>
 
-          <LeftContainer>
+          <div
+            style={{
+              height: "60%",
+              display: "flex",
+              alignItems: "center",
+              marginLeft: 16,
+              paddingLeft: 16,
+              borderLeft: "1px solid #eee",
+              position: "relative"
+            }}
+          >
+            <FontAwesomeIcon icon="map-marker-alt" color={"#6376f1"} />
+
+            <p
+              style={{ margin: 0, font: "menu", marginLeft: 8, marginRight: 8 }}
+            >
+              Bengaluru
+            </p>
+            <FontAwesomeIcon icon="angle-down" />
+
+            <LocationBox>
+              <div style={{ padding: 24, display: "flex", flexFlow: "column" }}>
+                <div style={{ display: "flex" }}>
+                  <Search size={"large"} placeholder={"search any area "} />
+                  <Button
+                    size={"large"}
+                    style={{
+                      marginLeft: 8,
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center"
+                    }}
+                  >
+                    Detect
+                    <FontAwesomeIcon
+                      icon={"location-arrow"}
+                      style={{ fontSize: 12, marginLeft: 4 }}
+                    />
+                  </Button>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "flex-start",
+                    marginTop: 12
+                  }}
+                >
+                  <FontAwesomeIcon
+                    icon={"info-circle"}
+                    style={{ paddingTop: 3 }}
+                  />
+                  <span
+                    style={{
+                      marginLeft: 6,
+                      letterSpacing: "-0.3px",
+                      color: "#707070",
+                      lineHeight: 1.3,
+                      opacity: 0.9,
+                      fontSize: 13
+                    }}
+                  >
+                    we need your location access to show information located
+                    near you.
+                  </span>
+                </div>
+              </div>
+            </LocationBox>
+          </div>
+
+          {/* <LeftContainer>
             {this._renderSearch()}
             <Nav>
               <li>
@@ -309,7 +408,7 @@ class Header extends React.Component {
                 </li>
               )}
             </Nav>
-          </LeftContainer>
+          </LeftContainer> */}
         </Container>
 
         <CustomDrawer
@@ -342,7 +441,7 @@ class Header extends React.Component {
               </Link>
             </li>
 
-            {user && !user.name ? (
+            {/* {user && !user.name ? (
               <li>
                 <Button
                   style={{ marginRight: 12 }}
@@ -368,7 +467,7 @@ class Header extends React.Component {
               <li>
                 <UserDropdown user={user} logout={logout} />
               </li>
-            )}
+            )} */}
           </Nav>
         </CustomDrawer>
       </Wrapper>
