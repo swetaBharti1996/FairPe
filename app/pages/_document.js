@@ -29,24 +29,19 @@ export default class MyDocument extends Document {
     };
   };
 
-  setCapturlyTag = () => {
+  setHotjarTag = () => {
     return {
       __html: `
-      function trq(){(trq.q=trq.q||[]).push(arguments);}
-      trq('account', 't-5e3be2ea0ea6365ea730679a');
-      var _paq=_paq||[];
-      _paq.push(['trackPageView']);
-      _paq.push(['enableLinkTracking']);
-  
-      (function() {
-          var u="//capturly.com/";
-          _paq.push(["setTrackerUrl", u+"capturly-track.php"]);
-          _paq.push(['setSiteId', '3936']);
-          var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-          g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'capturly-track-js.js';
-          s.parentNode.insertBefore(g,s);
-      })();
-      `
+      <script>
+      (function(h,o,t,j,a,r){
+          h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+          h._hjSettings={hjid:1675974,hjsv:6};
+          a=o.getElementsByTagName('head')[0];
+          r=o.createElement('script');r.async=1;
+          r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+          a.appendChild(r);
+      })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+    `
     };
   };
 
@@ -113,7 +108,7 @@ export default class MyDocument extends Document {
           </div>
 
           {isProduction && (
-            <script dangerouslySetInnerHTML={this.setCapturlyTag()} />
+            <script dangerouslySetInnerHTML={this.setHotjarTag()} />
           )}
         </body>
       </html>
