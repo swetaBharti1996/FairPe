@@ -7,10 +7,10 @@ const Wrapper = styled.div`
   flex-direction: column;
   /* margin-bottom: 55px; */
 
-  border-radius: 49px;
+  border-radius: 6px;
   /* box-shadow: 0 2px 4px 2px #ddd; */
-  box-shadow: 0px 0px 30px #00000014;
-  border: 1px solid #ededed;
+  /* box-shadow: 0px 0px 30px #00000014; */
+  border: 1px solid #dfdfdf;
   background: #ffffff 0% 0% no-repeat padding-box;
   width: 100%;
   /* height: 100%; */
@@ -60,7 +60,7 @@ const SearchButton = styled.button`
   /* background-image: linear-gradient(127deg, #ff632a, #e20000); */
   width: 11%;
   border: none;
-  border-radius: 0px 49px 49px 0px;
+  border-radius: 0px 6px 6px 0px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -228,7 +228,7 @@ class Search extends Component {
         <Container>
           <SearchBar
             type="text"
-            placeholder="Search for any category / product"
+            placeholder="Search for any product"
             value={searchTerm}
             onChange={this.handleInputChange}
             onFocus={() => this.setSuggestion()}

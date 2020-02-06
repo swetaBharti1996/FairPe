@@ -14,9 +14,9 @@ export default styled.a`
   text-align: center;
   vertical-align: middle;
   white-space: nowrap;
-  border: 1px solid ${props => props.theme.primary};
+  /* border: 1px solid ${props => props.theme.primary}; */
   border-radius: 0.25rem;
-  border-radius: 24px;
+  border-radius: 6px;
   user-select: none;
   outline: none;
   cursor: pointer;

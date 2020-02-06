@@ -3,7 +3,7 @@ import Router from "next/router";
 import UserDropdown from "./userDropdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "../../../server/routes";
-// import { Button } from "../../UI";
+import { Button as CustomButtom } from "../../UI";
 import { Drawer, Input, Button } from "antd";
 
 const { Search } = Input;
@@ -191,7 +191,7 @@ const Icon = styled.a`
 
 const LocationBox = styled.div`
   position: fixed;
-  height: 220px;
+  height: 150px;
   top: 74px;
   left: 173px;
   background-color: #fff;
@@ -199,7 +199,9 @@ const LocationBox = styled.div`
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
   color: #333;
   width: 440px;
-
+  justify-content: center;
+  align-items: center;
+  display: flex;
   &::before {
     margin-left: -6px;
     bottom: 100%;
@@ -329,7 +331,10 @@ class Header extends React.Component {
                       marginLeft: 8,
                       display: "flex",
                       justifyContent: "center",
-                      alignItems: "center"
+                      alignItems: "center",
+                      font: "menu",
+                      fontSize: "15px",
+                      color: "#263237"
                     }}
                   >
                     Detect
@@ -363,16 +368,25 @@ class Header extends React.Component {
                   >
                     we need your location access to show information located
                     near you.
+                    <a
+                      style={{
+                        paddingLeft: 2,
+                        letterSpacing: "-0.3px",
+                        color: "#6276f1"
+                      }}
+                    >
+                      How we use location ?
+                    </a>
                   </span>
                 </div>
               </div>
             </LocationBox>
           </div>
 
-          {/* <LeftContainer>
-            {this._renderSearch()}
+          <LeftContainer>
+            {/* {this._renderSearch()} */}
             <Nav>
-              <li>
+              {/* <li>
                 <Link route={"vendor"}>
                   <List>Become Partner</List>
                 </Link>
@@ -387,20 +401,23 @@ class Header extends React.Component {
                 <Link route={"contact"}>
                   <List>Contact us</List>
                 </Link>
-              </li>
+              </li> */}
 
               {user && !user.name ? (
                 <li>
-                  <Button
+                  {/* <CustomButtom
                     style={{ marginRight: 12 }}
                     onClick={() => this.props.openModal(true)}
                   >
                     Log In
-                  </Button>
+                  </CustomButtom> */}
 
-                  <Button active onClick={() => this.props.openModal(true)}>
-                    Sign up
-                  </Button>
+                  <CustomButtom
+                    active
+                    onClick={() => this.props.openModal(true)}
+                  >
+                    Login / Register
+                  </CustomButtom>
                 </li>
               ) : (
                 <li>
@@ -408,7 +425,7 @@ class Header extends React.Component {
                 </li>
               )}
             </Nav>
-          </LeftContainer> */}
+          </LeftContainer>
         </Container>
 
         <CustomDrawer

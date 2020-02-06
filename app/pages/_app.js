@@ -21,7 +21,8 @@ import {
   faMapMarkerAlt,
   faAngleDown,
   faLocationArrow,
-  faInfoCircle
+  faInfoCircle,
+  faSearchLocation
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -33,7 +34,8 @@ library.add(
   faMapMarkerAlt,
   faAngleDown,
   faLocationArrow,
-  faInfoCircle
+  faInfoCircle,
+  faSearchLocation
 );
 
 NProgress.configure({ showSpinner: false });
