@@ -144,22 +144,40 @@ const PopularBox = styled.div`
 const StoresNear = styled.div`
   margin-top: 109px;
   > div {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    > span {
-      font-size: 30px;
-      color: mediumseagreen;
-      font-weight: 600;
-      letter-spacing: -1.4px;
+    &:last-child {
+      display: flex;
+
+      margin-top: 24px;
+
+      > div {
+        min-height: 200px;
+        border: 1px solid;
+        flex: 1;
+        margin-right: 16px;
+        border-radius: 6px;
+        &:last-child {
+          margin-right: 0;
+        }
+      }
     }
-    > p {
-      margin: 0;
-      font-weight: 600;
-      font-size: 24px;
-      letter-spacing: -1.2px;
-      margin-right: 8px;
-      color: #263238;
+    &:first-child {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      > span {
+        font-size: 30px;
+        color: mediumseagreen;
+        font-weight: 600;
+        letter-spacing: -1.4px;
+      }
+      > p {
+        margin: 0;
+        font-weight: 600;
+        font-size: 24px;
+        letter-spacing: -1.2px;
+        margin-right: 8px;
+        color: #263238;
+      }
     }
   }
 `;
@@ -249,6 +267,13 @@ class Home extends Component {
                 style={{ marginLeft: 12, fontSize: 24 }}
                 icon="angle-down"
               />
+            </div>
+
+            <div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
             </div>
           </StoresNear>
 
