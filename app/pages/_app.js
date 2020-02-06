@@ -19,6 +19,7 @@ import {
   faFilter,
   faDirections
 } from "@fortawesome/free-solid-svg-icons";
+import { trackPageView } from "../utils/googelAnalytics";
 
 library.add(faSearch, faUser, faBars, faFilter, faDirections);
 
@@ -45,11 +46,6 @@ class MyApp extends App {
     const c = cookies(ctx);
     const isServer = !!ctx.req;
 
-    console.log(isServer);
-    if (!isServer) {
-      console.log("called");
-    }
-
     if (!!c.authtoken && isServer) {
       ctx.store.dispatch(login(c.authtoken));
       await getWishlist(c)
@@ -59,8 +55,6 @@ class MyApp extends App {
         .catch(err => console.log(err));
     }
 
-    // console.log("called");
-
     ctx.store.dispatch(error({}));
 
     const pageProps = Component.getInitialProps
@@ -68,6 +62,14 @@ class MyApp extends App {
       : {};
 
     return { pageProps };
+  }
+
+  componentDidMount() {
+    Router.onRouteChangeComplete = url => {
+      trackPageView(url);
+
+      console.log(url);
+    };
   }
 
   render() {

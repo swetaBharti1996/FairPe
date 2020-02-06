@@ -6,20 +6,12 @@ import { withRouter } from "next/router";
 import { connect } from "react-redux";
 import { MainWrapper } from "../UI";
 import { authModal } from "../actions/syncAction";
-import { initGA, logPageView } from "../utils/googelAnalytics";
 
 class Layout extends React.Component {
   state = {
     showModal: false
   };
 
-  // componentDidMount() {
-  //   if (!window.GA_INITIALIZED) {
-  //     initGA();
-  //     window.GA_INITIALIZED = true;
-  //   }
-  //   logPageView();
-  // }
   openModal = () => {
     this.setState({ showModal: true });
   };

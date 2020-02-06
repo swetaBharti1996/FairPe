@@ -1,7 +1,7 @@
 import Document, { Head, Main, NextScript } from "next/document";
 import { extractCritical } from "emotion-server";
 import { ServerStyleSheet } from "styled-components";
-import { AddToCart } from "../UI";
+import { Fragment } from "react";
 
 export default class MyDocument extends Document {
   static getInitialProps({ renderPage }) {
@@ -11,10 +11,27 @@ export default class MyDocument extends Document {
     );
     const selectStyles = extractCritical(page.html);
     const styleTags = sheet.getStyleElement();
-    return { ...page, styleTags, selectStyles };
+
+    const isProduction = process.env.NODE_ENV === "production";
+    // const initialProps = await Document.getInitialProps(ctx);
+
+    return { ...page, styleTags, selectStyles, isProduction };
   }
 
+  setGoogleTags = () => {
+    return {
+      __html: `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-123415504-7');
+      `
+    };
+  };
+
   render() {
+    const { isProduction } = this.props;
+
     return (
       <html>
         <Head>
@@ -58,6 +75,18 @@ export default class MyDocument extends Document {
         <body style={{ margin: "0px", padding: "0px" }}>
           <Main />
           <NextScript />
+
+          {isProduction && (
+            <Fragment>
+              <script
+                async
+                src="https://www.googletagmanager.com/gtag/js?id=UA-123415504-7"
+              />
+              {/* We call the function above to inject the contents of the script tag */}
+              <script dangerouslySetInnerHTML={this.setGoogleTags()} />
+            </Fragment>
+          )}
+
           <div id="__CUSTOM_CUBE_LOADER__">
             <div className="circle-loader" />
           </div>
