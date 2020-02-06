@@ -87,6 +87,10 @@ export default class MyDocument extends Document {
           <link rel="stylesheet" href="/static/css/nprogress.css" />
 
           <script />
+
+          {isProduction && (
+            <script dangerouslySetInnerHTML={this.setHotjarTag()} />
+          )}
         </Head>
         <body style={{ margin: "0px", padding: "0px" }}>
           <Main />
@@ -106,10 +110,6 @@ export default class MyDocument extends Document {
           <div id="__CUSTOM_CUBE_LOADER__">
             <div className="circle-loader" />
           </div>
-
-          {isProduction && (
-            <script dangerouslySetInnerHTML={this.setHotjarTag()} />
-          )}
         </body>
       </html>
     );
