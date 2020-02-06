@@ -150,11 +150,25 @@ const StoresNear = styled.div`
       margin-top: 24px;
 
       > div {
+        box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px 0px;
+        display: flex;
+        flex-direction: column;
+        -webkit-box-flex: 0;
+        flex-grow: 0;
+        flex-shrink: 1;
+        -webkit-box-pack: justify;
+        justify-content: space-between;
+        position: relative;
+
+        background-color: rgb(255, 255, 255);
+        color: rgb(153, 153, 153);
+        width: 100%;
+        box-sizing: border-box;
+        border-radius: 4px;
+        overflow: hidden;
+        text-decoration: none;
         min-height: 200px;
-        border: 1px solid;
-        flex: 1;
         margin-right: 16px;
-        border-radius: 6px;
         &:last-child {
           margin-right: 0;
         }
@@ -270,6 +284,7 @@ class Home extends Component {
             </div>
 
             <div>
+              <div></div>
               <div></div>
               <div></div>
               <div></div>
