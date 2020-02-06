@@ -1,7 +1,6 @@
 import Document, { Head, Main, NextScript } from "next/document";
 import { extractCritical } from "emotion-server";
 import { ServerStyleSheet } from "styled-components";
-import { AddToCart } from "../UI";
 
 export default class MyDocument extends Document {
   static getInitialProps({ renderPage }) {
