@@ -29,6 +29,27 @@ export default class MyDocument extends Document {
     };
   };
 
+  setCapturlyTag = () => {
+    return {
+      __html: `
+      function trq(){(trq.q=trq.q||[]).push(arguments);}
+      trq('account', 't-5e3be2ea0ea6365ea730679a');
+      var _paq=_paq||[];
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+  
+      (function() {
+          var u="//capturly.com/";
+          _paq.push(["setTrackerUrl", u+"capturly-track.php"]);
+          _paq.push(['setSiteId', '3936']);
+          var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+          g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'capturly-track-js.js';
+          s.parentNode.insertBefore(g,s);
+      })();
+      `
+    };
+  };
+
   render() {
     const { isProduction } = this.props;
 
@@ -90,6 +111,10 @@ export default class MyDocument extends Document {
           <div id="__CUSTOM_CUBE_LOADER__">
             <div className="circle-loader" />
           </div>
+
+          {isProduction && (
+            <script dangerouslySetInnerHTML={this.setCapturlyTag()} />
+          )}
         </body>
       </html>
     );
