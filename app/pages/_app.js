@@ -45,6 +45,11 @@ class MyApp extends App {
     const c = cookies(ctx);
     const isServer = !!ctx.req;
 
+    console.log(isServer);
+    if (!isServer) {
+      console.log("called");
+    }
+
     if (!!c.authtoken && isServer) {
       ctx.store.dispatch(login(c.authtoken));
       await getWishlist(c)
@@ -53,6 +58,8 @@ class MyApp extends App {
         })
         .catch(err => console.log(err));
     }
+
+    // console.log("called");
 
     ctx.store.dispatch(error({}));
 

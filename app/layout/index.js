@@ -13,13 +13,13 @@ class Layout extends React.Component {
     showModal: false
   };
 
-  componentDidMount() {
-    if (!window.GA_INITIALIZED) {
-      initGA();
-      window.GA_INITIALIZED = true;
-    }
-    logPageView();
-  }
+  // componentDidMount() {
+  //   if (!window.GA_INITIALIZED) {
+  //     initGA();
+  //     window.GA_INITIALIZED = true;
+  //   }
+  //   logPageView();
+  // }
   openModal = () => {
     this.setState({ showModal: true });
   };
