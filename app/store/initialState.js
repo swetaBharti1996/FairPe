@@ -10,5 +10,7 @@ export default {
   notification: {},
   location: {},
   livePrice: {},
-  error: {}
+  error: {},
+  url: {},
+  review: {}
 };

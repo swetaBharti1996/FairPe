@@ -1,16 +1,114 @@
 import React, { Component } from "react";
+import AsyncSelect from "react-select/async";
+import { Button } from "../../UI";
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import _ from "lodash";
+import { makeRequest } from "../../constants/request";
+import AppConstants from "../../constants/appConstant";
+
+// const Wrapper = styled.div`
+//   display: flex;
+// `;
+
+// const SearchContainer = styled.div`
+//   flex: 1;
+// `;
+
+// const customStyles = {
+//   option: (provided, state) => ({
+//     ...provided
+//   }),
+//   control: () => ({
+//     padding: "8px",
+//     border: "1px solid #bfbfbf",
+//     borderTopLeftRadius: 3,
+//     borderBottomLeftRadius: 3,
+//     flex: 1
+//   })
+// };
+
+// const Search = props => {
+//   const { searchSuggestion, search } = props;
+
+//   const request = term => {
+//     // return makeRequest(
+//     //   "get",
+//     //   `${AppConstants.default.suggestionURL}/suggest?term=${term}`
+//     // )
+//     //   .then(data => {
+//     //     console.log(data);
+//     //   })
+//     //   .catch(err => {
+//     //     console.log(err);
+//     //   });
+
+//     searchSuggestion(term, data => {
+//       if (data.length) {
+//         return { value: "value", label: "label" };
+//       }
+//     });
+//   };
+
+//   const getOptions = (term, callback) => {
+//     const input = _.trim(term);
+//     if (!input) {
+//       return callback([]);
+//     }
+//     const options = search[input] || [];
+//     if (options.length) {
+//       return callback(result);
+//     }
+//   };
+
+//   const promiseOptions = inputValue =>
+//     new Promise(resolve => {
+//       resolve(request(inputValue));
+//     });
+
+//   return (
+//     <Wrapper>
+//       <SearchContainer>
+//         <AsyncSelect
+//           styles={customStyles}
+//           cacheOptions
+//           placeholder={"search any product "}
+//           defaultOptions
+//           loadOptions={promiseOptions}
+//           components={{
+//             IndicatorsContainer: () => null
+//           }}
+//         />
+//       </SearchContainer>
+
+//       <Button
+//         style={{
+//           borderBottomLeftRadius: 0,
+//           borderTopLeftRadius: 0,
+//           display: "flex",
+//           justifyContent: "center",
+//           alignItems: "center",
+//           fontSize: 21
+//         }}
+//         active
+//       >
+//         <FontAwesomeIcon icon={"search"} />
+//       </Button>
+//     </Wrapper>
+//   );
+// };
+
+// export default Search;
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   /* margin-bottom: 55px; */
 
-  border-radius: 49px;
+  border-radius: 3px;
   /* box-shadow: 0 2px 4px 2px #ddd; */
-  box-shadow: 0px 0px 30px #00000014;
-  border: 1px solid #ededed;
+  /* box-shadow: 0px 0px 30px #00000014; */
+  border: 1px solid #dfdfdf;
   background: #ffffff 0% 0% no-repeat padding-box;
   width: 100%;
   /* height: 100%; */
@@ -18,7 +116,6 @@ const Wrapper = styled.div`
   position: relative;
   @media only screen and (max-width: 992px) {
     width: 100%;
-    border-radius: 32px;
   }
 `;
 const Container = styled.div`
@@ -34,7 +131,9 @@ const SearchBar = styled.input`
   margin-left: 5% !important;
   width: 85%;
   height: 100%;
-  padding: 22px 0px;
+  padding: 14px 0px;
+
+  font-size: 15px;
   border: none !important;
   :focus {
     border: none;
@@ -45,13 +144,13 @@ const SearchBar = styled.input`
   }
   @media only screen and (max-width: 1440px) {
     /* margin: 15px 0px; */
-    padding: 18px 0px;
-    font-size: 16px;
+    padding: 15px 0px;
+    font-size: 14px;
     /* width: 16px;     */
   }
   @media only screen and (max-width: 992px) {
     /* margin: 0px 30px; */
-    padding: 18px 0px;
+    padding: 14px 0px;
     width: 80%;
     margin-left: 8% !important;
   }
@@ -60,7 +159,7 @@ const SearchButton = styled.button`
   /* background-image: linear-gradient(127deg, #ff632a, #e20000); */
   width: 11%;
   border: none;
-  border-radius: 0px 49px 49px 0px;
+  border-radius: 0px 3px 3px 0px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -79,34 +178,30 @@ const SearchButton = styled.button`
 const SearchDropdown = styled.ul`
   display: flex;
   flex-direction: column;
-  /* padding: 20px; */
-  z-index: 99;
-  width: 100%;
-  padding-bottom: 40px;
-  /* padding: 10px; */
+  width: 89%;
+  padding-bottom: 8px;
   background-color: #fff;
   color: #777;
   cursor: default;
-  border-radius: 49px;
+  border-radius: 3px;
   position: absolute;
   z-index: 100000;
   margin: 0;
-  top: 60px;
-
-  background: #ffffff 0% 0% no-repeat padding-box;
-  box-shadow: 4px 2px 12px #00000014;
+  border: 1px solid #dfdfdf;
+  top: 54px;
 
   @media screen and (max-width: ${props => props.theme.bpxs}) {
     top: 43px;
   }
 `;
 const SuggestionList = styled.div`
-  width: 90%;
-  padding: 10px 5%;
-  font-size: 16px;
+  width: 100%;
+  padding: 6px 5%;
+  font-size: 15px;
   font-weight: bolder;
   text-transform: capitalize;
   color: #666666;
+  cursor: pointer;
   background: ${props => (props.hover ? "#eee" : "#fff")};
   :hover {
     background: #eee;
@@ -121,12 +216,7 @@ class Search extends Component {
   state = {
     searchTerm: "",
     showSuggestion: false,
-    list: [
-      "the chemist",
-      "the power of positive thinking",
-      "everyone has a story",
-      "age of shiva"
-    ],
+    list: ["samsung m30s", "iphone 11", "oppo 7", "jbl headphone"],
     list2: [],
     hovered: ""
   };
@@ -228,7 +318,7 @@ class Search extends Component {
         <Container>
           <SearchBar
             type="text"
-            placeholder="Search for any category / product"
+            placeholder="Search for any product"
             value={searchTerm}
             onChange={this.handleInputChange}
             onFocus={() => this.setSuggestion()}

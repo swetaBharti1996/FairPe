@@ -10,18 +10,51 @@ import Router from "next/router";
 import { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
 import { makeRequest } from "../constants/request";
-import { login, gotWishlist, error } from "../actions/syncAction";
+import {
+  login,
+  gotWishlist,
+  error,
+  gotCurrentLocation
+} from "../actions/syncAction";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faSearch,
   faUser,
   faBars,
   faFilter,
-  faDirections
+  faDirections,
+  faMapMarkerAlt,
+  faAngleDown,
+  faLocationArrow,
+  faInfoCircle,
+  faSearchLocation,
+  faPlayCircle,
+  faAngleRight,
+  faStore,
+  faTags,
+  faImages,
+  faUserCircle
 } from "@fortawesome/free-solid-svg-icons";
 import { trackPageView } from "../utils/googelAnalytics";
 
-library.add(faSearch, faUser, faBars, faFilter, faDirections);
+library.add(
+  faSearch,
+  faUser,
+  faBars,
+  faFilter,
+  faDirections,
+  faMapMarkerAlt,
+  faAngleDown,
+  faLocationArrow,
+  faInfoCircle,
+  faSearchLocation,
+  faPlayCircle,
+  faAngleRight,
+  faStore,
+  faTags,
+  faImages,
+  faUserCircle
+);
 
 NProgress.configure({ showSpinner: false });
 Router.events.on("routeChangeStart", url => {
@@ -48,6 +81,7 @@ class MyApp extends App {
 
     if (!!c.authtoken && isServer) {
       ctx.store.dispatch(login(c.authtoken));
+
       await getWishlist(c)
         .then(resp => {
           ctx.store.dispatch(gotWishlist(resp.data));

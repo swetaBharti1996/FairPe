@@ -3,8 +3,22 @@ import Router from "next/router";
 import UserDropdown from "./userDropdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "../../../server/routes";
-import { Button } from "../../UI";
-import { Drawer } from "antd";
+import { Button as CustomButtom } from "../../UI";
+import {
+  Drawer,
+  Input,
+  Button,
+  Modal,
+  Form,
+  Icon,
+  Checkbox,
+  message
+} from "antd";
+import Login from "./login";
+import Register from "./register";
+import _ from "lodash";
+
+const { Search } = Input;
 
 const CustomDrawer = styled(Drawer)`
   > div[class="ant-drawer-content-wrapper"] {
@@ -14,7 +28,7 @@ const CustomDrawer = styled(Drawer)`
 `;
 
 const Wrapper = styled.div`
-  height: 80px;
+  height: 70px;
   background: ${props => props.theme.white};
   box-shadow: 0 2px 4px 0px ${props => props.theme.gray300};
   position: fixed;
@@ -144,21 +158,21 @@ const NormalSearchIcon = styled.a`
   border: 1px solid transparent;
 `;
 
-const Search = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  border: 1px solid #b2b2b2;
-  border-radius: 24px;
-  padding: 0.525rem 1.55rem;
-  padding-right: 0;
-  > input {
-    width: 100%;
-    border: none;
-    box-shadow: none;
-    outline: none;
-  }
-`;
+// const Search = styled.div`
+//   width: 100%;
+//   display: flex;
+//   align-items: center;
+//   border: 1px solid #b2b2b2;
+//   border-radius: 24px;
+//   padding: 0.525rem 1.55rem;
+//   padding-right: 0;
+//   > input {
+//     width: 100%;
+//     border: none;
+//     box-shadow: none;
+//     outline: none;
+//   }
+// `;
 
 const SearchContainer = styled.div`
   margin-right: 40px;
@@ -168,27 +182,121 @@ const SearchContainer = styled.div`
   align-items: center;
 `;
 
-const Icon = styled.a`
-  display: none;
+// const Icon = styled.a`
+//   display: none;
+//   @media only screen and (max-width: ${props => props.theme.bpxs}) {
+//     font-size: 28px;
+//     margin-right: 16px;
+//     display: block;
+//     cursor: pointer;
+//     color: ${props => props.theme.default};
+
+//     &:active {
+//       color: inherit;
+//     }
+
+//     &:hover {
+//       color: inherit;
+//     }
+//   }
+// `;
+
+const LocationBox = styled.div`
+  position: fixed;
+  height: 150px;
+  top: 74px;
+  left: 173px;
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+  color: #333;
+  width: 440px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
   @media only screen and (max-width: ${props => props.theme.bpxs}) {
-    font-size: 28px;
-    margin-right: 16px;
-    display: block;
-    cursor: pointer;
-    color: ${props => props.theme.default};
+    width: 90%;
+    left: 5%;
+  }
 
-    &:active {
-      color: inherit;
-    }
+  &::before {
+    margin-left: -6px;
+    bottom: 100%;
+    left: 14%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 16px solid #eee;
 
-    &:hover {
-      color: inherit;
+    @media only screen and (max-width: ${props => props.theme.bpxs}) {
+      left: 64%;
     }
   }
 `;
 
+const ModalBody = styled.div`
+  flex: 1;
+  display: flex;
+  height: 520px;
+  justify-content: center;
+  align-items: center;
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    flex-flow: column;
+  }
+`;
+const ModalLeft = styled.div`
+  flex: 1;
+  background: #f8f8f8;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    display: none;
+  }
+`;
+
+const ModalRight = styled.div`
+  flex: 1.3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Ham = styled.div`
+  display: none;
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    display: block;
+    font-size: 21px;
+    margin-right: 8px;
+  }
+`;
+
+const TYPE = { LOGIN: "login", REGISTER: "register" };
+
 class Header extends React.Component {
-  state = { showSearch: false, displaySearch: false, drawer: false, term: "" };
+  state = {
+    showSearch: false,
+    displaySearch: false,
+    drawer: false,
+    term: "",
+    modal: false,
+    type: TYPE.LOGIN,
+    locationLoader: true,
+    showLocation: true
+  };
+
+  async componentDidMount() {
+    let loc = await localStorage.getItem("loc");
+    if (loc) this.props.refreshLocation(JSON.parse(loc));
+    this.setState({ locationLoader: false, showLocation: false });
+  }
 
   _onSearch = event => {
     this.setState(prevState => ({
@@ -206,6 +314,64 @@ class Header extends React.Component {
     }));
   };
 
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        console.log("Received values of form: ", values);
+      }
+    });
+  };
+
+  changeAuth = type => {
+    this.setState({ type: type });
+  };
+
+  closeModal = () => {
+    this.props.authModal(false);
+  };
+
+  currentLocation = () => {
+    this.setState({ locationLoader: true });
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        this.success,
+        this.error,
+        this.options
+      );
+    } else {
+      message.error("Geolocation is not supported by this browser.", 2);
+      this.setState({ locationLoader: false });
+    }
+  };
+
+  options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0
+  };
+  success = pos => {
+    var crd = pos.coords;
+
+    this.props.getCurrentLocation(
+      { lat: crd.latitude.toString(), lng: crd.longitude.toString() },
+      bol => {
+        this.setState({ locationLoader: false, showLocation: false });
+
+        if (bol) {
+          // Hide the box
+        } else {
+          message.error("error", 1);
+        }
+      }
+    );
+  };
+
+  error = err => {
+    message.error(`ERROR(${err.code}): ${err.message}`, 1);
+    this.setState({ locationLoader: false });
+  };
+
   _renderSearch = () => {
     const { pathname } = this.props.newRouter;
     const { showSearch, term } = this.state;
@@ -214,7 +380,7 @@ class Header extends React.Component {
       return (
         <SearchContainer>
           {/* {showSearch ? ( */}
-          <Search>
+          {/* <Search>
             <input
               value={term}
               onChange={() => this.setState({ term: event.target.value })}
@@ -231,7 +397,7 @@ class Header extends React.Component {
             >
               <FontAwesomeIcon icon="search" />
             </NormalSearchIcon>
-          </Search>
+          </Search> */}
           {/* // ) : ( //{" "}
           <SearchIcon onClick={this._onSearch}>
             // <FontAwesomeIcon icon="search" />
@@ -251,18 +417,29 @@ class Header extends React.Component {
   // };
 
   render() {
-    const { user, logout } = this.props;
+    const {
+      user,
+      logout,
+      login,
+      signup,
+      error,
+      location,
+      refreshLocation
+    } = this.props;
+    const { getFieldDecorator } = this.props.form;
 
-    const { drawer } = this.state;
+    const { drawer, type, locationLoader, showLocation } = this.state;
+
+    const { modal, authModal } = this.props;
 
     return (
       <Wrapper>
-        <Container>
-          <div>
+        <Container style={{ height: "100%" }}>
+          <Ham>
             <Icon onClick={this._toggleDrawer}>
               <FontAwesomeIcon icon="bars" />
             </Icon>
-          </div>
+          </Ham>
           <Logo>
             <img
               src="../../static/images/logo.png"
@@ -270,10 +447,146 @@ class Header extends React.Component {
             />
           </Logo>
 
+          <div
+            style={{
+              height: "60%",
+              display: "flex",
+              alignItems: "center",
+              marginLeft: 16,
+              paddingLeft: 16,
+              borderLeft: "1px solid #eee",
+              position: "relative"
+            }}
+          >
+            {!_.isEmpty(location) ? (
+              <a
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center"
+                }}
+                onClick={() => {
+                  this.setState(prevState => ({
+                    showLocation: !prevState.showLocation
+                  }));
+                }}
+              >
+                <FontAwesomeIcon icon="map-marker-alt" color={"#6376f1"} />
+                <p
+                  style={{
+                    margin: 0,
+                    font: "menu",
+                    marginLeft: 8,
+                    marginRight: 8,
+                    cursor: "pointer"
+                  }}
+                >
+                  {location.results &&
+                    location.results[
+                      location.results.length - 3
+                    ].address_components[0].long_name.split(" ")[0]}
+                </p>
+                <FontAwesomeIcon icon="angle-down" />
+              </a>
+            ) : (
+              <a
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center"
+                }}
+              >
+                <FontAwesomeIcon icon="map-marker-alt" color={"#6376f1"} />
+                <p
+                  style={{
+                    margin: 0,
+                    font: "menu",
+                    marginLeft: 8,
+                    marginRight: 8
+                  }}
+                >
+                  {"No Location access"}
+                </p>
+                <FontAwesomeIcon icon="angle-down" />
+              </a>
+            )}
+
+            {(showLocation || _.isEmpty(location)) && (
+              <LocationBox>
+                <div
+                  style={{ padding: 24, display: "flex", flexFlow: "column" }}
+                >
+                  <div style={{ display: "flex" }}>
+                    <Search
+                      disabled
+                      size={"large"}
+                      placeholder={"search any area "}
+                    />
+                    <Button
+                      size={"large"}
+                      style={{
+                        marginLeft: 8,
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        font: "menu",
+                        fontSize: "15px"
+                        // color: "#263237"
+                      }}
+                      loading={locationLoader}
+                      onClick={this.currentLocation}
+                    >
+                      Detect
+                      <FontAwesomeIcon
+                        icon={"location-arrow"}
+                        style={{ fontSize: 12, marginLeft: 4 }}
+                      />
+                    </Button>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "flex-start",
+                      marginTop: 12
+                    }}
+                  >
+                    <FontAwesomeIcon
+                      icon={"info-circle"}
+                      style={{ paddingTop: 3 }}
+                    />
+                    <span
+                      style={{
+                        marginLeft: 6,
+                        letterSpacing: "-0.3px",
+                        color: "#707070",
+                        lineHeight: 1.3,
+                        opacity: 0.9,
+                        fontSize: 13
+                      }}
+                    >
+                      we need your location access to show information located
+                      near you.
+                      <a
+                        style={{
+                          paddingLeft: 2,
+                          letterSpacing: "-0.3px",
+                          color: "#6276f1"
+                        }}
+                      >
+                        How we use location ?
+                      </a>
+                    </span>
+                  </div>
+                </div>
+              </LocationBox>
+            )}
+          </div>
+
           <LeftContainer>
-            {this._renderSearch()}
+            {/* {this._renderSearch()} */}
             <Nav>
-              <li>
+              {/* <li>
                 <Link route={"vendor"}>
                   <List>Become Partner</List>
                 </Link>
@@ -282,26 +595,28 @@ class Header extends React.Component {
                 <Link route={"about"}>
                   <List>Why FairPe</List>
                 </Link>
-              </li>
+              </li> */}
 
-              <li>
-                <Link route={"contact"}>
-                  <List>Contact us</List>
-                </Link>
-              </li>
+              {user && user.name && (
+                <li>
+                  <Link route={"searchurl"}>
+                    <CustomButtom active>Search by URL</CustomButtom>
+                  </Link>
+                </li>
+              )}
 
               {user && !user.name ? (
                 <li>
-                  <Button
+                  {/* <CustomButtom
                     style={{ marginRight: 12 }}
                     onClick={() => this.props.openModal(true)}
                   >
                     Log In
-                  </Button>
+                  </CustomButtom> */}
 
-                  <Button active onClick={() => this.props.openModal(true)}>
-                    Sign up
-                  </Button>
+                  <CustomButtom active onClick={() => authModal(true)}>
+                    Login / Register
+                  </CustomButtom>
                 </li>
               ) : (
                 <li>
@@ -319,7 +634,7 @@ class Header extends React.Component {
           closable={false}
         >
           <Nav>
-            <li>
+            {/* <li>
               <Link route={"vendor"}>
                 <List onClick={() => this.setState({ drawer: false })}>
                   Become Partner
@@ -340,29 +655,35 @@ class Header extends React.Component {
                   Contact us
                 </List>
               </Link>
-            </li>
+            </li> */}
+
+            {user && user.name && (
+              <li>
+                <Link route={"searchurl"}>
+                  <CustomButtom
+                    onClick={() => {
+                      this.setState({ drawer: false });
+                    }}
+                    active
+                  >
+                    Search by URL
+                  </CustomButtom>
+                </Link>
+              </li>
+            )}
 
             {user && !user.name ? (
               <li>
-                <Button
-                  style={{ marginRight: 12 }}
-                  onClick={() => {
-                    this.props.openModal(true);
-                    this.setState({ drawer: false });
-                  }}
-                >
-                  Log In
-                </Button>
-
-                <Button
+                <CustomButtom
                   active
                   onClick={() => {
-                    this.props.openModal(true);
+                    authModal(true);
+
                     this.setState({ drawer: false });
                   }}
                 >
-                  Sign up
-                </Button>
+                  Login / Register
+                </CustomButtom>
               </li>
             ) : (
               <li>
@@ -371,9 +692,47 @@ class Header extends React.Component {
             )}
           </Nav>
         </CustomDrawer>
+
+        <Modal
+          centered
+          bodyStyle={{ padding: 0 }}
+          destroyOnClose={true}
+          width={900}
+          visible={modal.auth}
+          footer={null}
+          onCancel={() => authModal(false)}
+          onOk={() => authModal(false)}
+        >
+          <ModalBody>
+            <ModalLeft>
+              <FontAwesomeIcon
+                style={{ fontSize: "200px", opacity: 0.4 }}
+                icon={"images"}
+              />
+            </ModalLeft>
+            <ModalRight>
+              {type === TYPE.LOGIN ? (
+                <Login
+                  changeAuth={this.changeAuth}
+                  login={login}
+                  closeModal={this.closeModal}
+                />
+              ) : (
+                <Register
+                  changeAuth={this.changeAuth}
+                  closeModal={this.closeModal}
+                  signup={signup}
+                  error={error}
+                />
+              )}
+            </ModalRight>
+          </ModalBody>
+        </Modal>
       </Wrapper>
     );
   }
 }
 
-export default Header;
+const WrappedNormalLoginForm = Form.create({ name: "normal_login" })(Header);
+
+export default WrappedNormalLoginForm;

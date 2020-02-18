@@ -5,10 +5,7 @@ import initialState from "../store/initialState";
 export default (state = initialState.error, action) => {
   switch (action.type) {
     case ActionTypes.ERROR:
-      return {
-        ...state,
-        error: action.payload
-      };
+      return action.payload;
 
     default:
       return state;

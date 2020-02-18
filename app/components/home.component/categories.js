@@ -5,6 +5,7 @@ import { Link } from "../../../server/routes";
 import _ from "lodash";
 
 const Wrapper = styled.div`
+  margin-top: 200px;
   width: 100%;
   margin-bottom: 70px;
 `;

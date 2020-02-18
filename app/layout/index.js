@@ -24,9 +24,6 @@ class Layout extends React.Component {
       <MainWrapper>
         <Header newRouter={router} openModal={this.props.authModal} />
         {this.props.children}
-        {this.props.modal.auth && !this.props.user && (
-          <AuthModal closeModal={this.props.authModal} />
-        )}
         <Footer />
       </MainWrapper>
     );

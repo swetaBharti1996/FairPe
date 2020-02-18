@@ -64,6 +64,10 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css?family=Montserrat:300,700&display=swap"
             rel="stylesheet"
           ></link>
+          <link
+            href="https://fonts.googleapis.com/css?family=Roboto+Slab:500,700,900&display=swap"
+            rel="stylesheet"
+          ></link>
 
           <link
             href="https://use.fontawesome.com/releases/v5.7.2/css/svg-with-js.css"
@@ -91,7 +95,14 @@ export default class MyDocument extends Document {
             <script dangerouslySetInnerHTML={this.setHotjarTag()} />
           )}
         </Head>
-        <body style={{ margin: "0px", padding: "0px" }}>
+        <body
+          style={{
+            margin: "0px",
+            padding: "0px"
+            // backgroundImage:
+            //   "linear-gradient( 135deg, rgb(98, 118, 241) 0%, rgb(191, 121, 247)"
+          }}
+        >
           <Main />
           <NextScript />
 

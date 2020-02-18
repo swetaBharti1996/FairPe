@@ -73,12 +73,19 @@ export const gotCurrentLocation = data => ({
   payload: data
 });
 
-export const authModal = flag => {
-  return {
-    type: ActionTypes.AUTH_MODAL,
-    payload: flag
-  };
-};
+export const refreshLocation = data => ({
+  type: ActionTypes.REFRESH_LOCATION,
+  payload: data
+});
+
+export const authModal = flag => ({
+  type: ActionTypes.AUTH_MODAL,
+  payload: flag
+});
+export const reviewModal = flag => ({
+  type: ActionTypes.REVIEW_MODAL,
+  payload: flag
+});
 
 export const partner = () => ({
   type: ActionTypes.PARTNER
@@ -127,6 +134,19 @@ export const gotCategoryData = data => ({
   payload: data
 });
 
+export const postStoreReview = () => ({
+  type: ActionTypes.POST_STORE_REVIEW
+});
+
+export const getStoreReview = data => ({
+  type: ActionTypes.GET_STORE_REVIEW,
+  payload: data
+});
+
+export const getSearchByURL = data => ({
+  type: ActionTypes.SEARCH_BY_URL,
+  payload: data
+});
 export const clearCategoryData = () => ({
   type: ActionTypes.CLEAR_CAT
 });

@@ -2,12 +2,9 @@ import _ from "lodash";
 import ActionTypes from "../constants/actionType";
 import initialState from "../store/initialState";
 
-export default (state = initialState.location, action) => {
+export default (state = initialState.url, action) => {
   switch (action.type) {
-    case ActionTypes.CURRENT_LOCATION:
-      return action.payload;
-
-    case ActionTypes.REFRESH_LOCATION:
+    case ActionTypes.SEARCH_BY_URL:
       return action.payload;
 
     default:

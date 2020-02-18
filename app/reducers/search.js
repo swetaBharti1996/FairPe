@@ -6,13 +6,7 @@ export default (state = initialState.search, action) => {
   switch (action.type) {
     case ActionTypes.GOT_SUGGESTIONS:
       const payload = [action.term, ...action.payload];
-      return _.assign({}, state, { [action.term]: payload, loading: false });
-
-    case ActionTypes.LOADING:
-      return {
-        ...state,
-        loading: true
-      };
+      return _.assign({}, state, { [action.term]: payload });
 
     default:
       return state;

@@ -9,6 +9,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 140px;
+  display: none;
   > p {
     font-size: 14px;
     color: ${props => props.theme.black600};

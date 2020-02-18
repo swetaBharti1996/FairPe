@@ -4,7 +4,11 @@ import Search from "../../containers/searchbar.container";
 import Stores from "./stores";
 import Categories from "./categories";
 import Description from "./description";
+import { Link } from "../../../server/routes";
+import _ from "lodash";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { PageWrapper } from "../../UI";
+import { Button, Spin } from "antd";
 
 const Wrapper = styled.div`
   background: ${props => props.theme.white};
@@ -18,15 +22,16 @@ const Wrapper = styled.div`
 `;
 
 const CategoryTag = styled.p`
+  font: menu;
   border-left: 2px solid ${props => props.theme.secondary};
   color: ${props => props.theme.primary};
-  padding: 15px;
+  padding: 12px;
   width: 310px;
   background: rgba(245, 245, 245, 0.57);
-  font-size: 27px;
+  font-size: 22px;
   font-weight: lighter;
   border-radius: 0px 35px 35px 0px;
-  margin-bottom: 32px;
+  margin-bottom: 38px;
 
   @media only screen and (max-width: ${props => props.theme.bpxs}) {
     padding: 11px;
@@ -35,21 +40,23 @@ const CategoryTag = styled.p`
   }
 `;
 const MainCaption = styled.h1`
-  font-family: ${props => props.theme.font2};
-  width: 53%;
+  font-family: "Roboto Slab", serif;
+  width: 47%;
   text-transform: none !important;
-  color: ${props => props.theme.default};
-  font-size: 40px;
-  margin-bottom: 16px;
-  letter-spacing: -0.7px;
+  color: #263238;
+  font-size: 45px;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
   font-weight: 600;
-  line-height: 1.2;
+  line-height: 1.1;
+  margin-top: 66px;
   @media only screen and (max-width: ${props => props.theme.bpxs}) {
     width: 100%;
     font-size: 28px;
   }
 `;
 const Tagline = styled.p`
+  display: none;
   font-size: 24px;
   color: ${props => props.theme.gray600};
   margin-bottom: 70px;
@@ -63,9 +70,9 @@ const Tagline = styled.p`
 const SearchContainer = styled.div`
   position: relative;
   z-index: 90;
-  /* height: 90px; */
   margin-bottom: 16px;
-  width: 70%;
+  width: 55%;
+  margin-top: 32px;
   @media only screen and (max-width: ${props => props.theme.bpxs}) {
     width: 100%;
   }
@@ -77,11 +84,12 @@ const Illustrator = styled.div`
   right: -13px;
   width: 63%;
   height: 614px;
-  background: url("../../static/images/maybe.png");
+  /* background: url("../../static/images/maybe.png"); */
   direction: flex;
   justify-content: center;
   align-items: center;
   background-size: cover;
+  /* display: none; */
 
   > div {
     position: relative;
@@ -91,8 +99,13 @@ const Illustrator = styled.div`
       position: absolute;
       width: 51%;
       height: auto;
-      top: 222px;
-      right: 103px;
+      top: 99px;
+      right: 52px;
+    }
+    > div {
+      position: absolute;
+      top: 466px;
+      right: 160px;
     }
   }
 
@@ -101,7 +114,281 @@ const Illustrator = styled.div`
   }
 `;
 
+const PopularBox = styled.div`
+  display: flex;
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    flex-flow: column;
+  }
+
+  > span {
+    padding-right: 12px;
+    font-weight: 600;
+    color: #62646a;
+    letter-spacing: -0.3px;
+    margin-left: 2px;
+    @media only screen and (max-width: ${props => props.theme.bpxs}) {
+      margin-bottom: 8px;
+    }
+  }
+  > ul {
+    display: flex;
+    width: 100%;
+    margin-bottom: 0;
+
+    @media only screen and (max-width: ${props => props.theme.bpxs}) {
+      flex-flow: row wrap;
+    }
+
+    > li {
+      display: flex;
+      margin-right: 12px;
+      background: #f5f5f5c9;
+      margin-bottom: 8px;
+      > a {
+        background-color: transparent;
+        padding: 0 8px;
+        border: 1px solid #d9d9d9;
+        border-radius: 3px;
+        color: #62646a;
+        letter-spacing: -0.3px;
+      }
+    }
+  }
+`;
+
+const StoresNear = styled.div`
+  margin-top: 109px;
+  > div {
+    &:nth-child(2) {
+      display: flex;
+
+      margin-top: 32px;
+      @media only screen and (max-width: ${props => props.theme.bpxs}) {
+        flex-flow: column;
+      }
+
+      > div {
+        /* border: 1px solid #dfdfdf;
+        border-radius: 3; */
+
+        /* box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px 0px; */
+        display: flex;
+        flex-direction: column;
+        -webkit-box-flex: 0;
+        flex-grow: 0;
+        flex-shrink: 1;
+        -webkit-box-pack: justify;
+        justify-content: space-between;
+        position: relative;
+
+        background-color: rgb(255, 255, 255);
+        color: rgb(153, 153, 153);
+        width: 100%;
+        box-sizing: border-box;
+        border-radius: 4px;
+
+        text-decoration: none;
+
+        margin-right: 24px;
+
+        justify-content: center;
+        align-items: center;
+        font: menu;
+        text-transform: capitalize;
+
+        @media only screen and (max-width: ${props => props.theme.bpxs}) {
+          margin-bottom: 16px;
+        }
+
+        > a {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: flex-end;
+          align-items: flex-start;
+          font: menu;
+          flex-flow: column;
+
+          position: relative;
+
+          > div {
+          }
+          > img {
+            width: 100px;
+          }
+          > p {
+            margin-bottom: 0;
+            margin-top: 4px;
+            font-size: 13px;
+            color: #555;
+          }
+        }
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+    &:first-child {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+
+      @media only screen and (max-width: ${props => props.theme.bpxs}) {
+        flex-flow: column;
+        align-items: flex-start;
+      }
+      > span {
+        font: menu;
+        font-size: 27px;
+        color: mediumseagreen;
+        font-weight: 600;
+        letter-spacing: -0.4px;
+      }
+      > p {
+        font: menu;
+        margin: 0;
+        font-weight: 600;
+        font-size: 24px;
+        letter-spacing: -1.2px;
+        margin-right: 8px;
+        color: #263238;
+      }
+    }
+  }
+  > p {
+    margin-bottom: 0;
+    padding: 8px 0;
+    margin-top: 4px;
+    font: menu;
+    text-align: right;
+  }
+`;
+
+const LoginInfoContainer = styled.div`
+  height: 350px;
+  width: 100%;
+  margin-top: 24px;
+  display: flex;
+
+  &:first-child {
+    flex: 1;
+  }
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    flex-flow: column;
+  }
+
+  > div {
+    background: #f8f8f8;
+
+    &:first-child {
+      flex: 1;
+      padding: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-flow: column;
+
+      > h2 {
+        margin-bottom: 8px;
+        font: menu;
+        font-size: 38px;
+        font-weight: bold;
+        letter-spacing: -0.2px;
+        max-width: 80%;
+      }
+
+      > p {
+        margin-bottom: 0;
+        font: menu;
+        font-size: 17px;
+        max-width: 80%;
+        letter-spacing: -0.2px;
+      }
+    }
+
+    &:last-child {
+      flex: 1;
+      padding: 18px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 50%;
+      background: #f8f8f8;
+      > img {
+        width: 100%;
+        height: 100%;
+      }
+
+      @media only screen and (max-width: ${props => props.theme.bpxs}) {
+        width: 100%;
+      }
+    }
+  }
+`;
+
+const StoreImage = styled.div`
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  flex: 2;
+  width: 100%;
+  background-size: cover;
+  background-image: url("https://lh5.googleusercontent.com/p/AF1QipO3zVN2Fd9sXDx0d1nT1C83GzIQMk0cJAX1-Fxy=w203-h152-k-no");
+`;
+
+const Tag = styled.div`
+  position: absolute;
+  left: -8px;
+  top: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 5px 9px 4px;
+  max-width: 50%;
+  text-transform: uppercase;
+  background: rgb(250, 74, 91);
+  color: rgb(255, 255, 255);
+  border-color: rgb(209, 42, 59) transparent;
+
+  &::before {
+    position: absolute;
+    bottom: -9px;
+    content: "";
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-color: inherit;
+    left: 0;
+    border-width: 9px 0 0 9px;
+  }
+
+  > span {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+`;
+
 const CATEGORY = ["Jewellery", "Electronics", "Fashion", "Toys", "Sports"];
+
+const STORES = [
+  {
+    name: "reliance digital",
+    image:
+      "https://www.technologyforyou.org/wp-content/uploads/2019/10/rdigital-1.jpg",
+    logo:
+      "https://cdn.grabon.in/gograbon/images/merchant/1545149633522/reliance-digital-logo.jpg"
+  },
+  {
+    name: "sangeetha mobiles",
+    image: "https://photos.wikimapia.org/p/00/03/99/48/42_1280.jpg"
+  },
+  {
+    name: "croma",
+    image:
+      "https://www.croma.com/_ui/responsive/common/images/store_images/store-A035.jpg"
+  }
+];
 class Home extends Component {
   state = {
     current: 0,
@@ -131,30 +418,163 @@ class Home extends Component {
 
   render() {
     const { category } = this.state;
+
+    const { location } = this.props;
     return (
       <PageWrapper>
         <Wrapper>
-          <CategoryTag>{category}|</CategoryTag>
+          {/* <CategoryTag>{category}|</CategoryTag> */}
+          <CategoryTag>Fashion|</CategoryTag>
           <MainCaption>
-            The best prices Online/Offline to shop locally
+            Shop at Online & Offline , Near you
+            <FontAwesomeIcon
+              style={{
+                marginLeft: 22,
+                fontSize: "38px",
+                color: "mediumseagreen"
+              }}
+              icon="search-location"
+            />
           </MainCaption>
           <Tagline>Search and buy at the cheapest price</Tagline>
           <SearchContainer>
             <Search />
           </SearchContainer>
+
+          <PopularBox>
+            <span>Popular: </span>
+            <ul>
+              <li>
+                <a>Redmi Note 8</a>
+              </li>
+
+              <li>
+                <a>One Plus 6</a>
+              </li>
+
+              <li>
+                <a>Dell XP 15 </a>
+              </li>
+
+              <li>
+                <a>Iphone 11 pro </a>
+              </li>
+              <li>
+                <a>One Plus 6</a>
+              </li>
+            </ul>
+          </PopularBox>
+
+          <StoresNear>
+            <div>
+              <p>Top stores near</p>
+              <span style={{ minWidth: 74, textAlign: "center" }}>
+                {!_.isEmpty(location) ? (
+                  location.results[0].address_components[1].long_name +
+                  " , " +
+                  location.results[0].address_components[2].long_name
+                ) : (
+                  <Spin />
+                )}
+
+                <FontAwesomeIcon
+                  style={{ marginLeft: 12, fontSize: 24 }}
+                  icon="angle-down"
+                />
+              </span>
+            </div>
+            <div>
+              {_.map(STORES, (store, i) => {
+                return (
+                  <div>
+                    <Link route={"store"} params={{ name: store.name }}>
+                      <a>
+                        <div
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            border: "1px solid #dfdfdf",
+                            borderRadius: 3,
+                            marginBottom: 8,
+                            background: "#eee",
+                            position: "relative"
+                          }}
+                        >
+                          <img
+                            style={{ width: "100%", height: "249px" }}
+                            src={store.image}
+                          ></img>
+
+                          {/* {i >= 2 && (
+                            <Tag>
+                              <span>Exclusive</span>
+                            </Tag>
+                          )} */}
+                        </div>
+
+                        <div>
+                          <h2
+                            style={{
+                              font: "menu",
+                              fontSize: 16,
+                              fontWeight: 600,
+                              color: "#555",
+                              paddingLeft: 4
+                            }}
+                          >
+                            {store.name}
+                          </h2>
+                          <p></p>
+                        </div>
+                      </a>
+                    </Link>
+                  </div>
+                );
+              })}
+
+              {/* <div></div> */}
+            </div>
+
+            {/* <p>View all store</p> */}
+          </StoresNear>
+
+          <LoginInfoContainer>
+            <div>
+              <h2>Header 1</h2>
+              <p>
+                It is a long established fact that a reader will be distracted
+                by the readable content of a page when looking at its layout.
+              </p>
+            </div>
+
+            <div>
+              <img src={"../../static/images/feature.gif"}></img>
+            </div>
+          </LoginInfoContainer>
+
           <Illustrator>
             <div>
-              <img src={"../../static/images/home1.svg"}></img>
+              <img src={"../../static/images/ill2.svg"}></img>
+
+              <div>
+                {/* <Button
+                  type="ghost"
+                  size="large"
+                  style={{ borderRadius: 6, font: "menu" }}
+                >
+                  Download App to Scan NOW
+                </Button> */}
+              </div>
             </div>
           </Illustrator>
           <Stores />
-
+          {/* 
           <Categories
             filterResults={this.props.filterResults}
             categoryData={this.props.categoryData}
             categoryResults={this.props.categoryResults}
           />
-          <Description />
+          <Description /> */}
         </Wrapper>
       </PageWrapper>
     );

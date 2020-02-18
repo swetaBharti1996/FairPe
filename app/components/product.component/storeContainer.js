@@ -584,7 +584,7 @@ const StoreContainer = props => {
 
   return (
     <Wrapper>
-      <Location>
+      {/* <Location>
         <img src="../../static/images/location_1.png" />
 
         <Address>
@@ -599,11 +599,11 @@ const StoreContainer = props => {
           )}
         </Address>
 
-        {/* <Address>9th Main, HSR Layout, Bangalore</Address> */}
+        <Address>9th Main, HSR Layout, Bangalore</Address>
         <AddText onClick={() => currentLocation()}>
           Get Current Location
         </AddText>
-      </Location>
+      </Location> */}
       <Modal
         visible={showModal}
         onCancel={() => setModal(false)}
