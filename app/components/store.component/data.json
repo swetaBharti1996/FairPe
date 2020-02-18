@@ -1,0 +1,110 @@
+[
+  {
+    "id": 3333,
+    "name": "croma",
+    "website": "https://www.croma.com/",
+    "number": {
+      "main": "7207-666-000",
+      "info": "9:00 AM to 9:00 PM, 365 days"
+    },
+    "email": "customersupport@croma.com",
+    "payment": [{ "name": "UPI" }, { "name": "cash" }],
+    "offer": [
+      { "day": "monday offer", "offer": ["5% cashback on paytm"] },
+      {
+        "day": "tuesday offer",
+        "offer": [
+          "Upto 3000 cashback from standard chartered",
+          "400 Cashback on min transaction 5000 mobikwik",
+          "1000 Cashback on min transaction 10000 on mobikwik"
+        ]
+      },
+      {
+        "day": "wednesday offer",
+        "offer": [
+          "Freecharge 300 cashback, Minimum transaction 3000",
+          "Amex 2500 Instant cashback Minimum 20000"
+        ]
+      },
+      {
+        "day": "thursday offer",
+        "offer": ["2500 instant cashback on icici card"]
+      },
+      {
+        "day": "friday offer",
+        "offer": ["5% Cashback, upto 500 phonepe"]
+      },
+      {
+        "day": "saturday offer",
+        "offer": [
+          "400 Cashback on min transaction 5000 mobikwik",
+          "1000 Cashback on min transaction 10000 on mobikwik",
+          "1500 Cashback on credit card hsbc",
+          "No cost emi on any credit card minimum transaction 5000",
+          "Yes bank upto 2000 cashback Minimum transaction 12500"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 4444,
+    "name": "reliance digital",
+    "website": "https://www.reliancedigital.in/",
+    "number": {
+      "main": "1800-889-1044",
+      "info": "9:00 AM to 9:00 PM, 365 days"
+    },
+    "email": "reliancedigital@ril.com",
+    "payment": [{ "name": "UPI" }, { "name": "cash" }],
+    "offer": [
+      {
+        "day": "reliance digital offer",
+        "offer": [
+          "No cost emi on selected product",
+          "Get 5% cashback up to 2500 on ICICI , SCB , SBI and Axis credit & debit cards on selected product"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 5555,
+    "name": "sangeetha mobiles",
+    "website": "https://www.sangeethamobiles.com/",
+    "number": "08049397000",
+    "payment": [{ "name": "UPI" }, { "name": "cash" }],
+    "offer": [
+      {
+        "day": "Sangthamobiles offers",
+        "offer": [
+          "No cost emi on bajaj emi card",
+          "Exchange offers on all mobiles"
+        ]
+      },
+      {
+        "day": "Buy any mobile from sangethamobiles",
+        "offer": [
+          "Assure buy back",
+          "Damage protection",
+          "Screen Replacement free"
+        ]
+      },
+      {
+        "day": "Sangethamobiles mobiles deals",
+        "offer": [
+          "5% off on emi",
+          "6000 off on note 10",
+          "2200 cashback on all jio pay",
+          "No emi cost on oppo brand"
+        ]
+      },
+      {
+        "day": "Sangethmobiles bank offers",
+        "offer": [
+          "10% cashback on yes bank ",
+          "10% cashback on federal bank",
+          "3000 cashback on oneplus sbi credit card"
+        ]
+      }
+    ]
+  }
+]

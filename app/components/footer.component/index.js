@@ -208,6 +208,10 @@ const FootInside = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 16px 0;
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    width: 100%;
+    padding: 16px;
+  }
 `;
 
 const Logo = styled.img`
@@ -232,7 +236,6 @@ const PolicyBox = styled.div`
     }
   }
   @media only screen and (max-width: 992px) {
-    width: 30%;
   }
 `;
 

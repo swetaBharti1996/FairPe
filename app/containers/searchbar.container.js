@@ -29,7 +29,7 @@ const mapDispatchToProps = dispatch => {
       return dispatch(filterResults(query, 1));
     },
     fetchWishlist: () => dispatch(fetchWishlist()),
-    searchSuggestion: term => dispatch(searchSuggestion(term)),
+    searchSuggestion: (term, CB) => dispatch(searchSuggestion(term, CB)),
     loading: () => dispatch(loading())
   };
 };

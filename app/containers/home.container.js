@@ -15,7 +15,9 @@ class HomeContainer extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    location: state.location
+  };
 };
 
 const mapDispatchToProps = dispatch => {

@@ -3,6 +3,7 @@ export default keyMirror({
   SUBSCRIBE: null,
   // NOTIFICATION: null,
   AUTH_MODAL: null,
+  REVIEW_MODAL: null,
   GOT_SUGGESTIONS: null,
   FETCHED_PRODUCTS: null,
   FETCH_WISHLIST: null,
@@ -12,6 +13,11 @@ export default keyMirror({
   QUESTION: null,
   CURRENT_LOCATION: null,
   LIVE_PRICE: null,
+  SEARCH_BY_URL: null,
+  REFRESH_LOCATION: null,
+
+  POST_STORE_REVIEW: null,
+  GET_STORE_REVIEW: null,
 
   //AUTH
   LOGIN: null,

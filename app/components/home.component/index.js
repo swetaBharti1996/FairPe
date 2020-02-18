@@ -4,6 +4,8 @@ import Search from "../../containers/searchbar.container";
 import Stores from "./stores";
 import Categories from "./categories";
 import Description from "./description";
+import { Link } from "../../../server/routes";
+import _ from "lodash";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { PageWrapper } from "../../UI";
 import { Button, Spin } from "antd";
@@ -20,6 +22,7 @@ const Wrapper = styled.div`
 `;
 
 const CategoryTag = styled.p`
+  font: menu;
   border-left: 2px solid ${props => props.theme.secondary};
   color: ${props => props.theme.primary};
   padding: 12px;
@@ -113,29 +116,42 @@ const Illustrator = styled.div`
 
 const PopularBox = styled.div`
   display: flex;
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    flex-flow: column;
+  }
+
   > span {
     padding-right: 12px;
     font-weight: 600;
     color: #62646a;
     letter-spacing: -0.3px;
     margin-left: 2px;
+    @media only screen and (max-width: ${props => props.theme.bpxs}) {
+      margin-bottom: 8px;
+    }
   }
   > ul {
     display: flex;
     width: 100%;
     margin-bottom: 0;
+
+    @media only screen and (max-width: ${props => props.theme.bpxs}) {
+      flex-flow: row wrap;
+    }
+
     > li {
       display: flex;
       margin-right: 12px;
       background: #f5f5f5c9;
+      margin-bottom: 8px;
       > a {
         background-color: transparent;
         padding: 0 8px;
         border: 1px solid #d9d9d9;
         border-radius: 3px;
         color: #62646a;
-        transition: background-color 0.3s ease-in-out,
-          border-color 0.3s ease-in-out;
+        letter-spacing: -0.3px;
       }
     }
   }
@@ -144,13 +160,19 @@ const PopularBox = styled.div`
 const StoresNear = styled.div`
   margin-top: 109px;
   > div {
-    &:last-child {
+    &:nth-child(2) {
       display: flex;
 
-      margin-top: 24px;
+      margin-top: 32px;
+      @media only screen and (max-width: ${props => props.theme.bpxs}) {
+        flex-flow: column;
+      }
 
       > div {
-        box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px 0px;
+        /* border: 1px solid #dfdfdf;
+        border-radius: 3; */
+
+        /* box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px 0px; */
         display: flex;
         flex-direction: column;
         -webkit-box-flex: 0;
@@ -165,10 +187,43 @@ const StoresNear = styled.div`
         width: 100%;
         box-sizing: border-box;
         border-radius: 4px;
-        overflow: hidden;
+
         text-decoration: none;
-        min-height: 200px;
-        margin-right: 16px;
+
+        margin-right: 24px;
+
+        justify-content: center;
+        align-items: center;
+        font: menu;
+        text-transform: capitalize;
+
+        @media only screen and (max-width: ${props => props.theme.bpxs}) {
+          margin-bottom: 16px;
+        }
+
+        > a {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: flex-end;
+          align-items: flex-start;
+          font: menu;
+          flex-flow: column;
+
+          position: relative;
+
+          > div {
+          }
+          > img {
+            width: 100px;
+          }
+          > p {
+            margin-bottom: 0;
+            margin-top: 4px;
+            font-size: 13px;
+            color: #555;
+          }
+        }
         &:last-child {
           margin-right: 0;
         }
@@ -178,13 +233,20 @@ const StoresNear = styled.div`
       display: flex;
       justify-content: flex-start;
       align-items: center;
+
+      @media only screen and (max-width: ${props => props.theme.bpxs}) {
+        flex-flow: column;
+        align-items: flex-start;
+      }
       > span {
-        font-size: 30px;
+        font: menu;
+        font-size: 27px;
         color: mediumseagreen;
         font-weight: 600;
-        letter-spacing: -1.4px;
+        letter-spacing: -0.4px;
       }
       > p {
+        font: menu;
         margin: 0;
         font-weight: 600;
         font-size: 24px;
@@ -194,9 +256,109 @@ const StoresNear = styled.div`
       }
     }
   }
+  > p {
+    margin-bottom: 0;
+    padding: 8px 0;
+    margin-top: 4px;
+    font: menu;
+    text-align: right;
+  }
+`;
+
+const LoginInfoContainer = styled.div`
+  height: 350px;
+  width: 100%;
+  margin-top: 24px;
+  display: flex;
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    flex-flow: column;
+  }
+
+  > div {
+    flex: 1;
+    border: 1px solid;
+    padding: 24px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:last-child {
+      > div {
+        border: 1px dashed;
+        height: 200px;
+        width: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 6px;
+      }
+    }
+  }
+`;
+
+const StoreImage = styled.div`
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  flex: 2;
+  width: 100%;
+  background-size: cover;
+  background-image: url("https://lh5.googleusercontent.com/p/AF1QipO3zVN2Fd9sXDx0d1nT1C83GzIQMk0cJAX1-Fxy=w203-h152-k-no");
+`;
+
+const Tag = styled.div`
+  position: absolute;
+  left: -8px;
+  top: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 5px 9px 4px;
+  max-width: 50%;
+  text-transform: uppercase;
+  background: rgb(250, 74, 91);
+  color: rgb(255, 255, 255);
+  border-color: rgb(209, 42, 59) transparent;
+
+  &::before {
+    position: absolute;
+    bottom: -9px;
+    content: "";
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-color: inherit;
+    left: 0;
+    border-width: 9px 0 0 9px;
+  }
+
+  > span {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
 `;
 
 const CATEGORY = ["Jewellery", "Electronics", "Fashion", "Toys", "Sports"];
+
+const STORES = [
+  {
+    name: "reliance digital",
+    image:
+      "https://www.technologyforyou.org/wp-content/uploads/2019/10/rdigital-1.jpg",
+    logo:
+      "https://cdn.grabon.in/gograbon/images/merchant/1545149633522/reliance-digital-logo.jpg"
+  },
+  {
+    name: "sangeetha mobiles",
+    image: "https://photos.wikimapia.org/p/00/03/99/48/42_1280.jpg"
+  },
+  {
+    name: "croma",
+    image:
+      "https://www.croma.com/_ui/responsive/common/images/store_images/store-A035.jpg"
+  }
+];
 class Home extends Component {
   state = {
     current: 0,
@@ -226,6 +388,8 @@ class Home extends Component {
 
   render() {
     const { category } = this.state;
+
+    const { location } = this.props;
     return (
       <PageWrapper>
         <Wrapper>
@@ -275,22 +439,84 @@ class Home extends Component {
             <div>
               <p>Top stores near</p>
               <span style={{ minWidth: 74, textAlign: "center" }}>
-                {true ? <Spin /> : "HSR Layout"}
+                {!_.isEmpty(location) ? (
+                  location.results[0].address_components[1].long_name +
+                  " , " +
+                  location.results[0].address_components[2].long_name
+                ) : (
+                  <Spin />
+                )}
+
+                <FontAwesomeIcon
+                  style={{ marginLeft: 12, fontSize: 24 }}
+                  icon="angle-down"
+                />
               </span>
-              <FontAwesomeIcon
-                style={{ marginLeft: 12, fontSize: 24 }}
-                icon="angle-down"
-              />
+            </div>
+            <div>
+              {_.map(STORES, (store, i) => {
+                return (
+                  <div>
+                    <Link route={"store"} params={{ name: store.name }}>
+                      <a>
+                        <div
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            border: "1px solid #dfdfdf",
+                            borderRadius: 3,
+                            marginBottom: 8,
+                            background: "#eee",
+                            position: "relative"
+                          }}
+                        >
+                          <img
+                            style={{ width: "100%", height: "249px" }}
+                            src={store.image}
+                          ></img>
+
+                          {/* {i >= 2 && (
+                            <Tag>
+                              <span>Exclusive</span>
+                            </Tag>
+                          )} */}
+                        </div>
+
+                        <div>
+                          <h2
+                            style={{
+                              font: "menu",
+                              fontSize: 16,
+                              fontWeight: 600,
+                              color: "#555",
+                              paddingLeft: 4
+                            }}
+                          >
+                            {store.name}
+                          </h2>
+                          <p></p>
+                        </div>
+                      </a>
+                    </Link>
+                  </div>
+                );
+              })}
+
+              {/* <div></div> */}
             </div>
 
-            <div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-            </div>
+            {/* <p>View all store</p> */}
           </StoresNear>
+
+          <LoginInfoContainer>
+            <div></div>
+
+            <div>
+              <div>
+                <FontAwesomeIcon style={{ fontSize: 60 }} icon="play-circle" />
+              </div>
+            </div>
+          </LoginInfoContainer>
 
           <Illustrator>
             <div>
@@ -308,13 +534,13 @@ class Home extends Component {
             </div>
           </Illustrator>
           <Stores />
-
+          {/* 
           <Categories
             filterResults={this.props.filterResults}
             categoryData={this.props.categoryData}
             categoryResults={this.props.categoryResults}
           />
-          <Description />
+          <Description /> */}
         </Wrapper>
       </PageWrapper>
     );

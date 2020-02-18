@@ -2,12 +2,9 @@ import _ from "lodash";
 import ActionTypes from "../constants/actionType";
 import initialState from "../store/initialState";
 
-export default (state = initialState.location, action) => {
+export default (state = initialState.review, action) => {
   switch (action.type) {
-    case ActionTypes.CURRENT_LOCATION:
-      return action.payload;
-
-    case ActionTypes.REFRESH_LOCATION:
+    case ActionTypes.GET_STORE_REVIEW:
       return action.payload;
 
     default:

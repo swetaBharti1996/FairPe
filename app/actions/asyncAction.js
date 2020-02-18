@@ -4,12 +4,26 @@ import AppConstants from "../constants/appConstant";
 
 import { message } from "antd";
 
-export const searchSuggestion = term => dispatch =>
+export const searchSuggestion = (term, CB) => dispatch =>
   makeRequest("get", `/suggest?term=${term}`)
     .then(resp => {
       dispatch(syncActions.gotSearchResults(resp.data, term));
+      CB(resp.data, term);
     })
-    .catch(err => {});
+    .catch(err => {
+      CB([]);
+    });
+
+export const searchByURL = (URL, CB) => dispatch =>
+  makeRequest("get", `${AppConstants.default.searchByURL}/?url=${URL}`)
+    .then(resp => {
+      dispatch(syncActions.getSearchByURL(resp.data));
+      CB(resp.data);
+    })
+    .catch(err => {
+      console.log(err);
+      CB(false);
+    });
 
 export const filterResults = (query, page = 1) => dispatch => {
   makeAsyncRequest("post", `/_search?${query}`).then(resp => {
@@ -25,11 +39,44 @@ export const categoryResults = (query, page = 1) => dispatch => {
     dispatch(syncActions.gotProducts(resp.data, query, page));
   });
 };
-export const productDetail = id => dispatch =>
+export const productDetail = (id, CB) => dispatch =>
+  makeRequest("get", `${AppConstants.default.baseURL}/api/fairpe/product/${id}`)
+    .then(resp => {
+      dispatch(syncActions.gotProductDetail(resp.data));
+      CB(true);
+    })
+    .catch(err => {
+      CB(false);
+    });
+
+export const getStoreReview = (data, CB) => dispatch =>
   makeRequest(
-    "get",
-    `${AppConstants.default.baseURL}/api/fairpe/product/${id}`
-  ).then(resp => dispatch(syncActions.gotProductDetail(resp.data)));
+    "post",
+    `${AppConstants.default.baseURL}/api/fairpe/review/store`,
+    data
+  )
+    .then(resp => {
+      dispatch(syncActions.getStoreReview(resp.data));
+      CB(true);
+    })
+    .catch(err => {
+      CB(false);
+    });
+
+export const postStoreReview = (data, CB) => dispatch =>
+  makeRequest(
+    "post",
+    `${AppConstants.default.baseURL}/api/fairpe/review`,
+    data,
+    { Authorization: document.cookie.replace("authtoken=", "") }
+  )
+    .then(resp => {
+      dispatch(syncActions.postStoreReview());
+      CB(true);
+    })
+    .catch(err => {
+      CB(false);
+    });
 
 export const getLivePrice = (id, CB) => dispatch =>
   makeRequest("get", `${AppConstants.default.livePriceURL}/_price?pid=${id}`)
@@ -59,11 +106,12 @@ export const getCurrentLocation = (data, CB) => dispatch => {
     data
   )
     .then(resp => {
+      localStorage.setItem("loc", JSON.stringify(resp.data));
       dispatch(syncActions.gotCurrentLocation(resp.data));
-      CB();
+      CB(true);
     })
     .catch(err => {
-      CB();
+      CB(false);
     });
 };
 
@@ -147,7 +195,7 @@ export const question = data => dispatch =>
       dispatch(syncActions.error(err.response.data));
     });
 
-export const login = data => dispatch =>
+export const login = (data, CB) => dispatch =>
   makeAsyncRequest(
     "post",
     `${AppConstants.default.baseURL}/api/fairpe/login`,
@@ -158,12 +206,14 @@ export const login = data => dispatch =>
       dispatch(syncActions.login(resp.data.token));
       dispatch(syncActions.error({}));
       dispatch(fetchWishlist());
+      CB(true);
     })
     .catch(err => {
       dispatch(syncActions.error(err.response.data));
+      CB(false);
     });
 
-export const signup = data => dispatch =>
+export const signup = (data, CB) => dispatch =>
   makeAsyncRequest(
     "post",
     `${AppConstants.default.baseURL}/api/fairpe/signup`,
@@ -173,9 +223,11 @@ export const signup = data => dispatch =>
       document.cookie = `authtoken=${resp.data.token}; path=/`;
       dispatch(syncActions.signup(resp.data.token));
       dispatch(syncActions.error({}));
+      CB(true);
     })
     .catch(err => {
-      dispatch(syncActions.error(err.response.data));
+      dispatch(syncActions.error(err.response));
+      CB(false);
     });
 
 export const logout = () => dispatch =>

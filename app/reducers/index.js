@@ -10,6 +10,8 @@ import wishlist from "./wishlist";
 import notification from "./notification";
 import location from "./location";
 import livePrice from "./livePrice";
+import searchByURL from "./searchByURL";
+import review from "./review";
 import error from "./error";
 
 const rootReducer = combineReducers({
@@ -24,6 +26,8 @@ const rootReducer = combineReducers({
   wishlist,
   location,
   livePrice,
+  searchByURL,
+  review,
   error
 });
 
