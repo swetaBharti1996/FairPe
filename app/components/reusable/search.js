@@ -216,7 +216,7 @@ class Search extends Component {
   state = {
     searchTerm: "",
     showSuggestion: false,
-    list: ["samsung m30s", "iphone 11", "oppo 7", "jbl headphone"],
+    list: [],
     list2: [],
     hovered: ""
   };

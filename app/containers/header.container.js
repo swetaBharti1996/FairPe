@@ -1,13 +1,12 @@
 import { connect } from "react-redux";
 import Header from "../components/header.component";
 import {
-  logout,
   filterResults,
   login,
   signup,
   getCurrentLocation
 } from "../actions/asyncAction";
-import { refreshLocation, authModal } from "../actions/syncAction";
+import { refreshLocation, authModal, logout } from "../actions/syncAction";
 import queryString from "query-string";
 import Router from "next/router";
 

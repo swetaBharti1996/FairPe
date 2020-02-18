@@ -389,6 +389,9 @@ const STORES = [
       "https://www.croma.com/_ui/responsive/common/images/store_images/store-A035.jpg"
   }
 ];
+
+const POPULAR = ["oppo A5s", "samsung note 10", "iphone x", "vivo v15 pro"];
+
 class Home extends Component {
   state = {
     current: 0,
@@ -419,12 +422,12 @@ class Home extends Component {
   render() {
     const { category } = this.state;
 
-    const { location } = this.props;
+    const { location, onSearch } = this.props;
     return (
       <PageWrapper>
         <Wrapper>
-          {/* <CategoryTag>{category}|</CategoryTag> */}
-          <CategoryTag>Fashion|</CategoryTag>
+          <CategoryTag>{category}|</CategoryTag>
+          {/* <CategoryTag>Fashion|</CategoryTag> */}
           <MainCaption>
             Shop at Online & Offline , Near you
             <FontAwesomeIcon
@@ -444,24 +447,20 @@ class Home extends Component {
           <PopularBox>
             <span>Popular: </span>
             <ul>
-              <li>
-                <a>Redmi Note 8</a>
-              </li>
-
-              <li>
-                <a>One Plus 6</a>
-              </li>
-
-              <li>
-                <a>Dell XP 15 </a>
-              </li>
-
-              <li>
-                <a>Iphone 11 pro </a>
-              </li>
-              <li>
-                <a>One Plus 6</a>
-              </li>
+              {_.map(POPULAR, (p, i) => {
+                return (
+                  <li key={i}>
+                    <a
+                      onClick={() => {
+                        onSearch(p);
+                      }}
+                    >
+                      {p}
+                    </a>
+                  </li>
+                );
+                r;
+              })}
             </ul>
           </PopularBox>
 
@@ -540,10 +539,10 @@ class Home extends Component {
 
           <LoginInfoContainer>
             <div>
-              <h2>Header 1</h2>
+              <h2>Why login on FairPe ?</h2>
               <p>
-                It is a long established fact that a reader will be distracted
-                by the readable content of a page when looking at its layout.
+                you don't have to search just copy-paste the URL get the list of
+                a similar product in online and offline
               </p>
             </div>
 

@@ -123,16 +123,25 @@ class Content extends Component {
             <Column>
               <h1>Contact us</h1>
               <Link>
-                <a>hello@fairpe.com</a>
+                <a
+                  href={"https://www.facebook.com/searchonfairpe/"}
+                  target={"_blank"}
+                >
+                  Facebook
+                </a>
               </Link>
               <Link>
-                <a>Facebook</a>
+                <a
+                  href={"https://www.linkedin.com/company/searchonfairpe/"}
+                  target={"_blank"}
+                >
+                  LinkedIn
+                </a>
               </Link>
               <Link>
-                <a>Instagram</a>
-              </Link>
-              <Link>
-                <a>Twitter</a>
+                <a href={"https://twitter.com/FairpeS"} target={"_blank"}>
+                  Twitter
+                </a>
               </Link>
             </Column>
           </RightContainer>

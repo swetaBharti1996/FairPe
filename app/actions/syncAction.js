@@ -118,6 +118,7 @@ export const signup = data => {
 };
 
 export const logout = () => {
+  document.cookie = "authtoken=; path=/";
   return {
     type: ActionTypes.LOGOUT
   };

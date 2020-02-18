@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   background: #f7f7f7;
-  margin-top: 80px;
+  margin-top: 70px;
 
   @media only screen and (max-width: ${props => props.theme.bpxs}) {
     width: 93%;

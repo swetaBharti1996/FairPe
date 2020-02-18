@@ -6,6 +6,8 @@ import {
   categoryData,
   categoryResults
 } from "../actions/asyncAction";
+import queryString from "query-string";
+import Router from "next/router";
 import {} from "../actions/syncAction";
 
 class HomeContainer extends React.Component {
@@ -24,7 +26,13 @@ const mapDispatchToProps = dispatch => {
   return {
     filterResults: query => dispatch(filterResults(query)),
     categoryData: query => dispatch(categoryData(query)),
-    categoryResults: query => dispatch(categoryResults(query))
+    categoryResults: query => dispatch(categoryResults(query)),
+    onSearch: term => {
+      const newQuery = { term, page: 1 };
+      const query = queryString.stringify(newQuery);
+      Router.push(`/search?${query}`);
+      return dispatch(filterResults(query, 1));
+    }
   };
 };
 

@@ -243,15 +243,17 @@ const BottomBox = styled.div`
   }
   > div {
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
+    justify-content: center;
+    align-items: flex-start;
+    flex-flow: column;
 
     > p {
       margin: 0;
       margin-right: 16px;
       letter-spacing: -0.3px;
       font-size: 0.9rem;
-      color: #404041;
+      color: #555;
+      font-weight: 600;
     }
     > a {
       padding: 6px 18px;
@@ -287,7 +289,8 @@ const AddressList = styled.li`
 
       > span {
         font-size: 0.86rem;
-        color: #666666;
+        color: #404041;
+        font-weight: 600;
       }
     }
   }
@@ -301,6 +304,10 @@ const MapContainer = styled.div`
   width: 400px;
 
   border: 1px solid;
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    display: none;
+  }
 `;
 
 const StoreContainer = props => {
@@ -325,9 +332,11 @@ const StoreContainer = props => {
   } = props;
 
   useEffect(() => {
-    getLivePrice(product.id, value => {
-      setLivePriceLoader(false);
-    });
+    setTimeout(() => {
+      getLivePrice(product.id, value => {
+        setLivePriceLoader(false);
+      });
+    }, 1000);
   }, []);
 
   const renderMorePrice = site => {
@@ -353,8 +362,6 @@ const StoreContainer = props => {
   };
 
   const menu = data => {
-    console.log(data);
-
     return (
       <Menu>
         {_.map(data, (d, i) => {
@@ -474,8 +481,8 @@ const StoreContainer = props => {
         let allLoc = [...d["coordinates"].split(",")];
 
         let dist = distance(
-          curLoc[0],
-          curLoc[1],
+          location.data.lat,
+          location.data.lng,
           Number(allLoc[0].trim()),
           Number(allLoc[1].trim()),
           "K"
@@ -489,7 +496,7 @@ const StoreContainer = props => {
       let newList = _.sortBy(secLoc, [o => o.distance]);
 
       return (
-        <div>
+        <div style={{ height: "100%" }}>
           <ul>
             {_.map(newList, (data, i) => {
               if (i >= 10) return;
@@ -561,6 +568,7 @@ const StoreContainer = props => {
             <strong style={{ letterSpacing: -0.3 }}>
               Showing Stores near you :
             </strong>
+            <p>{location.results[3].formatted_address}</p>
           </div>
         )}
 
@@ -708,7 +716,7 @@ const StoreContainer = props => {
                         {product.type === "online" ? (
                           <div>
                             <Button href={product.url} target={"_blank"}>
-                              Buy now
+                              visit website
                             </Button>
 
                             {renderMorePrice(product.site)}
@@ -721,7 +729,7 @@ const StoreContainer = props => {
                             }}
                             target={"_blank"}
                           >
-                            View Store +
+                            view store +
                           </Button>
                         )}
                       </td>

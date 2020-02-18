@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import _ from "lodash";
 
 const PopularProduct = styled.div`
   min-height: 200px;
@@ -67,6 +68,33 @@ const PopularProduct = styled.div`
   }
 `;
 
+const POPULAR = [
+  {
+    title: "Apple iPhone 11 (purple, A/MWM52HN)(128GB Storage)",
+    price: 69900,
+    storeCount: 3,
+    url: "https://fairpe.com/product/FP-LEXAQ992PCYJA0WEGY",
+    imageURL:
+      "https://www.reliancedigital.in/medias/iPhone-11-128GB-Purple-491584664-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3wxMzAzNHxpbWFnZS9qcGVnfGltYWdlcy9oMzYvaGU2LzkxOTU4ODI1NDUxODIuanBnfDc4NzVlNWY2MmViNWExMzg2OTdkY2U3ODE1ZDc0NjIwNWM2NjUzZDlhNzljOThmZWRkOGFmMjQwYTg4YzI4MDI"
+  },
+  {
+    title: "Oppo A7 (blue)(3GB RAM, 64GB Storage)",
+    price: 8990,
+    storeCount: 4,
+    url: "https://fairpe.com/product/FP-ODWKEJUHCXFL629B1H",
+    imageURL:
+      "https://assets.croma.com/medias/sys_master/images/images/h67/h61/8839218266142/216172.png?attachment=true"
+  },
+  {
+    title: "Samsung Galaxy Note 10 (black)(8GB RAM, 256GB Storage)",
+    price: 69999,
+    storeCount: 5,
+    url: "https://fairpe.com/product/FP-VPG8S1VWN0K2GN6J1M",
+    imageURL:
+      "https://images-eu.ssl-images-amazon.com/images/I/4110WP6GBwL._SL160_.jpg"
+  }
+];
+
 const Popular = props => {
   const {} = props;
   return (
@@ -74,51 +102,30 @@ const Popular = props => {
       <h1>Popular Products</h1>
 
       <ul>
-        <li>
-          <a>
-            <img
-              src={
-                "https://www.reliancedigital.in/medias/OPPO-A1K-Smart-Phones-491570666-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3w3NTQ1fGltYWdlL2pwZWd8aW1hZ2VzL2g1Ny9oNTMvOTE0Njk5ODU4NzQyMi5qcGd8OTQ5MmEzNTkwOTk5ZmNkOWMwODI3ZjZmM2Q4OTJkMmQzZTMyN2U0OTVjOWMyN2JhM2Y4NmEzOTQ4NzVhN2U4Zg"
-              }
-            />
-          </a>
-          <h2>
-            <a>Oppo A1K (red)(2GB RAM, 32GB Storage)</a>
-          </h2>
-          <p>
-            <a>Rs 7490</a>
-          </p>
-        </li>
-        <li>
-          <a>
-            <img
-              src={
-                "https://www.reliancedigital.in/medias/iPhone-11-Pro-256GB-Silver-491584677-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3wxMzg5OHxpbWFnZS9qcGVnfGltYWdlcy9oMjgvaDM0LzkxOTU5MDQzNjg2NzAuanBnfDY2NTZlYTQxYjFlMmIwMjU4NDNlOGEwOGYyMjY2NzhjOGM2NDAyNjE3M2JhNDExNDc1ODE0NDA0NTQ0ZmYzZTg"
-              }
-            />
-          </a>
-          <h2>
-            <a>Oppo A1K (red)(2GB RAM, 32GB Storage)</a>
-          </h2>
-          <p>
-            <a>Rs 7490</a>
-          </p>
-        </li>
-        <li>
-          <a>
-            <img
-              src={
-                "https://www.reliancedigital.in/medias/iPhone-11-128GB-Purple-491584664-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3wxMzAzNHxpbWFnZS9qcGVnfGltYWdlcy9oMzYvaGU2LzkxOTU4ODI1NDUxODIuanBnfDc4NzVlNWY2MmViNWExMzg2OTdkY2U3ODE1ZDc0NjIwNWM2NjUzZDlhNzljOThmZWRkOGFmMjQwYTg4YzI4MDI"
-              }
-            />
-          </a>
-          <h2>
-            <a>Apple iPhone 11 (green, A/MWM62HN)(128GB Storage)</a>
-          </h2>
-          <p>
-            <a>Rs 69900</a>
-          </p>
-        </li>
+        {_.map(POPULAR, (p, i) => {
+          return (
+            <li>
+              <a href={p.url} target={"_blank"}>
+                <img src={p.imageURL} />
+              </a>
+              <h2>
+                <a href={p.url} target={"_blank"}>
+                  {p.title}
+                </a>
+              </h2>
+              <p style={{ marginBottom: 0 }}>
+                <a href={p.url} target={"_blank"}>{`Rs ${p.price}`}</a>
+              </p>
+              <p>
+                <a
+                  href={p.url}
+                  target={"_blank"}
+                  style={{ color: "#666" }}
+                >{`Available in ${p.storeCount} stores`}</a>
+              </p>
+            </li>
+          );
+        })}
       </ul>
     </PopularProduct>
   );

@@ -17,8 +17,9 @@ import {
 import Login from "./login";
 import Register from "./register";
 import _ from "lodash";
+import CustomSearch from "../reusable/search";
 
-const { Search } = Input;
+// const { Search } = Input;
 
 const CustomDrawer = styled(Drawer)`
   > div[class="ant-drawer-content-wrapper"] {
@@ -62,8 +63,8 @@ const LeftContainer = styled.div`
   display: flex;
   align-items: center;
   flex: 1;
-  justify-content: flex-end;
-
+  justify-content: space-between;
+  margin-left: 32px;
   @media only screen and (max-width: ${props => props.theme.bpxs}) {
     display: none;
   }
@@ -85,7 +86,9 @@ const Nav = styled.ul`
   display: flex;
   align-items: center;
   margin: 0;
+  justify-content: flex-end;
 
+  width: 100%;
   > li {
     margin-right: 6px;
 
@@ -96,8 +99,7 @@ const Nav = styled.ul`
     &:last-child {
       display: flex;
       justify-content: flex-end;
-      width: 228px;
-      flex: 1;
+      margin-left: 32px;
       position: relative;
 
       @media only screen and (max-width: ${props => props.theme.bpxs}) {
@@ -158,25 +160,24 @@ const NormalSearchIcon = styled.a`
   border: 1px solid transparent;
 `;
 
-// const Search = styled.div`
-//   width: 100%;
-//   display: flex;
-//   align-items: center;
-//   border: 1px solid #b2b2b2;
-//   border-radius: 24px;
-//   padding: 0.525rem 1.55rem;
-//   padding-right: 0;
-//   > input {
-//     width: 100%;
-//     border: none;
-//     box-shadow: none;
-//     outline: none;
-//   }
-// `;
+const Search = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border: 1px solid #b2b2b2;
+  border-radius: 3px;
+  padding: 0.325rem 1.55rem;
+  padding-right: 0;
+  > input {
+    width: 100%;
+    border: none;
+    box-shadow: none;
+    outline: none;
+  }
+`;
 
 const SearchContainer = styled.div`
-  margin-right: 40px;
-  width: 35%;
+  width: 100%;
   position: relative;
   display: flex;
   align-items: center;
@@ -380,7 +381,7 @@ class Header extends React.Component {
       return (
         <SearchContainer>
           {/* {showSearch ? ( */}
-          {/* <Search>
+          <Search>
             <input
               value={term}
               onChange={() => this.setState({ term: event.target.value })}
@@ -397,7 +398,7 @@ class Header extends React.Component {
             >
               <FontAwesomeIcon icon="search" />
             </NormalSearchIcon>
-          </Search> */}
+          </Search>
           {/* // ) : ( //{" "}
           <SearchIcon onClick={this._onSearch}>
             // <FontAwesomeIcon icon="search" />
@@ -584,7 +585,7 @@ class Header extends React.Component {
           </div>
 
           <LeftContainer>
-            {/* {this._renderSearch()} */}
+            {this._renderSearch()}
             <Nav>
               {/* <li>
                 <Link route={"vendor"}>

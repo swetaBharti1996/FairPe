@@ -13,7 +13,7 @@ const Wrapper = styled.a`
   width: 25%;
 
   @media only screen and (max-width: ${props => props.theme.bpxs}) {
-    width: 46.5%;
+    width: 45.5%;
     margin-right: 24px;
 
     &:nth-child(2n) {
@@ -56,12 +56,10 @@ const BodyContainer = styled.div`
   margin-bottom: 4px;
 
   > span {
-    color: #666;
-
-    letter-spacing: -0.2px;
-    &:hover {
-      color: #666;
-    }
+    font: menu;
+    color: #555;
+    font-size: 14px;
+    font-weight: 600;
   }
 `;
 const Title = styled.h2`

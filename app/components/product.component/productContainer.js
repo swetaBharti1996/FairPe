@@ -164,13 +164,33 @@ class ProductContainer extends Component {
     else return false;
   };
 
+  _lowest = () => {
+    const { lowestPrice } = this.props;
+
+    let low = "";
+    low = lowestPrice && Object.values(lowestPrice)[0];
+    return low;
+  };
+
+  _liveLowest = () => {
+    const { lowestPrice, livePrice } = this.props;
+    let temp = [];
+    _.map(livePrice || [], (l, i) => {
+      if (l[1] === "NOT FOUND") return;
+      else temp.push(Number(l[1]));
+    });
+
+    return Math.min(...temp);
+  };
+
   render() {
     const {
       product,
       lowestPrice,
       authModal,
       wishlist,
-      wishlistData
+      wishlistData,
+      livePrice
     } = this.props;
     const { SUB } = this.state;
 
@@ -203,7 +223,11 @@ class ProductContainer extends Component {
               </RatingContainer> */}
               <LabelText>Price Starts at</LabelText>
               <CartContainer>
-                <Price>Rs {lowestPrice && Object.values(lowestPrice)[0]}</Price>
+                {_.isEmpty(livePrice) ? (
+                  <Price>Rs {this._lowest()}</Price>
+                ) : (
+                  <Price>Rs {this._liveLowest()}</Price>
+                )}
               </CartContainer>
             </LowerContainer>
 

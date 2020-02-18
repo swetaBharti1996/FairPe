@@ -106,8 +106,8 @@ export const getCurrentLocation = (data, CB) => dispatch => {
     data
   )
     .then(resp => {
-      localStorage.setItem("loc", JSON.stringify(resp.data));
-      dispatch(syncActions.gotCurrentLocation(resp.data));
+      localStorage.setItem("loc", JSON.stringify({ ...resp.data, data }));
+      dispatch(syncActions.gotCurrentLocation({ ...resp.data, data }));
       CB(true);
     })
     .catch(err => {
@@ -140,7 +140,10 @@ export const subscribe = data => dispatch =>
       message.success("subscribed");
     })
     .catch(err => {
-      message.error("error occured");
+      console.log();
+      if (err.response.data) message.error(err.response.data.error);
+      else message.error("error occured");
+
       dispatch(syncActions.error(err.response.data));
     });
 
@@ -230,7 +233,7 @@ export const signup = (data, CB) => dispatch =>
       CB(false);
     });
 
-export const logout = () => dispatch =>
+export const logout = () => dispatch => {
   makeRequest(
     "post",
     `${AppConstants.default.baseURL}/api/fairpe/logout`,
@@ -240,6 +243,7 @@ export const logout = () => dispatch =>
     document.cookie = "authtoken=; path=/";
     dispatch(syncActions.logout());
   });
+};
 
 export const changePassword = data => dispatch => {
   makeRequest(

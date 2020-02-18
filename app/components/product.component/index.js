@@ -227,6 +227,7 @@ const Product = props => {
               lowestPrice={_getLowestPrice(
                 _getAllPrice(products && products.data)
               )}
+              livePrice={livePrice}
               product={products && products.data}
               authModal={authModal}
               wishlist={wishlist}
