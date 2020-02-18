@@ -268,6 +268,16 @@ const ModalRight = styled.div`
   align-items: center;
 `;
 
+const Ham = styled.div`
+  display: none;
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    display: block;
+    font-size: 21px;
+    margin-right: 8px;
+  }
+`;
+
 const TYPE = { LOGIN: "login", REGISTER: "register" };
 
 class Header extends React.Component {
@@ -425,11 +435,11 @@ class Header extends React.Component {
     return (
       <Wrapper>
         <Container style={{ height: "100%" }}>
-          <div style={{ fontSize: "21px", marginRight: 8 }}>
+          <Ham>
             <Icon onClick={this._toggleDrawer}>
               <FontAwesomeIcon icon="bars" />
             </Icon>
-          </div>
+          </Ham>
           <Logo>
             <img
               src="../../static/images/logo.png"

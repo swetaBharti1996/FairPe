@@ -271,28 +271,58 @@ const LoginInfoContainer = styled.div`
   margin-top: 24px;
   display: flex;
 
+  &:first-child {
+    flex: 1;
+  }
+
   @media only screen and (max-width: ${props => props.theme.bpxs}) {
     flex-flow: column;
   }
 
   > div {
-    flex: 1;
-    border: 1px solid;
-    padding: 24px;
+    background: #f8f8f8;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    &:first-child {
+      flex: 1;
+      padding: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-flow: column;
+
+      > h2 {
+        margin-bottom: 8px;
+        font: menu;
+        font-size: 38px;
+        font-weight: bold;
+        letter-spacing: -0.2px;
+        max-width: 80%;
+      }
+
+      > p {
+        margin-bottom: 0;
+        font: menu;
+        font-size: 17px;
+        max-width: 80%;
+        letter-spacing: -0.2px;
+      }
+    }
 
     &:last-child {
-      > div {
-        border: 1px dashed;
-        height: 200px;
-        width: 300px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 6px;
+      flex: 1;
+      padding: 18px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 50%;
+      background: #f8f8f8;
+      > img {
+        width: 100%;
+        height: 100%;
+      }
+
+      @media only screen and (max-width: ${props => props.theme.bpxs}) {
+        width: 100%;
       }
     }
   }
@@ -509,12 +539,16 @@ class Home extends Component {
           </StoresNear>
 
           <LoginInfoContainer>
-            <div></div>
+            <div>
+              <h2>Header 1</h2>
+              <p>
+                It is a long established fact that a reader will be distracted
+                by the readable content of a page when looking at its layout.
+              </p>
+            </div>
 
             <div>
-              <div>
-                <FontAwesomeIcon style={{ fontSize: 60 }} icon="play-circle" />
-              </div>
+              <img src={"../../static/images/feature.gif"}></img>
             </div>
           </LoginInfoContainer>
 
@@ -523,13 +557,13 @@ class Home extends Component {
               <img src={"../../static/images/ill2.svg"}></img>
 
               <div>
-                <Button
+                {/* <Button
                   type="ghost"
                   size="large"
                   style={{ borderRadius: 6, font: "menu" }}
                 >
                   Download App to Scan NOW
-                </Button>
+                </Button> */}
               </div>
             </div>
           </Illustrator>

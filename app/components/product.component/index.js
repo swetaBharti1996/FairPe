@@ -98,7 +98,7 @@ const TAB = {
 const Product = props => {
   const [location, setLocation] = useState(null);
   useEffect(() => {
-    currentLocation();
+    // currentLocation();
   }, []);
 
   const currentLocation = () => {
