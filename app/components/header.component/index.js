@@ -18,6 +18,7 @@ import Login from "./login";
 import Register from "./register";
 import _ from "lodash";
 import CustomSearch from "../reusable/search";
+import axios from "axios";
 
 // const { Search } = Input;
 
@@ -290,7 +291,8 @@ class Header extends React.Component {
     modal: false,
     type: TYPE.LOGIN,
     locationLoader: true,
-    showLocation: true
+    showLocation: true,
+    locationError: false
   };
 
   async componentDidMount() {
@@ -334,16 +336,46 @@ class Header extends React.Component {
 
   currentLocation = () => {
     this.setState({ locationLoader: true });
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        this.success,
-        this.error,
-        this.options
-      );
-    } else {
-      message.error("Geolocation is not supported by this browser.", 2);
-      this.setState({ locationLoader: false });
-    }
+
+    axios
+      .post(
+        "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyAVVdU_-mfoW6jMtUDgLlSadGsy2vt4E3k"
+      )
+      .then(resp => {
+        this.props.getCurrentLocation(
+          {
+            lat: resp.data.location.lat.toString(),
+            lng: resp.data.location.lng.toString()
+          },
+          bol => {
+            this.setState({
+              locationLoader: false,
+              showLocation: false,
+              locationError: false
+            });
+
+            if (bol) {
+              // Hide the box
+            } else {
+              message.error("error", 1);
+            }
+          }
+        );
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    // if (navigator.geolocation) {
+    //   navigator.geolocation.getCurrentPosition(
+    //     this.success,
+    //     this.error,
+    //     this.options
+    //   );
+    // } else {
+    //   message.error("Geolocation is not supported by this browser.", 2);
+    //   this.setState({ locationLoader: false });
+    // }
   };
 
   options = {
@@ -357,7 +389,11 @@ class Header extends React.Component {
     this.props.getCurrentLocation(
       { lat: crd.latitude.toString(), lng: crd.longitude.toString() },
       bol => {
-        this.setState({ locationLoader: false, showLocation: false });
+        this.setState({
+          locationLoader: false,
+          showLocation: false,
+          locationError: false
+        });
 
         if (bol) {
           // Hide the box
@@ -369,8 +405,14 @@ class Header extends React.Component {
   };
 
   error = err => {
-    message.error(`ERROR(${err.code}): ${err.message}`, 1);
-    this.setState({ locationLoader: false });
+    console.log(err);
+
+    message.error(`ERROR(${err.code}): ${err.message}`, 2);
+    this.setState({
+      locationLoader: false,
+      showLocation: false,
+      locationError: true
+    });
   };
 
   _renderSearch = () => {
@@ -429,9 +471,20 @@ class Header extends React.Component {
     } = this.props;
     const { getFieldDecorator } = this.props.form;
 
-    const { drawer, type, locationLoader, showLocation } = this.state;
+    const {
+      drawer,
+      type,
+      locationLoader,
+      showLocation,
+      locationError
+    } = this.state;
 
     const { modal, authModal } = this.props;
+
+    console.log(showLocation);
+    // console.log(
+    //   showLocation || locationError ? locationError : _.isEmpty(location)
+    // );
 
     return (
       <Wrapper>
@@ -470,6 +523,8 @@ class Header extends React.Component {
                   this.setState(prevState => ({
                     showLocation: !prevState.showLocation
                   }));
+
+                  if (!locationError) this.setState({ locationError: true });
                 }}
               >
                 <FontAwesomeIcon icon="map-marker-alt" color={"#6376f1"} />
@@ -496,6 +551,9 @@ class Header extends React.Component {
                   justifyContent: "center",
                   alignItems: "center"
                 }}
+                onClick={() => {
+                  if (locationError) this.setState({ locationError: false });
+                }}
               >
                 <FontAwesomeIcon icon="map-marker-alt" color={"#6376f1"} />
                 <p
@@ -512,7 +570,11 @@ class Header extends React.Component {
               </a>
             )}
 
-            {(showLocation || _.isEmpty(location)) && (
+            {(showLocation || _.isEmpty(location)
+              ? locationError
+                ? false
+                : _.isEmpty(location)
+              : locationError) && (
               <LocationBox>
                 <div
                   style={{ padding: 24, display: "flex", flexFlow: "column" }}
