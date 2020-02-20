@@ -145,7 +145,8 @@ const SearchBar = styled.input`
   @media only screen and (max-width: 1440px) {
     /* margin: 15px 0px; */
     padding: 15px 0px;
-    font-size: 14px;
+    font-size: 16px;
+    letter-spacing: -0.3px;
     /* width: 16px;     */
   }
   @media only screen and (max-width: 992px) {

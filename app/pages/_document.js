@@ -68,6 +68,10 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css?family=Roboto+Slab:500,700,900&display=swap"
             rel="stylesheet"
           ></link>
+          <link
+            href="https://fonts.googleapis.com/css?family=Changa:700&display=swap"
+            rel="stylesheet"
+          ></link>
 
           <link
             href="https://use.fontawesome.com/releases/v5.7.2/css/svg-with-js.css"

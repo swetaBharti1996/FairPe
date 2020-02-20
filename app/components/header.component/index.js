@@ -20,7 +20,7 @@ import _ from "lodash";
 import CustomSearch from "../reusable/search";
 import axios from "axios";
 
-// const { Search } = Input;
+const { Search } = Input;
 
 const CustomDrawer = styled(Drawer)`
   > div[class="ant-drawer-content-wrapper"] {
@@ -49,6 +49,7 @@ const Container = styled.div`
   @media only screen and (max-width: ${props => props.theme.bpxs}) {
     width: 90%;
     margin: 0 auto;
+    justify-content: space-between;
   }
 `;
 const Logo = styled.div`
@@ -161,7 +162,7 @@ const NormalSearchIcon = styled.a`
   border: 1px solid transparent;
 `;
 
-const Search = styled.div`
+const ProductSearch = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
@@ -217,8 +218,8 @@ const LocationBox = styled.div`
   align-items: center;
   display: flex;
   @media only screen and (max-width: ${props => props.theme.bpxs}) {
-    width: 90%;
-    left: 5%;
+    width: 80%;
+    left: 15%;
   }
 
   &::before {
@@ -280,6 +281,19 @@ const Ham = styled.div`
   }
 `;
 
+const Close = styled.a`
+  position: absolute;
+  flex: 1;
+  width: 25px;
+  height: 25px;
+  top: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+`;
+
 const TYPE = { LOGIN: "login", REGISTER: "register" };
 
 class Header extends React.Component {
@@ -297,8 +311,11 @@ class Header extends React.Component {
 
   async componentDidMount() {
     let loc = await localStorage.getItem("loc");
-    if (loc) this.props.refreshLocation(JSON.parse(loc));
-    this.setState({ locationLoader: false, showLocation: false });
+    if (loc) {
+      this.props.refreshLocation(JSON.parse(loc));
+      this.setState({ showLocation: false });
+    }
+    this.setState({ locationLoader: false });
   }
 
   _onSearch = event => {
@@ -350,19 +367,13 @@ class Header extends React.Component {
           bol => {
             this.setState({
               locationLoader: false,
-              showLocation: false,
-              locationError: false
+              showLocation: false
             });
-
-            if (bol) {
-              // Hide the box
-            } else {
-              message.error("error", 1);
-            }
           }
         );
       })
       .catch(err => {
+        this.setState({ showLocation: false });
         console.log(err);
       });
 
@@ -423,7 +434,7 @@ class Header extends React.Component {
       return (
         <SearchContainer>
           {/* {showSearch ? ( */}
-          <Search>
+          <ProductSearch>
             <input
               value={term}
               onChange={() => this.setState({ term: event.target.value })}
@@ -440,7 +451,7 @@ class Header extends React.Component {
             >
               <FontAwesomeIcon icon="search" />
             </NormalSearchIcon>
-          </Search>
+          </ProductSearch>
           {/* // ) : ( //{" "}
           <SearchIcon onClick={this._onSearch}>
             // <FontAwesomeIcon icon="search" />
@@ -458,6 +469,18 @@ class Header extends React.Component {
   //     else this.setState({ displaySearch: false });
   //   });
   // };
+
+  onLocationBoxClose = () => {};
+
+  renderLocationBox = location => {
+    const { showLocation } = this.state;
+
+    if (_.isEmpty(location)) {
+      return showLocation;
+    } else {
+      return showLocation && !_.isEmpty(location);
+    }
+  };
 
   render() {
     const {
@@ -480,11 +503,6 @@ class Header extends React.Component {
     } = this.state;
 
     const { modal, authModal } = this.props;
-
-    console.log(showLocation);
-    // console.log(
-    //   showLocation || locationError ? locationError : _.isEmpty(location)
-    // );
 
     return (
       <Wrapper>
@@ -524,7 +542,7 @@ class Header extends React.Component {
                     showLocation: !prevState.showLocation
                   }));
 
-                  if (!locationError) this.setState({ locationError: true });
+                  // this.setState({ showLocation: true });
                 }}
               >
                 <FontAwesomeIcon icon="map-marker-alt" color={"#6376f1"} />
@@ -534,7 +552,8 @@ class Header extends React.Component {
                     font: "menu",
                     marginLeft: 8,
                     marginRight: 8,
-                    cursor: "pointer"
+                    cursor: "pointer",
+                    color: "#555"
                   }}
                 >
                   {location.results &&
@@ -552,10 +571,12 @@ class Header extends React.Component {
                   alignItems: "center"
                 }}
                 onClick={() => {
-                  if (locationError) this.setState({ locationError: false });
+                  this.setState(prevState => ({
+                    showLocation: !prevState.showLocation
+                  }));
                 }}
               >
-                <FontAwesomeIcon icon="map-marker-alt" color={"#6376f1"} />
+                <FontAwesomeIcon icon="map-marker-alt" color={"#555"} />
                 <p
                   style={{
                     margin: 0,
@@ -564,27 +585,35 @@ class Header extends React.Component {
                     marginRight: 8
                   }}
                 >
-                  {"No Location access"}
+                  {"No Location"}
                 </p>
                 <FontAwesomeIcon icon="angle-down" />
               </a>
             )}
 
-            {(showLocation || _.isEmpty(location)
+            {/* {(showLocation || _.isEmpty(location)
               ? locationError
                 ? false
                 : _.isEmpty(location)
-              : locationError) && (
+              : locationError) && ( */}
+
+            {this.renderLocationBox(location) && (
               <LocationBox>
                 <div
-                  style={{ padding: 24, display: "flex", flexFlow: "column" }}
+                  style={{
+                    padding: 16,
+                    display: "flex",
+                    flexFlow: "column",
+                    flex: 1,
+                    position: "relative"
+                  }}
                 >
                   <div style={{ display: "flex" }}>
-                    <Search
+                    {/* <Search
                       disabled
                       size={"large"}
                       placeholder={"search any area "}
-                    />
+                    /> */}
                     <Button
                       size={"large"}
                       style={{
@@ -593,8 +622,10 @@ class Header extends React.Component {
                         justifyContent: "center",
                         alignItems: "center",
                         font: "menu",
-                        fontSize: "15px"
-                        // color: "#263237"
+                        fontSize: "15px",
+                        background: "#6276f11a",
+                        color: "#333",
+                        width: "38%"
                       }}
                       loading={locationLoader}
                       onClick={this.currentLocation}
@@ -609,18 +640,13 @@ class Header extends React.Component {
                   <div
                     style={{
                       display: "flex",
-                      justifyContent: "center",
+                      justifyContent: "flex-start",
                       alignItems: "flex-start",
                       marginTop: 12
                     }}
                   >
-                    <FontAwesomeIcon
-                      icon={"info-circle"}
-                      style={{ paddingTop: 3 }}
-                    />
                     <span
                       style={{
-                        marginLeft: 6,
                         letterSpacing: "-0.3px",
                         color: "#707070",
                         lineHeight: 1.3,
@@ -628,20 +654,46 @@ class Header extends React.Component {
                         fontSize: 13
                       }}
                     >
-                      we need your location access to show information located
-                      near you.
                       <a
                         style={{
+                          font: "menu",
                           paddingLeft: 2,
-                          letterSpacing: "-0.3px",
-                          color: "#6276f1"
+                          letterSpacing: "0px",
+                          color: "rgba(0, 0, 0, 0.85)",
+                          fontSize: 14
                         }}
                       >
-                        How we use location ?
+                        <FontAwesomeIcon
+                          icon={"info-circle"}
+                          style={{
+                            marginRight: 4,
+                            color: "#555",
+                            fontSize: 12
+                          }}
+                        />
+                        Give Location and see Local store
+                        <FontAwesomeIcon
+                          icon={"store"}
+                          style={{ marginLeft: 6, color: "#6a7af1" }}
+                        />
                       </a>
                     </span>
                   </div>
                 </div>
+
+                <Close
+                  onClick={() => {
+                    this.setState({
+                      showLocation: false,
+                      locationError: false
+                    });
+                  }}
+                >
+                  <FontAwesomeIcon
+                    icon={"times"}
+                    style={{ marginLeft: 6, color: "#999" }}
+                  />
+                </Close>
               </LocationBox>
             )}
           </div>

@@ -40,19 +40,24 @@ const CategoryTag = styled.p`
   }
 `;
 const MainCaption = styled.h1`
-  font-family: "Roboto Slab", serif;
-  width: 47%;
-  text-transform: none !important;
-  color: #263238;
-  font-size: 45px;
-  margin-bottom: 8px;
+  font-family: "Changa", sans-serif;
+  width: 100%;
+  font-size: 50px;
+
+  padding-left: 4px;
+  display: flex;
   letter-spacing: -0.5px;
+  justify-content: flex-start;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.68);
   font-weight: 600;
   line-height: 1.1;
   margin-top: 66px;
+  margin-bottom: 8px;
   @media only screen and (max-width: ${props => props.theme.bpxs}) {
     width: 100%;
-    font-size: 28px;
+    font-size: 39px;
+    margin-bottom: 0px;
   }
 `;
 const Tagline = styled.p`
@@ -72,7 +77,7 @@ const SearchContainer = styled.div`
   z-index: 90;
   margin-bottom: 16px;
   width: 55%;
-  margin-top: 32px;
+  margin-top: 8px;
   @media only screen and (max-width: ${props => props.theme.bpxs}) {
     width: 100%;
   }
@@ -122,11 +127,12 @@ const PopularBox = styled.div`
   }
 
   > span {
+    margin-left: 3px;
     padding-right: 12px;
     font-weight: 600;
     color: #62646a;
     letter-spacing: -0.3px;
-    margin-left: 2px;
+    font-size: 15px;
     @media only screen and (max-width: ${props => props.theme.bpxs}) {
       margin-bottom: 8px;
     }
@@ -146,12 +152,19 @@ const PopularBox = styled.div`
       background: #f5f5f5c9;
       margin-bottom: 8px;
       > a {
+        font: menu;
         background-color: transparent;
-        padding: 0 8px;
+        padding: 3px 8px;
         border: 1px solid #d9d9d9;
         border-radius: 3px;
-        color: #62646a;
-        letter-spacing: -0.3px;
+        color: #555;
+        font-size: 14px;
+        text-transform: capitalize;
+        letter-spacing: 0.2px;
+
+        &:hover {
+          color: #000000de;
+        }
       }
     }
   }
@@ -426,13 +439,13 @@ class Home extends Component {
     return (
       <PageWrapper>
         <Wrapper>
-          <CategoryTag>{category}|</CategoryTag>
-          {/* <CategoryTag>Fashion|</CategoryTag> */}
+          {/* <CategoryTag>{category}|</CategoryTag> */}
+          <CategoryTag>Mobile Phones |</CategoryTag>
           <MainCaption>
-            Shop at Online & Offline , Near you
+            Search Here
             <FontAwesomeIcon
               style={{
-                marginLeft: 22,
+                marginLeft: 14,
                 fontSize: "38px",
                 color: "mediumseagreen"
               }}
