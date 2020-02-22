@@ -234,9 +234,16 @@ const Popular = props => {
       term: ""
     };
 
-    temp.term = data.name.split(" ")[1].toLowerCase();
-
-    temp[data.data.type] = data.data.name;
+    if (data.data.type === "brand") {
+      temp["category"] = "electronics";
+      temp["subcategory"] = "mobile phones";
+      temp["level"] = 1;
+      temp[data.data.type] = data.data.name;
+      temp.term = data.name.split(" ")[0].toLowerCase();
+    } else {
+      temp[data.data.type] = data.data.name;
+      temp.term = data.name.split(" ")[1].toLowerCase();
+    }
 
     let query = queryString.stringify(temp);
 
