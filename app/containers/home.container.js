@@ -32,6 +32,10 @@ const mapDispatchToProps = dispatch => {
       const query = queryString.stringify(newQuery);
       Router.push(`/search?${query}`);
       return dispatch(filterResults(query, 1));
+    },
+    popularSearch: query => {
+      Router.push(`/search?${query}`);
+      return dispatch(filterResults(query, 1));
     }
   };
 };

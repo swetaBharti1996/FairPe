@@ -9,6 +9,9 @@ import _ from "lodash";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { PageWrapper } from "../../UI";
 import { Button, Spin } from "antd";
+import StoreCard from "./storeCard";
+import Info from "./info";
+import Popular from "./popular";
 
 const Wrapper = styled.div`
   background: ${props => props.theme.white};
@@ -88,7 +91,7 @@ const Illustrator = styled.div`
   top: -100px;
   right: -13px;
   width: 63%;
-  height: 614px;
+  /* height: 614px; */
   /* background: url("../../static/images/maybe.png"); */
   direction: flex;
   justify-content: center;
@@ -179,13 +182,13 @@ const StoresNear = styled.div`
       margin-top: 32px;
       @media only screen and (max-width: ${props => props.theme.bpxs}) {
         flex-flow: column;
-      }
+      /* } */
 
-      > div {
-        /* border: 1px solid #dfdfdf;
-        border-radius: 3; */
+      /* > div {
+        border: 1px solid #dfdfdf;
+        border-radius: 3;
 
-        /* box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px 0px; */
+        box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px 0px;
         display: flex;
         flex-direction: column;
         -webkit-box-flex: 0;
@@ -212,7 +215,7 @@ const StoresNear = styled.div`
 
         @media only screen and (max-width: ${props => props.theme.bpxs}) {
           margin-bottom: 16px;
-        }
+        } */
 
         > a {
           width: 100%;
@@ -262,7 +265,7 @@ const StoresNear = styled.div`
         font: menu;
         margin: 0;
         font-weight: 600;
-        font-size: 24px;
+        font-size: 27px;
         letter-spacing: -1.2px;
         margin-right: 8px;
         color: #263238;
@@ -382,24 +385,26 @@ const Tag = styled.div`
   }
 `;
 
-const CATEGORY = ["Jewellery", "Electronics", "Fashion", "Toys", "Sports"];
+const CATEGORY = ["Mobile Phones", "Refrigerator", "Smart Watch", "Television"];
 
 const STORES = [
   {
     name: "reliance digital",
-    image:
-      "https://www.technologyforyou.org/wp-content/uploads/2019/10/rdigital-1.jpg",
-    logo:
-      "https://cdn.grabon.in/gograbon/images/merchant/1545149633522/reliance-digital-logo.jpg"
+    logo: "../../static/images/reliancedigitallogo.png",
+    leftColor: "#338fb8",
+    rightColor: "#11739d"
   },
   {
     name: "sangeetha mobiles",
-    image: "https://photos.wikimapia.org/p/00/03/99/48/42_1280.jpg"
+    logo: "../../static/images/sangeetha-mobiles-logo.jpeg",
+    leftColor: "#0266b2",
+    rightColor: "#034878"
   },
   {
     name: "croma",
-    image:
-      "https://www.croma.com/_ui/responsive/common/images/store_images/store-A035.jpg"
+    logo: "../../static/images/croma.jpg",
+    leftColor: "#44a7a3",
+    rightColor: "#3a9e98"
   }
 ];
 
@@ -435,14 +440,14 @@ class Home extends Component {
   render() {
     const { category } = this.state;
 
-    const { location, onSearch } = this.props;
+    const { location, onSearch, popularSearch } = this.props;
     return (
       <PageWrapper>
         <Wrapper>
-          {/* <CategoryTag>{category}|</CategoryTag> */}
-          <CategoryTag>Mobile Phones |</CategoryTag>
+          <CategoryTag>{category}|</CategoryTag>
+          {/* <CategoryTag>Mobile Phones </CategoryTag> */}
           <MainCaption>
-            Search Here
+            Search Now
             <FontAwesomeIcon
               style={{
                 marginLeft: 14,
@@ -480,7 +485,7 @@ class Home extends Component {
           <StoresNear>
             <div>
               <p>Top stores near</p>
-              <span style={{ minWidth: 74, textAlign: "center" }}>
+              <span style={{ minWidth: 74, textAlign: "left" }}>
                 {!_.isEmpty(location) ? (
                   location.results[0].address_components[1].long_name +
                   " , " +
@@ -488,69 +493,21 @@ class Home extends Component {
                 ) : (
                   <Spin />
                 )}
-
-                <FontAwesomeIcon
-                  style={{ marginLeft: 12, fontSize: 24 }}
-                  icon="angle-down"
-                />
               </span>
             </div>
             <div>
-              {_.map(STORES, (store, i) => {
-                return (
-                  <div>
-                    <Link route={"store"} params={{ name: store.name }}>
-                      <a>
-                        <div
-                          style={{
-                            width: "100%",
-                            height: "100%",
-                            border: "1px solid #dfdfdf",
-                            borderRadius: 3,
-                            marginBottom: 8,
-                            background: "#eee",
-                            position: "relative"
-                          }}
-                        >
-                          <img
-                            style={{ width: "100%", height: "249px" }}
-                            src={store.image}
-                          ></img>
-
-                          {/* {i >= 2 && (
-                            <Tag>
-                              <span>Exclusive</span>
-                            </Tag>
-                          )} */}
-                        </div>
-
-                        <div>
-                          <h2
-                            style={{
-                              font: "menu",
-                              fontSize: 16,
-                              fontWeight: 600,
-                              color: "#555",
-                              paddingLeft: 4
-                            }}
-                          >
-                            {store.name}
-                          </h2>
-                          <p></p>
-                        </div>
-                      </a>
-                    </Link>
-                  </div>
-                );
+              {_.map(STORES || [], (s, i) => {
+                return <StoreCard data={s} key={i} />;
               })}
-
-              {/* <div></div> */}
             </div>
-
-            {/* <p>View all store</p> */}
           </StoresNear>
+          <Info />
+          <Popular popularSearch={popularSearch} />
 
-          <LoginInfoContainer>
+          {/* <LoginInfoContainer>
+            <div>
+              <img src={"../../static/images/feature.gif"}></img>
+            </div>
             <div>
               <h2>Why login on FairPe ?</h2>
               <p>
@@ -558,35 +515,16 @@ class Home extends Component {
                 a similar product in online and offline
               </p>
             </div>
-
-            <div>
-              <img src={"../../static/images/feature.gif"}></img>
-            </div>
-          </LoginInfoContainer>
+          </LoginInfoContainer> */}
 
           <Illustrator>
             <div>
               <img src={"../../static/images/ill2.svg"}></img>
 
-              <div>
-                {/* <Button
-                  type="ghost"
-                  size="large"
-                  style={{ borderRadius: 6, font: "menu" }}
-                >
-                  Download App to Scan NOW
-                </Button> */}
-              </div>
+              <div></div>
             </div>
           </Illustrator>
           <Stores />
-          {/* 
-          <Categories
-            filterResults={this.props.filterResults}
-            categoryData={this.props.categoryData}
-            categoryResults={this.props.categoryResults}
-          />
-          <Description /> */}
         </Wrapper>
       </PageWrapper>
     );

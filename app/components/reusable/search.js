@@ -108,7 +108,7 @@ const Wrapper = styled.div`
   border-radius: 3px;
   /* box-shadow: 0 2px 4px 2px #ddd; */
   /* box-shadow: 0px 0px 30px #00000014; */
-  border: 1px solid #dfdfdf;
+  border: 1px solid #999999cf;
   background: #ffffff 0% 0% no-repeat padding-box;
   width: 100%;
   /* height: 100%; */
@@ -319,7 +319,7 @@ class Search extends Component {
         <Container>
           <SearchBar
             type="text"
-            placeholder="Search for any product"
+            placeholder="Search any mobiles"
             value={searchTerm}
             onChange={this.handleInputChange}
             onFocus={() => this.setSuggestion()}

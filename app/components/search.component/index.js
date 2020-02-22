@@ -64,6 +64,11 @@ class Search extends Component {
   state = {
     showCat: true
   };
+
+  componentDidMount() {
+    window.scroll(0, 0);
+  }
+
   toggleCategory = () => {
     this.setState({ showCat: !this.state.showCat });
   };
