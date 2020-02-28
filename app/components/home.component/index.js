@@ -459,7 +459,7 @@ class Home extends Component {
           </MainCaption>
           <Tagline>Search and buy at the cheapest price</Tagline>
           <SearchContainer>
-            <Search />
+            <Search placeholder={"Search any mobiles"} />
           </SearchContainer>
 
           <PopularBox>

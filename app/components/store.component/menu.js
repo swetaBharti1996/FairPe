@@ -2,6 +2,9 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 import _ from "lodash";
+import { Button } from "antd";
+
+const Wrapper = styled.div``;
 
 const StoreMenu = styled.a`
   display: block;
@@ -22,15 +25,106 @@ const StoreMenu = styled.a`
   }
 `;
 
+const StoreImage = styled.div`
+  width: 217px;
+  height: 217px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 0px 6px #6376f136;
+  border-radius: 6px;
+  position: absolute;
+  left: 65px;
+  top: -30%;
+  background: #ffffff 0% 0% no-repeat padding-box;
+`;
+
+const InfoContainer = styled.div`
+  position: absolute;
+  width: 100%;
+  min-height: 100px;
+  top: 162px;
+  padding-left: 16px;
+  > h1 {
+    margin-bottom: 8px;
+    font: menu;
+    text-transform: capitalize;
+    font-weight: bold;
+    color: #555;
+    font-size: 17px;
+  }
+
+  > ul {
+    display: flex;
+    flex-flow: column;
+    margin: 0;
+    > li {
+      > div {
+        display: flex;
+        > span {
+        }
+
+        > p {
+          margin: 0;
+        }
+      }
+    }
+  }
+`;
+
 const Menu = props => {
   const { MENU, store, setBlock, block } = props;
   return (
-    <>
-      <div>
-        <FontAwesomeIcon icon={"store"} size={"6x"} style={{ opacity: 0.4 }} />
-      </div>
+    <Wrapper>
+      <StoreImage>
+        <img src={"../../static/images/offlineshop.svg"} />
+      </StoreImage>
 
-      <div>
+      <InfoContainer>
+        <h1>{store.name}</h1>
+
+        <ul>
+          <li>
+            <div>
+              <Button
+                type="link"
+                style={{
+                  font: "menu",
+                  color: "#6276f1",
+                  fontSize: 14,
+                  paddingLeft: 0
+                }}
+              >
+                <span style={{ paddingRight: 8 }}>
+                  <FontAwesomeIcon icon={"globe"} />
+                </span>
+                website
+              </Button>
+            </div>
+          </li>
+
+          <li>
+            <div>
+              <Button
+                type="link"
+                style={{
+                  font: "menu",
+                  color: "#6276f1",
+                  fontSize: 14,
+                  paddingLeft: 0
+                }}
+              >
+                <span style={{ paddingRight: 8 }}>
+                  <FontAwesomeIcon icon={"phone"} />
+                </span>
+                1800-889-1044
+              </Button>
+            </div>
+          </li>
+        </ul>
+      </InfoContainer>
+
+      {/* <div>
         <ul>
           {_.map(MENU, (data, i) => {
             return (
@@ -52,8 +146,8 @@ const Menu = props => {
             );
           })}
         </ul>
-      </div>
-    </>
+      </div> */}
+    </Wrapper>
   );
 };
 

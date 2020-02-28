@@ -15,6 +15,7 @@ export default keyMirror({
   LIVE_PRICE: null,
   SEARCH_BY_URL: null,
   REFRESH_LOCATION: null,
+  PRODUCT_SEO: null,
 
   POST_STORE_REVIEW: null,
   GET_STORE_REVIEW: null,

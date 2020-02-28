@@ -20,7 +20,8 @@ const mapStateToProps = state => {
     wishlistData: state.wishlist,
     auth: state.auth,
     loc: state.location,
-    livePrice: state.livePrice
+    livePrice: state.livePrice,
+    seo: state.seo
   };
 };
 

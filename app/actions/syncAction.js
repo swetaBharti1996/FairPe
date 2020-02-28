@@ -1,10 +1,5 @@
 import ActionTypes from "../constants/actionType";
 
-export const gotProductSeo = data => ({
-  type: ActionTypes.PRODUCT_SEO,
-  payload: data
-});
-
 export const loginError = data => {
   return {
     type: ActionTypes.LOGIN_ERROR,
@@ -141,6 +136,11 @@ export const postStoreReview = () => ({
 
 export const getStoreReview = data => ({
   type: ActionTypes.GET_STORE_REVIEW,
+  payload: data
+});
+
+export const getProductSeo = data => ({
+  type: ActionTypes.PRODUCT_SEO,
   payload: data
 });
 

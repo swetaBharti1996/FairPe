@@ -30,7 +30,11 @@ const mapDispatchToProps = dispatch => {
     },
     fetchWishlist: () => dispatch(fetchWishlist()),
     searchSuggestion: (term, CB) => dispatch(searchSuggestion(term, CB)),
-    loading: () => dispatch(loading())
+    loading: () => dispatch(loading()),
+    customSearch: query => {
+      Router.push(`/search?${query}`);
+      return dispatch(filterResults(query, 1));
+    }
   };
 };
 

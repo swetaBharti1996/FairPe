@@ -12,5 +12,6 @@ export default {
   livePrice: {},
   error: {},
   url: {},
-  review: {}
+  review: {},
+  seo: {}
 };

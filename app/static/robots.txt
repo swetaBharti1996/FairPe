@@ -1,2 +1,25 @@
-﻿User-Agent: *
-Disallow: /
+﻿
+# Search Pages
+User-agent: *
+Disallow: /search?
+
+
+# URL parameters blocking for SEO
+User-agent: *
+Disallow: /*?hide=
+
+
+# Hiding different page from SEO
+User-agent: *
+Disallow: /about
+Disallow: /offline-partners
+Disallow: /faq
+Disallow: /become-partner
+Disallow: /careers
+Disallow: /contact
+Disallow: /searchurl
+Disallow: /category/
+Disallow: /store/
+Disallow: /account/
+Disallow: /privacy-policy
+

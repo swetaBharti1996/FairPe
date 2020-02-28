@@ -1,7 +1,7 @@
 import axios from "axios";
 import { makeRequest } from "../constants/request";
 import AppConstants from "../constants/appConstant";
-import { gotProductDetail, gotProductSeo } from "../actions/syncAction";
+import { gotProductDetail, getProductSeo } from "../actions/syncAction";
 import Product from "../containers/product.container";
 
 const fetchProductDetail = id => {
@@ -15,10 +15,10 @@ class Index extends React.Component {
     const { store, query, req } = props;
     const { id } = query;
 
-    // await axios
-    //   .post(`${AppConstants.default.baseURL}/api/seo/productpage`, { pid: id })
-    //   .then(resp => store.dispatch(gotProductSeo(resp.data)))
-    //   .catch(err => console.log(err));
+    await axios
+      .post(`${AppConstants.default.baseURL}/api/fairpe/seo`, { pid: id })
+      .then(resp => store.dispatch(getProductSeo(resp.data)))
+      .catch(err => console.log(err));
 
     return new Promise((resolve, reject) => {
       fetchProductDetail(id)

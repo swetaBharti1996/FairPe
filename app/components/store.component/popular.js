@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import _ from "lodash";
+import ProductCard from "./../reusable/productCard";
 
 const PopularProduct = styled.div`
   min-height: 200px;
@@ -16,6 +17,7 @@ const PopularProduct = styled.div`
     letter-spacing: -0.3px;
     font-weight: 600;
     color: #555;
+    word-spacing: 3px;
   }
   > ul {
     margin: 0 0 20px;
@@ -68,29 +70,38 @@ const PopularProduct = styled.div`
   }
 `;
 
+const Container = styled.ul`
+  display: flex;
+  width: 90%;
+  justify-content: space-between;
+`;
+
 const POPULAR = [
   {
     title: "Apple iPhone 11 (purple, A/MWM52HN)(128GB Storage)",
     price: 69900,
+    pid: "123",
     storeCount: 3,
     url: "https://fairpe.com/product/FP-LEXAQ992PCYJA0WEGY",
-    imageURL:
+    image:
       "https://www.reliancedigital.in/medias/iPhone-11-128GB-Purple-491584664-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3wxMzAzNHxpbWFnZS9qcGVnfGltYWdlcy9oMzYvaGU2LzkxOTU4ODI1NDUxODIuanBnfDc4NzVlNWY2MmViNWExMzg2OTdkY2U3ODE1ZDc0NjIwNWM2NjUzZDlhNzljOThmZWRkOGFmMjQwYTg4YzI4MDI"
   },
   {
     title: "Oppo A7 (blue)(3GB RAM, 64GB Storage)",
     price: 8990,
+    pid: "123",
     storeCount: 4,
     url: "https://fairpe.com/product/FP-ODWKEJUHCXFL629B1H",
-    imageURL:
+    image:
       "https://assets.croma.com/medias/sys_master/images/images/h67/h61/8839218266142/216172.png?attachment=true"
   },
   {
     title: "Samsung Galaxy Note 10 (black)(8GB RAM, 256GB Storage)",
     price: 69999,
+    pid: "123",
     storeCount: 5,
     url: "https://fairpe.com/product/FP-VPG8S1VWN0K2GN6J1M",
-    imageURL:
+    image:
       "https://images-eu.ssl-images-amazon.com/images/I/4110WP6GBwL._SL160_.jpg"
   }
 ];
@@ -99,34 +110,13 @@ const Popular = props => {
   const {} = props;
   return (
     <PopularProduct style={{ marginTop: 30 }}>
-      <h1>Popular Products</h1>
+      <h1>Product Offers Available Nearby</h1>
 
-      <ul>
+      <Container>
         {_.map(POPULAR, (p, i) => {
-          return (
-            <li>
-              <a href={p.url} target={"_blank"}>
-                <img src={p.imageURL} />
-              </a>
-              <h2>
-                <a href={p.url} target={"_blank"}>
-                  {p.title}
-                </a>
-              </h2>
-              <p style={{ marginBottom: 0 }}>
-                <a href={p.url} target={"_blank"}>{`Rs ${p.price}`}</a>
-              </p>
-              <p>
-                <a
-                  href={p.url}
-                  target={"_blank"}
-                  style={{ color: "#666" }}
-                >{`Available in ${p.storeCount} stores`}</a>
-              </p>
-            </li>
-          );
+          return <ProductCard product={p} />;
         })}
-      </ul>
+      </Container>
     </PopularProduct>
   );
 };

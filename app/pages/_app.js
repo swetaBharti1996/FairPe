@@ -9,6 +9,8 @@ import NProgress from "nprogress";
 import Router from "next/router";
 import { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
+import NextSeo from "next-seo";
+import SEO from "../../next-seo.config";
 import { makeRequest } from "../constants/request";
 import {
   login,
@@ -34,7 +36,9 @@ import {
   faTags,
   faImages,
   faUserCircle,
-  faTimes
+  faTimes,
+  faGlobe,
+  faPhone
 } from "@fortawesome/free-solid-svg-icons";
 import { trackPageView } from "../utils/googelAnalytics";
 
@@ -55,7 +59,9 @@ library.add(
   faTags,
   faImages,
   faUserCircle,
-  faTimes
+  faTimes,
+  faGlobe,
+  faPhone
 );
 
 NProgress.configure({ showSpinner: false });
@@ -103,8 +109,6 @@ class MyApp extends App {
   componentDidMount() {
     Router.onRouteChangeComplete = url => {
       trackPageView(url);
-
-      console.log(url);
     };
   }
 
@@ -116,6 +120,7 @@ class MyApp extends App {
         <Provider store={store}>
           <ThemeProvider theme={theme}>
             <Layout>
+              <NextSeo config={SEO} />
               <Component {...pageProps} />
             </Layout>
           </ThemeProvider>

@@ -55,6 +55,8 @@ const BodyContainer = styled.div`
   /* height: 42px; */
   margin-bottom: 4px;
 
+  min-height: 70px;
+
   > span {
     font: menu;
     color: #555;
@@ -202,7 +204,11 @@ class ProductCard extends Component {
     const { product } = this.props;
 
     return (
-      <Wrapper {...this.props} href={"/product/" + product.pid} target="_blank">
+      <Wrapper
+        {...this.props}
+        href={`/product/${product.pid}${true ? "?hide=true" : ""}`}
+        target="_blank"
+      >
         <Container>
           <ImageContainer>
             <img

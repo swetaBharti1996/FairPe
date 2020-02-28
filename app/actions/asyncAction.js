@@ -115,6 +115,22 @@ export const getCurrentLocation = (data, CB) => dispatch => {
     });
 };
 
+export const getProductSeo = (data, CB) => dispatch => {
+  makeAsyncRequest(
+    "post",
+    `${AppConstants.default.baseURL}/api/fairpe/seo`,
+    data
+  )
+    .then(resp => {
+      dispatch(syncActions.getProductSeo(resp.data));
+      CB(true);
+    })
+    .catch(err => {
+      console.log(err);
+      CB(false);
+    });
+};
+
 export const fetchWishlist = () => dispatch =>
   makeRequest(
     "get",

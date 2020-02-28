@@ -12,6 +12,7 @@ import location from "./location";
 import livePrice from "./livePrice";
 import searchByURL from "./searchByURL";
 import review from "./review";
+import seo from "./seo";
 import error from "./error";
 
 const rootReducer = combineReducers({
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
   livePrice,
   searchByURL,
   review,
+  seo,
   error
 });
 

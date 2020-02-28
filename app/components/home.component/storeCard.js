@@ -68,6 +68,10 @@ const RightContainer = styled.div`
         align-items: center;
         height: 100%;
         font-weight: 600;
+
+        &:hover {
+          color: rgba(255, 255, 255, 0.65);
+        }
       }
     }
   }

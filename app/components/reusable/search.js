@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import _ from "lodash";
 import { makeRequest } from "../../constants/request";
 import AppConstants from "../../constants/appConstant";
-
+import queryString from "query-string";
 // const Wrapper = styled.div`
 //   display: flex;
 // `;
@@ -226,10 +226,22 @@ class Search extends Component {
   };
 
   onChange = ({ value }) => {
+    const { router, customSearch } = this.props;
+
     if (value) {
       this.state.searchTerm = value;
       this.props.fetchWishlist();
-      this.props.onSearch(value);
+
+      if (router.pathname === "/store") {
+        let temp = {
+          term: value,
+          store: router.query.name.replace(" ", ""),
+          page: 1
+        };
+        customSearch(queryString.stringify(temp));
+      } else {
+        this.props.onSearch(value);
+      }
     }
   };
 
@@ -314,12 +326,15 @@ class Search extends Component {
   };
   render() {
     const { searchTerm, showSuggestion, list, hovered } = this.state;
+
+    const { placeholder } = this.props;
+
     return (
       <Wrapper>
         <Container>
           <SearchBar
             type="text"
-            placeholder="Search any mobiles"
+            placeholder={placeholder}
             value={searchTerm}
             onChange={this.handleInputChange}
             onFocus={() => this.setSuggestion()}
