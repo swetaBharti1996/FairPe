@@ -170,7 +170,7 @@ const SEARCHES = [
     type: "trending brands",
     list: [
       {
-        name: "onplus mobile",
+        name: "oneplus mobile",
         data: { type: "brand", name: "oneplus" }
       },
       {
