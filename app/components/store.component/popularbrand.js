@@ -38,7 +38,10 @@ const Container = styled.div`
 
   > ul {
     display: flex;
-    margin-bottom: 16px;
+    margin-bottom: 0;
+    @media only screen and (max-width: ${props => props.theme.bpxs}) {
+      flex-flow: column;
+    }
 
     &:last-child {
       margin-bottom: 0;
@@ -46,9 +49,14 @@ const Container = styled.div`
 
     > li {
       flex: 1;
-      min-height: 100px;
 
       margin-right: 16px;
+
+      margin-bottom: 16px;
+
+      @media only screen and (max-width: ${props => props.theme.bpxs}) {
+        margin-right: 0;
+      }
 
       &:last-child {
         margin-right: 0;
@@ -63,6 +71,10 @@ const Container = styled.div`
         overflow: hidden;
         transition: 0.3s;
         background: #f8f8f8;
+        padding: 8px 0;
+        > img {
+          width: 200px;
+        }
 
         &:hover {
           background: #eee;
@@ -73,17 +85,17 @@ const Container = styled.div`
 `;
 
 const BRAND1 = [
-  { image: "../../static/images/puma.png" },
+  { image: "../../static/images/oppo-logo.jpeg" },
   { image: "../../static/images/samsung.png" },
-  { image: "../../static/images/iphone.png" },
+  { image: "../../static/images/apple-logo.jpeg" },
   { image: "../../static/images/boat.png" }
 ];
 
 const BRAND2 = [
-  { image: "../../static/images/nike.png" },
-  { image: "../../static/images/adidas.png" },
-  { image: "../../static/images/sony.png" },
-  { image: "../../static/images/amazon.png" }
+  { image: "../../static/images/oneplus-logo.png" },
+  { image: "../../static/images/vivo-logo.jpeg" }
+  // { image: "../../static/images/sony.png" },
+  // { image: "../../static/images/amazon.png" }
 ];
 
 const PopularBrand = () => {

@@ -7,7 +7,6 @@ const PopularProduct = styled.div`
   min-height: 200px;
   display: flex;
   justify-content: flex-start;
-  padding: 8px 16px;
   align-items: flex-start;
   flex-flow: column;
   > h1 {
@@ -18,6 +17,9 @@ const PopularProduct = styled.div`
     font-weight: 600;
     color: #555;
     word-spacing: 3px;
+    @media only screen and (max-width: ${props => props.theme.bpxs}) {
+      width: 80%;
+    }
   }
   > ul {
     margin: 0 0 20px;
@@ -74,6 +76,11 @@ const Container = styled.ul`
   display: flex;
   width: 90%;
   justify-content: space-between;
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    justify-content: flex-start;
+    flex-flow: row wrap;
+    width: 100%;
+  }
 `;
 
 const POPULAR = [

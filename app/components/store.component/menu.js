@@ -37,6 +37,17 @@ const StoreImage = styled.div`
   left: 65px;
   top: -30%;
   background: #ffffff 0% 0% no-repeat padding-box;
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    width: 125px;
+    height: 125px;
+    left: 6%;
+    top: -70%;
+  }
+
+  > img {
+    width: 68%;
+  }
 `;
 
 const InfoContainer = styled.div`
@@ -45,6 +56,14 @@ const InfoContainer = styled.div`
   min-height: 100px;
   top: 162px;
   padding-left: 16px;
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    width: fit-content;
+    min-height: auto;
+    top: 0;
+    padding-left: 16px;
+    left: 200px;
+  }
   > h1 {
     margin-bottom: 8px;
     font: menu;

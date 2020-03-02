@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Breadcrumb, Button, Rate, Tag, message } from "antd";
 import _ from "lodash";
 import GoogleMapReact from "google-map-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // import { Button } from "../../UI";
 import STORE_DATA from "./data.json";
@@ -49,7 +50,7 @@ const LeftContainer = styled.div`
   top: 220px; */
 
   @media only screen and (max-width: ${props => props.theme.bpxs}) {
-    display: none;
+    min-height: 100px;
   }
   /* > div {
     &:nth-child(2) {
@@ -88,6 +89,10 @@ const Body = styled.div`
   display: flex;
   min-height: 900px;
   position: relative;
+
+  @media only screen and (max-width: ${props => props.theme.bpxs}) {
+    flex-flow: column;
+  }
 `;
 
 const Head = styled.div`

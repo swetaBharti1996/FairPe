@@ -38,7 +38,10 @@ import {
   faUserCircle,
   faTimes,
   faGlobe,
-  faPhone
+  faPhone,
+  faWallet,
+  faCreditCard,
+  faUniversity
 } from "@fortawesome/free-solid-svg-icons";
 import { trackPageView } from "../utils/googelAnalytics";
 
@@ -61,7 +64,10 @@ library.add(
   faUserCircle,
   faTimes,
   faGlobe,
-  faPhone
+  faPhone,
+  faWallet,
+  faCreditCard,
+  faUniversity
 );
 
 NProgress.configure({ showSpinner: false });

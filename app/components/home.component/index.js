@@ -270,6 +270,15 @@ const StoresNear = styled.div`
         margin-right: 8px;
         color: #263238;
       }
+
+      >div{
+
+
+      width:8%;
+      >a{
+        font:menu;
+      }
+      }
     }
   }
   > p {
@@ -485,7 +494,7 @@ class Home extends Component {
           <StoresNear>
             <div>
               <p>Top stores near</p>
-              <span style={{ minWidth: 74, textAlign: "left" }}>
+              <span style={{ minWidth: 74, textAlign: "left", flex: 1 }}>
                 {!_.isEmpty(location) ? (
                   location.results[0].address_components[1].long_name +
                   " , " +
@@ -494,6 +503,12 @@ class Home extends Component {
                   <Spin />
                 )}
               </span>
+
+              {/* <div>
+                <Link route={"store"} params={{ name: "all" }}>
+                  <a>View all store</a>
+                </Link>
+              </div> */}
             </div>
             <div>
               {_.map(STORES || [], (s, i) => {
