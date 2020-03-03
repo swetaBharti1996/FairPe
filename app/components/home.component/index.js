@@ -504,11 +504,11 @@ class Home extends Component {
                 )}
               </span>
 
-              {/* <div>
-                <Link route={"store"} params={{ name: "all" }}>
+              <div>
+                <Link route={"allstore"}>
                   <a>View all store</a>
                 </Link>
-              </div> */}
+              </div>
             </div>
             <div>
               {_.map(STORES || [], (s, i) => {

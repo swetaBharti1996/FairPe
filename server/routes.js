@@ -12,5 +12,6 @@ routes.add("searchurl", "/searchurl");
 routes.add("category", "/category/:slug");
 routes.add("product", "/product/:id");
 routes.add("store", "/store/:name");
+routes.add("allstore", "/allstore");
 routes.add("account", "/account/:ext");
 routes.add("privacy", "/privacy-policy");
